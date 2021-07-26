@@ -51,7 +51,7 @@ const Sidebar: React.FC = () => {
             <img src={JungleLogo} alt="Jungle" />
           </Box>
         )}
-        {routes[currentUser.role as keyof typeof routes].map(
+        {routes[(currentUser.role as keyof typeof routes) || 'user'].map(
           ({ name, icon, isSoon, path }) =>
             name ? (
               <MenuItem

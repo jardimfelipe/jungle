@@ -20,7 +20,6 @@ const resetEnhancer = (rootReducer: Reducer) => (state: any, action: any) => {
   if (action.type !== LoginTypeKeys.RESET_STORE) return rootReducer(state, action);
 
   const newState = rootReducer(undefined, { type: '' });
-  newState.router = state.router;
   return newState;
 };
 

@@ -10,8 +10,6 @@ import {
   Table,
   Image,
 } from '../../..';
-import { BiHeart } from 'react-icons/bi';
-import { FiBox } from 'react-icons/fi';
 import { BsArrowRight } from 'react-icons/bs';
 import { ResumeBox, GestorCard } from '../Dashboard.styled';
 import Skeleton from 'react-loading-skeleton';
@@ -59,13 +57,6 @@ const tableFields = [
     render: () => <Text>16/06 a 20/07</Text>,
   },
 ];
-
-const resultsIcons = {
-  neuroticidade: <Brain color="#ffffff" />,
-  Ansiedade: <Brain color="#ffffff" />,
-  amabilidade: <BiHeart />,
-  abertura: <FiBox />,
-};
 
 const Gestor: React.FC = () => {
   const history = useHistory();
@@ -167,14 +158,17 @@ const Gestor: React.FC = () => {
       <ResumeBox>
         {dimensions.map((dimension, index) =>
           isResumeLoading ? (
-            <Box params={{ display: 'block' }}>
+            <Box
+              key={`skeleton-results-${index}`}
+              params={{ display: 'block' }}
+            >
               <Skeleton height={150} />
             </Box>
           ) : (
             <ResumeCard
               key={`results-${index}`}
               name={dimension.name}
-              icon={resultsIcons[dimension.name as keyof typeof resultsIcons]}
+              icon={<Brain color="#ffffff" />}
               total={80}
               onClick={handleResultClick}
             />

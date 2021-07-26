@@ -15,32 +15,24 @@ import {
   StyledCol,
 } from './MyResults.styled';
 import { Col, Row } from 'react-flexbox-grid';
-import { BiHeart } from 'react-icons/bi';
-import { FiBox } from 'react-icons/fi';
 import { Icons } from '../../';
 
 import { useTheme } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { getResultsRequest } from '../../../store/modules/results/actions';
+import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
 
-const { Brain, Communication } = Icons;
+const { Brain } = Icons;
 
 const { Title, Text } = Typography;
 
 const MyResults: React.FC = () => {
-  const { results } = useSelector((state: RootState) => state.results);
+  const { dimensions } = useSelector((state: RootState) => state.dimensions);
   const dispatch = useDispatch();
   const theme = useTheme();
-  const resultsIcons = {
-    neuroticidade: <Brain color={theme.colors.blue} />,
-    amabilidade: <BiHeart color={theme.colors.blue} />,
-    abertura: <FiBox color={theme.colors.blue} />,
-    contato: <Communication color={theme.colors.blue} />,
-  };
 
   useEffect(() => {
-    dispatch(getResultsRequest());
+    dispatch(getDimensionsRequest());
   }, [dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -53,21 +45,26 @@ const MyResults: React.FC = () => {
           <Box
             params={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
           >
-            {Object.keys(results).map((props, index) => (
-              <ResultCard>
+            {dimensions.map(({ name }) => (
+              <ResultCard key={`dimension-${name}`}>
                 <CardHeader>
                   <Text textDecoration="strong" variant="primary">
-                    {resultsIcons[props as keyof typeof resultsIcons]}
-                    {props}
+                    <Brain color={theme.colors.blue} />
+                    {name}
                   </Text>
                   <Text textDecoration="strong" variant="primary">
-                    {results[props as keyof typeof results].total}%
+                    65%
                   </Text>
                 </CardHeader>
                 <CardBody>
                   <ResultLine
-                    results={results[props as keyof typeof results]}
-                    type={props}
+                    results={{
+                      analise:
+                        'Observamos níveis de proteção contra ocorrências de sintomas ansiosos, maiores do que a população geral. Os sintomas podem ser reativos a problemas diversos, e não necessariamente se traduzem em transtornos.',
+                      total: 65,
+                    }}
+                    hasAnalysis
+                    type={name}
                   />
                 </CardBody>
               </ResultCard>

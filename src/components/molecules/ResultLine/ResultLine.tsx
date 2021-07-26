@@ -15,7 +15,7 @@ import {
 } from './ResultLine.styled';
 import useMobileWidth from '../../../hooks/useMobileWidth';
 import { useTheme } from 'styled-components';
-import { LineTexts, ResultLineProps } from './ResultLine.types';
+import { ResultLineProps } from './ResultLine.types';
 
 const { Text } = Typography;
 const ResultLine: React.FC<ResultLineProps> = ({
@@ -30,12 +30,11 @@ const ResultLine: React.FC<ResultLineProps> = ({
   const handleClick = () => {
     setShowAnalysis(!showAnalysis);
   };
-  console.log(type);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
       <ChartContainer>
         <TextContainer className="left-text">
-          <Text>{LineTexts[type as keyof typeof LineTexts].left}</Text>
+          <Text>Amigável</Text>
         </TextContainer>
 
         <LineContainer className="chart">
@@ -57,7 +56,7 @@ const ResultLine: React.FC<ResultLineProps> = ({
           </YouAreHereContainer>
         </LineContainer>
         <TextContainer className="right-text">
-          <Text>{LineTexts[type as keyof typeof LineTexts].right}</Text>
+          <Text>Desafiador</Text>
         </TextContainer>
       </ChartContainer>
       {isMobile && (

@@ -16,8 +16,7 @@ import {
   CardHeader,
   ResultCard,
 } from '../MyResults/MyResults.styled';
-import { BiHeart, BiFace } from 'react-icons/bi';
-import { FiBox } from 'react-icons/fi';
+import { BiFace } from 'react-icons/bi';
 import { Col, Row } from 'react-flexbox-grid';
 import {
   CardCharts,
@@ -44,7 +43,7 @@ import protectionLevelData from './protectionLevelData';
 import Skeleton from 'react-loading-skeleton';
 
 const { Title, Text } = Typography;
-const { Brain, Communication } = Icons;
+const { Brain } = Icons;
 
 const chartData = {
   datasets: [
@@ -75,13 +74,6 @@ const TeamResults: React.FC = () => {
   );
 
   const dispatch = useDispatch();
-  const resultsIcons = {
-    neuroticidade: <Brain color={theme.colors.blue} />,
-    Ansiedade: <Brain color={theme.colors.blue} />,
-    Amabilidade: <BiHeart color={theme.colors.blue} />,
-    abertura: <FiBox color={theme.colors.blue} />,
-    contato: <Communication color={theme.colors.blue} />,
-  };
   useEffect(() => {
     dispatch(getDimensionsRequest());
   }, [dispatch]);
@@ -226,10 +218,10 @@ const TeamResults: React.FC = () => {
           </>
         ) : (
           dimensions.map(({ name }) => (
-            <ResultCard>
+            <ResultCard key={`dimension-${name}`}>
               <CardHeader>
                 <Text textDecoration="strong" variant="primary">
-                  {resultsIcons[name as keyof typeof resultsIcons]}
+                  <Brain color={theme.colors.blue} />
                   {name}
                 </Text>
                 <Text textDecoration="strong" variant="primary">
@@ -273,7 +265,7 @@ const TeamResults: React.FC = () => {
           </>
         ) : (
           dimensions.map((dimension, index) => (
-            <Card>
+            <Card key={`${dimension}-card-${index}`}>
               <Box
                 params={{
                   display: 'flex',

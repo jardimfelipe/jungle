@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { loginRequest, resetStore } from '../../../store/modules/login/actions';
+import { loginRequest } from '../../../store/modules/login/actions';
 
 import {
   AdminAccessContainer,
@@ -55,10 +55,6 @@ const Login: React.FC = () => {
   useEffect(() => {
     isLoggedIn && history.push('/');
   }, [isLoggedIn, history]);
-
-  useEffect(() => {
-    dispatch(resetStore());
-  }, [dispatch]);
 
   return (
     <LoginRow>

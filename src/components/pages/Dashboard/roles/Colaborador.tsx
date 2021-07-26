@@ -14,8 +14,6 @@ import {
   QuestionaryModal,
   Icons,
 } from '../../..';
-import { BiHeart } from 'react-icons/bi';
-import { FiBox } from 'react-icons/fi';
 import { BiCaretRight } from 'react-icons/bi';
 import { BsArrowRight } from 'react-icons/bs';
 import { QuestionariesGridContainer, ResumeBox } from '../Dashboard.styled';
@@ -25,19 +23,13 @@ import { useHistory } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../store';
-import { getResultsRequest } from '../../../../store/modules/results/actions';
 import { getQuestionariesRequest } from '../../../../store/modules/questionaries/actions';
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
 import { Questionary as QuestionaryType } from '../../../../store/modules/questionaries/types';
+import { getDimensionsRequest } from '../../../../store/modules/dimensions/actions';
 
 const { Title, Text } = Typography;
 const { Brain } = Icons;
-
-const resultsIcons = {
-  neuroticidade: <Brain color="#ffffff" />,
-  amabilidade: <BiHeart />,
-  abertura: <FiBox />,
-};
 
 const chartData = {
   datasets: [
@@ -53,8 +45,8 @@ const chartData = {
 const Colaborador: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { results, isLoading: isResumeLoading } = useSelector(
-    (state: RootState) => state.results
+  const { dimensions, isLoading: isResumeLoading } = useSelector(
+    (state: RootState) => state.dimensions
   );
   const [clickedQuestionary, setClickedQuestionary] = useState<
     Partial<QuestionaryType>
@@ -81,8 +73,8 @@ const Colaborador: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getResultsRequest());
     dispatch(getQuestionariesRequest());
+    dispatch(getDimensionsRequest());
   }, [dispatch]);
 
   useEffect(() => {
@@ -100,22 +92,23 @@ const Colaborador: React.FC = () => {
       </Box>
 
       <ResumeBox>
-        {Object.keys(results).map(
-          (props, index) =>
-            props !== 'contato' &&
-            (isResumeLoading ? (
-              <Box params={{ display: 'block' }}>
-                <Skeleton height={150} />
-              </Box>
-            ) : (
-              <ResumeCard
-                key={`results-${index}`}
-                name={props}
-                icon={resultsIcons[props as keyof typeof resultsIcons]}
-                total={results[props as keyof typeof results].total}
-                onClick={handleResultClick}
-              />
-            ))
+        {dimensions.map((dimension, index) =>
+          isResumeLoading ? (
+            <Box
+              key={`skeleton-results-${index}`}
+              params={{ display: 'block' }}
+            >
+              <Skeleton height={150} />
+            </Box>
+          ) : (
+            <ResumeCard
+              key={`results-${index}`}
+              name={dimension.name}
+              icon={<Brain color="#ffffff" />}
+              total={80}
+              onClick={handleResultClick}
+            />
+          )
         )}
       </ResumeBox>
 
