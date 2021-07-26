@@ -4,6 +4,7 @@ import { CardContainer } from '../../atoms/Card/Card.styled';
 
 export const MenuCard = styled(CardContainer)`
   position: absolute;
+  top: -5px;
   right: 40px;
   padding: 10px 0;
   z-index: 100;
