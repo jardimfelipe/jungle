@@ -10,6 +10,9 @@ import {
 } from './ProtectionLevel.styled';
 import { useTheme } from 'styled-components';
 
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+
 const { Text } = Typography;
 
 const protectionLevelColors = {
@@ -20,6 +23,7 @@ const protectionLevelColors = {
 
 const ProtectionLevel: React.FC = () => {
   const theme = useTheme();
+  const { currentUser } = useSelector(({ login }: RootState) => login);
   const protectionLevels = [
     'Depressão',
     'Ansiedade',
@@ -44,7 +48,7 @@ const ProtectionLevel: React.FC = () => {
         }}
       >
         <Text textDecoration="strong" variant="primary">
-          Níveis de proteção
+          Níveis de proteção {currentUser.role === 'gestor' && 'da empresa'}
         </Text>
         <QuestionButton>
           <BsQuestion size="24" color={theme.colors.darkGray} />
