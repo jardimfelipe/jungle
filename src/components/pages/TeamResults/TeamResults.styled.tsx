@@ -1,0 +1,98 @@
+import { Col } from 'react-flexbox-grid';
+import styled from 'styled-components';
+import media from 'styled-media-query';
+import { CardContainer } from '../../atoms/Card/Card.styled';
+import { ResultCard } from '../MyResults/MyResults.styled';
+
+export const CardImage = styled.div<{ side: 'left' | 'right' }>`
+  position: absolute;
+  bottom: 0;
+  ${(props) => (props.side === 'left' ? 'left: 25px' : 'right: 25px')};
+  @media (max-width: 1080px) {
+    display: none;
+  }
+`;
+
+export const ChartsContainer = styled.div`
+  display: flex;
+`;
+
+export const FlexContainer = styled.div`
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  ${ResultCard}, ${CardContainer} {
+    flex: 0 0 calc(50% - 7.5px);
+    ${media.lessThan('large')`
+      flex: 0 0 100%;
+    `}
+  }
+`;
+
+export const StyledCol = styled(Col)`
+  ${CardContainer} {
+    height: 100%;
+  }
+  ${media.lessThan('large')`
+      margin-top: 15px;
+  `}
+`;
+
+export const CharFlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  flex: 0 0 50%;
+  align-items: center;
+  ${media.lessThan('large')`
+    flex: 0 0 100%;
+    justify-content:center;
+  `}
+`;
+
+export const LevelsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  flex: 0 0 45%;
+  ${media.lessThan('large')`
+    flex: 0 0 100%;
+  `}
+`;
+
+export const ChartsBarContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+  ${media.lessThan('large')`
+  `}
+`;
+
+export const ProgressBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const CardCharts = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex: 0 0 55%;
+  flex-wrap: wrap;
+  ${media.lessThan('large')`
+    flex: auto
+  `}
+`;
+
+export const CardIcon = styled.div`
+  padding: 10px 13px;
+  border-radius: 5px;
+  background-color: ${(props) => props.theme.colors.gray};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

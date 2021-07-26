@@ -1,0 +1,99 @@
+import React, { ReactNode } from 'react';
+
+import { Box, Card, ChartWrapper, TableChart, Typography } from '../..';
+
+const { Text } = Typography;
+
+type Item = {
+  name: string;
+  icon: ReactNode;
+  total: number;
+};
+
+type ResumeProps = {
+  items: Item[];
+  date?: string;
+  filled?: number;
+};
+
+const Resume: React.FC<ResumeProps> = ({ items, date, filled }) => {
+  const chartData = {
+    datasets: [
+      {
+        label: null,
+        data: [70, 30],
+        backgroundColor: ['#4ED9A7', '#F1F5FA'],
+        borderWidth: 0,
+      },
+    ],
+  };
+  return (
+    <Card>
+      <Box
+        params={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Box params={{ display: 'flex', flexDirection: 'column' }}>
+          <Text>
+            <small>Resumo</small>
+          </Text>
+          <Text size={24} textDecoration="strong" variant="primary">
+            Jungle
+          </Text>
+        </Box>
+
+        <Box params={{ display: 'flex', gap: '24px' }}>
+          {items.map((item, index) => (
+            <Box
+              params={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Box
+                params={{ display: 'flex', gap: '5px', alignItems: 'center' }}
+              >
+                {item.icon}
+                <Text size={20} textDecoration="strong">
+                  {item.total}
+                </Text>
+              </Box>
+              <Text>{item.name}</Text>
+            </Box>
+          ))}
+        </Box>
+
+        {date && (
+          <Box
+            params={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+            }}
+          >
+            <Text textDecoration="strong">{date}</Text>
+            <Text>ativo desde</Text>
+          </Box>
+        )}
+
+        {filled && (
+          <Box params={{ display: 'flex', alignItems: 'center' }}>
+            <ChartWrapper>
+              <TableChart data={chartData} />
+              <Text textDecoration="strong">{filled}%</Text>
+            </ChartWrapper>
+            <Text>Preenchimento</Text>
+          </Box>
+        )}
+      </Box>
+    </Card>
+  );
+};
+
+export default Resume;
