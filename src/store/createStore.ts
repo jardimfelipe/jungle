@@ -5,6 +5,7 @@ import { BaseState } from "./modules/base/types";
 import { CompaniesState, DimensionsState, LoginTypeKeys } from "./modules/exportTypes";
 import { QuestionariesState } from "./modules/questionaries/types";
 import { ResultsState } from "./modules/results/types";
+import { UsersState } from "./modules/users/types";
 
 export interface RootState {
   base: BaseState;
@@ -13,6 +14,7 @@ export interface RootState {
   dimensions: DimensionsState;
   results: ResultsState;
   questionaries: QuestionariesState;
+  users: UsersState;
 }
 const resetEnhancer = (rootReducer: Reducer) => (state: any, action: any) => {
   if (action.type !== LoginTypeKeys.RESET_STORE) return rootReducer(state, action);

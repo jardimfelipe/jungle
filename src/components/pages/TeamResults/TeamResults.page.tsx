@@ -41,6 +41,7 @@ import { getDimensionsRequest } from '../../../store/modules/dimensions/actions'
 import { useTheme } from 'styled-components';
 import { rgba } from 'polished';
 import protectionLevelData from './protectionLevelData';
+import Skeleton from 'react-loading-skeleton';
 
 const { Title, Text } = Typography;
 const { Brain, Communication } = Icons;
@@ -69,7 +70,9 @@ const chartData2 = {
 
 const TeamResults: React.FC = () => {
   const theme = useTheme();
-  const { dimensions } = useSelector((state: RootState) => state.dimensions);
+  const { dimensions, isLoading } = useSelector(
+    (state: RootState) => state.dimensions
+  );
 
   const dispatch = useDispatch();
   const resultsIcons = {
@@ -85,7 +88,6 @@ const TeamResults: React.FC = () => {
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />
-
       <Box
         params={{
           display: 'flex',
@@ -96,7 +98,6 @@ const TeamResults: React.FC = () => {
       >
         <Title level={3}>Entendendo a equipe</Title>
       </Box>
-
       <Row>
         <StyledCol xs={12} lg={7}>
           <Card>
@@ -173,7 +174,6 @@ const TeamResults: React.FC = () => {
           </Box>
         </StyledCol>
       </Row>
-
       <Row>
         <StyledCol xs={12} lg={7}>
           <Card>
@@ -215,32 +215,42 @@ const TeamResults: React.FC = () => {
       </Row>
 
       <FlexContainer>
-        {dimensions.map(({ name }) => (
-          <ResultCard>
-            <CardHeader>
-              <Text textDecoration="strong" variant="primary">
-                {resultsIcons[name as keyof typeof resultsIcons]}
-                {name}
-              </Text>
-              <Text textDecoration="strong" variant="primary">
-                65%
-              </Text>
-            </CardHeader>
-            <CardBody>
-              <ResultLine
-                results={{
-                  analise:
-                    'Observamos níveis de proteção contra ocorrências de sintomas ansiosos, maiores do que a população geral. Os sintomas podem ser reativos a problemas diversos, e não necessariamente se traduzem em transtornos.',
-                  total: 65,
-                }}
-                hasAnalysis={false}
-                type={name}
-              />
-            </CardBody>
-          </ResultCard>
-        ))}
+        {isLoading ? (
+          <>
+            <Box params={{ display: 'block', flex: 'auto' }}>
+              <Skeleton height={100} />
+            </Box>
+            <Box params={{ display: 'block', flex: 'auto' }}>
+              <Skeleton height={100} />
+            </Box>
+          </>
+        ) : (
+          dimensions.map(({ name }) => (
+            <ResultCard>
+              <CardHeader>
+                <Text textDecoration="strong" variant="primary">
+                  {resultsIcons[name as keyof typeof resultsIcons]}
+                  {name}
+                </Text>
+                <Text textDecoration="strong" variant="primary">
+                  65%
+                </Text>
+              </CardHeader>
+              <CardBody>
+                <ResultLine
+                  results={{
+                    analise:
+                      'Observamos níveis de proteção contra ocorrências de sintomas ansiosos, maiores do que a população geral. Os sintomas podem ser reativos a problemas diversos, e não necessariamente se traduzem em transtornos.',
+                    total: 65,
+                  }}
+                  hasAnalysis={false}
+                  type={name}
+                />
+              </CardBody>
+            </ResultCard>
+          ))
+        )}
       </FlexContainer>
-
       <Box
         params={{
           display: 'flex',
@@ -251,109 +261,123 @@ const TeamResults: React.FC = () => {
       >
         <Title level={3}>Niveis de proteção</Title>
       </Box>
-
       <FlexContainer>
-        {dimensions.map((dimension, index) => (
-          <Card>
-            <Box
-              params={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-              }}
-            >
+        {isLoading ? (
+          <>
+            <Box params={{ display: 'block', flex: 'auto' }}>
+              <Skeleton height={250} />
+            </Box>
+            <Box params={{ display: 'block', flex: 'auto' }}>
+              <Skeleton height={250} />
+            </Box>
+          </>
+        ) : (
+          dimensions.map((dimension, index) => (
+            <Card>
               <Box
                 params={{
                   display: 'flex',
                   flexDirection: 'column',
+                  gap: '20px',
                 }}
               >
                 <Box
                   params={{
                     display: 'flex',
-                    alignItems: 'center',
-                    gap: '15px',
+                    flexDirection: 'column',
                   }}
                 >
-                  <CardIcon>
-                    <BiFace color={theme.colors.darkGray} size="28" />
-                  </CardIcon>
                   <Box
                     params={{
                       display: 'flex',
-                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '15px',
                     }}
                   >
-                    <Text textDecoration="strong" variant="primary">
-                      {dimension.name}
-                    </Text>
-                    <Text>Proteção contra sistomas de ansiosos</Text>
+                    <CardIcon>
+                      <BiFace color={theme.colors.darkGray} size="28" />
+                    </CardIcon>
+                    <Box
+                      params={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      <Text textDecoration="strong" variant="primary">
+                        {dimension.name}
+                      </Text>
+                      <Text>Proteção contra sistomas de ansiosos</Text>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
 
-              <Box
-                params={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '5px',
-                }}
-              >
-                <Text textDecoration="strong">Análise dos especialistas</Text>
-                <Text>
-                  Sed in libero commodo enim laoreet auctor. Donec ac ultricies
-                  nibh, non gravida nibh. Orci varius natoque penatibus et
-                  magnis dis parturient montes, nascetur ridiculus mus. Proin
-                  aliquet dolor nec velit egestas pellentesque.
-                </Text>
-              </Box>
+                <Box
+                  params={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '5px',
+                  }}
+                >
+                  <Text textDecoration="strong">Análise dos especialistas</Text>
+                  <Text>
+                    Sed in libero commodo enim laoreet auctor. Donec ac
+                    ultricies nibh, non gravida nibh. Orci varius natoque
+                    penatibus et magnis dis parturient montes, nascetur
+                    ridiculus mus. Proin aliquet dolor nec velit egestas
+                    pellentesque.
+                  </Text>
+                </Box>
 
-              <ChartsBarContainer>
-                <LevelsContainer>
-                  {protectionLevelData.map((level) => (
-                    <ProgressBarContainer>
-                      <Text color={level.color}>{level.level}</Text>
-                      <Box params={{ display: 'block', width: '140px' }}>
-                        <ProgressBar
-                          bgColor={level.color}
-                          height="10px"
-                          completed={level.amount}
-                          baseBgColor={rgba(level.color, 0.1)}
-                          isLabelVisible={false}
+                <ChartsBarContainer>
+                  <LevelsContainer>
+                    {protectionLevelData.map((level) => (
+                      <ProgressBarContainer>
+                        <Text color={level.color}>{level.level}</Text>
+                        <Box params={{ display: 'block', width: '140px' }}>
+                          <ProgressBar
+                            bgColor={level.color}
+                            height="10px"
+                            completed={level.amount}
+                            baseBgColor={rgba(level.color, 0.1)}
+                            isLabelVisible={false}
+                          />
+                        </Box>
+                      </ProgressBarContainer>
+                    ))}
+                  </LevelsContainer>
+
+                  <CardCharts>
+                    <CharFlexContainer>
+                      <ChartWrapper size={100}>
+                        <TableChart options={{ cutout: 35 }} data={chartData} />
+                        <Text color="#4ED9A7" textDecoration="strong">
+                          65%
+                        </Text>
+                      </ChartWrapper>
+                      <Text>
+                        Nível de proteção na <strong>equipe</strong>
+                      </Text>
+                    </CharFlexContainer>
+                    <CharFlexContainer>
+                      <ChartWrapper size={100}>
+                        <TableChart
+                          options={{ cutout: 35 }}
+                          data={chartData2}
                         />
-                      </Box>
-                    </ProgressBarContainer>
-                  ))}
-                </LevelsContainer>
-
-                <CardCharts>
-                  <CharFlexContainer>
-                    <ChartWrapper size={100}>
-                      <TableChart options={{ cutout: 35 }} data={chartData} />
-                      <Text color="#4ED9A7" textDecoration="strong">
-                        65%
+                        <Text color="#0062FF" textDecoration="strong">
+                          80%
+                        </Text>
+                      </ChartWrapper>
+                      <Text>
+                        Nível de proteção na <strong>população</strong>
                       </Text>
-                    </ChartWrapper>
-                    <Text>
-                      Nível de proteção na <strong>equipe</strong>
-                    </Text>
-                  </CharFlexContainer>
-                  <CharFlexContainer>
-                    <ChartWrapper size={100}>
-                      <TableChart options={{ cutout: 35 }} data={chartData2} />
-                      <Text color="#0062FF" textDecoration="strong">
-                        80%
-                      </Text>
-                    </ChartWrapper>
-                    <Text>
-                      Nível de proteção na <strong>população</strong>
-                    </Text>
-                  </CharFlexContainer>
-                </CardCharts>
-              </ChartsBarContainer>
-            </Box>
-          </Card>
-        ))}
+                    </CharFlexContainer>
+                  </CardCharts>
+                </ChartsBarContainer>
+              </Box>
+            </Card>
+          ))
+        )}
       </FlexContainer>
     </Box>
   );

@@ -64,6 +64,7 @@ export const StyledTableColumnBody = styled.td<StyledTableColumnBodyProps>`
   border-top: 0;
   font-size: 14px;
   font-weight: normal;
+  position: relative;
   &:first-child {
     ${(props) => !props.border && `padding-left: 16px`};
   }

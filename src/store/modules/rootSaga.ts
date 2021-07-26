@@ -4,11 +4,12 @@ import companies from "./companies/sagas";
 import dimensions from "./dimensions/sagas";
 import results from "./results/sagas";
 import questionaries from "./questionaries/sagas";
+import users from "./users/sagas";
 
 export default function* rootSaga(): Generator<
   AllEffect<AllEffect<ForkEffect<never>>>,
   unknown,
   unknown
 > {
-  return yield all([login, companies, dimensions, results, questionaries]);
+  return yield all([login, companies, dimensions, results, questionaries, users]);
 }
