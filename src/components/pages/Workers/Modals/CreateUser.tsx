@@ -1,10 +1,9 @@
 import React from 'react';
-import { Col, Row } from 'react-flexbox-grid';
 
 import { Box, Modal, Typography, FileUploader } from '../../..';
 import { ModalButton } from '../../../pages/Dashboard/Dashboard.styled';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 type ModalProps = {
   onClick: () => void;

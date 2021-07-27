@@ -16,3 +16,15 @@ export function getGestoresRequest() {
 export function getGestoresSuccess(params: User[]) {
   return action(UsersTypeKeys.GET_GESTORES_SUCCESS, params);
 }
+
+export function createUsersRequest(params: FormData) {
+  return action(UsersTypeKeys.CREATE_USERS_REQUEST, params)
+}
+
+export function createUsersSuccess() {
+  return action(UsersTypeKeys.CREATE_USERS_SUCCESS)
+}
+
+export function createUsersFailure() {
+  return action(UsersTypeKeys.CREATE_USERS_FAILURE)
+}
