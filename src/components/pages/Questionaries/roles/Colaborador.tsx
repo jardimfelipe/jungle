@@ -65,7 +65,10 @@ const Questionaries: React.FC = () => {
 
   const handleStartQuestionary = () => {
     if (!clickedQuestionary._id) return;
-    history.push(`/questionaries/application/${clickedQuestionary?._id}`);
+    history.push({
+      pathname: `/questionaries/application/${clickedQuestionary?._id}`,
+      state: { questionary: clickedQuestionary },
+    });
   };
 
   useEffect(() => {
@@ -132,9 +135,9 @@ const Questionaries: React.FC = () => {
         ) : (
           questionaries.map((questionary) => (
             <Questionary key={questionary._id} image="">
-              <Box params={{ display: 'flex' }}>
+              <div style={{ display: 'flex' }}>
                 <Tag size="large">{questionary.dimension?.name}</Tag>
-              </Box>
+              </div>
               <Box params={{ display: 'flex', flexDirection: 'column' }}>
                 <Title level={3}>{questionary.title}</Title>
                 <Text color="#FFFFFF">

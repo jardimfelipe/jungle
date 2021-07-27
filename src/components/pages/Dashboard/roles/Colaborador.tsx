@@ -65,7 +65,10 @@ const Colaborador: React.FC = () => {
 
   const handleStartQuestionary = () => {
     if (!clickedQuestionary._id) return;
-    history.push(`/questionaries/application/${clickedQuestionary?._id}`);
+    history.push({
+      pathname: `/questionaries/application/${clickedQuestionary?._id}`,
+      state: { questionary: clickedQuestionary },
+    });
   };
 
   const handleResultClick = () => {
@@ -128,7 +131,10 @@ const Colaborador: React.FC = () => {
         {isQuestionaryLoading ? (
           <>
             {[...Array(3)].map((_, index) => (
-              <Box params={{ display: 'block' }}>
+              <Box
+                key={`questionaries-grid-skeleton${index}`}
+                params={{ display: 'block' }}
+              >
                 <Skeleton height={200} />
               </Box>
             ))}
@@ -136,9 +142,9 @@ const Colaborador: React.FC = () => {
         ) : (
           questionaries.map((questionary) => (
             <Questionary key={questionary._id} image="">
-              <Box params={{ display: 'flex' }}>
+              <div style={{ display: 'flex' }}>
                 <Tag size="large">{questionary.dimension?.name}</Tag>
-              </Box>
+              </div>
               <Box params={{ display: 'flex', flexDirection: 'column' }}>
                 <Title level={3}>{questionary.title}</Title>
                 <Text color="#FFFFFF">

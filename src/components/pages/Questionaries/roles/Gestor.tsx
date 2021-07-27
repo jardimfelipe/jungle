@@ -20,7 +20,7 @@ import { Questionary } from '../../../../store/modules/questionaries/types';
 
 const { Title, Text } = Typography;
 
-type TabComponents = 'disponiveis' | 'em andamento' | 'finalizados';
+type TabComponents = 'Ativos' | 'inativos' | 'em breve';
 
 const tableFields = [
   {
@@ -32,6 +32,7 @@ const tableFields = [
     title: 'Dimensão',
     dataIndex: 'dimension',
     key: 'dimension',
+    render: (value: Questionary['dimension']) => <Text>{value.name}</Text>,
   },
   {
     title: 'Número de perguntas',
@@ -64,7 +65,7 @@ const Questionaries: React.FC = () => {
   const { questionaries, error, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
-  const [currentTab, setCurrentTab] = useState<TabComponents>('disponiveis');
+  const [currentTab, setCurrentTab] = useState<TabComponents>('Ativos');
   const isMobile = useMobileWidth();
 
   const handleTabClick = (tab: TabComponents) => {
@@ -102,22 +103,22 @@ const Questionaries: React.FC = () => {
           {isMobile ? <SearchInput /> : <IconButton icon={<BiSearch />} />}
           <Box params={{ display: 'flex', gap: '15px' }}>
             <TabNavigation
-              onClick={() => handleTabClick('disponiveis')}
-              isActive={currentTab === 'disponiveis'}
+              onClick={() => handleTabClick('Ativos')}
+              isActive={currentTab === 'Ativos'}
             >
-              Disponíveis
+              Ativos
             </TabNavigation>
             <TabNavigation
-              onClick={() => handleTabClick('em andamento')}
-              isActive={currentTab === 'em andamento'}
+              onClick={() => handleTabClick('inativos')}
+              isActive={currentTab === 'inativos'}
             >
-              Em andamento
+              Inativos
             </TabNavigation>
             <TabNavigation
-              onClick={() => handleTabClick('finalizados')}
-              isActive={currentTab === 'finalizados'}
+              onClick={() => handleTabClick('em breve')}
+              isActive={currentTab === 'em breve'}
             >
-              Finalizados
+              Em breve
             </TabNavigation>
           </Box>
         </Box>

@@ -24,16 +24,17 @@ import { BsArrowRight } from 'react-icons/bs';
 
 import { useTheme } from 'styled-components';
 import useMobileWidth from '../../../hooks/useMobileWidth';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation /*,useParams*/ } from 'react-router-dom';
 
 import { SwitchTransition, Transition } from 'react-transition-group';
 import FinishQuestionary from '../../../assets/finish-questionary.png';
 import { ModalButton } from '../Dashboard/Dashboard.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestionaryRequest } from '../../../store/modules/questionaries/actions';
+// import { getQuestionaryRequest } from '../../../store/modules/questionaries/actions';
 import { RootState } from '../../../store';
 import { setSnackbarOpen } from '../../../store/modules/base/actions';
+import { Questionary } from '../../../store/modules/questionaries/types';
 
 const { Title, Text } = Typography;
 
@@ -44,17 +45,23 @@ const questionTransition = {
   exited: { opacity: '0' },
 };
 
+type RouteState = {
+  questionary: Questionary;
+};
+
 const QuestionaryApplication: React.FC = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const history = useHistory();
-  const { id } = useParams<{ id: string }>();
+  const {
+    state: { questionary },
+  } = useLocation<RouteState>();
+  // const { id } = useParams<{ id: string }>();
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const isMobile = useMobileWidth();
-
-  const { questionary, error } = useSelector(
+  const { /*questionary,*/ error } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
 
@@ -92,9 +99,9 @@ const QuestionaryApplication: React.FC = () => {
     setSelectedAnswer('');
   }, [currentQuestion]);
 
-  useEffect(() => {
-    dispatch(getQuestionaryRequest(id));
-  }, [dispatch, id]);
+  // useEffect(() => {
+  //   dispatch(getQuestionaryRequest(id));
+  // }, [dispatch, id]);
 
   useEffect(() => {
     error.status && dispatch(setSnackbarOpen(error.message));
@@ -112,7 +119,7 @@ const QuestionaryApplication: React.FC = () => {
               }}
             >
               <Tag size="large" color="primary">
-                {questionary?.description}
+                {questionary?.dimension.name}
               </Tag>
               <Button onClick={handleExitClick}>
                 Sair <BsArrowRight />

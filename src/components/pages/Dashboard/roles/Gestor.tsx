@@ -41,6 +41,7 @@ const tableFields = [
     title: 'Dimensão',
     dataIndex: 'dimension',
     key: 'dimension',
+    render: (value: Questionary['dimension']) => <Text>{value.name}</Text>,
   },
   {
     title: 'Número de perguntas',

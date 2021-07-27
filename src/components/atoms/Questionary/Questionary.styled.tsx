@@ -10,7 +10,7 @@ export const Questionary = styled.div<{ image: string }>`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 15px;
   background-image: url('${QuestionImage}');
   background-size: cover;
   background-position: center;
