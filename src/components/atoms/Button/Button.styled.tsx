@@ -25,7 +25,7 @@ const ButtonVariants = {
     border: 1px solid ${(props) => props.theme.colors.blue};
     color: ${(props) => props.theme.colors.blue};
     &:active {
-      ${(props) => darken(0.05, props.theme.colors.blue)};
+      background-color: rgba(0, 0, 0, 0.05);
     }
     &[disabled] {
       border-color: ${(props) => props.theme.colors.darkGray};

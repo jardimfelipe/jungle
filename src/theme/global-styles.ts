@@ -45,7 +45,6 @@ const GlobalStyles = createGlobalStyle`
     font-weight: bold;
     font-size: 16px;
     &, input, textarea, a {
-      outline-style: none;
       box-shadow: none;
       border-color: transparent;
     }
@@ -60,7 +59,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   *:active, :focus {
-    outline: none
 
   }
 

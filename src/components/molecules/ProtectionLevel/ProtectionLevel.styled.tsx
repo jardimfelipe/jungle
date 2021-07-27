@@ -1,9 +1,13 @@
+import { darken } from 'polished';
 import styled from 'styled-components';
 import { StyledButton } from '../../atoms/Button/Button.styled';
 
 export const QuestionButton = styled(StyledButton)`
   padding: 0 2px;
   background: ${(props) => props.theme.colors.gray};
+  &:active {
+    background: ${(props) => darken(0.05, props.theme.colors.gray)};
+  }
 `;
 
 export const ParamIcon = styled.div`

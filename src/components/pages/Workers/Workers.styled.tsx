@@ -29,4 +29,8 @@ export const MenuButton = styled(Button)<{ danger?: boolean }>`
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
+  &:active {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 `;

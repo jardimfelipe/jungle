@@ -23,6 +23,7 @@ import { getGestoresRequest } from '../../../store/modules/users/actions';
 import { Field } from '../../molecules/Table/table.types';
 import { useTheme } from 'styled-components';
 import TableMenu from './TableMenu';
+import CreateUser from './Modals/CreateUser';
 
 const { Title } = Typography;
 
@@ -33,7 +34,6 @@ const options = [
 ];
 
 const Companies: React.FC = () => {
-  const theme = useTheme();
   const tableFields: Field[] = [
     {
       title: 'Colaborador',
@@ -95,7 +95,9 @@ const Companies: React.FC = () => {
       ),
     },
   ];
+  const theme = useTheme();
   const [currentOpenMenu, setCurrentOpenMenu] = useState(-1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const { gestores, isLoading } = useSelector(
     (state: RootState) => state.users
@@ -105,9 +107,18 @@ const Companies: React.FC = () => {
     setCurrentOpenMenu(index);
   };
 
+  const handleModalButton = () => {
+    setIsModalOpen(true);
+  };
+
   const handleCloseButton = () => {
     setCurrentOpenMenu(-1);
   };
+
+  const handleCreateUser = () => {
+    console.log('create user');
+  };
+
   useEffect(() => {
     dispatch(getGestoresRequest());
   }, [dispatch]);
@@ -145,7 +156,12 @@ const Companies: React.FC = () => {
               flex: '0 0 60%',
             }}
           >
-            <Button block size="small" variant="primary">
+            <Button
+              onClick={handleModalButton}
+              block
+              size="small"
+              variant="primary"
+            >
               Cadastrar Usuários
             </Button>
           </Box>
@@ -169,6 +185,12 @@ const Companies: React.FC = () => {
           <Table items={gestores} fields={tableFields} isLoading={isLoading} />
         </Col>
       </Row>
+
+      <CreateUser
+        onClick={handleCreateUser}
+        onClose={() => setIsModalOpen(false)}
+        isModalOpen={isModalOpen}
+      />
     </Box>
   );
 };

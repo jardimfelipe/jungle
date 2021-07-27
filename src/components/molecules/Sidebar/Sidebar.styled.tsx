@@ -56,10 +56,14 @@ export const MenuItem = styled.li<MenuItemProps>`
       !props.isSoon &&
       `
     &:hover {
-    color: ${props.theme.colors.black};
-    cursor: pointer;
-    border-right: 3px solid ${props.theme.colors.blue};
-  }
+      color: ${props.theme.colors.black};
+      cursor: pointer;
+      border-right: 3px solid ${props.theme.colors.blue};
+    }
+    *:active, :focus {
+      outline: none;
+      color: ${props.theme.colors.black};
+    }
   ${
     props.isActive &&
     `

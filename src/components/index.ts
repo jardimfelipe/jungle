@@ -22,6 +22,7 @@ export { default as SearchInput } from './atoms/SearchInput/SearchInput'
 export { default as Icons } from './atoms/Icons'
 export { default as Snackbar } from './atoms/Snackbar/Snackbar'
 export { default as QuestionaryModal } from './atoms/QuestionaryModal/QuestionaryModal'
+export { default as FileUploader } from './atoms/FileUploader/FileUploader'
 
 export { default as CompanyTable } from './organisms/CompanyTable/CompanyTable'
 
