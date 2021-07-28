@@ -14,6 +14,9 @@ export enum UsersTypeKeys {
   CREATE_USERS_REQUEST = "@user/CREATE_USERS_REQUEST",
   CREATE_USERS_SUCCESS = "@user/CREATE_USERS_SUCCESS",
   CREATE_USERS_FAILURE = "@user/CREATE_USERS_FAILURE",
+  CREATE_USERS_PROGRESS = "@user/CREATE_USERS_PROGRESS",
+
+  RESET_USERS_ERRORS = "@user/RESET_USERS_ERRORS"
 }
 
 export type UsersAction = ActionType<typeof actions>;
@@ -44,7 +47,10 @@ export type UsersState = {
   users: User[];
   gestores: User[];
   admins: User[];
+  userFileProgress: number;
+  isFileLoading: boolean;
   isLoading: boolean;
   error: RequestError;
+  fileSuccess: boolean;
 }
 

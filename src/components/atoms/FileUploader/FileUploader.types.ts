@@ -1,3 +1,3 @@
 export type FileUploaderProps = {
-  onDrop: (e: File[]) => void;
+  onChange: (e: File[]) => void;
 }

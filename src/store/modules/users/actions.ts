@@ -25,6 +25,14 @@ export function createUsersSuccess() {
   return action(UsersTypeKeys.CREATE_USERS_SUCCESS)
 }
 
-export function createUsersFailure() {
-  return action(UsersTypeKeys.CREATE_USERS_FAILURE)
+export function createUsersFailure(params: string) {
+  return action(UsersTypeKeys.CREATE_USERS_FAILURE, params)
+}
+
+export function createUsersProgress(params: number) {
+  return action(UsersTypeKeys.CREATE_USERS_PROGRESS, params)
+}
+
+export function resetUsersErrors() {
+  return action(UsersTypeKeys.RESET_USERS_ERRORS)
 }

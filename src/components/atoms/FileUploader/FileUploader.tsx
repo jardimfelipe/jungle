@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { DropContainer, FileInfo } from './FileUploader.styled';
 
 import { useDropzone } from 'react-dropzone';
@@ -11,18 +11,30 @@ import { useTheme } from 'styled-components';
 
 const { Text } = Typography;
 
-const FileUploader: React.FC<FileUploaderProps> = ({ onDrop }) => {
+const FileUploader: React.FC<FileUploaderProps> = ({ onChange }) => {
+  const [files, setFiles] = useState<File[]>([]);
   const theme = useTheme();
-  const { getRootProps, getInputProps, isDragReject, acceptedFiles } =
-    useDropzone({
-      accept: ['xls', 'xlsx', 'csv'],
-      onDrop,
-    });
 
-  const files = acceptedFiles.map((file) => (
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      setFiles([...files, ...acceptedFiles]);
+    },
+    [files]
+  );
+
+  const { getRootProps, getInputProps, isDragReject } = useDropzone({
+    // accept: ['xls', 'xlsx', 'csv'],
+    onDrop,
+  });
+
+  const handleFileRemove = () => {
+    setFiles([]);
+  };
+
+  const fileList = files.map((file) => (
     <FileInfo key={file.name}>
       {file.name}
-      <Button>
+      <Button onClick={handleFileRemove}>
         <CgCloseR size={18} color={theme.colors.p1} />
       </Button>
     </FileInfo>
@@ -48,7 +60,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onDrop }) => {
               size="64"
             />
             <Text>
-              {!acceptedFiles.length
+              {!files.length
                 ? 'Arraste e solte sua planilha ou clique aqui para acessá-la'
                 : 'Substituir planilha'}
             </Text>
@@ -57,6 +69,10 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onDrop }) => {
       </Box>
     );
   };
+
+  useEffect(() => {
+    onChange(files);
+  }, [files, onChange]);
   return (
     <Box
       params={{
@@ -66,7 +82,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onDrop }) => {
         width: '100%',
       }}
     >
-      {files}
+      {fileList}
       <DropContainer {...getRootProps()}>
         <input {...getInputProps()} id="file-uploader" type="file" />
         {renderDragMessage()}

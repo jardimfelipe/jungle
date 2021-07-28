@@ -19,7 +19,10 @@ import Profile from '../../../assets/profile.jpg';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { getGestoresRequest } from '../../../store/modules/users/actions';
+import {
+  getGestoresRequest,
+  resetUsersErrors,
+} from '../../../store/modules/users/actions';
 import { Field } from '../../molecules/Table/table.types';
 import { useTheme } from 'styled-components';
 import TableMenu from './TableMenu';
@@ -111,12 +114,13 @@ const Companies: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleCloseButton = () => {
-    setCurrentOpenMenu(-1);
+  const handleModalClose = () => {
+    dispatch(resetUsersErrors());
+    setIsModalOpen(false);
   };
 
-  const handleCreateUser = () => {
-    console.log('create user');
+  const handleCloseButton = () => {
+    setCurrentOpenMenu(-1);
   };
 
   useEffect(() => {
@@ -186,11 +190,7 @@ const Companies: React.FC = () => {
         </Col>
       </Row>
 
-      <CreateUser
-        onClick={handleCreateUser}
-        onClose={() => setIsModalOpen(false)}
-        isModalOpen={isModalOpen}
-      />
+      <CreateUser onClose={handleModalClose} isModalOpen={isModalOpen} />
     </Box>
   );
 };

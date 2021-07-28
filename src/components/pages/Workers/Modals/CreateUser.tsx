@@ -1,28 +1,66 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Box, Modal, Typography, FileUploader } from '../../..';
 import { ModalButton } from '../../../pages/Dashboard/Dashboard.styled';
+import ProgressBar from '@ramonak/react-progress-bar';
+import { Oval } from 'react-loading-icons';
 
-const { Title } = Typography;
+import { createUsersRequest } from '../../../../store/modules/users/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+
+import { useTheme } from 'styled-components';
+import { rgba } from 'polished';
+import { FaCheckCircle } from 'react-icons/fa';
+
+const { Title, Text } = Typography;
 
 type ModalProps = {
-  onClick: () => void;
   onClose: () => void;
   isModalOpen: boolean;
 };
 
-const CreateUser: React.FC<ModalProps> = ({
-  onClick,
-  onClose,
-  isModalOpen,
-}) => {
-  const handleFileUpload = (files: File[]) => {
-    if (!files.length) return;
+const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const { userFileProgress, isFileLoading, error, fileSuccess } = useSelector(
+    (state: RootState) => state.users
+  );
+  const [currentFile, setCurrentFile] = useState<FormData | undefined>(
+    undefined
+  );
+
+  const handleFileChange = useCallback((files: File[]) => {
+    if (!files.length) return setCurrentFile(undefined);
     const data = new FormData();
     data.append('file', files[0], files[0].name);
+    setCurrentFile(data);
+  }, []);
+
+  const handleSubmit = () => {
+    if (fileSuccess) onClose();
+    if (currentFile) dispatch(createUsersRequest(currentFile));
   };
-  return (
-    <Modal width={550} height={500} isOpen={isModalOpen} onClose={onClose}>
+  console.log('rendeeer');
+  const successFeedback = () => {
+    return (
+      <Box
+        params={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '15px',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <FaCheckCircle size="120" color={theme.colors.p3} />
+        <Title level={2}>Usuários cadastrados com sucesso!</Title>
+      </Box>
+    );
+  };
+
+  const usersFileUploader = () => {
+    return (
       <Box
         params={{
           display: 'flex',
@@ -35,12 +73,63 @@ const CreateUser: React.FC<ModalProps> = ({
         <Title style={{ alignSelf: 'flex-start' }} variant="primary" level={4}>
           Cadastrar usuários
         </Title>
-        <ModalButton onClick={onClick} variant="primary" block>
-          Enviar planilha
-        </ModalButton>
+        <FileUploader onChange={handleFileChange} />
 
-        <FileUploader onDrop={handleFileUpload} />
+        {error.status && (
+          <Box
+            params={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '15px',
+            }}
+          >
+            <Text color={theme.colors.p1} textDecoration="strong">
+              {error.message}
+            </Text>
+          </Box>
+        )}
       </Box>
+    );
+  };
+
+  const buttonContent = () => {
+    const text = fileSuccess ? 'Fechar' : 'Enviar planilha';
+    return isFileLoading ? <Oval height="28" /> : text;
+  };
+
+  return (
+    <Modal width={550} height={500} isOpen={isModalOpen} onClose={onClose}>
+      {isFileLoading && (
+        <Box
+          params={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <ProgressBar
+            bgColor={theme.colors.blue}
+            height="3px"
+            completed={userFileProgress}
+            baseBgColor={rgba(theme.colors.blue, 0.1)}
+            isLabelVisible={false}
+            transitionDuration="0.3s"
+          />
+        </Box>
+      )}
+
+      {fileSuccess ? successFeedback() : usersFileUploader()}
+
+      <ModalButton
+        disabled={!currentFile || isFileLoading}
+        onClick={handleSubmit}
+        variant="primary"
+        block
+      >
+        {buttonContent()}
+      </ModalButton>
     </Modal>
   );
 };
