@@ -23,7 +23,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onChange }) => {
   );
 
   const { getRootProps, getInputProps, isDragReject } = useDropzone({
-    // accept: ['xls', 'xlsx', 'csv'],
+    accept: ['.xls', '.xlsx', '.csv'],
     onDrop,
   });
 
@@ -57,7 +57,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onChange }) => {
             <AiOutlineFileAdd
               style={{ flexShrink: 0 }}
               color={theme.colors.darkGray}
-              size="64"
+              size={files.length ? 64 : 120}
             />
             <Text>
               {!files.length

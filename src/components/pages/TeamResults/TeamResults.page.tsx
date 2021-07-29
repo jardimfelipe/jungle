@@ -206,53 +206,8 @@ const TeamResults: React.FC = () => {
         </StyledCol>
       </Row>
 
-      <FlexContainer>
-        {isLoading ? (
-          <>
-            <Box params={{ display: 'block', flex: 'auto' }}>
-              <Skeleton height={100} />
-            </Box>
-            <Box params={{ display: 'block', flex: 'auto' }}>
-              <Skeleton height={100} />
-            </Box>
-          </>
-        ) : (
-          dimensions.map(({ name }) => (
-            <ResultCard key={`dimension-${name}`}>
-              <CardHeader>
-                <Text textDecoration="strong" variant="primary">
-                  <Brain color={theme.colors.blue} />
-                  {name}
-                </Text>
-                <Text textDecoration="strong" variant="primary">
-                  65%
-                </Text>
-              </CardHeader>
-              <CardBody>
-                <ResultLine
-                  results={{
-                    analise:
-                      'Observamos níveis de proteção contra ocorrências de sintomas ansiosos, maiores do que a população geral. Os sintomas podem ser reativos a problemas diversos, e não necessariamente se traduzem em transtornos.',
-                    total: 65,
-                  }}
-                  hasAnalysis={false}
-                  type={name}
-                />
-              </CardBody>
-            </ResultCard>
-          ))
-        )}
-      </FlexContainer>
-      <Box
-        params={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        <Title level={3}>Niveis de proteção</Title>
-      </Box>
+      {/* Níveis de proteção */}
+      <Title level={3}>Niveis de proteção</Title>
       <FlexContainer>
         {isLoading ? (
           <>
@@ -323,7 +278,9 @@ const TeamResults: React.FC = () => {
                 <ChartsBarContainer>
                   <LevelsContainer>
                     {protectionLevelData.map((level) => (
-                      <ProgressBarContainer>
+                      <ProgressBarContainer
+                        key={`protection-leve-${level}-${Math.random()}`}
+                      >
                         <Text color={level.color}>{level.level}</Text>
                         <Box params={{ display: 'block', width: '140px' }}>
                           <ProgressBar
@@ -368,6 +325,48 @@ const TeamResults: React.FC = () => {
                 </ChartsBarContainer>
               </Box>
             </Card>
+          ))
+        )}
+      </FlexContainer>
+
+      {/* Níveis de proteção */}
+
+      <Title level={3}>Aspectos biopsicossociais da equipe</Title>
+
+      <FlexContainer>
+        {isLoading ? (
+          <>
+            <Box params={{ display: 'block', flex: 'auto' }}>
+              <Skeleton height={100} />
+            </Box>
+            <Box params={{ display: 'block', flex: 'auto' }}>
+              <Skeleton height={100} />
+            </Box>
+          </>
+        ) : (
+          dimensions.map(({ name }) => (
+            <ResultCard key={`dimension-${name}`}>
+              <CardHeader>
+                <Text textDecoration="strong" variant="primary">
+                  <Brain color={theme.colors.blue} />
+                  {name}
+                </Text>
+                <Text textDecoration="strong" variant="primary">
+                  65%
+                </Text>
+              </CardHeader>
+              <CardBody>
+                <ResultLine
+                  results={{
+                    analise:
+                      'Observamos níveis de proteção contra ocorrências de sintomas ansiosos, maiores do que a população geral. Os sintomas podem ser reativos a problemas diversos, e não necessariamente se traduzem em transtornos.',
+                    total: 65,
+                  }}
+                  hasAnalysis={false}
+                  type={name}
+                />
+              </CardBody>
+            </ResultCard>
           ))
         )}
       </FlexContainer>

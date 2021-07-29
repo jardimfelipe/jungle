@@ -33,7 +33,7 @@ export type Questionary = {
   title: string
   _id: string
   description: string
-  dimension: {
+  dimension?: {
     name: string
   }
   question: Question[]

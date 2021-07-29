@@ -41,7 +41,6 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     if (fileSuccess) onClose();
     if (currentFile) dispatch(createUsersRequest(currentFile));
   };
-  console.log('rendeeer');
   const successFeedback = () => {
     return (
       <Box

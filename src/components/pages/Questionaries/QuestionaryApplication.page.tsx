@@ -119,7 +119,7 @@ const QuestionaryApplication: React.FC = () => {
               }}
             >
               <Tag size="large" color="primary">
-                {questionary?.dimension.name}
+                {questionary?.dimension?.name}
               </Tag>
               <Button onClick={handleExitClick}>
                 Sair <BsArrowRight />
