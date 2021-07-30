@@ -76,7 +76,7 @@ export const MenuItem = styled.li<MenuItemProps>`
   }
 `;
 
-export const UserSection = styled.div`
+export const UserSectionContainer = styled.div`
   margin-top: 24px;
   display: flex;
   flex-direction: column;

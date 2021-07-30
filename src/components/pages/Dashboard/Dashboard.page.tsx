@@ -10,7 +10,7 @@ import Gestor from './roles/Gestor';
 const Dashboard: React.FC = () => {
   const { currentUser } = useSelector(({ login }: RootState) => login);
   const dashboards = {
-    master: <Master />,
+    admin_jungle: <Master />,
     user: <Colaborador />,
     gestor: <Gestor />,
   };

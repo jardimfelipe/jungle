@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import {
   IStyledTableRowProps,
   LoaderProps,
-  RowTypes,
   StyledTableColumnBodyProps,
   StyledTableColumnHeaderProps,
 } from './table.types';
@@ -22,7 +21,7 @@ export const TableContainer = styled.div`
   position: relative;
 `;
 
-export const StyledTableHeader = styled.thead<{ rowType?: RowTypes }>`
+export const StyledTableHeader = styled.thead`
   background-color: ${(props) => rgba(props.theme.colors.darkGray, 0.1)};
   height: 50px;
   vertical-align: center;

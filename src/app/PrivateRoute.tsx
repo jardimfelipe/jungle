@@ -10,7 +10,6 @@ const PrivateRoute: React.FC<{
 }> = (props) => {
   const { isLoggedIn } = useSelector(({ login }: RootState) => login);
   const { render, ...rest } = props;
-
   return isLoggedIn ? (
     <Route {...rest} render={() => render()} />
   ) : (

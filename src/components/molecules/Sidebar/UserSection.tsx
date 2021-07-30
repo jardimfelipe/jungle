@@ -1,15 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, Box, Typography } from '../..';
-import { MenuItem, MenuList } from './Sidebar.styled';
+import { MenuItem, MenuList, UserSectionContainer } from './Sidebar.styled';
 import { BiCog, BiLogOut } from 'react-icons/bi';
 import Profile from '../../../assets/profile.jpg';
+
+import { removeState } from '../../../utils/localStorage';
+import { logout } from '../../../store/modules/login/actions';
+import { useDispatch } from 'react-redux';
 
 const { Text } = Typography;
 
 const UserSection: React.FC = () => {
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    removeState('auth.token');
+    dispatch(logout());
+  };
   return (
-    <UserSection>
+    <UserSectionContainer>
       <Box params={{ display: 'flex', paddingLeft: '32px', gap: '10px' }}>
         <Avatar image={Profile} />
         <Box
@@ -30,12 +39,12 @@ const UserSection: React.FC = () => {
           </Link>
         </MenuItem>
         <MenuItem>
-          <Link to="/">
+          <Link to="/" onClick={handleLogout}>
             <BiLogOut /> Deslogar
           </Link>
         </MenuItem>
       </MenuList>
-    </UserSection>
+    </UserSectionContainer>
   );
 };
 

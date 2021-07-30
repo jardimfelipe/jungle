@@ -9,7 +9,6 @@ import { BiLogOut } from 'react-icons/bi';
 import { FiChevronLeft } from 'react-icons/fi';
 import UserSection from './UserSection';
 
-import { routes } from '../../../app/Router';
 import SpecialistBanner from './SpecialistBanner';
 import useMobileWidth from '../../../hooks/useMobileWidth';
 
@@ -18,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSidebarState } from '../../../store/modules/base/actions';
 import { removeState } from '../../../utils/localStorage';
 import { logout } from '../../../store/modules/login/actions';
+import { routes } from '../../../app/Routes';
 
 const Sidebar: React.FC = () => {
   const history = useHistory();
@@ -34,7 +34,6 @@ const Sidebar: React.FC = () => {
   const handleClick = () => {
     dispatch(setSidebarState(false));
   };
-
   const handleLogout = () => {
     removeState('auth.token');
     dispatch(logout());
@@ -51,7 +50,7 @@ const Sidebar: React.FC = () => {
             <img src={JungleLogo} alt="Jungle" />
           </Box>
         )}
-        {routes[(currentUser.role as keyof typeof routes) || 'user'].map(
+        {routes[currentUser.role as keyof typeof routes].map(
           ({ name, icon, isSoon, path }) =>
             name ? (
               <MenuItem
@@ -66,7 +65,7 @@ const Sidebar: React.FC = () => {
             ) : null
         )}
       </MenuList>
-      {currentUser.role === 'master' ? (
+      {currentUser.role === 'admin_jungle' ? (
         <UserSection />
       ) : (
         <>

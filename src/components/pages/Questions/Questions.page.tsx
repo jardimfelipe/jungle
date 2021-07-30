@@ -12,7 +12,8 @@ import {
   Table,
   Typography,
 } from '../..';
-import { BiSearch, BiDotsVertical } from 'react-icons/bi';
+import { BiSearch, BiMessageSquareDetail } from 'react-icons/bi';
+import { AiOutlineRight } from 'react-icons/ai';
 import { useTheme } from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +28,7 @@ const options = [
   { value: 'vanilla', label: 'Vanilla' },
 ];
 
-const Dimensions: React.FC = () => {
+const Questions: React.FC = () => {
   const dispatch = useDispatch();
   const { dimensions, isLoading } = useSelector(
     ({ dimensions }: RootState) => dimensions
@@ -57,19 +58,25 @@ const Dimensions: React.FC = () => {
     },
 
     {
-      title: 'Questões (min)',
-      dataIndex: 'qt_minimum',
-      key: 'qt_minimum',
-      render: (value: string) => <Text textDecoration="strong">{value}</Text>,
+      title: 'Total de perguntas',
+      dataIndex: 'qt_maximum',
+      key: 'qt_maximum',
+      render: (value: string) => (
+        <Box params={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <BiMessageSquareDetail size="24" color={theme.colors.blue} />
+          <Text textDecoration="strong">{value}</Text>
+        </Box>
+      ),
     },
     {
       title: 'Obrigatórias (P1)',
       dataIndex: 'mandatory',
       key: 'mandatory',
       render: (value: string) => (
-        <Text style={{ color: theme.colors.p1 }} textDecoration="strong">
-          {value}
-        </Text>
+        <Box params={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <BiMessageSquareDetail size="24" color={theme.colors.p1} />
+          <Text textDecoration="strong">{value}</Text>
+        </Box>
       ),
     },
     {
@@ -77,9 +84,10 @@ const Dimensions: React.FC = () => {
       dataIndex: 'complementary',
       key: 'complementary',
       render: (value: string) => (
-        <Text style={{ color: theme.colors.p2 }} textDecoration="strong">
-          {value}
-        </Text>
+        <Box params={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <BiMessageSquareDetail size="24" color={theme.colors.p2} />
+          <Text textDecoration="strong">{value}</Text>
+        </Box>
       ),
     },
     {
@@ -87,24 +95,19 @@ const Dimensions: React.FC = () => {
       dataIndex: 'optional',
       key: 'optional',
       render: (value: string) => (
-        <Text style={{ color: theme.colors.p3 }} textDecoration="strong">
-          {value}
-        </Text>
+        <Box params={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <BiMessageSquareDetail size="24" color={theme.colors.p3} />
+          <Text textDecoration="strong">{value}</Text>
+        </Box>
       ),
-    },
-    {
-      title: 'Questões (Max)',
-      dataIndex: 'qt_maximum',
-      key: 'qt_maximum',
-      render: (value: string) => <Text textDecoration="strong">{value}</Text>,
     },
     {
       title: '',
       dataIndex: 'id',
       key: 'id',
-      render: (value: string) => (
-        <ColumnButton onClick={() => console.log(value)}>
-          <BiDotsVertical size="24" />
+      render: () => (
+        <ColumnButton onClick={() => console.log('')}>
+          <AiOutlineRight size="24" />
         </ColumnButton>
       ),
     },
@@ -120,7 +123,7 @@ const Dimensions: React.FC = () => {
           alignItems: 'center',
         }}
       >
-        <Title level={3}>Dimensões</Title>
+        <Title level={3}>Perguntas</Title>
         <Box
           params={{
             display: 'flex',
@@ -131,7 +134,7 @@ const Dimensions: React.FC = () => {
         >
           <IconButton icon={<BiSearch />} />
           <Button block size="small" variant="primary">
-            Cadastrar Dimensões
+            Cadastrar Perguntas
           </Button>
         </Box>
       </Box>
@@ -151,6 +154,7 @@ const Dimensions: React.FC = () => {
       <Row>
         <Col xs>
           <Table
+            rowType="modern"
             items={dimensions}
             isLoading={isLoading}
             fields={tableFields}
@@ -165,4 +169,4 @@ const Dimensions: React.FC = () => {
   );
 };
 
-export default Dimensions;
+export default Questions;

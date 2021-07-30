@@ -18,6 +18,7 @@ export interface TableProps {
   isLoading?: boolean
   loaderIcon?: ReactNode | ImageData;
   rowType?: RowTypes
+  hideHeader?: boolean
 }
 
 export interface IStyledTableRowProps {

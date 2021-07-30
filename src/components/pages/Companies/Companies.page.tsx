@@ -13,7 +13,7 @@ import { BiSearch } from 'react-icons/bi';
 import { BiBuildings, BiDockLeft } from 'react-icons/bi';
 import PromotionalCard from '../../molecules/PromotionalCard/PromotionalCard';
 import { FilterLink } from './Companies.styled';
-import Resume from './Resume';
+import Resume from '../../molecules/Resume/Resume';
 
 import { useHistory } from 'react-router-dom';
 
@@ -56,7 +56,10 @@ const Companies: React.FC = () => {
   ];
 
   const handleTableClick = (company: CompanyItem) => {
-    history.push(`/companies/company/${company.id}`);
+    history.push({
+      pathname: `/companies/company/${company.id}`,
+      state: { company },
+    });
   };
 
   return (
@@ -109,7 +112,7 @@ const Companies: React.FC = () => {
         </Col>
       </Row>
 
-      <CompanyTable hasPagination onClick={handleTableClick} />
+      <CompanyTable onClick={handleTableClick} />
     </Box>
   );
 };

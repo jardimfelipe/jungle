@@ -12,13 +12,12 @@ export enum CompaniesTypeKeys {
 export type CompaniesAction = ActionType<typeof actions>;
 
 export type CompanyItem = {
-  company: string,
-  workers: string,
-  questions: string,
-  filled: number,
-  active: string,
-  createdAt: string,
-  id: number,
+  name: string,
+  image: string,
+  collaborators: string,
+  questionnaires: string,
+  active: boolean,
+  id: string,
 }
 
 export type Questionary = {

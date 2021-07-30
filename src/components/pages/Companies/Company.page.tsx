@@ -9,21 +9,28 @@ import {
   Button,
 } from '../..';
 import { Col, Row } from 'react-flexbox-grid';
-import Resume from './Resume';
+import Resume from '../../molecules/Resume/Resume';
 import { FiUsers } from 'react-icons/fi';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import { BiDockLeft, BiSearch } from 'react-icons/bi';
 import { Colaboradores, Questionarios } from './CompanyTabItems';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { TabNavigation } from './Companies.styled';
+import { CompanyItem } from '../../../store';
 
 const { Text, Title } = Typography;
 
 type TabComponents = 'questionarios' | 'colaboradores';
+type RouteState = {
+  company: CompanyItem;
+};
 
 const Company: React.FC = () => {
+  const {
+    state: { company },
+  } = useLocation<RouteState>();
   const history = useHistory();
   const theme = useTheme();
   const [currentTab, setCurrentTab] = useState<TabComponents>('questionarios');
@@ -32,12 +39,12 @@ const Company: React.FC = () => {
     {
       name: 'Colaboradores',
       icon: <FiUsers size="32" color={theme.colors.blue} />,
-      total: 120,
+      total: company.collaborators,
     },
     {
       name: 'Questionários',
       icon: <BiDockLeft size="32" color="#3BC8E3" />,
-      total: 12,
+      total: company.questionnaires,
     },
     {
       name: 'Ativos',
@@ -62,7 +69,7 @@ const Company: React.FC = () => {
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <Card size="small" hasCloseButton background="#E5EEF7">
         <Title variant="primary" level={3}>
-          Você está visualizando as informações da Magalu
+          Você está visualizando as informações da {company.name}
         </Title>
       </Card>
 

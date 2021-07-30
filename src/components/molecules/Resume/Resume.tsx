@@ -7,7 +7,7 @@ const { Text } = Typography;
 type Item = {
   name: string;
   icon: ReactNode;
-  total: number;
+  total: number | string;
 };
 
 type ResumeProps = {
@@ -55,6 +55,7 @@ const Resume: React.FC<ResumeProps> = ({ items, date, filled }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
+              key={`resume-box-${index}`}
             >
               <Box
                 params={{ display: 'flex', gap: '5px', alignItems: 'center' }}

@@ -37,6 +37,8 @@ export { default as MobileTopBar } from './molecules/MobileTopBar/MobileTopBar'
 export { default as ResultLine } from './molecules/ResultLine/ResultLine'
 export { default as Modal } from './molecules/Modal/Modal'
 export { default as QuestionarySlider } from './molecules/QuestionarySlider/QuestionarySlider'
+export { default as Resume } from './molecules/Resume/Resume'
+export { default as TableMenu } from './molecules/TableMenu/TableMenu'
 
 export { default as Dashboard } from './pages/Dashboard/Dashboard.page'
 export { default as Companies } from './pages/Companies/Companies.page'
@@ -47,6 +49,7 @@ export { default as QuestionaryApplication } from './pages/Questionaries/Questio
 export { default as MyResults } from './pages/MyResults/MyResults.page'
 export { default as TeamResults } from './pages/TeamResults/TeamResults.page'
 export { default as Workers } from './pages/Workers/Workers.page'
+export { default as Questions } from './pages/Questions/Questions.page'
 
 export { default as BasicTemplate } from './templates/Basic/Basic.template'
 export { default as WorkerTemplate } from './templates/Worker/Worker.template'

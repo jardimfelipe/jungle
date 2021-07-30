@@ -14,6 +14,7 @@ const Main = styled.main`
 `;
 
 const BasicTemplate: React.FC = ({ children }) => {
+  console.log('template');
   return (
     <Layout>
       <Sidebar />

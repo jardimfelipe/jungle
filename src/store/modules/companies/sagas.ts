@@ -6,8 +6,8 @@ import { CompaniesTypeKeys } from "./types";
 
 function* getCompanies({ payload }: ActionType<typeof actions.getCompanyRequest>) {
   try {
-    const { data: { items } } = yield call(api, "https://run.mocky.io/v3/3240db88-50d9-49d1-9fbe-e42edb233516", { params: { ...payload } });
-    yield put(actions.getCompaniesSuccess(items));
+    const { data } = yield call(api, "/companies", { params: { ...payload } });
+    yield put(actions.getCompaniesSuccess(data));
   } catch (error) {
     if (error instanceof Error) {
       console.log(error)

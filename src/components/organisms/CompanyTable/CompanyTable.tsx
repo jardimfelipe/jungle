@@ -20,7 +20,7 @@ import { useTheme } from 'styled-components';
 import { CompanyTableProps } from './CompanyTable.types';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { CompanyItem, RootState } from '../../../store';
 import { getCompaniesRequest } from '../../../store/modules/companies/actions';
 
 const chartData = {
@@ -39,6 +39,7 @@ const { Text } = Typography;
 const CompanyTable: React.FC<CompanyTableProps> = ({
   onClick,
   hasPagination,
+  hideHeader = false,
 }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const dispatch = useDispatch();
@@ -60,22 +61,22 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
       title: 'Empresa',
       dataIndex: 'company',
       key: 'company',
-      render: (value) => (
+      render: (value, object: CompanyItem) => (
         <TableContainer>
           <TableImage
             src="https://media.glassdoor.com/sqll/382606/magazine-luiza-squarelogo-1564520166281.png"
-            alt={value}
+            alt={object.image}
           />
           <Text textDecoration="strong" variant="primary">
-            {value}
+            {object.name}
           </Text>
         </TableContainer>
       ),
     },
     {
       title: 'Colaboradores',
-      dataIndex: 'workers',
-      key: 'workers',
+      dataIndex: 'collaborators',
+      key: 'collaborators',
       render: (value) => (
         <TableContainer>
           <FiUsers size="24px" color={theme.colors.blue} />
@@ -85,8 +86,8 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
     },
     {
       title: 'Questionários',
-      dataIndex: 'questions',
-      key: 'questions',
+      dataIndex: 'questionnaires',
+      key: 'questionnaires',
       render: (value) => (
         <TableContainer>
           <BiDockLeft size="24px" color={theme.colors.blue} />
@@ -102,7 +103,7 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
         <TableContainer>
           <ChartWrapper>
             <TableChart data={chartData} />
-            <Text textDecoration="strong">{value}%</Text>
+            <Text textDecoration="strong">52%</Text>
           </ChartWrapper>
           <Text>Preenchimento</Text>
         </TableContainer>
@@ -112,6 +113,7 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
       title: 'Ativo',
       dataIndex: 'active',
       key: 'active',
+      render: () => '15/06/2021',
     },
     {
       title: '',
@@ -134,6 +136,7 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
             isLoading={isLoading}
             items={companies}
             fields={tableFields}
+            hideHeader={hideHeader}
           />
         </Col>
       </Row>

@@ -21,6 +21,8 @@ import {
   FaChevronUp,
 } from 'react-icons/fa';
 import { Box, Button, Typography } from '../..';
+import { Oval } from 'react-loading-icons';
+import { useTheme } from 'styled-components';
 
 const { Text } = Typography;
 
@@ -30,7 +32,9 @@ const Table: React.FC<TableProps> = ({
   isLoading,
   loaderIcon,
   rowType,
+  hideHeader = false,
 }) => {
+  const theme = useTheme();
   const [tableItems, setTableItems] = useState<any[]>([]);
   const [sortState, setSortState] = useState<SortOrder>('ascend');
 
@@ -62,31 +66,33 @@ const Table: React.FC<TableProps> = ({
   return (
     <TableContainer className="table">
       <LoaderWrapper isLoading={isLoading}>
-        {loaderIcon || 'Carregando'}
+        {loaderIcon || <Oval stroke={theme.colors.blue} height={50} />}
       </LoaderWrapper>
       <StyledTable>
-        <StyledTableHeader rowType={rowType}>
-          <StyledTableRow>
-            {fields.map((field, index) => {
-              return (
-                <StyledTableColumnHeader
-                  sorter={!!field.sorter}
-                  onClick={() => handleSortClick(field)}
-                  key={`column-header-${field.key}-${Math.random()}`}
-                >
-                  {field.title}
-                  {field.sorter ? (
-                    sortState === 'ascend' ? (
-                      <FaChevronUp />
-                    ) : (
-                      <FaChevronDown />
-                    )
-                  ) : null}
-                </StyledTableColumnHeader>
-              );
-            })}
-          </StyledTableRow>
-        </StyledTableHeader>
+        {!hideHeader && (
+          <StyledTableHeader>
+            <StyledTableRow>
+              {fields.map((field, index) => {
+                return (
+                  <StyledTableColumnHeader
+                    sorter={!!field.sorter}
+                    onClick={() => handleSortClick(field)}
+                    key={`column-header-${field.key}-${Math.random()}`}
+                  >
+                    {field.title}
+                    {field.sorter ? (
+                      sortState === 'ascend' ? (
+                        <FaChevronUp />
+                      ) : (
+                        <FaChevronDown />
+                      )
+                    ) : null}
+                  </StyledTableColumnHeader>
+                );
+              })}
+            </StyledTableRow>
+          </StyledTableHeader>
+        )}
         <StyledTableBody>
           {tableItems.length ? (
             tableItems.map((item, rowIndex) => {
@@ -104,6 +110,7 @@ const Table: React.FC<TableProps> = ({
                                 : null
                             }
                             key={`body-column-${item}-${Math.random()}`}
+                            rowType={rowType}
                           >
                             {currentItem.render
                               ? currentItem.render(

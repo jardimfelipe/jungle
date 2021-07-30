@@ -12,12 +12,15 @@ export type DimensionsAction = ActionType<typeof actions>;
 export type DimensionItem = {
   dimension: string;
   name: string;
-  min: string;
+  qt_minimum: string;
   p1: string;
   p2: string;
   p3: string;
-  max: string;
-  id: number
+  qt_maximum: string;
+  id: number;
+  complementary: number
+  mandatory: number
+  optional: number
 }
 
 export type DimensionsState = {

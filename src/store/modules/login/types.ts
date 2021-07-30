@@ -12,7 +12,7 @@ export enum LoginTypeKeys {
 }
 
 export type LoginAction = ActionType<typeof actions>;
-export type UserRoles = 'user' | 'gestor' | 'master' | ''
+export type UserRoles = 'user' | 'gestor' | 'master' | 'admin_jungle' | ''
 
 export type LoginState = {
   currentUser: {

@@ -11,6 +11,7 @@ function* login({ payload }: ActionType<typeof actions.loginRequest>) {
   try {
     const { data } = yield call(api, "/authorize", { method: 'POST', data: { ...payload } });
     saveState('auth.token', data.token)
+    saveState('auth.role', data.user.role)
     yield put(actions.loginSuccess(data.user));
   } catch (error) {
     if (error instanceof Error) {
@@ -22,7 +23,7 @@ function* login({ payload }: ActionType<typeof actions.loginRequest>) {
 function* getUserInfo() {
   const token = getSavedState('auth.token')
   const decodeToken: LoginState["currentUser"] = jwtDecode(token)
-  const userInfo = { ...decodeToken, role: 'gestor' }
+  const userInfo = { ...decodeToken, role: getSavedState('auth.role') }
   yield put(actions.loginSuccess(userInfo));
 }
 
