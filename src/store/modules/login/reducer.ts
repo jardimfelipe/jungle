@@ -8,7 +8,7 @@ const INITIAL_STATE: LoginState = {
     role: ''
   },
   isLoading: false,
-  isLoggedIn: !!getSavedState('auth.token'),
+  isLoggedIn: !!getSavedState('auth.token') && !!getSavedState('auth.role'),
   error: {
     status: false,
     message: ''

@@ -1,24 +1,7 @@
 import { ResumeAction, ResultsState, ResultsTypeKeys } from "./types";
 
 const INITIAL_STATE: ResultsState = {
-  results: {
-    amabilidade: {
-      total: 0,
-      analise: ''
-    },
-    neuroticidade: {
-      total: 0,
-      analise: ''
-    },
-    contato: {
-      total: 0,
-      analise: ''
-    },
-    abertura: {
-      total: 0,
-      analise: ''
-    }
-  },
+  results: [],
   isLoading: false,
   error: {
     status: false,

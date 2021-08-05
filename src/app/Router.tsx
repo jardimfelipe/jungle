@@ -19,8 +19,8 @@ const Router: React.FC = () => {
   const { currentUser } = useSelector(({ login }: RootState) => login);
   const dispatch = useDispatch();
   useEffect(() => {
-    const isLogged = getSavedState('auth.token') && getSavedState('auth.role');
-    if (isLogged && !currentUser.name) {
+    const hasToken = getSavedState('auth.token');
+    if (hasToken && !currentUser.name) {
       dispatch(getUserInfo());
     }
   }, [currentUser.name, dispatch]);

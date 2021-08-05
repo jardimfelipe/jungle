@@ -8,12 +8,15 @@ import { BsArrowRight } from 'react-icons/bs';
 import useMobileWidth from '../../../hooks/useMobileWidth';
 import { CardContainer } from '../../atoms/Card/Card.styled';
 import { ResumeProps } from './Resume.types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 const { Text } = Typography;
 
 const ResumeCard: React.FC<ResumeProps> = ({ name, total, icon, onClick }) => {
   const theme = useTheme();
   const isMobile = useMobileWidth();
+  const { currentUser } = useSelector(({ login }: RootState) => login);
   return (
     <CardContainer background={theme.colors.blue}>
       <ResumeInfo>
@@ -28,7 +31,10 @@ const ResumeCard: React.FC<ResumeProps> = ({ name, total, icon, onClick }) => {
           <ResumeIcon>{icon}</ResumeIcon>
           <ResumeTexts>
             <Text>{name}</Text>
-            <Text textDecoration="strong">{total}%</Text>
+            <Text textDecoration="strong">
+              {total}
+              {currentUser.role !== 'admin_jungle' && '%'}
+            </Text>
           </ResumeTexts>
         </Box>
         {!isMobile && (

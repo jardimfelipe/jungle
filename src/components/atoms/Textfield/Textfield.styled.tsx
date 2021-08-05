@@ -37,8 +37,10 @@ export const StyledInput = styled.input.attrs((props) => ({
   type: props.type,
 }))<StyledInputProps>`
   font-size: 16px;
-  background-color: ${(props) => props.theme.colors.gray};
-  border: 1px solid ${(props) => props.theme.colors.gray};
+  background-color: ${(props) =>
+    props.isTransparent ? 'transparent' : props.theme.colors.gray};
+  border: ${(props) =>
+    props.isTransparent ? 'none' : `1px solid ${props.theme.colors.gray}`};
   height: 40px;
   border-radius: 10px;
   padding: 28px 16px;

@@ -4,13 +4,14 @@ import { CardContainer } from '../../atoms/Card/Card.styled';
 import { Box, Questionary } from '../..';
 import { StyledButton } from '../../atoms/Button/Button.styled';
 import media from 'styled-media-query';
+import { UserRoles } from '../../../store';
 
-export const ResumeBox = styled.div`
+export const ResumeBox = styled.div<{ role?: UserRoles }>`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
   ${CardContainer}, ${Box} {
-    flex: 0 0 32.3%;
+    flex: 0 0 ${(props) => (props.role === 'admin_jungle' ? '23.5%' : '32.3%')};
   }
   @media (max-width: 1280px) {
     ${CardContainer}, ${Box} {

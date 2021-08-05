@@ -23,6 +23,7 @@ export interface TextFieldProps
   onPressEnter?: () => void;
   isSearch?: boolean;
   error?: string;
+  isTransparent?: boolean;
 }
 
 export type InputWrapperProps = TextFieldProps;
@@ -32,4 +33,5 @@ export type StyledInputProps = {
   hasSuffix?: boolean;
   hasAddon?: boolean;
   feedback?: Status;
+  isTransparent?: boolean;
 };

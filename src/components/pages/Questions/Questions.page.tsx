@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-flexbox-grid';
 
 import {
@@ -19,6 +19,7 @@ import { useTheme } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
+import CreateQuestion from './Modals/CreateQuestion.page';
 
 const { Title, Text } = Typography;
 
@@ -34,12 +35,21 @@ const Questions: React.FC = () => {
     ({ dimensions }: RootState) => dimensions
   );
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // const [pageNumber, setPageNumber] = useState(1);
 
   // const handlePagination = (_: number, newPage: number) => {
   //   setPageNumber(newPage);
   // };
   const theme = useTheme();
+
+  const handleCreateQuestion = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     dispatch(getDimensionsRequest());
@@ -133,7 +143,12 @@ const Questions: React.FC = () => {
           }}
         >
           <IconButton icon={<BiSearch />} />
-          <Button block size="small" variant="primary">
+          <Button
+            block
+            size="small"
+            onClick={handleCreateQuestion}
+            variant="primary"
+          >
             Cadastrar Perguntas
           </Button>
         </Box>
@@ -161,6 +176,8 @@ const Questions: React.FC = () => {
           />
         </Col>
       </Row>
+
+      <CreateQuestion isModalOpen={isModalOpen} onClose={handleCloseModal} />
 
       {/* <Row end="xs">
         <Pagination onChange={handlePagination} totalItems={30} pageSize={5} />

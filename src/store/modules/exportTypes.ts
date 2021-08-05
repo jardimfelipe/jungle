@@ -1,5 +1,5 @@
 // shared types
-export type RequestParams = {
+export interface RequestParams {
   pageNumber?: number
 }
 

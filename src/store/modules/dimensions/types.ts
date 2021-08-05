@@ -11,6 +11,7 @@ export type DimensionsAction = ActionType<typeof actions>;
 
 export type DimensionItem = {
   dimension: string;
+  _id: string;
   name: string;
   qt_minimum: string;
   p1: string;

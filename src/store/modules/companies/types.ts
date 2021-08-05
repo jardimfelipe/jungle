@@ -1,6 +1,8 @@
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
-import { RequestError } from "../exportTypes";
+import { RequestError, RequestParams } from "../exportTypes";
+import { DimensionItem } from "../dimensions/types";
+import { Question } from "../questionaries/types";
 
 export enum CompaniesTypeKeys {
   GET_COMPANIES_REQUEST = "@companies/GET_COMPANIES_REQUEST",
@@ -22,8 +24,8 @@ export type CompanyItem = {
 
 export type Questionary = {
   title: string;
-  dimension: string;
-  numberOfQuestions: string;
+  dimension?: DimensionItem;
+  question: Question[];
   createdAt: string;
   track: string;
   status: string;
@@ -51,3 +53,6 @@ export type CompaniesState = {
   error: RequestError;
 }
 
+export interface RequestParamsCompany extends RequestParams {
+  headers?: any
+}

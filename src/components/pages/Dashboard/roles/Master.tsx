@@ -17,6 +17,7 @@ import { getDimensionsRequest } from '../../../../store/modules/dimensions/actio
 import { useHistory } from 'react-router-dom';
 import { CompanyItem, RootState } from '../../../../store';
 import { useDispatch, useSelector } from 'react-redux';
+import { getResultsRequest } from '../../../../store/modules/results/actions';
 
 export type Resume = {
   name: string;
@@ -26,15 +27,25 @@ export type Resume = {
 
 const { Text, Title } = Typography;
 
+const names = [
+  { name: 'Empresas', total: 1 },
+  { name: 'Dimensões', total: 12 },
+  { name: 'Perguntas', total: 1 },
+  { name: 'Questionários', total: 1 },
+];
+
 const Master: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { dimensions, isLoading: isResumeLoading } = useSelector(
+  const { isLoading: isResumeLoading } = useSelector(
     (state: RootState) => state.dimensions
   );
 
-  const handleTableClick = (e: CompanyItem) => {
-    history.push(`/companies/company/${e.id}`);
+  const handleTableClick = (company: CompanyItem) => {
+    history.push({
+      pathname: `/companies/company/${company.id}`,
+      state: { company },
+    });
   };
 
   const handleSeeAllClick = () => {
@@ -47,30 +58,31 @@ const Master: React.FC = () => {
 
   useEffect(() => {
     dispatch(getDimensionsRequest());
+    dispatch(getResultsRequest());
   }, [dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />
       <Title level={3}>Resumo da plataforma</Title>
-      <ResumeBox>
-        {dimensions.map((dimension, index) =>
-          isResumeLoading ? (
-            <Box
-              key={`skeleton-results-${index}`}
-              params={{ display: 'block', width: '100%' }}
-            >
-              <Skeleton height={150} />
-            </Box>
-          ) : (
-            <ResumeCard
-              key={`results-${index}`}
-              name={dimension.name}
-              icon={<Brain color="#ffffff" />}
-              total={80}
-              onClick={handleResultClick}
-            />
-          )
-        )}
+      <ResumeBox role="admin_jungle">
+        {isResumeLoading
+          ? [...Array(6)].map((_, index) => (
+              <Box
+                key={`skeleton-results-${index}`}
+                params={{ display: 'block', width: '100%' }}
+              >
+                <Skeleton height={150} />
+              </Box>
+            ))
+          : names.map((item, index) => (
+              <ResumeCard
+                key={`results-${index}`}
+                name={item.name}
+                icon={<Brain color="#ffffff" />}
+                total={item.total}
+                onClick={handleResultClick}
+              />
+            ))}
       </ResumeBox>
       <Box
         params={{

@@ -5,7 +5,8 @@ import { ResultsTypeKeys } from "./types";
 
 function* getResults() {
   try {
-    const { data } = yield call(api, "https://run.mocky.io/v3/8e83ace8-ad07-426c-b39c-456e4096333f");
+    const { data } = yield call(api, "/results");
+    console.log(data)
     yield put(actions.getResultsSuccess(data));
   } catch (error) {
     yield put(actions.getResultsFailure({ status: true, message: 'Ocorreu um erro' }))

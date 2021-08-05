@@ -8,6 +8,7 @@ import { Field } from '../../../molecules/Table/table.types';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
 import { getCompanyRequest } from '../../../../store/modules/companies/actions';
+import { useParams } from 'react-router-dom';
 
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -17,6 +18,7 @@ const options = [
 
 const Colaboradores: React.FC = () => {
   const dispatch = useDispatch();
+  const { id } = useParams<{ id: string }>();
   const { company, isLoading } = useSelector(
     ({ companies }: RootState) => companies
   );
@@ -28,14 +30,14 @@ const Colaboradores: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getCompanyRequest({ pageNumber }));
-  }, [dispatch, pageNumber]);
+    dispatch(getCompanyRequest({ pageNumber, headers: { company: id } }));
+  }, [dispatch, pageNumber, id]);
 
   const tableFields: Field[] = [
     {
       title: 'Colaborador',
-      dataIndex: 'worker',
-      key: 'worker',
+      dataIndex: 'name',
+      key: 'name',
     },
     {
       title: 'Setor da empresa',

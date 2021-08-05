@@ -18,8 +18,12 @@ function* getCompanies({ payload }: ActionType<typeof actions.getCompanyRequest>
 
 function* getCompany({ payload }: ActionType<typeof actions.getCompanyRequest>) {
   try {
-    const { data } = yield call(api, "https://run.mocky.io/v3/6e2b4226-583e-4559-ac1f-e703dbeebd7e", { params: { ...payload } });
-    yield put(actions.getCompanySuccess(data));
+    const { headers } = payload
+    const [{ data: questionaries }, { data: workers }] = yield all([
+      call(api.get, "/questionnaires", { headers }),
+      call(api.get, "users", { headers }),
+    ]);
+    yield put(actions.getCompanySuccess({ questionaries, workers }));
   } catch (error) {
     if (error instanceof Error) {
       console.log(error)

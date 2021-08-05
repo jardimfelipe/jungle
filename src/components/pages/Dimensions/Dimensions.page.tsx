@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-flexbox-grid';
 
 import {
@@ -18,6 +18,7 @@ import { useTheme } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
+import DimensionForm from './Modals/Dimension.form';
 
 const { Title, Text } = Typography;
 
@@ -32,6 +33,16 @@ const Dimensions: React.FC = () => {
   const { dimensions, isLoading } = useSelector(
     ({ dimensions }: RootState) => dimensions
   );
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCreateDimension = () => {
+    setIsModalOpen(true);
+  };
 
   // const [pageNumber, setPageNumber] = useState(1);
 
@@ -130,7 +141,12 @@ const Dimensions: React.FC = () => {
           }}
         >
           <IconButton icon={<BiSearch />} />
-          <Button block size="small" variant="primary">
+          <Button
+            block
+            size="small"
+            onClick={handleCreateDimension}
+            variant="primary"
+          >
             Cadastrar Dimensões
           </Button>
         </Box>
@@ -157,6 +173,8 @@ const Dimensions: React.FC = () => {
           />
         </Col>
       </Row>
+
+      <DimensionForm isModalOpen={isModalOpen} onClose={handleModalClose} />
 
       {/* <Row end="xs">
         <Pagination onChange={handlePagination} totalItems={30} pageSize={5} />

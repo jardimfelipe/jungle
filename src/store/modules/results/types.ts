@@ -15,13 +15,17 @@ export type ResumeProps = {
 
 export type ResumeAction = ActionType<typeof actions>;
 
+export type ResultType = {
+  dimension: string
+  questionnaire: string
+  result: number
+  user: string
+  __v: number
+  _id: string
+}
+
 export type ResultsState = {
-  results: {
-    neuroticidade: ResumeProps
-    amabilidade: ResumeProps
-    abertura: ResumeProps
-    contato: ResumeProps
-  };
+  results: ResultType[]
   isLoading: boolean;
   error: RequestError;
 }

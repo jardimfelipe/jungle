@@ -1,6 +1,6 @@
 import { action } from "typesafe-actions";
 import { RequestParams } from "../exportTypes";
-import { CompaniesTypeKeys, CompanyItem, CompanyModel } from "./types";
+import { CompaniesTypeKeys, CompanyItem, CompanyModel, RequestParamsCompany } from "./types";
 
 export function getCompaniesRequest(params: RequestParams) {
   return action(CompaniesTypeKeys.GET_COMPANIES_REQUEST, params);
@@ -10,7 +10,7 @@ export function getCompaniesSuccess(params: CompanyItem[]) {
   return action(CompaniesTypeKeys.GET_COMPANIES_SUCCESS, params);
 }
 
-export function getCompanyRequest(params: RequestParams) {
+export function getCompanyRequest(params: RequestParamsCompany) {
   return action(CompaniesTypeKeys.GET_COMPANY_REQUEST, params);
 }
 

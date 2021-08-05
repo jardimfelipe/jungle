@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
-import { ColumnButton, Pagination, Select, Table, Tag } from '../../..';
+import {
+  ColumnButton,
+  Pagination,
+  Select,
+  Table,
+  Tag,
+  Typography,
+} from '../../..';
 import { BiDotsVertical } from 'react-icons/bi';
 import { Field } from '../../../molecules/Table/table.types';
 import { TagColors } from '../../../atoms/Tag/Tag.types';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../store';
+import { DimensionItem, RootState } from '../../../../store';
 import { getCompanyRequest } from '../../../../store/modules/companies/actions';
+import { Question } from '../../../../store/modules/questionaries/types';
 
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
   { value: 'strawberry', label: 'Strawberry' },
   { value: 'vanilla', label: 'Vanilla' },
 ];
+
+const { Text } = Typography;
 
 const Questionarios: React.FC = () => {
   const dispatch = useDispatch();
@@ -48,29 +58,33 @@ const Questionarios: React.FC = () => {
       title: 'Dimensão',
       dataIndex: 'dimension',
       key: 'dimension',
+      render: (value: DimensionItem) => <Text>{value?.name}</Text>,
     },
     {
       title: 'No de questões',
-      dataIndex: 'numberOfQuestions',
-      key: 'numberOfQuestions',
+      dataIndex: 'question',
+      key: 'question',
+      render: (value: Question[]) => <Text>{value.length}</Text>,
     },
     {
       title: 'Criado em',
       dataIndex: 'createdAt',
       key: 'createdAt',
+      render: (value: Question[]) => <Text>06/2021</Text>,
     },
     {
       title: 'Rastreio',
       dataIndex: 'track',
       key: 'track',
+      render: () => <Text>06/2021</Text>,
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      render: (value: string) => (
-        <Tag size="large" color={getTagColor(value)}>
-          {value}
+      render: () => (
+        <Tag size="large" color={getTagColor('ativo')}>
+          ativo
         </Tag>
       ),
     },

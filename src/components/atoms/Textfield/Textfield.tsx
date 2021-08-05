@@ -25,6 +25,8 @@ const Textfield: React.FC<TextFieldProps> = ({
   prefix,
   suffix,
   error,
+  isTransparent,
+  onKeyDown,
 }) => {
   return (
     <InputWrapper inline={inline}>
@@ -32,6 +34,7 @@ const Textfield: React.FC<TextFieldProps> = ({
       {prefix && <PrefixWrapper>{prefix}</PrefixWrapper>}
       <StyledInput
         hasPrefix={!!prefix}
+        onKeyDown={onKeyDown}
         disabled={disabled}
         type={type}
         aria-label={ariaLabel}
@@ -41,6 +44,7 @@ const Textfield: React.FC<TextFieldProps> = ({
         value={value}
         id={id}
         name={name}
+        isTransparent={isTransparent}
       />
       {suffix && <SuffixWrapper>{suffix}</SuffixWrapper>}
       {!!error && <ErrorMessage>{error}</ErrorMessage>}
