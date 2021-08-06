@@ -18,7 +18,7 @@ import {
 } from '../..';
 import { OptionMark } from '../Questions/Questions.styled';
 
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DimensionItem, RootState } from '../../../store';
 import { useTheme } from 'styled-components';
@@ -27,6 +27,7 @@ import {
   Priorities,
   QuestionItem,
 } from '../../../store/modules/questions/types';
+import Skeleton from 'react-loading-skeleton';
 
 type RouteState = {
   questionary: {
@@ -50,6 +51,7 @@ type CheckedQuestion = {
 
 const CreateQuestionary: React.FC = () => {
   const theme = useTheme();
+  const history = useHistory();
   const {
     state: { questionary },
   } = useLocation<RouteState>();
@@ -107,7 +109,9 @@ const CreateQuestionary: React.FC = () => {
     [questionary, theme]
   );
   const dispatch = useDispatch();
-  const { questions } = useSelector(({ questions }: RootState) => questions);
+  const { questions, isLoading } = useSelector(
+    ({ questions }: RootState) => questions
+  );
   const [checkedQuestions, setCheckedQuestions] = useState<CheckedQuestion[]>(
     []
   );
@@ -122,6 +126,10 @@ const CreateQuestionary: React.FC = () => {
     } else {
       setCheckedQuestions([...checkedQuestions, question]);
     }
+  };
+
+  const handleBackButton = () => {
+    history.push('/questionaries');
   };
 
   const questionsSelectedsText = () => {
@@ -139,6 +147,78 @@ const CreateQuestionary: React.FC = () => {
       return 'Você já selecionou todas as perguntas obrigatórias';
     }
   };
+
+  const renderQuestions = () =>
+    !checkedQuestions.length ? (
+      <Card>
+        <Box
+          params={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Text>Não foram encontradas perguntas para essa dimensão</Text>
+          <Button onClick={handleBackButton}>Voltar</Button>
+        </Box>
+      </Card>
+    ) : (
+      questionaryQuestions.map((question) => (
+        <Card>
+          <Box
+            params={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '25px',
+            }}
+          >
+            <Box
+              params={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '25px',
+              }}
+            >
+              <Checkbox
+                value={question._id}
+                onChange={() =>
+                  handleCheckboxClick({
+                    id: question._id,
+                    priority: question.priority,
+                  })
+                }
+                checked={
+                  !!checkedQuestions.find(({ id }) => id === question._id)
+                }
+              />
+              <Tag
+                size="large"
+                color={TagColors[question.priority as keyof typeof TagColors]}
+              >
+                {question.priority}
+              </Tag>
+              <Text>
+                Tipo:{' '}
+                <Tag size="large" color="default">
+                  {question.type}
+                </Tag>
+              </Text>
+              <Text>Peso: {question.weight}</Text>
+            </Box>
+
+            <Text textDecoration="strong">{question.title}</Text>
+            <QuestionOptions>
+              {question.options.map((option) => (
+                <OptionBox>
+                  <OptionMark />
+                  <Text>{option.label}</Text>
+                </OptionBox>
+              ))}
+            </QuestionOptions>
+          </Box>
+        </Card>
+      ))
+    );
 
   useEffect(() => {
     dispatch(getQuestionsRequest());
@@ -259,63 +339,16 @@ const CreateQuestionary: React.FC = () => {
             obrigatórias
           </Title>
 
-          {questionaryQuestions.map((question) => (
-            <Card>
-              <Box
-                params={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '25px',
-                }}
-              >
+          {isLoading
+            ? [...Array(4)].map((_, index) => (
                 <Box
-                  params={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '25px',
-                  }}
+                  key={`skeleton-questions-${index}`}
+                  params={{ display: 'block', width: '100%' }}
                 >
-                  <Checkbox
-                    value={question._id}
-                    onChange={() =>
-                      handleCheckboxClick({
-                        id: question._id,
-                        priority: question.priority,
-                      })
-                    }
-                    checked={
-                      !!checkedQuestions.find(({ id }) => id === question._id)
-                    }
-                  />
-                  <Tag
-                    size="large"
-                    color={
-                      TagColors[question.priority as keyof typeof TagColors]
-                    }
-                  >
-                    {question.priority}
-                  </Tag>
-                  <Text>
-                    Tipo:{' '}
-                    <Tag size="large" color="default">
-                      {question.type}
-                    </Tag>
-                  </Text>
-                  <Text>Peso: {question.weight}</Text>
+                  <Skeleton height={250} />
                 </Box>
-
-                <Text textDecoration="strong">{question.title}</Text>
-                <QuestionOptions>
-                  {question.options.map((option) => (
-                    <OptionBox>
-                      <OptionMark />
-                      <Text>{option.label}</Text>
-                    </OptionBox>
-                  ))}
-                </QuestionOptions>
-              </Box>
-            </Card>
-          ))}
+              ))
+            : renderQuestions()}
         </Box>
       </Grid>
     </Box>
