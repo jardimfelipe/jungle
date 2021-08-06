@@ -64,7 +64,10 @@ const Companies: React.FC = () => {
 
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <PromotionalCard />
+      <PromotionalCard
+        title="Olá equipe Jungle!"
+        text="Aqui você tem acesso a todas as empresas que participam de nossas jornadas e pode acompanhar o status dos projetos e o engajamento dos colaboradores."
+      />
 
       <Box
         params={{

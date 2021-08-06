@@ -25,6 +25,10 @@ const tagColors = {
   primary: css`
     background-color: ${(props) => props.theme.colors.blue};
   `,
+  default: css`
+    background-color: ${(props) => props.theme.colors.gray};
+    color: ${(props) => props.theme.colors.black};
+  `,
 };
 
 export const Tag = styled.span<TagProps>`

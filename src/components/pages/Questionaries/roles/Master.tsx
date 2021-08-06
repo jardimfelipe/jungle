@@ -23,6 +23,7 @@ import { RootState } from '../../../../store';
 import { Questionary } from '../../../../store/modules/questionaries/types';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { Field } from '../../../molecules/Table/table.types';
+import CreateQuestionary from '../Modals/CreateQuestionary';
 
 const { Text } = Typography;
 
@@ -142,6 +143,7 @@ const Master: React.FC = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const [currentTab, setCurrentTab] = useState<PageTabs>('questionarios');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { questionaries, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
@@ -175,6 +177,14 @@ const Master: React.FC = () => {
 
   const handleCloseButton = () => {
     setCurrentOpenMenu(-1);
+  };
+
+  const handleCreateQuestionary = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -218,7 +228,12 @@ const Master: React.FC = () => {
             flex: '0 0 30%',
           }}
         >
-          <Button block size="small" variant="primary">
+          <Button
+            onClick={handleCreateQuestionary}
+            block
+            size="small"
+            variant="primary"
+          >
             Cadastrar questionário
           </Button>
         </Box>
@@ -241,7 +256,7 @@ const Master: React.FC = () => {
           <Resume items={resumeItems} />
         </Col>
       </Row>
-
+      <CreateQuestionary isModalOpen={isModalOpen} onClose={handleClose} />
       <Table isLoading={isLoading} items={questionaries} fields={tableFields} />
     </Box>
   );

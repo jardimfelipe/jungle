@@ -8,7 +8,7 @@ const Main = styled.main`
   width: 100%;
 `;
 
-const BasicTemplate: React.FC = ({ children }) => {
+const BlankTemplate: React.FC = ({ children }) => {
   return (
     <Layout>
       <Main>{children}</Main>
@@ -17,4 +17,4 @@ const BasicTemplate: React.FC = ({ children }) => {
   );
 };
 
-export default BasicTemplate;
+export default BlankTemplate;

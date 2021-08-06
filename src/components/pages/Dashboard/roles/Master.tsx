@@ -17,7 +17,7 @@ import { getDimensionsRequest } from '../../../../store/modules/dimensions/actio
 import { useHistory } from 'react-router-dom';
 import { CompanyItem, RootState } from '../../../../store';
 import { useDispatch, useSelector } from 'react-redux';
-import { getResultsRequest } from '../../../../store/modules/results/actions';
+import { getQuestionsRequest } from '../../../../store/modules/questions/actions';
 
 export type Resume = {
   name: string;
@@ -27,20 +27,21 @@ export type Resume = {
 
 const { Text, Title } = Typography;
 
-const names = [
-  { name: 'Empresas', total: 1 },
-  { name: 'Dimensões', total: 12 },
-  { name: 'Perguntas', total: 1 },
-  { name: 'Questionários', total: 1 },
-];
-
 const Master: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { isLoading: isResumeLoading } = useSelector(
     (state: RootState) => state.dimensions
   );
-
+  const { companies } = useSelector(({ companies }: RootState) => companies);
+  const { dimensions } = useSelector(({ dimensions }: RootState) => dimensions);
+  const { questions } = useSelector(({ questions }: RootState) => questions);
+  const names = [
+    { name: 'Empresas', total: companies.length, path: '/companies' },
+    { name: 'Dimensões', total: dimensions.length, path: '/dimensions' },
+    { name: 'Perguntas', total: questions.length, path: '/questions' },
+    { name: 'Questionários', total: 1, path: '/questionaries' },
+  ];
   const handleTableClick = (company: CompanyItem) => {
     history.push({
       pathname: `/companies/company/${company.id}`,
@@ -52,26 +53,25 @@ const Master: React.FC = () => {
     history.push('/companies');
   };
 
-  const handleResultClick = () => {
-    history.push('/dimensions');
-  };
-
   useEffect(() => {
     dispatch(getDimensionsRequest());
-    dispatch(getResultsRequest());
+    dispatch(getQuestionsRequest());
   }, [dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <PromotionalCard />
+      <PromotionalCard
+        title="Olá equipe Jungle!"
+        text="Este é o seu dashboard master. Acompanhe e gerencie as jornadas de nossos clientes."
+      />
       <Title level={3}>Resumo da plataforma</Title>
       <ResumeBox role="admin_jungle">
         {isResumeLoading
-          ? [...Array(6)].map((_, index) => (
+          ? [...Array(4)].map((_, index) => (
               <Box
                 key={`skeleton-results-${index}`}
                 params={{ display: 'block', width: '100%' }}
               >
-                <Skeleton height={150} />
+                <Skeleton height={110} />
               </Box>
             ))
           : names.map((item, index) => (
@@ -80,7 +80,7 @@ const Master: React.FC = () => {
                 name={item.name}
                 icon={<Brain color="#ffffff" />}
                 total={item.total}
-                onClick={handleResultClick}
+                onClick={() => history.push(item.path)}
               />
             ))}
       </ResumeBox>

@@ -5,7 +5,7 @@ import { ResultsTypeKeys } from "./types";
 
 function* getResults() {
   try {
-    const { data } = yield call(api, "/results");
+    const { data } = yield call(api, "/results/me");
     console.log(data)
     yield put(actions.getResultsSuccess(data));
   } catch (error) {

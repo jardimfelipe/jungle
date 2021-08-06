@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import {
   BasicTemplate,
   QuestionaryApplication,
-  QuestionaryApplicationTemplate,
+  BlankTemplate,
 } from '../components';
 import Login from '../components/pages/Login/login.page';
 import PrivateRoute from './PrivateRoute';
@@ -48,9 +48,9 @@ const Router: React.FC = () => {
           exact
           path="/questionaries/application/:id"
           render={() => (
-            <QuestionaryApplicationTemplate>
+            <BlankTemplate>
               <QuestionaryApplication />
-            </QuestionaryApplicationTemplate>
+            </BlankTemplate>
           )}
         />
       </Switch>

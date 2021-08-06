@@ -23,6 +23,8 @@ import {
   TeamResults,
   Workers,
   Questions,
+  BlankTemplate,
+  CreateQuestionary,
 } from '../components';
 
 export const routes = {
@@ -87,6 +89,14 @@ export const routes = {
         <WorkerTemplate>
           <Questionaries />
         </WorkerTemplate>
+      ),
+    },
+    {
+      path: '/questionaries/create',
+      render: () => (
+        <BlankTemplate>
+          <CreateQuestionary />
+        </BlankTemplate>
       ),
     },
     {

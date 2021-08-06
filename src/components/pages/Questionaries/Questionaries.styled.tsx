@@ -92,3 +92,27 @@ export const QuestionContainer = styled.div`
   transition: opacity 500ms, transform 500ms;
   background-color: #ffffff;
 `;
+
+export const QuestionaryHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 25px 0;
+`;
+
+export const QuestionOptions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-height: 250px;
+`;
+
+export const OptionBox = styled.div`
+  background-color: ${(props) => props.theme.colors.gray};
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+`;

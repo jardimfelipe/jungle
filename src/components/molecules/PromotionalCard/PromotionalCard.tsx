@@ -8,7 +8,15 @@ import useMobileWidth from '../../../hooks/useMobileWidth';
 
 const { Text } = Typography;
 
-const PromotionalCard: React.FC = () => {
+export type PromotionalCardProps = {
+  title?: string;
+  text?: string;
+};
+
+const PromotionalCard: React.FC<PromotionalCardProps> = ({
+  title = '',
+  text = '',
+}) => {
   const isMobile = useMobileWidth();
   return (
     <Card hasCloseButton background="#E5EEF7">
@@ -16,13 +24,11 @@ const PromotionalCard: React.FC = () => {
         <Row>
           <Col xs={12} sm={7} lg={9} xl={10}>
             <CardTitle variant="primary" level={2}>
-              Lorem ipsum dolor sit amet
+              {title || 'Lorem ipsum dolor sit amet'}
             </CardTitle>
             <Text>
-              Sed in libero commodo enim laoreet auctor. Donec ac ultricies
-              nibh, non gravida nibh. Orci varius natoque penatibus et magnis
-              dis parturient montes, nascetur ridiculus mus. Proin aliquet dolor
-              nec velit egestas pellentesque.
+              {text ||
+                'Sed in libero commodo enim laoreet auctor. Donec ac ultricies nibh, non gravida nibh. Orci varius natoque penatibus et magnis'}
             </Text>
           </Col>
           <CardImage xs>

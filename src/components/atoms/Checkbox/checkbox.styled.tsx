@@ -40,7 +40,7 @@ export const StyledCheckbox = styled.div`
         height: 16px;
         top: 0;
         left: 0;
-        border: 3px solid ${(props) => props.theme.colors.blue};
+        border: 12px solid ${(props) => props.theme.colors.blue};
         border-radius: 4px;
         background-color: ${(props) => props.theme.colors.blue};
       }
