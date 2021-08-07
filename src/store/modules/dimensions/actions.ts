@@ -8,3 +8,8 @@ export function getDimensionsRequest() {
 export function getDimensionsSuccess(params: DimensionItem[]) {
   return action(DimensionsTypeKeys.GET_DIMENSIONS_SUCCESS, params);
 }
+
+export function createDimensionsRequest(params: DimensionItem) {
+  return action(DimensionsTypeKeys.CREATE_DIMENSIONS_SUCCESS, params);
+
+}

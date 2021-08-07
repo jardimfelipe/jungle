@@ -15,7 +15,7 @@ export interface TextFieldProps
   id?: string;
   prefix?: ReactNode;
   suffix?: ReactNode;
-  value?: string;
+  value?: string | number;
   label?: string;
   feedback?: Feedback;
   inline?: boolean;

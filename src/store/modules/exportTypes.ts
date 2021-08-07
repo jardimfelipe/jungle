@@ -8,6 +8,10 @@ export type RequestError = {
   message: string;
 }
 
+export type RequestFeedback = {
+  status: 'error' | 'success' | '';
+  message: string
+}
 
 
 export * from "../createStore";

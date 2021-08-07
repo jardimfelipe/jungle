@@ -34,4 +34,6 @@ export const Typography = styled.div<TypographyTypes>`
   ${({ size }) => size && `font-size: ${size}px`};
 
   ${({ color }) => color && `color: ${color}`};
+
+  ${({ textAlign }) => textAlign && `text-align: ${textAlign}`};
 `;

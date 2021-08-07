@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Box, Modal, Typography, Textfield, Label, Select } from '../../..';
-import { ModalButtonQuestionary } from './CreateQuestion.styled';
+import { ModalButtonHalf } from './CreateQuestion.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
@@ -97,17 +97,17 @@ const CreateQuestionary: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             />
           </div>
         </Box>
-        <ModalButtonQuestionary disabled={!isFormFilled()} variant="secondary">
+        <ModalButtonHalf disabled={!isFormFilled()} variant="secondary">
           Cadastrar automaticamente
-        </ModalButtonQuestionary>
-        <ModalButtonQuestionary
+        </ModalButtonHalf>
+        <ModalButtonHalf
           disabled={!isFormFilled()}
           style={{ right: 0, left: 'auto' }}
           onClick={handleManualCreation}
           variant="primary"
         >
           Cadastrar manualmente
-        </ModalButtonQuestionary>
+        </ModalButtonHalf>
       </Box>
     </Modal>
   );

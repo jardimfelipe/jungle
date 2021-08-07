@@ -28,6 +28,14 @@ import { getDimensionsRequest } from '../../../../store/modules/dimensions/actio
 import { RootState } from '../../../../store';
 import { OptionType } from '../../../atoms/Select/Select.types';
 import { useFormik } from 'formik';
+import {
+  OptionModel,
+  Priorities,
+} from '../../../../store/modules/questions/types';
+import { createQuestionRequest } from '../../../../store/modules/questions/actions';
+import FeedbackModal from './FeedbackModal';
+import schema from './schema';
+import { ErrorMessage } from '../../../atoms/Textfield/Textfield.styled';
 
 const { Text } = Typography;
 
@@ -36,39 +44,35 @@ type ModalProps = {
   isModalOpen: boolean;
 };
 
-type QuestionOption = {
-  title: string;
-};
-
 const weightOptions = [
   { value: 1, label: '1' },
   { value: 2, label: '2' },
   { value: 3, label: '3' },
 ];
 
-const typeOptions = [{ value: 1, label: 'Escolha' }];
+const typeOptions = [{ value: 'choice', label: 'Escolha' }];
 
 const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { dimensions } = useSelector(({ dimensions }: RootState) => dimensions);
   const [dimensionOptions, setDimensionOptions] = useState<OptionType[]>([]);
-  const [optionTitle, setOptionTitle] = useState('');
+  const [optionLabel, setOptionLabel] = useState('');
 
   const handleAddOption = () => {
-    if (!optionTitle) return;
+    if (!optionLabel) return;
     const newOption = {
-      title: optionTitle,
+      label: optionLabel,
     };
     formik.setFieldValue('options', [...formik.values.options, newOption]);
-    setOptionTitle('');
+    setOptionLabel('');
   };
 
-  const handleOptionTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOptionTitle(e.target.value);
+  const handleOptionLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOptionLabel(e.target.value);
   };
 
-  const handleOptionTitleKeyDown = (
+  const handleOptionLabelKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (e.key === 'Enter') {
@@ -82,8 +86,7 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     onClose();
   };
 
-  const handle = (input: string, value: string) => {
-    console.log(input, value);
+  const handleManualInputChanges = (input: string, value: string) => {
     formik.setFieldValue(input, value);
   };
 
@@ -94,17 +97,17 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const formik = useFormik({
     initialValues: {
       dimension: '',
-      priority: '',
-      weight: '',
-      question: '',
+      priority: '' as Priorities,
+      weight: 1,
+      title: '',
       type: '',
-      options: [] as QuestionOption[],
+      options: [] as OptionModel[],
     },
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(createQuestionRequest(values));
     },
     validateOnChange: false,
-    // validationSchema: schema,
+    validationSchema: schema,
   });
 
   useEffect(() => {
@@ -115,7 +118,7 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     setDimensionOptions(dimensionOptionsLocal);
   }, [dimensions]);
   return (
-    <Modal width={980} height={830} isOpen={isModalOpen} onClose={onClose}>
+    <Modal width={980} height={840} isOpen={isModalOpen} onClose={onClose}>
       <form onSubmit={formik.handleSubmit}>
         <Box params={{ padding: '0 25px' }}>
           <Row>
@@ -123,17 +126,24 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Label>Dimensão</Label>
               <Select
                 onChange={(selectedOption: OptionType | null) =>
-                  handle('dimension', selectedOption?.value)
+                  handleManualInputChanges('dimension', selectedOption?.value)
                 }
                 placeholder="Selecione"
                 options={dimensionOptions}
               />
+              {!!formik.errors.dimension && (
+                <ErrorMessage position="relative">
+                  {formik.errors.dimension}
+                </ErrorMessage>
+              )}
             </Col>
 
             <Col xs={12} md={4}>
               <Box
                 params={{ display: 'flex', gap: '5px', alignItems: 'flex-end' }}
-                onChange={(e: any) => handle('priority', e.target.value)}
+                onChange={(e: any) =>
+                  handleManualInputChanges('priority', e.target.value)
+                }
               >
                 <RadioContainer>
                   <Label>Prioridade</Label>
@@ -141,7 +151,7 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                     label="P1"
                     name="priority"
                     value="p1"
-                    checked={formik.values.priority === 'p1'}
+                    checked={formik.values.priority === 'P1'}
                   />
                 </RadioContainer>
                 <RadioContainer>
@@ -149,7 +159,7 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                     label="P2"
                     name="priority"
                     value="p2"
-                    checked={formik.values.priority === 'p2'}
+                    checked={formik.values.priority === 'P2'}
                   />
                 </RadioContainer>
                 <RadioContainer>
@@ -157,15 +167,26 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                     label="P3"
                     name="priority"
                     value="p3"
-                    checked={formik.values.priority === 'p3'}
+                    checked={formik.values.priority === 'P3'}
                   />
                 </RadioContainer>
               </Box>
+              {!!formik.errors.priority && (
+                <ErrorMessage position="relative">
+                  {formik.errors.priority}
+                </ErrorMessage>
+              )}
             </Col>
 
             <Col xs={12} md={1}>
               <Label>Peso</Label>
-              <Select placeholder="Selecione" options={weightOptions} />
+              <Select
+                onChange={(selectedOption: OptionType | null) =>
+                  handleManualInputChanges('weight', selectedOption?.value)
+                }
+                placeholder="Selecione"
+                options={weightOptions}
+              />
             </Col>
 
             <Col xs>
@@ -198,30 +219,51 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
         >
           <InputWrapper>
             <Label>Pergunta</Label>
-            <QuestionTextArea />
+            <QuestionTextArea
+              name="title"
+              value={formik.values.title}
+              onChange={formik.handleChange}
+            />
+            {!!formik.errors.title && (
+              <ErrorMessage position="relative">
+                {formik.errors.title}
+              </ErrorMessage>
+            )}
           </InputWrapper>
 
           <InputWrapper>
             <Label>Tipo de resposta</Label>
             <Box params={{ maxWidth: '350px' }}>
-              <Select placeholder="Selecione" options={typeOptions} />
+              <Select
+                onChange={(selectedOption: OptionType | null) =>
+                  handleManualInputChanges('type', selectedOption?.value)
+                }
+                placeholder="Selecione"
+                options={typeOptions}
+              />
             </Box>
+            {!!formik.errors.type && (
+              <ErrorMessage position="relative">
+                {formik.errors.type}
+              </ErrorMessage>
+            )}
           </InputWrapper>
 
           <AnswerBox>
-            {formik.values.options.map(({ title }) => (
+            {formik.values.options.map(({ label }) => (
               <Box
+                key={`options-${label}-${Math.random()}`}
                 params={{ display: 'flex', alignItems: 'center', gap: '5px' }}
               >
                 <OptionMark />
-                <Text>{title}</Text>
+                <Text>{label}</Text>
               </Box>
             ))}
             <Textfield
               placeholder="adicionar opção ou aperte a tecla enter"
-              value={optionTitle}
-              onChange={handleOptionTitleChange}
-              onKeyDown={handleOptionTitleKeyDown}
+              value={optionLabel}
+              onChange={handleOptionLabelChange}
+              onKeyDown={handleOptionLabelKeyDown}
               prefix={
                 <AiFillPlusCircle
                   onClick={handleAddOption}
@@ -239,6 +281,7 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
           </Box>
         </Box>
       </form>
+      <FeedbackModal />
     </Modal>
   );
 };

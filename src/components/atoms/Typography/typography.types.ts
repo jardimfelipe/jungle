@@ -3,6 +3,7 @@ import { CSSProperties } from "react";
 type TextLevel = 1 | 2 | 3 | 4 | 5;
 type TextDecoration = "underline" | "delete" | "strong" | null;
 type VariantTypes = "primary" | "default"
+type TextAlignments = "start" | "center" | "end"
 
 export interface TypographyTypes {
   disabled?: boolean;
@@ -12,6 +13,7 @@ export interface TypographyTypes {
   variant?: VariantTypes;
   style?: CSSProperties;
   size?: number;
+  textAlign?: TextAlignments
 }
 
 export interface TitleProps extends TypographyTypes {

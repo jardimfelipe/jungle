@@ -75,9 +75,13 @@ export const SuffixWrapper = styled.div`
   right: 8px;
 `;
 
-export const ErrorMessage = styled.span`
+export const ErrorMessage = styled.span<{ position?: string }>`
   color: red;
   font-size: 12px;
-  position: absolute;
-  bottom: -20px;
+  position: ${({ position = 'absolute' }) => position};
+  ${({ position = 'absolute' }) =>
+    position === 'absolute' &&
+    `
+      bottom: -20px;
+    `};
 `;

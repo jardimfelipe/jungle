@@ -47,7 +47,14 @@ const GlobalStyles = createGlobalStyle`
     &, input, textarea, a {
       box-shadow: none;
       border-color: transparent;
+      font-family: 'Raleway', sans-serif;
     }
+  }
+
+  input, textarea, a {
+    box-shadow: none;
+    border-color: transparent;
+    font-family: 'Raleway', sans-serif;
   }
 
   #app {

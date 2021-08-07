@@ -34,8 +34,8 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const formik = useFormik({
     initialValues: {
       dimension: '',
-      minQuestions: '',
-      maxQuestions: '',
+      minQuestions: 0,
+      maxQuestions: 0,
       p1: 0,
       p2: 0,
       p3: 0,
@@ -121,6 +121,7 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                   onChange={(value) => formik.setFieldValue('p1', value)}
                   trackStyle={{ backgroundColor: theme.colors.p1, height: 8 }}
                   handleStyle={handleSliderStyles}
+                  max={formik.values.minQuestions}
                   railStyle={{
                     backgroundColor: theme.colors.darkGray,
                     height: 8,
@@ -134,7 +135,13 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                   value={formik.values.p2}
                   onChange={(value) => formik.setFieldValue('p2', value)}
                   trackStyle={{ backgroundColor: theme.colors.p2, height: 8 }}
+                  maximumTrackStyle={{ backgroundColor: theme.colors.blue }}
                   handleStyle={handleSliderStyles}
+                  max={
+                    formik.values.maxQuestions > 1
+                      ? formik.values.maxQuestions / 2
+                      : 0
+                  }
                   railStyle={{
                     backgroundColor: theme.colors.darkGray,
                     height: 8,
@@ -149,6 +156,13 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                   onChange={(value) => formik.setFieldValue('p3', value)}
                   trackStyle={{ backgroundColor: theme.colors.p3, height: 8 }}
                   handleStyle={handleSliderStyles}
+                  max={
+                    formik.values.maxQuestions > 1
+                      ? formik.values.maxQuestions -
+                        formik.values.p1 -
+                        formik.values.p2
+                      : 0
+                  }
                   railStyle={{
                     backgroundColor: theme.colors.darkGray,
                     height: 8,
