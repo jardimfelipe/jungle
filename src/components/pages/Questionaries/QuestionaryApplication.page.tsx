@@ -61,7 +61,7 @@ const QuestionaryApplication: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const isMobile = useMobileWidth();
-  const { /*questionary,*/ error } = useSelector(
+  const { /*questionary,*/ feedback } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
 
@@ -104,8 +104,8 @@ const QuestionaryApplication: React.FC = () => {
   // }, [dispatch, id]);
 
   useEffect(() => {
-    error.status && dispatch(setSnackbarOpen(error.message));
-  }, [error, dispatch]);
+    feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
+  }, [feedback, dispatch]);
   return (
     <Box params={{ display: 'flex' }}>
       <Box params={{ flex: '1 0 70%' }}>

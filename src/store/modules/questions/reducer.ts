@@ -24,13 +24,12 @@ export default function Reducer(
       return { ...state, isLoading: true };
 
     case QuestionsTypeKeys.CREATE_QUESTIONS_SUCCESS:
-      return { ...state, feedback: { status: 'success', message: 'Pergunta cadastrada com sucesso!' }, isLoading: true }
+      return { ...state, feedback: { status: 'success', message: 'Pergunta cadastrada com sucesso!' }, isLoading: false }
 
     case QuestionsTypeKeys.CREATE_QUESTIONS_FAILURE:
       return { ...state, isLoading: false };
 
     case QuestionsTypeKeys.RESET_FEEDBACK:
-      console.log('reset feedback')
       return {
         ...state, feedback: {
           status: '',

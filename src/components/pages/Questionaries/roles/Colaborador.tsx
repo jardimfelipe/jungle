@@ -44,7 +44,7 @@ const chartData = {
 const Questionaries: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { questionaries, error, isLoading } = useSelector(
+  const { questionaries, feedback, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
   const [currentTab, setCurrentTab] = useState<TabComponents>('disponiveis');
@@ -76,8 +76,8 @@ const Questionaries: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    error.status && dispatch(setSnackbarOpen(error.message));
-  }, [error, dispatch]);
+    feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
+  }, [feedback, dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />

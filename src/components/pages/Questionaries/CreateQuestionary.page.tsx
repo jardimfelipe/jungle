@@ -17,6 +17,7 @@ import {
   Typography,
 } from '../..';
 import { OptionMark } from '../Questions/Questions.styled';
+import FeedbackModal from './Modals/FeedbackModal';
 
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,8 +29,9 @@ import {
   QuestionItem,
 } from '../../../store/modules/questions/types';
 import Skeleton from 'react-loading-skeleton';
+import { createQuestionaryRequest } from '../../../store/modules/questionaries/actions';
 
-type RouteState = {
+export type RouteState = {
   questionary: {
     title: string;
     dimension: DimensionItem;
@@ -132,6 +134,14 @@ const CreateQuestionary: React.FC = () => {
     history.push('/questionaries');
   };
 
+  const isAllMandatoryChoosed = () => {
+    const questions = checkedQuestions.filter(
+      (question) => (question.priority = 'P1')
+    ).length;
+    const mandatories = questionary.dimension.mandatory;
+    return questions >= mandatories;
+  };
+
   const questionsSelectedsText = () => {
     const questions = checkedQuestions.filter(
       (question) => (question.priority = 'P1')
@@ -149,7 +159,7 @@ const CreateQuestionary: React.FC = () => {
   };
 
   const renderQuestions = () =>
-    !checkedQuestions.length ? (
+    !questionaryQuestions.length ? (
       <Card>
         <Box
           params={{
@@ -220,6 +230,17 @@ const CreateQuestionary: React.FC = () => {
       ))
     );
 
+  const handleSubmit = () => {
+    const model = {
+      title: questionary.title,
+      description: questionary.title,
+      active: true,
+      required: true,
+      dimension: questionary.dimension._id,
+      question: checkedQuestions.map(({ id }) => id),
+    };
+    dispatch(createQuestionaryRequest(model));
+  };
   useEffect(() => {
     dispatch(getQuestionsRequest());
   }, [dispatch]);
@@ -249,7 +270,6 @@ const CreateQuestionary: React.FC = () => {
     }));
     setChartDatas(newChartDatas);
   }, [checkedQuestions, initialChartDatas]);
-
   return (
     <Box
       params={{
@@ -269,9 +289,11 @@ const CreateQuestionary: React.FC = () => {
                 justifyContent: 'space-between',
               }}
             >
-              <Tag color="primary" size="large">
-                {questionary.dimension.name}
-              </Tag>
+              <Box params={{ display: 'block' }}>
+                <Tag color="primary" size="large">
+                  {questionary.dimension.name}
+                </Tag>
+              </Box>
               <Text textDecoration="strong" variant="primary">
                 {questionary.title}
               </Text>
@@ -313,8 +335,13 @@ const CreateQuestionary: React.FC = () => {
             <Box
               params={{ display: 'flex', flexDirection: 'column', gap: '5px' }}
             >
-              <Button disabled size="small" variant="primary">
-                Próximo
+              <Button
+                disabled={!isAllMandatoryChoosed()}
+                onClick={handleSubmit}
+                size="small"
+                variant="primary"
+              >
+                Salvar pergunta
               </Button>
               <Button size="small" variant="secondary">
                 Salvar rascunho e sair
@@ -351,6 +378,7 @@ const CreateQuestionary: React.FC = () => {
             : renderQuestions()}
         </Box>
       </Grid>
+      <FeedbackModal />
     </Box>
   );
 };

@@ -20,6 +20,19 @@ function* getQuestionary({ payload }: ActionType<typeof actions.getQuestionaryRe
   try {
     const { data } = yield call(api, `/questionnaires/${payload}`);
     yield put(actions.getQuestionarySuccess(data));
+    yield put(actions.getQuestionariesRequest())
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(actions.getQuestionariesFailure({ message: 'Ocorreu um erro, tente novamente', status: true }))
+    }
+
+  }
+}
+
+function* createQuestionary({ payload }: ActionType<typeof actions.createQuestionaryRequest>) {
+  try {
+    yield call(api, `/questionnaires/`, { method: "POST", data: payload });
+    yield put(actions.createQuestionarySuccess());
   } catch (error) {
     if (error instanceof Error) {
       yield put(actions.getQuestionariesFailure({ message: 'Ocorreu um erro, tente novamente', status: true }))
@@ -29,4 +42,4 @@ function* getQuestionary({ payload }: ActionType<typeof actions.getQuestionaryRe
 }
 
 
-export default all([takeLatest(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST, getQuestionaries), takeLatest(QuestionariesTypeKeys.GET_QUESTIONARY_REQUEST, getQuestionary)]);
+export default all([takeLatest(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST, getQuestionaries), takeLatest(QuestionariesTypeKeys.GET_QUESTIONARY_REQUEST, getQuestionary), takeLatest(QuestionariesTypeKeys.CREATE_QUESTIONARY_REQUEST, createQuestionary)]);

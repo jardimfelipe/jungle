@@ -15,8 +15,8 @@ const INITIAL_STATE: QuestionariesState = {
     done: '',
   },
   isLoading: false,
-  error: {
-    status: false,
+  feedback: {
+    status: '',
     message: ''
   }
 };
@@ -28,13 +28,13 @@ export default function Reducer(
   switch (action.type) {
 
     case QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST:
-      return { ...state, isLoading: true, error: { status: false, message: '' } }
+      return { ...state, isLoading: true, feedback: { status: '', message: '' } }
 
     case QuestionariesTypeKeys.GET_QUESTIONARIES_SUCCESS:
       return { ...state, questionaries: action.payload, isLoading: false }
 
     case QuestionariesTypeKeys.GET_QUESTIONARIES_FAILURE:
-      return { ...state, error: action.payload, isLoading: false }
+      return { ...state, feedback: { status: 'error', message: 'Tente novamente mais tarde' }, isLoading: false }
 
     case QuestionariesTypeKeys.GET_QUESTIONARY_REQUEST:
       return { ...state, isLoading: true }
@@ -43,7 +43,19 @@ export default function Reducer(
       return { ...state, questionary: action.payload, isLoading: false }
 
     case QuestionariesTypeKeys.GET_QUESTIONARY_FAILURE:
-      return { ...state, error: action.payload, isLoading: false }
+      return { ...state, feedback: { status: 'error', message: 'Tente novamente mais tarde' }, isLoading: false }
+
+    case QuestionariesTypeKeys.CREATE_QUESTIONARY_REQUEST:
+      return { ...state, isLoading: true }
+
+    case QuestionariesTypeKeys.CREATE_QUESTIONARY_SUCCESS:
+      return { ...state, feedback: { status: 'success', message: 'Questionário criado com sucesso!' }, isLoading: false }
+
+    case QuestionariesTypeKeys.CREATE_QUESTIONARY_FAILURE:
+      return { ...state, feedback: { status: 'error', message: 'Tente novamente mais tarde' }, isLoading: false }
+
+    case QuestionariesTypeKeys.RESET_FEEDBACK:
+      return { ...state, feedback: { status: '', message: '' } }
     default:
       return state;
   }

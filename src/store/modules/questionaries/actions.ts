@@ -1,6 +1,6 @@
 import { action } from "typesafe-actions";
 import { RequestError } from "../exportTypes";
-import { QuestionariesTypeKeys, Questionary } from "./types";
+import { QuestionariesTypeKeys, Questionary, QuestionaryModel } from "./types";
 
 export function getQuestionariesRequest() {
   return action(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST);
@@ -24,4 +24,19 @@ export function getQuestionarySuccess(params: Questionary) {
 
 export function getQuestionaryFailure(error: RequestError) {
   return action(QuestionariesTypeKeys.GET_QUESTIONARY_FAILURE, error);
+}
+
+export function createQuestionaryRequest(params: QuestionaryModel) {
+  return action(QuestionariesTypeKeys.CREATE_QUESTIONARY_REQUEST, params);
+}
+export function createQuestionarySuccess() {
+  return action(QuestionariesTypeKeys.CREATE_QUESTIONARY_SUCCESS);
+}
+
+export function createQuestionaryFailure(error: RequestError) {
+  return action(QuestionariesTypeKeys.CREATE_QUESTIONARY_FAILURE, error);
+}
+
+export function resetFeeback() {
+  return action(QuestionariesTypeKeys.RESET_FEEDBACK);
 }

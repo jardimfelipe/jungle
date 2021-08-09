@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Box, Modal, Typography, Textfield, Label } from '../../..';
 import { ModalButton } from '../../../pages/Dashboard/Dashboard.styled';
@@ -11,6 +11,10 @@ import { SliderContainer } from '../DImensions.styled';
 
 import { useFormik } from 'formik';
 import schema from './schema';
+import { ErrorMessage } from '../../../atoms/Textfield/Textfield.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { createDimensionsRequest } from '../../../../store/modules/dimensions/actions';
 
 const { Title } = Typography;
 
@@ -30,22 +34,28 @@ const FormSlider = createSliderWithTooltip(Slider);
 
 const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const { feedback } = useSelector(({ dimensions }: RootState) => dimensions);
 
   const formik = useFormik({
     initialValues: {
-      dimension: '',
-      minQuestions: 0,
-      maxQuestions: 0,
-      p1: 0,
-      p2: 0,
-      p3: 0,
+      name: '',
+      qt_minimum: 0,
+      qt_maximum: 0,
+      mandatory: 0,
+      complementary: 0,
+      optional: 0,
     },
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(createDimensionsRequest(values));
     },
     validateOnChange: false,
     validationSchema: schema,
   });
+
+  useEffect(() => {
+    if (feedback.status === 'success') onClose();
+  }, [feedback, onClose]);
   return (
     <Modal width={550} height={680} isOpen={isModalOpen} onClose={onClose}>
       <Box
@@ -62,14 +72,10 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Box params={{ marginBottom: '25px' }}>
                 <Label>Dimensão</Label>
                 <Textfield
-                  name="dimension"
-                  value={formik.values.dimension}
+                  name="name"
+                  value={formik.values.name}
                   onChange={formik.handleChange}
-                  error={
-                    !!formik.errors.dimension
-                      ? formik.errors.dimension
-                      : undefined
-                  }
+                  error={!!formik.errors.name ? formik.errors.name : undefined}
                 />
               </Box>
             </Col>
@@ -77,12 +83,12 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             <Col xs={12} md={6}>
               <Label>Questões (mínima)</Label>
               <Textfield
-                name="minQuestions"
-                value={formik.values.minQuestions}
+                name="qt_minimum"
+                value={formik.values.qt_minimum}
                 onChange={formik.handleChange}
                 error={
-                  !!formik.errors.minQuestions
-                    ? formik.errors.minQuestions
+                  !!formik.errors.qt_minimum
+                    ? formik.errors.qt_minimum
                     : undefined
                 }
               />
@@ -91,12 +97,12 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             <Col xs={12} md={6}>
               <Label>Questões (máxima)</Label>
               <Textfield
-                name="maxQuestions"
-                value={formik.values.maxQuestions}
+                name="qt_maximum"
+                value={formik.values.qt_maximum}
                 onChange={formik.handleChange}
                 error={
-                  !!formik.errors.maxQuestions
-                    ? formik.errors.maxQuestions
+                  !!formik.errors.qt_maximum
+                    ? formik.errors.qt_maximum
                     : undefined
                 }
               />
@@ -117,29 +123,40 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <SliderContainer>
                 <Label>Obrigatórias (P1)</Label>
                 <FormSlider
-                  value={formik.values.p1}
-                  onChange={(value) => formik.setFieldValue('p1', value)}
-                  trackStyle={{ backgroundColor: theme.colors.p1, height: 8 }}
+                  value={formik.values.mandatory}
+                  onChange={(value) => formik.setFieldValue('mandatory', value)}
+                  trackStyle={{
+                    backgroundColor: theme.colors.p1,
+                    height: 8,
+                  }}
                   handleStyle={handleSliderStyles}
-                  max={formik.values.minQuestions}
+                  max={formik.values.qt_minimum}
                   railStyle={{
                     backgroundColor: theme.colors.darkGray,
                     height: 8,
                   }}
                 />
+                {!!formik.errors.mandatory && (
+                  <ErrorMessage>{formik.errors.mandatory}</ErrorMessage>
+                )}
               </SliderContainer>
 
               <SliderContainer>
                 <Label>Complementares (P2)</Label>
                 <FormSlider
-                  value={formik.values.p2}
-                  onChange={(value) => formik.setFieldValue('p2', value)}
-                  trackStyle={{ backgroundColor: theme.colors.p2, height: 8 }}
+                  value={formik.values.complementary}
+                  onChange={(value) =>
+                    formik.setFieldValue('complementary', value)
+                  }
+                  trackStyle={{
+                    backgroundColor: theme.colors.p2,
+                    height: 8,
+                  }}
                   maximumTrackStyle={{ backgroundColor: theme.colors.blue }}
                   handleStyle={handleSliderStyles}
                   max={
-                    formik.values.maxQuestions > 1
-                      ? formik.values.maxQuestions / 2
+                    formik.values.qt_maximum > 1
+                      ? formik.values.qt_maximum / 2
                       : 0
                   }
                   railStyle={{
@@ -147,20 +164,26 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                     height: 8,
                   }}
                 />
+                {!!formik.errors.complementary && (
+                  <ErrorMessage>{formik.errors.complementary}</ErrorMessage>
+                )}
               </SliderContainer>
 
               <SliderContainer>
                 <Label>Opcionais (P3)</Label>
                 <FormSlider
-                  value={formik.values.p3}
-                  onChange={(value) => formik.setFieldValue('p3', value)}
-                  trackStyle={{ backgroundColor: theme.colors.p3, height: 8 }}
+                  value={formik.values.optional}
+                  onChange={(value) => formik.setFieldValue('optional', value)}
+                  trackStyle={{
+                    backgroundColor: theme.colors.p3,
+                    height: 8,
+                  }}
                   handleStyle={handleSliderStyles}
                   max={
-                    formik.values.maxQuestions > 1
-                      ? formik.values.maxQuestions -
-                        formik.values.p1 -
-                        formik.values.p2
+                    formik.values.qt_maximum > 1
+                      ? formik.values.qt_maximum -
+                        formik.values.mandatory -
+                        formik.values.complementary
                       : 0
                   }
                   railStyle={{
@@ -168,6 +191,9 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                     height: 8,
                   }}
                 />
+                {!!formik.errors.optional && (
+                  <ErrorMessage>{formik.errors.optional}</ErrorMessage>
+                )}
               </SliderContainer>
             </Box>
           </Row>

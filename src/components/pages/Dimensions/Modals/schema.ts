@@ -5,12 +5,12 @@ const minNumberValidation = {
 }
 
 const schema = Yup.object().shape({
-  dimension: Yup.string().required("Campo obrigatório"),
-  minQuestions: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
-  maxQuestions: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
-  p1: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
-  p2: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
-  p3: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
+  name: Yup.string().required("Campo obrigatório"),
+  qt_minimum: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
+  qt_maximum: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
+  mandatory: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
+  complementary: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
+  optional: Yup.number().integer().min(minNumberValidation.limit, minNumberValidation.message).required("Campo obrigatório").typeError('Esse campo precisa ser um número'),
 });
 
 export default schema;

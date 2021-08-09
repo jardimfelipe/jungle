@@ -53,7 +53,7 @@ const Colaborador: React.FC = () => {
   >({});
   const {
     questionaries,
-    error,
+    feedback,
     isLoading: isQuestionaryLoading,
   } = useSelector(({ questionaries }: RootState) => questionaries);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -81,8 +81,8 @@ const Colaborador: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    error.status && dispatch(setSnackbarOpen(error.message));
-  }, [error, dispatch]);
+    feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
+  }, [feedback, dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />

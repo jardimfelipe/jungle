@@ -1,6 +1,6 @@
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
-import { RequestError } from "../exportTypes";
+import { RequestFeedback } from "../exportTypes";
 
 export enum DimensionsTypeKeys {
   GET_DIMENSIONS_REQUEST = "@dimensions/GET_DIMENSIONS_REQUEST",
@@ -8,6 +8,9 @@ export enum DimensionsTypeKeys {
 
   CREATE_DIMENSIONS_REQUEST = "@dimensions/CREATE_DIMENSIONS_REQUEST",
   CREATE_DIMENSIONS_SUCCESS = "@dimensions/CREATE_DIMENSIONS_SUCCESS",
+  CREATE_DIMENSIONS_FAILURE = "@dimensions/CREATE_DIMENSIONS_FAILURE",
+
+  RESET_FEEDBACK = "@dimensions/RESET_FEEDBACK",
 }
 
 export type DimensionsAction = ActionType<typeof actions>;
@@ -17,11 +20,7 @@ export type DimensionItem = {
   _id: string;
   name: string;
   qt_minimum: string;
-  p1: string;
-  p2: string;
-  p3: string;
   qt_maximum: string;
-  id: number;
   complementary: number
   mandatory: number
   optional: number
@@ -39,6 +38,6 @@ export type DimensionFormModel = {
 export type DimensionsState = {
   dimensions: DimensionItem[];
   isLoading: boolean;
-  error: RequestError;
+  feedback: RequestFeedback
 }
 

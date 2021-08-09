@@ -188,8 +188,8 @@ const Master: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getQuestionariesRequest());
-  }, [dispatch]);
+    !questionaries.length && dispatch(getQuestionariesRequest());
+  }, [dispatch, questionaries]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />

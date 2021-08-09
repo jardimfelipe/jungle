@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
 import DimensionForm from './Modals/Dimension.form';
+import FeedbackModal from './Modals/FeedbackModal';
 
 const { Title, Text } = Typography;
 
@@ -175,6 +176,7 @@ const Dimensions: React.FC = () => {
       </Row>
 
       <DimensionForm isModalOpen={isModalOpen} onClose={handleModalClose} />
+      <FeedbackModal />
 
       {/* <Row end="xs">
         <Pagination onChange={handlePagination} totalItems={30} pageSize={5} />
