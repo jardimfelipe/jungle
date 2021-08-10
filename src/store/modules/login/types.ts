@@ -19,6 +19,7 @@ export type LoginState = {
     email: string;
     name: string;
     role: UserRoles;
+    _id: string
   };
   isLoading: boolean;
   isLoggedIn: boolean;

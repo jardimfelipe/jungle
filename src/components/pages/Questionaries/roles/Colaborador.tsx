@@ -34,7 +34,7 @@ const chartData = {
   datasets: [
     {
       label: null,
-      data: [70, 30],
+      data: [0, 100],
       backgroundColor: ['#4ED9A7', '#F1F5FA'],
       borderWidth: 0,
     },
@@ -155,14 +155,12 @@ const Questionaries: React.FC = () => {
                   </div>
                   Iniciar questionário
                 </QuestionaryButton>
-                {questionary.done && (
-                  <ChartWrapper>
-                    <TableChart data={chartData} />
-                    <Text textDecoration="strong" color="#ffffff">
-                      62%
-                    </Text>
-                  </ChartWrapper>
-                )}
+                <ChartWrapper>
+                  <TableChart data={chartData} />
+                  <Text textDecoration="strong" color="#ffffff">
+                    0%
+                  </Text>
+                </ChartWrapper>
               </Box>
             </Questionary>
           ))

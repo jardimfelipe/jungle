@@ -5,7 +5,8 @@ const INITIAL_STATE: LoginState = {
   currentUser: {
     name: '',
     email: '',
-    role: ''
+    role: '',
+    _id: ''
   },
   isLoading: false,
   isLoggedIn: !!getSavedState('auth.token') && !!getSavedState('auth.role'),
@@ -35,7 +36,7 @@ export default function Reducer(
       return { ...state, error: action.payload, isLoading: false };
 
     case LoginTypeKeys.LOGOUT:
-      return { ...state, currentUser: { name: '', email: '', role: '' }, isLoggedIn: false }
+      return { ...state, currentUser: { name: '', email: '', role: '', _id: '' }, isLoggedIn: false }
 
     default:
       return state;

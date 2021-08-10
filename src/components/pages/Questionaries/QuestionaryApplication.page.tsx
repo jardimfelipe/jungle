@@ -35,7 +35,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { setSnackbarOpen } from '../../../store/modules/base/actions';
 import {
-  Answer,
+  UserAnswer,
   Questionary,
 } from '../../../store/modules/questionaries/types';
 import {
@@ -69,7 +69,7 @@ const QuestionaryApplication: React.FC = () => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<Answer[]>([]);
+  const [answers, setAnswers] = useState<UserAnswer[]>([]);
   const isMobile = useMobileWidth();
   const { /*questionary,*/ feedback, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
@@ -91,15 +91,19 @@ const QuestionaryApplication: React.FC = () => {
 
   const handleNexQuestionClick = () => {
     const question = questionary.question[currentQuestion];
+    const option = question.options.find(
+      ({ value }) => value === selectedAnswer
+    );
     const newAnswer = {
       question_id: question._id,
-      answer: question.options.find(({ value }) => value === selectedAnswer),
+      answer: option?.value || 0,
     };
     setAnswers([...answers, newAnswer]);
     if (isLastQuestion()) {
       const model = {
         questionnaire: questionary._id,
         dimension: questionary.dimension?._id || '',
+        user: currentUser._id,
         answers: answers,
       };
       dispatch(sendQuestionaryRequest(model));

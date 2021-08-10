@@ -263,13 +263,17 @@ const CreateQuestionary: React.FC = () => {
       datasets: data.datasets.map((dataset) => ({
         ...dataset,
         data: [
-          chardPriorities[data.priority as keyof typeof chardPriorities] || 0,
-          dataset.data[1],
+          chardPriorities[data.priority as keyof typeof chardPriorities] * 10 ||
+            0,
+          100 -
+            chardPriorities[data.priority as keyof typeof chardPriorities] *
+              10 || 0,
         ],
       })),
     }));
     setChartDatas(newChartDatas);
   }, [checkedQuestions, initialChartDatas]);
+  console.log(chartDatas);
   return (
     <Box
       params={{
@@ -310,7 +314,7 @@ const CreateQuestionary: React.FC = () => {
                 flex: '0 0 50%',
               }}
             >
-              {chartDatas.map((data) => (
+              {chartDatas.map((data, index) => (
                 <Box
                   params={{
                     display: 'flex',
@@ -324,7 +328,9 @@ const CreateQuestionary: React.FC = () => {
                       color={data.datasets[0].backgroundColor[0]}
                       textDecoration="strong"
                     >
-                      {data.datasets[0].data.join('/')}
+                      {`${+data.datasets[0].data[0] / 10}/${
+                        initialChartDatas[index].datasets[0].data[1]
+                      }`}
                     </Text>
                   </ChartWrapper>
                   <Text>{data.text}</Text>

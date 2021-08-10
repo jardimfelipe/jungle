@@ -1,6 +1,5 @@
 import { ActionType } from "typesafe-actions";
 import { RequestFeedback } from "../exportTypes";
-import { Option } from '../../../store/modules/questions/types';
 import * as actions from "./actions";
 
 export enum QuestionariesTypeKeys {
@@ -72,13 +71,14 @@ export type QuestionaryModel = {
   question: string[],
 }
 
-export type Answer = {
+export type UserAnswer = {
   question_id: string;
-  answer: Option | undefined;
+  answer: string | number
 };
 
 export type QuestionaryAnswers = {
   questionnaire: string,
   dimension: string,
-  answers: Answer[]
+  user: string
+  answers: UserAnswer[]
 }
