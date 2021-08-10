@@ -34,7 +34,7 @@ const FeedbackModal: React.FC = () => {
     if (feedback.status !== '') setisModalOpen(true);
   }, [feedback]);
   return (
-    <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+    <Modal height={500} isOpen={isModalOpen} onClose={handleModalClose}>
       <Box params={{ padding: '0px' }}>
         <Row middle="xs" around="xs">
           <Col xs={12} md={4}>

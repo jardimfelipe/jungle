@@ -10,16 +10,16 @@ export const ResumeBox = styled.div<{ role?: UserRoles }>`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  ${CardContainer}, ${Box} {
-    flex: 0 0 ${(props) => (props.role === 'admin_jungle' ? '23.5%' : '32.3%')};
+  ${CardContainer} {
+    flex: 0 0 ${(props) => (props.role === 'admin_jungle' ? '23.5%' : '49.3%')};
   }
   @media (max-width: 1280px) {
-    ${CardContainer}, ${Box} {
+    ${CardContainer} {
       flex: 0 0 calc(50% - 7.5px);
     }
   }
   @media (max-width: 860px) {
-    ${CardContainer}, ${Box} {
+    ${CardContainer} {
       flex: 0 0 100%;
     }
   }

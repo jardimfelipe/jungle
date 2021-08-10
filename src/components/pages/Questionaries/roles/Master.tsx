@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Tag,
-  Select,
   Typography,
   Resume,
   TabNavigation,
@@ -26,12 +25,6 @@ import { Field } from '../../../molecules/Table/table.types';
 import CreateQuestionary from '../Modals/CreateQuestionary';
 
 const { Text } = Typography;
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
 
 type PageTabs = 'questionarios' | 'templates' | 'rascunhos';
 
@@ -238,18 +231,6 @@ const Master: React.FC = () => {
           </Button>
         </Box>
       </Box>
-
-      <Row>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-      </Row>
 
       <Row>
         <Col xs>

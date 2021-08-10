@@ -29,7 +29,8 @@ export type Questionary = {
   createdAt: string;
   track: string;
   status: string;
-  id: number
+  id: number;
+  active: boolean;
 }
 
 export type Worker = {

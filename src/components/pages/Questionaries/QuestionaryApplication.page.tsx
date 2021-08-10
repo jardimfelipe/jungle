@@ -34,7 +34,16 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { getQuestionaryRequest } from '../../../store/modules/questionaries/actions';
 import { RootState } from '../../../store';
 import { setSnackbarOpen } from '../../../store/modules/base/actions';
-import { Questionary } from '../../../store/modules/questionaries/types';
+import {
+  Answer,
+  Questionary,
+} from '../../../store/modules/questionaries/types';
+import {
+  sendQuestionaryRequest,
+  resetFeeback,
+} from '../../../store/modules/questionaries/actions';
+import { LoaderWrapper } from '../../molecules/Table/table.styled';
+import { Oval } from 'react-loading-icons';
 
 const { Title, Text } = Typography;
 
@@ -60,8 +69,9 @@ const QuestionaryApplication: React.FC = () => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState<Answer[]>([]);
   const isMobile = useMobileWidth();
-  const { /*questionary,*/ feedback } = useSelector(
+  const { /*questionary,*/ feedback, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
 
@@ -80,8 +90,19 @@ const QuestionaryApplication: React.FC = () => {
   };
 
   const handleNexQuestionClick = () => {
+    const question = questionary.question[currentQuestion];
+    const newAnswer = {
+      question_id: question._id,
+      answer: question.options.find(({ value }) => value === selectedAnswer),
+    };
+    setAnswers([...answers, newAnswer]);
     if (isLastQuestion()) {
-      setIsModalOpen(true);
+      const model = {
+        questionnaire: questionary._id,
+        dimension: questionary.dimension?._id || '',
+        answers: answers,
+      };
+      dispatch(sendQuestionaryRequest(model));
     } else {
       setCurrentQuestion(currentQuestion + 1);
     }
@@ -93,11 +114,16 @@ const QuestionaryApplication: React.FC = () => {
   };
 
   const handleCloseModal = () => {
+    dispatch(resetFeeback());
     history.push('/');
   };
   useEffect(() => {
     setSelectedAnswer('');
   }, [currentQuestion]);
+
+  useEffect(() => {
+    if (feedback.status === 'success') setIsModalOpen(true);
+  }, [feedback]);
 
   // useEffect(() => {
   //   dispatch(getQuestionaryRequest(id));
@@ -106,8 +132,17 @@ const QuestionaryApplication: React.FC = () => {
   useEffect(() => {
     feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
   }, [feedback, dispatch]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetFeeback());
+    };
+  }, [dispatch]);
   return (
-    <Box params={{ display: 'flex' }}>
+    <Box params={{ display: 'flex', position: 'relative' }}>
+      <LoaderWrapper isLoading={isLoading}>
+        <Oval stroke={theme.colors.blue} height={50} />
+      </LoaderWrapper>
       <Box params={{ flex: '1 0 70%' }}>
         <QuestionaryContainer>
           <Grid>

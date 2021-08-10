@@ -4,7 +4,6 @@ import {
   Box,
   NavigationButton,
   PromotionalCard,
-  ResumeCard,
   Typography,
   Tag,
   ChartWrapper,
@@ -12,12 +11,12 @@ import {
   Questionary,
   QuestionaryButton,
   QuestionaryModal,
-  Icons,
 } from '../../..';
 import { BiCaretRight } from 'react-icons/bi';
 import { BsArrowRight } from 'react-icons/bs';
-import { QuestionariesGridContainer, ResumeBox } from '../Dashboard.styled';
+import { QuestionariesGridContainer } from '../Dashboard.styled';
 import Skeleton from 'react-loading-skeleton';
+import ProgressBar from '@ramonak/react-progress-bar';
 
 import { useHistory } from 'react-router-dom';
 
@@ -27,9 +26,10 @@ import { getQuestionariesRequest } from '../../../../store/modules/questionaries
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
 import { Questionary as QuestionaryType } from '../../../../store/modules/questionaries/types';
 import { getDimensionsRequest } from '../../../../store/modules/dimensions/actions';
+import { useTheme } from 'styled-components';
+import { rgba } from 'polished';
 
 const { Title, Text } = Typography;
-const { Brain } = Icons;
 
 const chartData = {
   datasets: [
@@ -43,11 +43,10 @@ const chartData = {
 };
 
 const Colaborador: React.FC = () => {
+  const theme = useTheme();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { dimensions, isLoading: isResumeLoading } = useSelector(
-    (state: RootState) => state.dimensions
-  );
+  const { currentUser } = useSelector((state: RootState) => state.login);
   const [clickedQuestionary, setClickedQuestionary] = useState<
     Partial<QuestionaryType>
   >({});
@@ -71,10 +70,6 @@ const Colaborador: React.FC = () => {
     });
   };
 
-  const handleResultClick = () => {
-    history.push('/my-results');
-  };
-
   useEffect(() => {
     dispatch(getQuestionariesRequest());
     dispatch(getDimensionsRequest());
@@ -85,35 +80,11 @@ const Colaborador: React.FC = () => {
   }, [feedback, dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <PromotionalCard />
-
-      <Box params={{ display: 'fex', justifyContent: 'space-between' }}>
-        <Title level={3}>Seus resultados</Title>
-        <NavigationButton onClick={() => history.push('/my-results')}>
-          <Text>Ver todos </Text> <BsArrowRight />
-        </NavigationButton>
-      </Box>
-
-      <ResumeBox>
-        {dimensions.map((dimension, index) =>
-          isResumeLoading ? (
-            <Box
-              key={`skeleton-results-${index}`}
-              params={{ display: 'block' }}
-            >
-              <Skeleton height={150} />
-            </Box>
-          ) : (
-            <ResumeCard
-              key={`results-${index}`}
-              name={dimension.name}
-              icon={<Brain color="#ffffff" />}
-              total={80}
-              onClick={handleResultClick}
-            />
-          )
-        )}
-      </ResumeBox>
+      <PromotionalCard
+        title={`Estamos felizes em ver você, ${currentUser.name}.`}
+        text="Todos nossos questionários são sigilosos, cientificamente validados,
+        para que você tenha uma vida mais saudável e produtiva."
+      />
 
       <Box
         params={{
@@ -126,6 +97,20 @@ const Colaborador: React.FC = () => {
         <NavigationButton onClick={() => history.push('/questionaries')}>
           <Text>Ver todos </Text> <BsArrowRight />
         </NavigationButton>
+      </Box>
+      <Box params={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+        <Box params={{ display: 'block', width: '150px' }}>
+          <ProgressBar
+            bgColor={theme.colors.blue}
+            height="8px"
+            completed={0}
+            baseBgColor={rgba(theme.colors.blue, 0.1)}
+            isLabelVisible={false}
+          />
+        </Box>
+        <Text variant="primary">
+          <strong>0</strong> de <strong>10</strong> preenchidos
+        </Text>
       </Box>
       <QuestionariesGridContainer>
         {isQuestionaryLoading ? (

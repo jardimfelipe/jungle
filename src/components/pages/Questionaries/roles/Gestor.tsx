@@ -81,7 +81,10 @@ const Questionaries: React.FC = () => {
   }, [feedback, dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <PromotionalCard />
+      <PromotionalCard
+        title="Questionários disponíveis"
+        text="Aqui você encontrará a relação de todos os questionários disponíveis, detalhes como o período para preenchimento além de poder acompanhar como está a participação da equipe!"
+      />
 
       <Box
         params={{

@@ -8,7 +8,6 @@ import {
   IconButton,
   // Pagination,
   PromotionalCard,
-  Select,
   Table,
   Typography,
 } from '../..';
@@ -22,12 +21,6 @@ import { getDimensionsRequest } from '../../../store/modules/dimensions/actions'
 import CreateQuestion from './Modals/CreateQuestion.page';
 
 const { Title, Text } = Typography;
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
 
 const Questions: React.FC = () => {
   const dispatch = useDispatch();
@@ -153,18 +146,6 @@ const Questions: React.FC = () => {
           </Button>
         </Box>
       </Box>
-
-      <Row>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-      </Row>
 
       <Row>
         <Col xs>

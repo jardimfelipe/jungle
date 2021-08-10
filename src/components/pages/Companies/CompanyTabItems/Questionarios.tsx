@@ -1,52 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
-import {
-  ColumnButton,
-  Pagination,
-  Select,
-  Table,
-  Tag,
-  Typography,
-} from '../../..';
+import { ColumnButton, Table, Tag, Typography } from '../../..';
 import { BiDotsVertical } from 'react-icons/bi';
 import { Field } from '../../../molecules/Table/table.types';
 import { TagColors } from '../../../atoms/Tag/Tag.types';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { DimensionItem, RootState } from '../../../../store';
-import { getCompanyRequest } from '../../../../store/modules/companies/actions';
 import { Question } from '../../../../store/modules/questionaries/types';
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
+import { TabItemsProps } from './CompanyTabItems.types';
+import { DimensionItem } from '../../../../store';
 
 const { Text } = Typography;
 
-const Questionarios: React.FC = () => {
-  const dispatch = useDispatch();
-  const { company, isLoading } = useSelector(
-    ({ companies }: RootState) => companies
-  );
+const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
   const getTagColor = (value: string): TagColors => {
     if (value === 'ativo') return 'success';
     if (value === 'inativo') return 'error';
     if (value === 'em breve') return 'warning';
     return 'warning';
   };
-
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const handlePagination = (_: number, newPage: number) => {
-    setPageNumber(newPage);
-  };
-
-  useEffect(() => {
-    dispatch(getCompanyRequest({ pageNumber }));
-  }, [dispatch, pageNumber]);
 
   const tableFields: Field[] = [
     {
@@ -102,18 +74,6 @@ const Questionarios: React.FC = () => {
   return (
     <React.Fragment>
       <Row>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-      </Row>
-
-      <Row>
         <Col xs>
           <Table
             items={company.questionaries}
@@ -121,10 +81,6 @@ const Questionarios: React.FC = () => {
             fields={tableFields}
           />
         </Col>
-      </Row>
-
-      <Row end="xs">
-        <Pagination onChange={handlePagination} totalItems={30} pageSize={5} />
       </Row>
     </React.Fragment>
   );

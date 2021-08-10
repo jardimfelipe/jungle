@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Typography,
@@ -18,7 +18,10 @@ import { Colaboradores, Questionarios } from './CompanyTabItems';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import { TabNavigation } from './Companies.styled';
-import { CompanyItem } from '../../../store';
+import { CompanyItem, RootState } from '../../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCompanyRequest } from '../../../store/modules/companies/actions';
+import InsertQuestionary from './Modals/InsertQuestionary';
 
 const { Text, Title } = Typography;
 
@@ -29,32 +32,37 @@ type RouteState = {
 
 const Company: React.FC = () => {
   const {
-    state: { company },
+    state: { company: routeCompany },
   } = useLocation<RouteState>();
+  const { company, isLoading } = useSelector(
+    ({ companies }: RootState) => companies
+  );
   const history = useHistory();
   const theme = useTheme();
+  const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState<TabComponents>('questionarios');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const companyItems = [
     {
       name: 'Colaboradores',
       icon: <FiUsers size="32" color={theme.colors.blue} />,
-      total: company.collaborators,
+      total: routeCompany.collaborators,
     },
     {
       name: 'Questionários',
       icon: <BiDockLeft size="32" color="#3BC8E3" />,
-      total: company.questionnaires,
+      total: company.questionaries.length,
     },
     {
       name: 'Ativos',
       icon: <BiDockLeft size="32" color={theme.colors.p3} />,
-      total: 12,
+      total: company.questionaries.filter(({ active }) => active).length,
     },
     {
       name: 'Inativos',
       icon: <BiDockLeft size="32" color={theme.colors.p1} />,
-      total: 12,
+      total: company.questionaries.filter(({ active }) => !active).length,
     },
   ];
 
@@ -65,11 +73,26 @@ const Company: React.FC = () => {
   const handleTabClick = (tab: TabComponents) => {
     setCurrentTab(tab);
   };
+
+  const handleClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  useEffect(() => {
+    const headers = {
+      company: routeCompany.id,
+    };
+    dispatch(getCompanyRequest({ headers }));
+  }, [dispatch, routeCompany]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <Card size="small" hasCloseButton background="#E5EEF7">
         <Title variant="primary" level={3}>
-          Você está visualizando as informações da {company.name}
+          Você está visualizando as informações da {routeCompany.name}
         </Title>
       </Card>
 
@@ -121,7 +144,12 @@ const Company: React.FC = () => {
                   flex: '0 0 60%',
                 }}
               >
-                <Button block size="small" variant="primary">
+                <Button
+                  block
+                  onClick={handleOpenModal}
+                  size="small"
+                  variant="primary"
+                >
                   Cadastrar Questionários
                 </Button>
               </Box>
@@ -129,8 +157,12 @@ const Company: React.FC = () => {
           </Box>
         </Col>
       </Row>
-
-      {currentTab === 'questionarios' ? <Questionarios /> : <Colaboradores />}
+      <InsertQuestionary isOpen={isModalOpen} onClose={handleClose} />
+      {currentTab === 'questionarios' ? (
+        <Questionarios company={company} isLoading={isLoading} />
+      ) : (
+        <Colaboradores company={company} isLoading={isLoading} />
+      )}
     </Box>
   );
 };

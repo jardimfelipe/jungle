@@ -4,5 +4,5 @@ export type ResumeProps = {
   name: string;
   total: number;
   icon: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 };

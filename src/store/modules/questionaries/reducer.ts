@@ -7,7 +7,8 @@ const INITIAL_STATE: QuestionariesState = {
     _id: '',
     description: '',
     dimension: {
-      name: ''
+      name: '',
+      _id: ''
     },
     question: [],
     active: true,
@@ -56,6 +57,15 @@ export default function Reducer(
 
     case QuestionariesTypeKeys.RESET_FEEDBACK:
       return { ...state, feedback: { status: '', message: '' } }
+
+    case QuestionariesTypeKeys.SEND_QUESTIONARY_REQUEST:
+      return { ...state, isLoading: true }
+
+    case QuestionariesTypeKeys.SEND_QUESTIONARY_SUCCESS:
+      return { ...state, feedback: { status: 'success', message: 'Questionário enviado com sucesso!' }, isLoading: false }
+
+    case QuestionariesTypeKeys.SEND_QUESTIONARY_FAILURE:
+      return { ...state, feedback: { status: 'error', message: 'Tente novamente mais tarde' }, isLoading: false }
     default:
       return state;
   }

@@ -103,6 +103,7 @@ export const routes = {
       name: 'Playbook',
       path: '/playbook',
       icon: <BiBuildings />,
+      isSoon: true,
     },
     {
       name: 'Marketplace',

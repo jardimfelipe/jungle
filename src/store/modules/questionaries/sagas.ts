@@ -41,5 +41,22 @@ function* createQuestionary({ payload }: ActionType<typeof actions.createQuestio
   }
 }
 
+function* sendQuestionary({ payload }: ActionType<typeof actions.sendQuestionaryRequest>) {
+  try {
+    yield call(api, `/answers`, { method: "POST", data: payload });
+    yield put(actions.sendQuestionarySuccess());
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(actions.sendQuestionaryFailure({ message: 'Ocorreu um erro, tente novamente', status: true }))
+    }
 
-export default all([takeLatest(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST, getQuestionaries), takeLatest(QuestionariesTypeKeys.GET_QUESTIONARY_REQUEST, getQuestionary), takeLatest(QuestionariesTypeKeys.CREATE_QUESTIONARY_REQUEST, createQuestionary)]);
+  }
+}
+
+
+
+
+export default all([takeLatest(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST, getQuestionaries),
+takeLatest(QuestionariesTypeKeys.GET_QUESTIONARY_REQUEST, getQuestionary),
+takeLatest(QuestionariesTypeKeys.CREATE_QUESTIONARY_REQUEST, createQuestionary),
+takeLatest(QuestionariesTypeKeys.SEND_QUESTIONARY_REQUEST, sendQuestionary)]);

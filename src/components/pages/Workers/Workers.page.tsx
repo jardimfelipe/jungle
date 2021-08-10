@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   IconButton,
-  Select,
   Table,
   Typography,
   Avatar,
@@ -29,12 +28,6 @@ import TableMenu from './TableMenu';
 import CreateUser from './Modals/CreateUser';
 
 const { Title } = Typography;
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
 
 const Companies: React.FC = () => {
   const tableFields: Field[] = [
@@ -128,7 +121,10 @@ const Companies: React.FC = () => {
   }, [dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <PromotionalCard />
+      <PromotionalCard
+        title="Colaboradores da sua equipe"
+        text="Olá! Aqui você encontra a relação de colaboradores de sua equipe que foram cadastrados na jornada Jungle. Caso haja modificação no staff, podemos incluir ou retirar pessoas de nossa análise sigilosa ok?"
+      />
 
       <Box
         params={{
@@ -171,18 +167,6 @@ const Companies: React.FC = () => {
           </Box>
         </Box>
       </Box>
-
-      <Row>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-      </Row>
 
       <Row>
         <Col xs>

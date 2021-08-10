@@ -33,6 +33,7 @@ export const ResumeIcon = styled.div`
 export const ResumeTexts = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   @media (max-width: 768px) {
     flex-direction: row;
     justify-content: space-between;

@@ -1,14 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
-import {
-  Box,
-  Button,
-  IconButton,
-  Select,
-  Typography,
-  CompanyTable,
-} from '../..';
+import { Box, IconButton, Typography, CompanyTable } from '../..';
 import { BiSearch } from 'react-icons/bi';
 import { BiBuildings, BiDockLeft } from 'react-icons/bi';
 import PromotionalCard from '../../molecules/PromotionalCard/PromotionalCard';
@@ -18,40 +11,41 @@ import Resume from '../../molecules/Resume/Resume';
 import { useHistory } from 'react-router-dom';
 
 import { useTheme } from 'styled-components';
-import { CompanyItem } from '../../../store';
+import { CompanyItem, RootState } from '../../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { getQuestionariesRequest } from '../../../store/modules/questionaries/actions';
 
 const { Title } = Typography;
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
-
 const Companies: React.FC = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const theme = useTheme();
+  const { companies } = useSelector(({ companies }: RootState) => companies);
+  const { questionaries } = useSelector(
+    ({ questionaries }: RootState) => questionaries
+  );
 
   const resumeItems = [
     {
       name: 'Empresas',
       icon: <BiBuildings size="32" color={theme.colors.blue} />,
-      total: 20,
+      total: companies.length,
     },
     {
       name: 'Questionários',
       icon: <BiDockLeft size="32" color="#3BC8E3" />,
-      total: 200,
+      total: questionaries.length,
     },
     {
       name: 'Ativos',
       icon: <BiDockLeft size="32" color={theme.colors.p3} />,
-      total: 60,
+      total: questionaries.filter(({ active }) => active).length,
     },
     {
       name: 'Inativos',
       icon: <BiDockLeft size="32" color={theme.colors.p1} />,
-      total: 140,
+      total: questionaries.filter(({ active }) => !active).length,
     },
   ];
 
@@ -61,6 +55,10 @@ const Companies: React.FC = () => {
       state: { company },
     });
   };
+
+  useEffect(() => {
+    !questionaries.length && dispatch(getQuestionariesRequest());
+  }, [dispatch, questionaries]);
 
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -83,31 +81,8 @@ const Companies: React.FC = () => {
           <IconButton icon={<BiSearch />} />
           <FilterLink isActive={true}>Ativas</FilterLink>
           <FilterLink isActive={false}>Inativas</FilterLink>
-          <Box
-            params={{
-              display: 'flex',
-              alignItems: 'center',
-              flex: '0 0 60%',
-            }}
-          >
-            <Button block size="small" variant="primary">
-              Cadastrar Empresas
-            </Button>
-          </Box>
         </Box>
       </Box>
-
-      <Row>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-      </Row>
 
       <Row>
         <Col xs>

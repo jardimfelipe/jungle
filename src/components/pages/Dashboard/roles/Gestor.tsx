@@ -6,13 +6,11 @@ import {
   PromotionalCard,
   ResumeCard,
   Typography,
-  Icons,
   Table,
   Image,
 } from '../../..';
 import { BsArrowRight } from 'react-icons/bs';
 import { ResumeBox, GestorCard } from '../Dashboard.styled';
-import Skeleton from 'react-loading-skeleton';
 
 import { useHistory } from 'react-router-dom';
 
@@ -26,10 +24,9 @@ import GestorResults from '../../../../assets/gestor-results.png';
 import GestorNegative from '../../../../assets/gestor-negative.png';
 import { Questionary } from '../../../../store/modules/questionaries/types';
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
-import { getDimensionsRequest } from '../../../../store/modules/dimensions/actions';
+import { BiDockLeft } from 'react-icons/bi';
 
 const { Title, Text } = Typography;
-const { Brain } = Icons;
 
 const tableFields = [
   {
@@ -68,16 +65,10 @@ const Gestor: React.FC = () => {
     feedback,
     isLoading: isQuestionaryLoading,
   } = useSelector(({ questionaries }: RootState) => questionaries);
-  const { dimensions, isLoading: isResumeLoading } = useSelector(
-    (state: RootState) => state.dimensions
-  );
-  const handleResultClick = () => {
-    history.push('/my-results');
-  };
+  const { currentUser } = useSelector((state: RootState) => state.login);
 
   useEffect(() => {
     dispatch(getQuestionariesRequest());
-    dispatch(getDimensionsRequest());
   }, [dispatch]);
 
   useEffect(() => {
@@ -85,7 +76,11 @@ const Gestor: React.FC = () => {
   }, [feedback, dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <PromotionalCard />
+      <PromotionalCard
+        title={`Seja bem-vindo ${currentUser.name}`}
+        text="Todos nossos questionários foram criados com base científica.
+        Veja os resultados que obtivemos da sua equipe."
+      />
 
       <Box params={{ display: 'flex', justifyContent: 'space-between' }}>
         <Title level={3}>Resultados do time</Title>
@@ -157,24 +152,16 @@ const Gestor: React.FC = () => {
       </Box>
 
       <ResumeBox>
-        {dimensions.map((dimension, index) =>
-          isResumeLoading ? (
-            <Box
-              key={`skeleton-results-${index}`}
-              params={{ display: 'block' }}
-            >
-              <Skeleton height={150} />
-            </Box>
-          ) : (
-            <ResumeCard
-              key={`results-${index}`}
-              name={dimension.name}
-              icon={<Brain color="#ffffff" />}
-              total={80}
-              onClick={handleResultClick}
-            />
-          )
-        )}
+        <ResumeCard
+          name="Questionários preenchidos"
+          icon={<BiDockLeft color="#ffffff" />}
+          total={20}
+        />
+        <ResumeCard
+          name="Questionários disponíveis"
+          icon={<BiDockLeft color="#ffffff" />}
+          total={questionaries.length}
+        />
       </ResumeBox>
 
       <Box params={{ display: 'flex', justifyContent: 'space-between' }}>

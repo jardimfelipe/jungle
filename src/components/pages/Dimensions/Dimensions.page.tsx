@@ -8,7 +8,6 @@ import {
   IconButton,
   // Pagination,
   PromotionalCard,
-  Select,
   Table,
   Typography,
 } from '../..';
@@ -22,12 +21,6 @@ import DimensionForm from './Modals/Dimension.form';
 import FeedbackModal from './Modals/FeedbackModal';
 
 const { Title, Text } = Typography;
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
 
 const Dimensions: React.FC = () => {
   const dispatch = useDispatch();
@@ -152,18 +145,6 @@ const Dimensions: React.FC = () => {
           </Button>
         </Box>
       </Box>
-
-      <Row>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-      </Row>
 
       <Row>
         <Col xs>

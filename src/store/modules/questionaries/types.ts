@@ -1,5 +1,6 @@
 import { ActionType } from "typesafe-actions";
 import { RequestFeedback } from "../exportTypes";
+import { Option } from '../../../store/modules/questions/types';
 import * as actions from "./actions";
 
 export enum QuestionariesTypeKeys {
@@ -15,6 +16,10 @@ export enum QuestionariesTypeKeys {
   CREATE_QUESTIONARY_FAILURE = "@companies/CREATE_QUESTIONARY_FAILURE",
   CREATE_QUESTIONARY_SUCCESS = "@companies/CREATE_QUESTIONARY_SUCCESS",
 
+  SEND_QUESTIONARY_REQUEST = "@companies/SEND_QUESTIONARY_REQUEST",
+  SEND_QUESTIONARY_SUCCESS = "@companies/SEND_QUESTIONARY_SUCCESS",
+  SEND_QUESTIONARY_FAILURE = "@companies/SEND_QUESTIONARY_FAILURE",
+
   RESET_FEEDBACK = "@companies/RESET_FEEDBACK",
 }
 
@@ -26,11 +31,13 @@ export type Question = {
   options: [
     {
       label: string,
-      value: string
+      value: string,
+      _id: string
     },
     {
       label: string,
-      value: string
+      value: string,
+      _id: string
     }
   ]
 }
@@ -41,6 +48,7 @@ export type Questionary = {
   description: string
   dimension?: {
     name: string
+    _id: string
   }
   question: Question[]
   active: boolean,
@@ -62,4 +70,15 @@ export type QuestionaryModel = {
   required: boolean,
   dimension: string,
   question: string[],
+}
+
+export type Answer = {
+  question_id: string;
+  answer: Option | undefined;
+};
+
+export type QuestionaryAnswers = {
+  questionnaire: string,
+  dimension: string,
+  answers: Answer[]
 }

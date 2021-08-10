@@ -29,7 +29,7 @@ export const SidebarContainer = styled.aside<SidebarProps>`
 `;
 
 export const MenuList = styled.ul`
-  margin-top: 32px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   gap: 12px;

@@ -1,38 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
-import { ColumnButton, Pagination, Select, Table } from '../../..';
+import { ColumnButton, Table } from '../../..';
 import { AiOutlineRight } from 'react-icons/ai';
 import { Field } from '../../../molecules/Table/table.types';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../store';
-import { getCompanyRequest } from '../../../../store/modules/companies/actions';
-import { useParams } from 'react-router-dom';
+import { TabItemsProps } from './CompanyTabItems.types';
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
-
-const Colaboradores: React.FC = () => {
-  const dispatch = useDispatch();
-  const { id } = useParams<{ id: string }>();
-  const { company, isLoading } = useSelector(
-    ({ companies }: RootState) => companies
-  );
-
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const handlePagination = (_: number, newPage: number) => {
-    setPageNumber(newPage);
-  };
-
-  useEffect(() => {
-    dispatch(getCompanyRequest({ pageNumber, headers: { company: id } }));
-  }, [dispatch, pageNumber, id]);
-
+const Colaboradores: React.FC<TabItemsProps> = ({ company, isLoading }) => {
   const tableFields: Field[] = [
     {
       title: 'Colaborador',
@@ -73,18 +48,6 @@ const Colaboradores: React.FC = () => {
   return (
     <React.Fragment>
       <Row>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-        <Col xs={12} md={6} lg={4}>
-          <Select placeholder="Selecione o filtro" options={options} />
-        </Col>
-      </Row>
-
-      <Row>
         <Col xs>
           <Table
             isLoading={isLoading}
@@ -92,10 +55,6 @@ const Colaboradores: React.FC = () => {
             fields={tableFields}
           />
         </Col>
-      </Row>
-
-      <Row end="xs">
-        <Pagination onChange={handlePagination} totalItems={30} pageSize={5} />
       </Row>
     </React.Fragment>
   );

@@ -37,7 +37,7 @@ const ResumeCard: React.FC<ResumeProps> = ({ name, total, icon, onClick }) => {
             </Text>
           </ResumeTexts>
         </Box>
-        {!isMobile && (
+        {!isMobile && !!onClick && (
           <Button onClick={onClick}>
             <BsArrowRight size="20px" color="#ffffff" />
           </Button>

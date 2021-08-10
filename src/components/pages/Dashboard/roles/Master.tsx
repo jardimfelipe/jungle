@@ -69,7 +69,7 @@ const Master: React.FC = () => {
           ? [...Array(4)].map((_, index) => (
               <Box
                 key={`skeleton-results-${index}`}
-                params={{ display: 'block', width: '100%' }}
+                params={{ display: 'block', width: '23.7%' }}
               >
                 <Skeleton height={110} />
               </Box>
