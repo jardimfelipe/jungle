@@ -2,7 +2,7 @@ import { Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
 import { CardContainer } from '../../atoms/Card/Card.styled';
 
-export const ResultCard = styled(CardContainer)`
+export const SocialAspectsCard = styled(CardContainer)`
   padding: 0;
 `;
 
@@ -33,4 +33,8 @@ export const StyledCol = styled(Col)`
   @media (max-width: 1210px) {
     margin-top: 15px;
   }
+`;
+
+export const ResultsCard = styled(CardContainer)`
+  flex: 0 0 40%;
 `;

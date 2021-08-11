@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import QuestionaryImage from '../../../assets/questionary-image.png';
 import { Button, Label, Typography } from '../..';
 
-import { Questionary, Box } from '../..';
+import { Box } from '../..';
 import media from 'styled-media-query';
 
 const { Text } = Typography;
@@ -12,7 +12,8 @@ export const QuestionariesGridContainer = styled.div`
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  ${Questionary}, ${Box} {
+  .questionary-card,
+  ${Box} {
     &:first-child {
       flex: 0 0 66%;
     }

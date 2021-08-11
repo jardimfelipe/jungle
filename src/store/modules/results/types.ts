@@ -15,17 +15,28 @@ export type ResumeProps = {
 
 export type ResumeAction = ActionType<typeof actions>;
 
-export type ResultType = {
+export type Statistics = {
   dimension: string
   questionnaire: string
-  result: number
+  result: "Proteção Level" | "Proteção Boa" | "Proteção Moderada" | "Proteção Alta"
   user: string
   __v: number
   _id: string
+  value: number
+  description: string
+  title: string
+}
+
+export type ResultType = {
+  statistics: Statistics[]
+  analysis: {
+    adequate_protection: string[]
+    minor_protection: string[]
+  }
 }
 
 export type ResultsState = {
-  results: ResultType[]
+  results: ResultType
   isLoading: boolean;
   error: RequestError;
 }

@@ -1,7 +1,23 @@
 import { ResumeAction, ResultsState, ResultsTypeKeys } from "./types";
 
 const INITIAL_STATE: ResultsState = {
-  results: [],
+  results: {
+    statistics: [{
+      dimension: "",
+      questionnaire: "",
+      result: "Proteção Level",
+      user: "",
+      __v: 0,
+      _id: "",
+      value: 0,
+      description: "",
+      title: ""
+    }],
+    analysis: {
+      adequate_protection: [''],
+      minor_protection: ['']
+    }
+  },
   isLoading: false,
   error: {
     status: false,

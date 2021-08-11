@@ -14,7 +14,7 @@ import {
 import {
   CardBody,
   CardHeader,
-  ResultCard,
+  SocialAspectsCard,
 } from '../MyResults/MyResults.styled';
 import { BiFace } from 'react-icons/bi';
 import { Col, Row } from 'react-flexbox-grid';
@@ -348,7 +348,7 @@ const TeamResults: React.FC = () => {
           </>
         ) : (
           dimensions.map(({ name }) => (
-            <ResultCard key={`dimension-${name}`}>
+            <SocialAspectsCard key={`dimension-${name}`}>
               <CardHeader>
                 <Text textDecoration="strong" variant="primary">
                   <Brain color={theme.colors.blue} />
@@ -369,7 +369,7 @@ const TeamResults: React.FC = () => {
                   type={name}
                 />
               </CardBody>
-            </ResultCard>
+            </SocialAspectsCard>
           ))
         )}
       </FlexContainer>

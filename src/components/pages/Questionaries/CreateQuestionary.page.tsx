@@ -35,6 +35,7 @@ export type RouteState = {
   questionary: {
     title: string;
     dimension: DimensionItem;
+    image?: FormData;
   };
 };
 

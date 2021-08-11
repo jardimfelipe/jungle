@@ -23,6 +23,7 @@ import { Questionary } from '../../../../store/modules/questionaries/types';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { Field } from '../../../molecules/Table/table.types';
 import CreateQuestionary from '../Modals/CreateQuestionary';
+import { getCompaniesRequest } from '../../../../store/modules/companies/actions';
 
 const { Text } = Typography;
 
@@ -99,23 +100,17 @@ const Master: React.FC = () => {
       render: () => <Text>16/06 a 20/07</Text>,
     },
     {
-      title: 'Rastreio',
-      dataIndex: '_id',
-      key: '_id',
-      render: () => <Text>16/06 a 20/07</Text>,
-    },
-    {
       title: 'Status',
-      dataIndex: '__v',
-      key: '__v',
-      render: () => (
-        <Tag size="large" color="success">
-          ativo
+      dataIndex: 'active',
+      key: 'active',
+      render: (active) => (
+        <Tag size="large" color={active ? 'success' : 'error'}>
+          {active ? 'ativo' : 'inativo'}
         </Tag>
       ),
     },
     {
-      title: 'Status',
+      title: '',
       dataIndex: 'respondents',
       key: 'respondents',
       render: (value, object, index) => (
@@ -140,27 +135,28 @@ const Master: React.FC = () => {
   const { questionaries, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
+  const { companies } = useSelector(({ companies }: RootState) => companies);
 
   const resumeItems = [
     {
       name: 'Empresas',
       icon: <BiBuildings size="32" color={theme.colors.blue} />,
-      total: 20,
+      total: companies.length,
     },
     {
       name: 'Questionários',
       icon: <BiDockLeft size="32" color="#3BC8E3" />,
-      total: 200,
+      total: questionaries.length,
     },
     {
       name: 'Ativos',
       icon: <BiDockLeft size="32" color={theme.colors.p3} />,
-      total: 60,
+      total: questionaries.filter(({ active }) => active).length,
     },
     {
       name: 'Inativos',
       icon: <BiDockLeft size="32" color={theme.colors.p1} />,
-      total: 140,
+      total: questionaries.filter(({ active }) => !active).length,
     },
   ];
 
@@ -182,7 +178,8 @@ const Master: React.FC = () => {
 
   useEffect(() => {
     !questionaries.length && dispatch(getQuestionariesRequest());
-  }, [dispatch, questionaries]);
+    !companies.length && dispatch(getCompaniesRequest());
+  }, [dispatch, questionaries, companies]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />

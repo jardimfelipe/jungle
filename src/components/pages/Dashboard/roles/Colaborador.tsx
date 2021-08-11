@@ -5,14 +5,9 @@ import {
   NavigationButton,
   PromotionalCard,
   Typography,
-  Tag,
-  ChartWrapper,
-  TableChart,
-  Questionary,
-  QuestionaryButton,
   QuestionaryModal,
+  QuestionaryCard,
 } from '../../..';
-import { BiCaretRight } from 'react-icons/bi';
 import { BsArrowRight } from 'react-icons/bs';
 import { QuestionariesGridContainer } from '../Dashboard.styled';
 import Skeleton from 'react-loading-skeleton';
@@ -30,17 +25,6 @@ import { useTheme } from 'styled-components';
 import { rgba } from 'polished';
 
 const { Title, Text } = Typography;
-
-const chartData = {
-  datasets: [
-    {
-      label: null,
-      data: [0, 100],
-      backgroundColor: ['#4ED9A7', '#F1F5FA'],
-      borderWidth: 0,
-    },
-  ],
-};
 
 const Colaborador: React.FC = () => {
   const theme = useTheme();
@@ -126,35 +110,11 @@ const Colaborador: React.FC = () => {
           </>
         ) : (
           questionaries.map((questionary) => (
-            <Questionary key={questionary._id} image="">
-              <div style={{ display: 'flex' }}>
-                <Tag size="large">{questionary.dimension?.name}</Tag>
-              </div>
-              <Box params={{ display: 'flex', flexDirection: 'column' }}>
-                <Title level={3}>{questionary.title}</Title>
-                <Text color="#FFFFFF">
-                  <small>{questionary.question.length} questões</small>
-                </Text>
-              </Box>
-              <Box
-                params={{ display: 'flex', justifyContent: 'space-between' }}
-              >
-                <QuestionaryButton
-                  onClick={() => handleQuestionaryClick(questionary)}
-                >
-                  <div>
-                    <BiCaretRight color="#ffffff" size="32" />
-                  </div>
-                  Iniciar questionário
-                </QuestionaryButton>
-                <ChartWrapper>
-                  <TableChart data={chartData} />
-                  <Text textDecoration="strong" color="#ffffff">
-                    0%
-                  </Text>
-                </ChartWrapper>
-              </Box>
-            </Questionary>
+            <QuestionaryCard
+              onClick={handleQuestionaryClick}
+              questionary={questionary}
+              key={questionary._id}
+            />
           ))
         )}
       </QuestionariesGridContainer>

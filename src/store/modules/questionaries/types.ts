@@ -52,6 +52,7 @@ export type Questionary = {
   question: Question[]
   active: boolean,
   required: boolean
+  track: string;
   done?: string;
 }
 

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
-import { Tag } from '../..';
 import QuestionImage from '../../../assets/question.png';
 import { StyledButton } from '../Button/Button.styled';
 
@@ -18,9 +17,6 @@ export const Questionary = styled.div<{ image: string }>`
   min-height: 70px;
   padding: 28px 32px;
   color: #ffffff;
-  ${Tag} {
-    background-color: ${(props) => props.theme.colors.blue};
-  }
   h3 {
     line-height: 1;
   }

@@ -25,7 +25,7 @@ export const LineContainer = styled.div`
     transform: translateY(-50%);
     right: 10%;
     width: 40%;
-    border-bottom: 3px dashed #ffae33;
+    border-bottom: 3px dashed ${(props) => props.theme.colors.blue};
   }
 `;
 

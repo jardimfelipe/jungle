@@ -4,7 +4,7 @@ import { Col, Row } from 'react-flexbox-grid';
 import { ColumnButton, Table, Tag, Typography } from '../../..';
 import { BiDotsVertical } from 'react-icons/bi';
 import { Field } from '../../../molecules/Table/table.types';
-import { TagColors } from '../../../atoms/Tag/Tag.types';
+// import { TagColors } from '../../../atoms/Tag/Tag.types';
 
 import { Question } from '../../../../store/modules/questionaries/types';
 import { TabItemsProps } from './CompanyTabItems.types';
@@ -13,12 +13,12 @@ import { DimensionItem } from '../../../../store';
 const { Text } = Typography;
 
 const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
-  const getTagColor = (value: string): TagColors => {
-    if (value === 'ativo') return 'success';
-    if (value === 'inativo') return 'error';
-    if (value === 'em breve') return 'warning';
-    return 'warning';
-  };
+  // const getTagColor = (value: string): TagColors => {
+  //   if (value === 'ativo') return 'success';
+  //   if (value === 'inativo') return 'error';
+  //   if (value === 'em breve') return 'warning';
+  //   return 'warning';
+  // };
 
   const tableFields: Field[] = [
     {
@@ -52,11 +52,11 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
     },
     {
       title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      render: () => (
-        <Tag size="large" color={getTagColor('ativo')}>
-          ativo
+      dataIndex: 'active',
+      key: 'active',
+      render: (active) => (
+        <Tag size="large" color={active ? 'success' : 'error'}>
+          {active ? 'ativo' : 'inativo'}
         </Tag>
       ),
     },

@@ -2,7 +2,7 @@ import { Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { CardContainer } from '../../atoms/Card/Card.styled';
-import { ResultCard } from '../MyResults/MyResults.styled';
+import { SocialAspectsCard } from '../MyResults/MyResults.styled';
 
 export const CardImage = styled.div<{ side: 'left' | 'right' }>`
   position: absolute;
@@ -21,7 +21,7 @@ export const FlexContainer = styled.div`
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  ${ResultCard}, ${CardContainer} {
+  ${SocialAspectsCard}, ${CardContainer} {
     flex: 0 0 calc(50% - 7.5px);
     ${media.lessThan('large')`
       flex: 0 0 100%;

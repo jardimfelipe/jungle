@@ -6,8 +6,8 @@ import { ResultsTypeKeys } from "./types";
 function* getResults() {
   try {
     const { data } = yield call(api, "/results/me");
-    console.log(data)
-    yield put(actions.getResultsSuccess(data));
+    const { results: statistics, adequate_protection, minor_protection } = data
+    yield put(actions.getResultsSuccess({ statistics, analysis: { minor_protection, adequate_protection } }));
   } catch (error) {
     yield put(actions.getResultsFailure({ status: true, message: 'Ocorreu um erro' }))
   }

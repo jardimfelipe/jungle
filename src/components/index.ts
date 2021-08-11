@@ -23,8 +23,7 @@ export { default as Icons } from './atoms/Icons'
 export { default as Snackbar } from './atoms/Snackbar/Snackbar'
 export { default as QuestionaryModal } from './atoms/QuestionaryModal/QuestionaryModal'
 export { default as FileUploader } from './atoms/FileUploader/FileUploader'
-
-export { default as CompanyTable } from './organisms/CompanyTable/CompanyTable'
+export { default as ImageUploader } from './atoms/ImageUploader/ImageUploader'
 
 export { default as Sidebar } from './molecules/Sidebar/Siderbar'
 export { default as UserBar } from './molecules/UserBar/UserBar'
@@ -39,6 +38,9 @@ export { default as Modal } from './molecules/Modal/Modal'
 export { default as QuestionarySlider } from './molecules/QuestionarySlider/QuestionarySlider'
 export { default as Resume } from './molecules/Resume/Resume'
 export { default as TableMenu } from './molecules/TableMenu/TableMenu'
+export { default as QuestionaryCard } from './molecules/QuestionaryCard/QuestionaryCard'
+
+export { default as CompanyTable } from './organisms/CompanyTable/CompanyTable'
 
 export { default as Dashboard } from './pages/Dashboard/Dashboard.page'
 export { default as Companies } from './pages/Companies/Companies.page'

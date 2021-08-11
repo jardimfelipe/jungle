@@ -1,6 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { Box, Modal, Typography, Textfield, Label, Select } from '../../..';
+import {
+  Box,
+  Modal,
+  Typography,
+  Textfield,
+  Label,
+  Select,
+  ImageUploader,
+} from '../../..';
 import { ModalButtonHalf } from './CreateQuestion.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,16 +24,38 @@ type ModalProps = {
   isModalOpen: boolean;
 };
 
+type InputState = {
+  dimension: string;
+  title: string;
+  image: FormData | undefined;
+};
+
 const CreateQuestionary: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { dimensions } = useSelector(({ dimensions }: RootState) => dimensions);
   const [dimensionOptions, setDimensionOptions] = useState<OptionType[]>([]);
-  const [inputValues, setInputValues] = useState({ dimension: '', title: '' });
+  const [inputValues, setInputValues] = useState<InputState>({
+    dimension: '',
+    title: '',
+    image: undefined,
+  });
 
   const handleChange = (input: string, value: string) => {
     setInputValues({ ...inputValues, [input]: value });
   };
+
+  const handleImageChange = useCallback((files: File[]) => {
+    if (!files.length)
+      return setInputValues(
+        (inputValues) => (inputValues = { ...inputValues, image: undefined })
+      );
+    const data = new FormData();
+    data.append('file', files[0], files[0].name);
+    setInputValues(
+      (inputValues) => (inputValues = { ...inputValues, image: undefined })
+    );
+  }, []);
 
   const handleManualCreation = () => {
     history.push({
@@ -36,6 +66,7 @@ const CreateQuestionary: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
           dimension: dimensions.find(
             ({ _id }) => _id === inputValues.dimension
           ),
+          image: inputValues.image,
         },
       },
     });
@@ -57,7 +88,7 @@ const CreateQuestionary: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     setDimensionOptions(dimensionOptionsLocal);
   }, [dimensions]);
   return (
-    <Modal width={550} height={450} isOpen={isModalOpen} onClose={onClose}>
+    <Modal width={550} height={650} isOpen={isModalOpen} onClose={onClose}>
       <Box
         params={{
           padding: '0 32px 25px 32px',
@@ -96,6 +127,8 @@ const CreateQuestionary: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               onChange={(e) => handleChange('title', e.target.value)}
             />
           </div>
+
+          <ImageUploader onChange={(e) => handleImageChange(e)} />
         </Box>
         <ModalButtonHalf disabled={!isFormFilled()} variant="secondary">
           Cadastrar automaticamente

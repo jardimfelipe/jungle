@@ -27,6 +27,12 @@ const ResultLine: React.FC<ResultLineProps> = ({
   const isMobile = useMobileWidth();
   const theme = useTheme();
 
+  const getUserPosition = () => {
+    if (results.total < 50) return results.total + 10;
+    if (results.total === 50) return results.total;
+    return results.total - 10;
+  };
+
   const handleClick = () => {
     setShowAnalysis(!showAnalysis);
   };
@@ -47,10 +53,10 @@ const ResultLine: React.FC<ResultLineProps> = ({
             <FiArrowLeft size="32" color="#4ED9A7" />
           </ArrowBox>
           <ArrowBox>
-            <FiArrowRight size="32" color="#FFAE33" />
+            <FiArrowRight size="32" color={theme.colors.blue} />
           </ArrowBox>
 
-          <YouAreHereContainer position="75%">
+          <YouAreHereContainer position={`${getUserPosition()}%`}>
             <GoPrimitiveDot size="18px" />
             {!isMobile && <Text>Você está aqui</Text>}
           </YouAreHereContainer>

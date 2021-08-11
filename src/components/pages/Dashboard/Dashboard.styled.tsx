@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { CardContainer } from '../../atoms/Card/Card.styled';
-import { Box, Questionary } from '../..';
+import { Box } from '../..';
 import { StyledButton } from '../../atoms/Button/Button.styled';
 import media from 'styled-media-query';
 import { UserRoles } from '../../../store';
@@ -29,7 +29,8 @@ export const QuestionariesGridContainer = styled.div`
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  ${Questionary}, ${Box} {
+  .questionary-card,
+  ${Box} {
     &:first-child {
       flex: 0 0 100%;
     }

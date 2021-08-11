@@ -4,6 +4,7 @@ const INITIAL_STATE: QuestionariesState = {
   questionaries: [],
   questionary: {
     title: '',
+    track: '',
     _id: '',
     description: '',
     dimension: {
