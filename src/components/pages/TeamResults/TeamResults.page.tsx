@@ -35,11 +35,10 @@ import ProgressBar from '@ramonak/react-progress-bar';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
+import { getResultsRequest } from '../../../store/modules/results/actions';
 
 import { useTheme } from 'styled-components';
-import { rgba } from 'polished';
-import protectionLevelData from './protectionLevelData';
+// import { rgba } from 'polished';
 import Skeleton from 'react-loading-skeleton';
 
 const { Title, Text } = Typography;
@@ -69,13 +68,19 @@ const chartData2 = {
 
 const TeamResults: React.FC = () => {
   const theme = useTheme();
-  const { dimensions, isLoading } = useSelector(
-    (state: RootState) => state.dimensions
+  const dispatch = useDispatch();
+  const { results, isLoading } = useSelector(
+    (state: RootState) => state.results
   );
 
-  const dispatch = useDispatch();
+  const getLevelLabel = (label: string) => {
+    const labelArray = label.split(' ');
+    if (labelArray.length > 1) return labelArray[1];
+    return labelArray[0];
+  };
+
   useEffect(() => {
-    dispatch(getDimensionsRequest());
+    dispatch(getResultsRequest('gestor'));
   }, [dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -99,23 +104,7 @@ const TeamResults: React.FC = () => {
             <Title level={4} variant="primary">
               Análise dos especialistas
             </Title>
-            <Text paragraph>
-              Observamos níveis de proteção contra sintomas depressivos e de uso
-              de substâncias que podem ser melhorados. A equipe de maneira
-              global se destaca pela presença de pessoas mais meticulosas, que
-              se expressam de maneira mais objetiva. Devemos, no entanto focar
-              em estratégias para otimizar o trabalho em equipe, mobilizando
-              características como a tolerância a ideias diferentes e
-              fortalecimento de caracteristicas e talentos individuais para
-              compor o todo.
-            </Text>
-            <Text paragraph>
-              Perfil global de pessoas mais extrovertidas, eficientes e
-              organizadas, que tendem a enfrentar a rotina de modo prático,
-              podendo haver tendência a um maior foco a si mesmas do que aos
-              outros. Também há uma discreta tendência a uma maior reatividade
-              ao estresse.
-            </Text>
+            <Text paragraph>{results.analysis.expert_analysis}</Text>
           </Card>
         </StyledCol>
         <StyledCol xs>
@@ -129,9 +118,13 @@ const TeamResults: React.FC = () => {
                     Proteção adequada contra
                   </Title>
                   <ul>
-                    <li>Sintomas ansiosos</li>
-                    <li>Sintomas de Burnout</li>
-                    <li>Estresse</li>
+                    {results.analysis.adequate_protection.map(
+                      (protection, index) => (
+                        <li key={`adequate-protection-${index}`}>
+                          {protection}
+                        </li>
+                      )
+                    )}
                   </ul>
                 </Col>
                 <CardImage side="right">
@@ -160,8 +153,11 @@ const TeamResults: React.FC = () => {
                     Proteção menor contra
                   </Title>
                   <ul>
-                    <li>Sintomas ansiosos</li>
-                    <li>Sintomas de Burnout</li>
+                    {results.analysis.minor_protection.map(
+                      (protection, index) => (
+                        <li key={`minor-protection-${index}`}>{protection}</li>
+                      )
+                    )}
                   </ul>
                 </Col>
               </Row>
@@ -177,14 +173,13 @@ const TeamResults: React.FC = () => {
             </Title>
             <Text>Foco em:</Text>
             <ul>
-              <li>
-                Foco em: Aumento da proteção contra sintomas depressivos e de
-                uso de substâncias;
-              </li>
-              <li>
-                Desenvolvimento de ferramentas para lidar com estresse e
-                trabalho em equipe.
-              </li>
+              {results.analysis.improvement_opportunity.map(
+                (opportunity, index) => (
+                  <li key={`improvement_opportunity-${index}`}>
+                    {opportunity}
+                  </li>
+                )
+              )}
             </ul>
           </Card>
         </StyledCol>
@@ -196,14 +191,9 @@ const TeamResults: React.FC = () => {
             </Title>
             <Text>Foco em:</Text>
             <ul>
-              <li>
-                Foco em: Aumento da proteção contra sintomas depressivos e de
-                uso de substâncias;
-              </li>
-              <li>
-                Desenvolvimento de ferramentas para lidar com estresse e
-                trabalho em equipe.
-              </li>
+              {results.analysis.how_to.map((opportunity, index) => (
+                <li key={`how-to-${index}`}>{opportunity}</li>
+              ))}
             </ul>
           </Card>
         </StyledCol>
@@ -222,113 +212,112 @@ const TeamResults: React.FC = () => {
             </Box>
           </>
         ) : (
-          dimensions.map((dimension, index) => (
-            <Card key={`${dimension}-card-${index}`}>
-              <Box
-                params={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '20px',
-                }}
-              >
+          results.statistics.map((statistics, index) =>
+            index <= 4 ? (
+              <Card key={`${statistics}-card-${index}`}>
                 <Box
                   params={{
                     display: 'flex',
                     flexDirection: 'column',
+                    gap: '20px',
                   }}
                 >
                   <Box
                     params={{
                       display: 'flex',
-                      alignItems: 'center',
-                      gap: '15px',
+                      flexDirection: 'column',
                     }}
                   >
-                    <CardIcon>
-                      <BiFace color={theme.colors.darkGray} size="28" />
-                    </CardIcon>
                     <Box
                       params={{
                         display: 'flex',
-                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '15px',
                       }}
                     >
-                      <Text textDecoration="strong" variant="primary">
-                        {dimension.name}
-                      </Text>
-                      <Text>Proteção contra sistomas de ansiosos</Text>
+                      <CardIcon>
+                        <BiFace color={theme.colors.darkGray} size="28" />
+                      </CardIcon>
+                      <Box
+                        params={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                        }}
+                      >
+                        <Text textDecoration="strong" variant="primary">
+                          {statistics.name}
+                        </Text>
+                        <Text>{statistics.title}</Text>
+                      </Box>
                     </Box>
                   </Box>
-                </Box>
 
-                <Box
-                  params={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '5px',
-                  }}
-                >
-                  <Text textDecoration="strong">Análise dos especialistas</Text>
-                  <Text>
-                    Sed in libero commodo enim laoreet auctor. Donec ac
-                    ultricies nibh, non gravida nibh. Orci varius natoque
-                    penatibus et magnis dis parturient montes, nascetur
-                    ridiculus mus. Proin aliquet dolor nec velit egestas
-                    pellentesque.
-                  </Text>
-                </Box>
+                  <Box
+                    params={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '5px',
+                    }}
+                  >
+                    <Text textDecoration="strong">
+                      Análise dos especialistas
+                    </Text>
+                    <Text>{statistics.description}</Text>
+                  </Box>
 
-                <ChartsBarContainer>
-                  <LevelsContainer>
-                    {protectionLevelData.map((level) => (
-                      <ProgressBarContainer
-                        key={`protection-leve-${level}-${Math.random()}`}
-                      >
-                        <Text color={level.color}>{level.level}</Text>
-                        <Box params={{ display: 'block', width: '140px' }}>
-                          <ProgressBar
-                            bgColor={level.color}
-                            height="10px"
-                            completed={level.amount}
-                            baseBgColor={rgba(level.color, 0.1)}
-                            isLabelVisible={false}
+                  <ChartsBarContainer>
+                    <LevelsContainer>
+                      {statistics.niveis?.map((level) => (
+                        <ProgressBarContainer
+                          key={`protection-leve-${level}-${Math.random()}`}
+                        >
+                          <Text>{getLevelLabel(level.label)}</Text>
+                          <Box params={{ display: 'block', width: '140px' }}>
+                            <ProgressBar
+                              height="10px"
+                              completed={level.qtd}
+                              isLabelVisible={false}
+                            />
+                          </Box>
+                        </ProgressBarContainer>
+                      ))}
+                    </LevelsContainer>
+
+                    <CardCharts>
+                      <CharFlexContainer>
+                        <ChartWrapper size={100}>
+                          <TableChart
+                            options={{ cutout: 35 }}
+                            data={chartData}
                           />
-                        </Box>
-                      </ProgressBarContainer>
-                    ))}
-                  </LevelsContainer>
-
-                  <CardCharts>
-                    <CharFlexContainer>
-                      <ChartWrapper size={100}>
-                        <TableChart options={{ cutout: 35 }} data={chartData} />
-                        <Text color="#4ED9A7" textDecoration="strong">
-                          65%
+                          <Text color="#4ED9A7" textDecoration="strong">
+                            {statistics.team_protection * 100}%
+                          </Text>
+                        </ChartWrapper>
+                        <Text>
+                          Nível de proteção na <strong>equipe</strong>
                         </Text>
-                      </ChartWrapper>
-                      <Text>
-                        Nível de proteção na <strong>equipe</strong>
-                      </Text>
-                    </CharFlexContainer>
-                    <CharFlexContainer>
-                      <ChartWrapper size={100}>
-                        <TableChart
-                          options={{ cutout: 35 }}
-                          data={chartData2}
-                        />
-                        <Text color="#0062FF" textDecoration="strong">
-                          80%
+                      </CharFlexContainer>
+                      <CharFlexContainer>
+                        <ChartWrapper size={100}>
+                          <TableChart
+                            options={{ cutout: 35 }}
+                            data={chartData2}
+                          />
+                          <Text color="#0062FF" textDecoration="strong">
+                            {statistics.population_protection * 100}%
+                          </Text>
+                        </ChartWrapper>
+                        <Text>
+                          Nível de proteção na <strong>população</strong>
                         </Text>
-                      </ChartWrapper>
-                      <Text>
-                        Nível de proteção na <strong>população</strong>
-                      </Text>
-                    </CharFlexContainer>
-                  </CardCharts>
-                </ChartsBarContainer>
-              </Box>
-            </Card>
-          ))
+                      </CharFlexContainer>
+                    </CardCharts>
+                  </ChartsBarContainer>
+                </Box>
+              </Card>
+            ) : null
+          )
         )}
       </FlexContainer>
 
@@ -347,26 +336,25 @@ const TeamResults: React.FC = () => {
             </Box>
           </>
         ) : (
-          dimensions.map(({ name }) => (
-            <SocialAspectsCard key={`dimension-${name}`}>
+          results.statistics.map((statistic, index) => (
+            <SocialAspectsCard key={`social-${index}`}>
               <CardHeader>
                 <Text textDecoration="strong" variant="primary">
                   <Brain color={theme.colors.blue} />
-                  {name}
+                  {statistic.name}
                 </Text>
                 <Text textDecoration="strong" variant="primary">
-                  65%
+                  {(statistic.team_protection * 100).toFixed(1)}%
                 </Text>
               </CardHeader>
               <CardBody>
                 <ResultLine
                   results={{
-                    analise:
-                      'Observamos níveis de proteção contra ocorrências de sintomas ansiosos, maiores do que a população geral. Os sintomas podem ser reativos a problemas diversos, e não necessariamente se traduzem em transtornos.',
-                    total: 65,
+                    analise: statistic.description,
+                    total: +(statistic.team_protection * 100).toFixed(1),
                   }}
                   hasAnalysis={false}
-                  type={name}
+                  type={statistic.name}
                 />
               </CardBody>
             </SocialAspectsCard>

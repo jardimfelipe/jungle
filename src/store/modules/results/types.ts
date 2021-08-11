@@ -15,16 +15,25 @@ export type ResumeProps = {
 
 export type ResumeAction = ActionType<typeof actions>;
 
+export type Nivel = {
+  label: string
+  qtd: number
+}
+
 export type Statistics = {
   dimension: string
   questionnaire: string
-  result: "Proteção Level" | "Proteção Boa" | "Proteção Moderada" | "Proteção Alta"
+  result: "Proteção Leve" | "Proteção Boa" | "Proteção Moderada" | "Proteção Alta"
   user: string
   __v: number
   _id: string
   value: number
   description: string
   title: string
+  name: string
+  niveis: Nivel[]
+  population_protection: number
+  team_protection: number
 }
 
 export type ResultType = {
@@ -32,6 +41,9 @@ export type ResultType = {
   analysis: {
     adequate_protection: string[]
     minor_protection: string[]
+    expert_analysis: string
+    improvement_opportunity: string[]
+    how_to: string[]
   }
 }
 

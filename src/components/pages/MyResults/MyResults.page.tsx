@@ -29,7 +29,6 @@ import ProgressBar from '@ramonak/react-progress-bar';
 import { useTheme } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
 import { getResultsRequest } from '../../../store/modules/results/actions';
 import protectionLevelData from '../TeamResults/protectionLevelData';
 import { rgba } from 'polished';
@@ -61,19 +60,13 @@ const chartData2 = {
 };
 
 const MyResults: React.FC = () => {
-  const { dimensions } = useSelector((state: RootState) => state.dimensions);
   const { results, isLoading } = useSelector(
     (state: RootState) => state.results
   );
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const getDimensionById = (dimensionId: string) => {
-    return dimensions.find(({ _id }) => _id === dimensionId);
-  };
-
   useEffect(() => {
-    dispatch(getDimensionsRequest());
     dispatch(getResultsRequest());
   }, [dispatch]);
   return (
@@ -96,9 +89,9 @@ const MyResults: React.FC = () => {
             </Box>
           </>
         ) : (
-          dimensions.map((dimension, index) =>
+          results.statistics.map((result, index) =>
             index <= 4 ? (
-              <Card key={`${dimension}-card-${index}`}>
+              <Card key={`${result._id}-card-${index}`}>
                 <Box
                   params={{
                     display: 'flex',
@@ -129,9 +122,9 @@ const MyResults: React.FC = () => {
                         }}
                       >
                         <Text textDecoration="strong" variant="primary">
-                          {dimension.name}
+                          {result.name}
                         </Text>
-                        <Text>{results.statistics[index].title}</Text>
+                        <Text>{result.title}</Text>
                       </Box>
                     </Box>
                   </Box>
@@ -223,25 +216,25 @@ const MyResults: React.FC = () => {
                   </Box>
                 ))
               : results.statistics.map(
-                  ({ dimension, result, value, description }) => (
+                  ({ dimension, value, description, name }) => (
                     <SocialAspectsCard key={`dimension-${dimension}`}>
                       <CardHeader>
                         <Text textDecoration="strong" variant="primary">
                           <Brain color={theme.colors.blue} />
-                          {getDimensionById(dimension)?.name}
+                          {name}
                         </Text>
                         <Text textDecoration="strong" variant="primary">
-                          {value}%
+                          {value * 100}%
                         </Text>
                       </CardHeader>
                       <CardBody>
                         <ResultLine
                           results={{
                             analise: description,
-                            total: value,
+                            total: value * 100,
                           }}
                           hasAnalysis
-                          type={getDimensionById(dimension)?.name || ''}
+                          type={name}
                         />
                       </CardBody>
                     </SocialAspectsCard>

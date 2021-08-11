@@ -25,6 +25,7 @@ import GestorNegative from '../../../../assets/gestor-negative.png';
 import { Questionary } from '../../../../store/modules/questionaries/types';
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
 import { BiDockLeft } from 'react-icons/bi';
+import { getResultsRequest } from '../../../../store/modules/results/actions';
 
 const { Title, Text } = Typography;
 
@@ -66,9 +67,11 @@ const Gestor: React.FC = () => {
     isLoading: isQuestionaryLoading,
   } = useSelector(({ questionaries }: RootState) => questionaries);
   const { currentUser } = useSelector((state: RootState) => state.login);
+  const { results } = useSelector((state: RootState) => state.results);
 
   useEffect(() => {
     dispatch(getQuestionariesRequest());
+    dispatch(getResultsRequest('gestor'));
   }, [dispatch]);
 
   useEffect(() => {
@@ -113,9 +116,11 @@ const Gestor: React.FC = () => {
                   Proteção adequada contra
                 </Text>
                 <ul>
-                  <li>Sintomas ansiosos</li>
-                  <li>Sintomas de burnout</li>
-                  <li>Estresse</li>
+                  {results.analysis.adequate_protection.map(
+                    (protection, index) => (
+                      <li key={`adequate-protection-${index}`}>{protection}</li>
+                    )
+                  )}
                 </ul>
               </Box>
             </Col>
@@ -139,8 +144,11 @@ const Gestor: React.FC = () => {
                   Proteção menor contra
                 </Text>
                 <ul>
-                  <li>Sintomas depressivos</li>
-                  <li>Risco de uso de substâncias</li>
+                  {results.analysis.minor_protection.map(
+                    (protection, index) => (
+                      <li key={`minor-protection-${index}`}>{protection}</li>
+                    )
+                  )}
                 </ul>
               </Box>
             </Col>
@@ -155,7 +163,7 @@ const Gestor: React.FC = () => {
         <ResumeCard
           name="Questionários preenchidos"
           icon={<BiDockLeft color="#ffffff" />}
-          total={20}
+          total={'20%'}
         />
         <ResumeCard
           name="Questionários disponíveis"

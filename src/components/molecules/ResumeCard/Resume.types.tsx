@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 export type ResumeProps = {
   name: string;
-  total: number;
+  total: number | string;
   icon: ReactNode;
   onClick?: () => void;
 };

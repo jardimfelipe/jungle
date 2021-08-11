@@ -20,7 +20,7 @@ export const ParamIcon = styled.div`
   flex: 0 0 10px;
 `;
 
-export const ParamInfos = styled.div`
+export const ParamInfosContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

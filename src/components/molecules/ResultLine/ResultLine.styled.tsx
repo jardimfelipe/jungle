@@ -67,6 +67,8 @@ export const CenterDot = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  text-align: center;
+  width: 600px;
 `;
 
 export const YouAreHereContainer = styled.div<{ position: string }>`

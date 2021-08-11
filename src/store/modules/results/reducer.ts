@@ -2,20 +2,13 @@ import { ResumeAction, ResultsState, ResultsTypeKeys } from "./types";
 
 const INITIAL_STATE: ResultsState = {
   results: {
-    statistics: [{
-      dimension: "",
-      questionnaire: "",
-      result: "Proteção Level",
-      user: "",
-      __v: 0,
-      _id: "",
-      value: 0,
-      description: "",
-      title: ""
-    }],
+    statistics: [],
     analysis: {
       adequate_protection: [''],
-      minor_protection: ['']
+      minor_protection: [''],
+      expert_analysis: '',
+      improvement_opportunity: [''],
+      how_to: [''],
     }
   },
   isLoading: false,

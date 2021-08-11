@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Box,
@@ -16,6 +16,9 @@ import Banner from '../../../../assets/banner-mindgifts.png';
 
 import { UserBarProfileProps } from '../UserBar.types';
 import useMobileWidth from '../../../../hooks/useMobileWidth';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { getResultsRequest } from '../../../../store/modules/results/actions';
 
 const { Text } = Typography;
 
@@ -25,6 +28,12 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
   onConfigClick,
 }) => {
   const isMobile = useMobileWidth();
+  const dispatch = useDispatch();
+  const { results } = useSelector((state: RootState) => state.results);
+
+  useEffect(() => {
+    !results.statistics.length && dispatch(getResultsRequest(currentUser.role));
+  }, [dispatch, results, currentUser]);
 
   return (
     <>
@@ -56,7 +65,7 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
         </Text>
       </UserInfo>
       <Box params={{ marginTop: '50px' }}>
-        <ProtectionLevel />
+        <ProtectionLevel statistics={results.statistics} />
       </Box>
       {currentUser.role === 'user' && (
         <Button>

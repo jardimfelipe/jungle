@@ -1,9 +1,9 @@
 import { action } from "typesafe-actions";
-import { RequestError } from "../exportTypes";
+import { RequestError, UserRoles } from "../exportTypes";
 import { ResultsTypeKeys, ResultsState } from "./types";
 
-export function getResultsRequest() {
-  return action(ResultsTypeKeys.GET_RESULTS_REQUEST);
+export function getResultsRequest(role?: UserRoles) {
+  return action(ResultsTypeKeys.GET_RESULTS_REQUEST, role);
 }
 
 export function getResultsSuccess(params: ResultsState["results"]) {
