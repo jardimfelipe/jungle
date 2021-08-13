@@ -12,24 +12,45 @@ import {
 import { BiCaretRight } from 'react-icons/bi';
 import { QuestionaryCardProps } from './QuestionaryCard.types';
 import { QuestionaryTag } from './QuestionaryCard.styled';
+import { getSavedState } from '../../../utils/localStorage';
+import { UserAnswer } from '../../../store/modules/questionaries/types';
 
 const { Title, Text } = Typography;
 
-const chartData = {
-  datasets: [
-    {
-      label: null,
-      data: [0, 100],
-      backgroundColor: ['#4ED9A7', '#F1F5FA'],
-      borderWidth: 0,
-    },
-  ],
+type StartedQuestionary = {
+  id: string;
+  answers: UserAnswer[];
 };
 
 const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
   questionary,
   onClick,
 }) => {
+  const startedQuestionaries =
+    getSavedState('worker.startedQuestionaries') || [];
+
+  const getPercentage = () => {
+    const filledQuestionary = startedQuestionaries.find(
+      ({ id }: StartedQuestionary) => id === questionary._id
+    );
+    if (filledQuestionary) {
+      const totalQuestions = questionary.question.length;
+      const totalAnswers = filledQuestionary.answers.length;
+      return (100 * totalAnswers) / totalQuestions;
+    } else {
+      return 0;
+    }
+  };
+  const chartData = {
+    datasets: [
+      {
+        label: null,
+        data: [getPercentage(), 100],
+        backgroundColor: ['#4ED9A7', '#F1F5FA'],
+        borderWidth: 0,
+      },
+    ],
+  };
   return (
     <Questionary className="questionary-card" image="">
       <div style={{ display: 'flex' }}>
@@ -54,7 +75,7 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
         <ChartWrapper>
           <TableChart data={chartData} />
           <Text textDecoration="strong" color="#ffffff">
-            0%
+            {chartData.datasets[0].data[0]}%
           </Text>
         </ChartWrapper>
       </Box>

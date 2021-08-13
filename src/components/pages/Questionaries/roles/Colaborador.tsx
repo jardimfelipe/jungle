@@ -21,7 +21,6 @@ import Skeleton from 'react-loading-skeleton';
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
 import { useHistory } from 'react-router-dom';
 import { Questionary as QuestionaryType } from '../../../../store/modules/questionaries/types';
-
 const { Title } = Typography;
 
 type TabComponents = 'disponiveis' | 'em andamento' | 'finalizados';

@@ -44,6 +44,7 @@ import {
 } from '../../../store/modules/questionaries/actions';
 import { LoaderWrapper } from '../../molecules/Table/table.styled';
 import { Oval } from 'react-loading-icons';
+import { getSavedState, saveState } from '../../../utils/localStorage';
 
 const { Title, Text } = Typography;
 
@@ -56,6 +57,11 @@ const questionTransition = {
 
 type RouteState = {
   questionary: Questionary;
+};
+
+type StartedQuestionary = {
+  id: string;
+  answers: UserAnswer[];
 };
 
 const QuestionaryApplication: React.FC = () => {
@@ -81,14 +87,41 @@ const QuestionaryApplication: React.FC = () => {
     setSelectedAnswer(e.target.value);
   };
 
+  const setAnswersBeforeLeave = (
+    savedAnswer: StartedQuestionary['answers']
+  ) => {
+    const filteredSavedAnswers = savedAnswer.filter(
+      ({ question_id }) =>
+        !answers.some((answer) => answer.question_id === question_id)
+    );
+    return [...filteredSavedAnswers, answers];
+  };
+
   const handleExitClick = () => {
+    const savedAnswers = getSavedState('worker.startedQuestionaries');
+    if (!savedAnswers) {
+      saveState('worker.startedQuestionaries', [
+        { id: questionary._id, answers: answers },
+      ]);
+    } else {
+      const newAnswers = savedAnswers.map(
+        (savedAnswer: StartedQuestionary) => ({
+          ...savedAnswer,
+          ...(savedAnswer.id === questionary._id
+            ? {
+                answers: setAnswersBeforeLeave(savedAnswer.answers),
+              }
+            : null),
+        })
+      );
+      saveState('worker.startedQuestionaries', newAnswers);
+    }
     history.goBack();
   };
 
   const isLastQuestion = () => {
     return currentQuestion + 1 === questionary.question.length;
   };
-
   const handleNexQuestionClick = () => {
     const question = questionary.question[currentQuestion];
     const option = question.options.find(
@@ -106,6 +139,7 @@ const QuestionaryApplication: React.FC = () => {
         user: currentUser._id,
         answers: answers,
       };
+
       dispatch(sendQuestionaryRequest(model));
     } else {
       setCurrentQuestion(currentQuestion + 1);
@@ -122,8 +156,24 @@ const QuestionaryApplication: React.FC = () => {
     history.push('/');
   };
   useEffect(() => {
-    setSelectedAnswer('');
-  }, [currentQuestion]);
+    const savedAnswers = getSavedState('worker.startedQuestionaries');
+    if (!savedAnswers) return setSelectedAnswer('');
+
+    const questionaryAnswers = savedAnswers.find(
+      ({ id }: StartedQuestionary) => id === questionary._id
+    );
+    if (!questionaryAnswers) return setSelectedAnswer('');
+
+    const questionIndex = questionaryAnswers.answers.findIndex(
+      ({ question_id }: UserAnswer) =>
+        question_id === questionary.question[currentQuestion]._id
+    );
+    if (questionIndex === -1) return setSelectedAnswer('');
+
+    return setSelectedAnswer(
+      questionaryAnswers.answers[currentQuestion].answer
+    );
+  }, [currentQuestion, questionary]);
 
   useEffect(() => {
     if (feedback.status === 'success') setIsModalOpen(true);
@@ -161,7 +211,7 @@ const QuestionaryApplication: React.FC = () => {
                 {questionary?.dimension?.name}
               </Tag>
               <Button onClick={handleExitClick}>
-                Sair <BsArrowRight />
+                Salvar e sair <BsArrowRight />
               </Button>
             </Box>
 

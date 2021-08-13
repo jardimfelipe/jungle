@@ -5,7 +5,7 @@ export const getSavedState = (key: string) => {
   return JSON.parse(localStorage.getItem(key) || '{}')
 }
 
-export const saveState = (key: string, state: string) => {
+export const saveState = (key: string, state: any) => {
   localStorage.setItem(key, JSON.stringify(state))
 }
 
