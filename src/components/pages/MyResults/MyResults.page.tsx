@@ -41,17 +41,6 @@ const chartData = {
   datasets: [
     {
       label: null,
-      data: [70, 30],
-      backgroundColor: ['#4ED9A7', '#F1F5FA'],
-      borderWidth: 0,
-    },
-  ],
-};
-
-const chartData2 = {
-  datasets: [
-    {
-      label: null,
       data: [80, 20],
       backgroundColor: ['#0062FF', '#F1F5FA'],
       borderWidth: 0,
@@ -162,26 +151,12 @@ const MyResults: React.FC = () => {
                       ))}
                     </LevelsContainer>
 
-                    <CardCharts>
+                    <CardCharts align="center">
                       <CharFlexContainer>
                         <ChartWrapper size={100}>
                           <TableChart
                             options={{ cutout: 35 }}
                             data={chartData}
-                          />
-                          <Text color="#4ED9A7" textDecoration="strong">
-                            80%
-                          </Text>
-                        </ChartWrapper>
-                        <Text>
-                          Nível de proteção na <strong>população</strong>
-                        </Text>
-                      </CharFlexContainer>
-                      <CharFlexContainer>
-                        <ChartWrapper size={100}>
-                          <TableChart
-                            options={{ cutout: 35 }}
-                            data={chartData2}
                           />
                           <Text color="#0062FF" textDecoration="strong">
                             80%

@@ -78,9 +78,9 @@ export const ProgressBarContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const CardCharts = styled.div`
+export const CardCharts = styled.div<{ align?: 'center' | 'space-between' }>`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ align = 'space-between' }) => align};
   flex: 0 0 55%;
   flex-wrap: wrap;
   ${media.lessThan('large')`
