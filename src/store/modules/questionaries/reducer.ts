@@ -8,8 +8,14 @@ const INITIAL_STATE: QuestionariesState = {
     _id: '',
     description: '',
     dimension: {
+      dimension: '',
+      _id: '',
       name: '',
-      _id: ''
+      qt_minimum: '',
+      qt_maximum: '',
+      complementary: 0,
+      mandatory: 0,
+      optional: 0
     },
     question: [],
     active: true,

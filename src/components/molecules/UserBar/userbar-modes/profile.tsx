@@ -1,14 +1,7 @@
 import React, { useEffect } from 'react';
 
-import {
-  Box,
-  ProtectionLevel,
-  Button,
-  Image,
-  Typography,
-  IconButton,
-} from '../../..';
-import { UserInfo, UserTag } from '../UserBar.styled';
+import { Box, ProtectionLevel, Image, Typography, IconButton } from '../../..';
+import { MindGiftsLink, UserInfo, UserTag } from '../UserBar.styled';
 import { FiChevronRight, FiSettings } from 'react-icons/fi';
 
 import Profile from '../../../../assets/profile.jpg';
@@ -53,9 +46,9 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
       <UserInfo>
         <div className="userInfo__points">
           <img src={Profile} alt="profile" />
-          <UserTag role={currentUser.role}>
-            {currentUser.role === 'gestor' ? currentUser.role : '180pts'}
-          </UserTag>
+          {currentUser.role === 'gestor' && (
+            <UserTag role={currentUser.role}> {currentUser.role} </UserTag>
+          )}
         </div>
         <Text textDecoration="strong" className="userInfo__userName">
           {currentUser.name}
@@ -68,9 +61,12 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
         <ProtectionLevel statistics={results.statistics} />
       </Box>
       {currentUser.role === 'user' && (
-        <Button>
+        <MindGiftsLink
+          target="_blank"
+          href="https://www.junglexp.com/mindgifts-clientes-dashboard"
+        >
           <Image src={Banner} />
-        </Button>
+        </MindGiftsLink>
       )}
     </>
   );

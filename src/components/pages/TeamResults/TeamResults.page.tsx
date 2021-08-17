@@ -99,74 +99,70 @@ const TeamResults: React.FC = () => {
         <Title level={3}>Entendendo a equipe</Title>
       </Box>
       <Row>
-        <StyledCol xs={12} lg={7}>
+        {/* <StyledCol xs={12} lg={7}>
           <Card>
             <Title level={4} variant="primary">
               Análise dos especialistas
             </Title>
             <Text paragraph>{results.analysis.expert_analysis}</Text>
           </Card>
-        </StyledCol>
-        <StyledCol xs>
-          <Box
-            params={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
-          >
-            <Card>
-              <Row>
-                <Col xs={12} xl={10}>
-                  <Title color={theme.colors.p3} variant="primary" level={4}>
-                    Proteção adequada contra
-                  </Title>
-                  <ul>
-                    {results.analysis.adequate_protection.map(
-                      (protection, index) => (
-                        <li key={`adequate-protection-${index}`}>
-                          {protection}
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </Col>
-                <CardImage side="right">
-                  <Image src={Man} alt="Lorem Ipsum" />
-                </CardImage>
-              </Row>
-            </Card>
+        </StyledCol> */}
 
-            <Card>
-              <Row>
-                <Col
-                  xs
-                  style={{
-                    position: 'relative',
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                    padding: 0,
-                  }}
-                >
-                  <CardImage side="left">
-                    <Image src={Woman} alt="Lorem Ipsum" />
-                  </CardImage>
-                </Col>
-                <Col xs={12} xl={6}>
-                  <Title color={theme.colors.p1} variant="primary" level={4}>
-                    Proteção menor contra
-                  </Title>
-                  <ul>
-                    {results.analysis.minor_protection.map(
-                      (protection, index) => (
-                        <li key={`minor-protection-${index}`}>{protection}</li>
-                      )
-                    )}
-                  </ul>
-                </Col>
-              </Row>
-            </Card>
-          </Box>
+        <StyledCol xs={12} md={6}>
+          <Card>
+            <Row>
+              <Col xs={12} xl={10}>
+                <Title color={theme.colors.p3} variant="primary" level={4}>
+                  Proteção adequada contra
+                </Title>
+                <ul>
+                  {results.analysis.adequate_protection.map(
+                    (protection, index) => (
+                      <li key={`adequate-protection-${index}`}>{protection}</li>
+                    )
+                  )}
+                </ul>
+              </Col>
+              <CardImage side="right">
+                <Image src={Man} alt="Lorem Ipsum" />
+              </CardImage>
+            </Row>
+          </Card>
+        </StyledCol>
+        <StyledCol xs={12} md={6}>
+          <Card>
+            <Row>
+              <Col
+                xs
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  padding: 0,
+                }}
+              >
+                <CardImage side="left">
+                  <Image src={Woman} alt="Lorem Ipsum" />
+                </CardImage>
+              </Col>
+              <Col xs={12} xl={6}>
+                <Title color={theme.colors.p1} variant="primary" level={4}>
+                  Proteção menor contra
+                </Title>
+                <ul>
+                  {results.analysis.minor_protection.map(
+                    (protection, index) => (
+                      <li key={`minor-protection-${index}`}>{protection}</li>
+                    )
+                  )}
+                </ul>
+              </Col>
+            </Row>
+          </Card>
         </StyledCol>
       </Row>
       <Row>
-        <StyledCol xs={12} lg={7}>
+        {/* <StyledCol xs={12} lg={7}>
           <Card>
             <Title level={4} color={theme.colors.p2}>
               Oportunidades de melhoria
@@ -182,9 +178,9 @@ const TeamResults: React.FC = () => {
               )}
             </ul>
           </Card>
-        </StyledCol>
+        </StyledCol> */}
 
-        <StyledCol xs>
+        {/* <StyledCol xs>
           <Card>
             <Title level={4} variant="primary">
               Como chegar lá?
@@ -196,7 +192,7 @@ const TeamResults: React.FC = () => {
               ))}
             </ul>
           </Card>
-        </StyledCol>
+        </StyledCol> */}
       </Row>
 
       {/* Níveis de proteção */}
@@ -295,7 +291,7 @@ const TeamResults: React.FC = () => {
                           </Text>
                         </ChartWrapper>
                         <Text>
-                          Nível de proteção na <strong>equipe</strong>
+                          Nível de proteção na <strong>empresa</strong>
                         </Text>
                       </CharFlexContainer>
                       <CharFlexContainer>

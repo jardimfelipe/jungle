@@ -8,6 +8,10 @@ export enum CompaniesTypeKeys {
   GET_COMPANIES_SUCCESS = "@companies/GET_COMPANIES_SUCCESS",
   GET_COMPANY_REQUEST = "@companies/GET_COMPANY_REQUEST",
   GET_COMPANY_SUCCESS = "@companies/GET_COMPANY_SUCCESS",
+
+  INSERT_QUESTIONARY_REQUEST = "@companies/INSERT_QUESTIONARY_REQUEST",
+  INSERT_QUESTIONARY_SUCCESS = "@companies/INSERT_QUESTIONARY_SUCCESS",
+
 }
 
 export type CompaniesAction = ActionType<typeof actions>;

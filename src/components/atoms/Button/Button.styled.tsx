@@ -43,6 +43,10 @@ const ButtonVariants = {
       cursor: default;
     }
   `,
+  cancel: css`
+    border: 1px solid ${(props) => props.theme.colors.p1};
+    color: ${(props) => props.theme.colors.p1};
+  `,
 };
 
 export const StyledButton = styled.button<ButtonProps>`

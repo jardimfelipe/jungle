@@ -1,5 +1,5 @@
 import { ActionType } from "typesafe-actions";
-import { RequestFeedback } from "../exportTypes";
+import { DimensionItem, RequestFeedback } from "../exportTypes";
 import * as actions from "./actions";
 
 export enum QuestionariesTypeKeys {
@@ -27,6 +27,9 @@ export type QuestionariesAction = ActionType<typeof actions>;
 export type Question = {
   _id: string,
   title: string,
+  priority: "P1" | "P2" | "P3"
+  weight: number;
+  type: "choice"
   options: [
     {
       label: string,
@@ -45,10 +48,7 @@ export type Questionary = {
   title: string
   _id: string
   description: string
-  dimension?: {
-    name: string
-    _id: string
-  }
+  dimension: DimensionItem
   question: Question[]
   active: boolean,
   required: boolean

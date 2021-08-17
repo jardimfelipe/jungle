@@ -77,3 +77,9 @@ export const ChangePasswordForm = styled.form`
   gap: 8px;
   width: 100%;
 `;
+
+export const MindGiftsLink = styled.a`
+  img {
+    margin-top: 25px;
+  }
+`;

@@ -57,8 +57,8 @@ const Companies: React.FC = () => {
   };
 
   useEffect(() => {
-    !questionaries.length && dispatch(getQuestionariesRequest());
-  }, [dispatch, questionaries]);
+    dispatch(getQuestionariesRequest());
+  }, [dispatch]);
 
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>

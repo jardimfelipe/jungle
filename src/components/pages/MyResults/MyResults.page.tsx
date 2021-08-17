@@ -170,11 +170,11 @@ const MyResults: React.FC = () => {
                             data={chartData}
                           />
                           <Text color="#4ED9A7" textDecoration="strong">
-                            65%
+                            80%
                           </Text>
                         </ChartWrapper>
                         <Text>
-                          Nível de proteção na <strong>equipe</strong>
+                          Nível de proteção na <strong>população</strong>
                         </Text>
                       </CharFlexContainer>
                       <CharFlexContainer>

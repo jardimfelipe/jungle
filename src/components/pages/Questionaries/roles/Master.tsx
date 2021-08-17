@@ -24,16 +24,22 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { Field } from '../../../molecules/Table/table.types';
 import CreateQuestionary from '../Modals/CreateQuestionary';
 import { getCompaniesRequest } from '../../../../store/modules/companies/actions';
+import { useHistory } from 'react-router';
 
 const { Text } = Typography;
 
 type PageTabs = 'questionarios' | 'templates' | 'rascunhos';
 
 const Master: React.FC = () => {
+  const history = useHistory();
+  const { questionaries, isLoading } = useSelector(
+    ({ questionaries }: RootState) => questionaries
+  );
   const tableMenuItems = [
     {
       title: 'Visualizar',
-      onClick: () => console.log('onClick'),
+      onClick: (index: number) =>
+        history.push(`/questionaries/edit/${questionaries[index]._id}`),
     },
     {
       title: 'Editar',
@@ -119,6 +125,7 @@ const Master: React.FC = () => {
             onClose={() => handleCloseButton()}
             isOpen={currentOpenMenu === index}
             menuItems={tableMenuItems}
+            itemIndex={index}
           />
           <ColumnButton onClick={() => handleTableButtonClick(index)}>
             <BsThreeDotsVertical color={theme.colors.black} size="24" />
@@ -132,9 +139,6 @@ const Master: React.FC = () => {
   const theme = useTheme();
   const [currentTab, setCurrentTab] = useState<PageTabs>('questionarios');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { questionaries, isLoading } = useSelector(
-    ({ questionaries }: RootState) => questionaries
-  );
   const { companies } = useSelector(({ companies }: RootState) => companies);
 
   const resumeItems = [
@@ -177,9 +181,9 @@ const Master: React.FC = () => {
   };
 
   useEffect(() => {
-    !questionaries.length && dispatch(getQuestionariesRequest());
-    !companies.length && dispatch(getCompaniesRequest());
-  }, [dispatch, questionaries, companies]);
+    dispatch(getQuestionariesRequest());
+    dispatch(getCompaniesRequest());
+  }, [dispatch]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />

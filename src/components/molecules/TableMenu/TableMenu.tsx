@@ -24,6 +24,7 @@ const TableMenu: React.FC<TableMenuProps> = ({
   isOpen,
   onClose,
   menuItems,
+  itemIndex,
 }) => {
   const theme = useTheme();
   return (
@@ -53,7 +54,7 @@ const TableMenu: React.FC<TableMenuProps> = ({
               <li role="menuitem">
                 <MenuButton
                   danger={menuItem.isDanger}
-                  onClick={menuItem.onClick}
+                  onClick={() => menuItem.onClick(itemIndex)}
                 >
                   {menuItem.title}
                 </MenuButton>

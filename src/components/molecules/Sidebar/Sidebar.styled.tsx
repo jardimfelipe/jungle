@@ -108,3 +108,18 @@ export const SpecialistCard = styled(CardContainer)`
     font-weight: normal;
   }
 `;
+
+export const SpeclialistLink = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  transition: 0.3s;
+  background-color: #0062ff;
+  border: 1px solid #0062ff;
+  color: #ffffff;
+  box-shadow: 0px 5px 35px rgb(0 98 255 / 25%);
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+`;

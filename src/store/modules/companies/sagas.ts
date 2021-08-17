@@ -32,4 +32,16 @@ function* getCompany({ payload }: ActionType<typeof actions.getCompanyRequest>) 
   }
 }
 
-export default all([takeLatest(CompaniesTypeKeys.GET_COMPANIES_REQUEST, getCompanies), takeLatest(CompaniesTypeKeys.GET_COMPANY_REQUEST, getCompany)]);
+function* insertQuestionary({ payload }: ActionType<typeof actions.insertQuestionaryRequest>) {
+  try {
+    yield call(api, "/questionnaires", { method: "PUT", data: payload });
+    yield put(actions.insertQuestionarySuccess());
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error)
+    }
+
+  }
+}
+
+export default all([takeLatest(CompaniesTypeKeys.GET_COMPANIES_REQUEST, getCompanies), takeLatest(CompaniesTypeKeys.GET_COMPANY_REQUEST, getCompany), takeLatest(CompaniesTypeKeys.INSERT_QUESTIONARY_REQUEST, insertQuestionary)]);

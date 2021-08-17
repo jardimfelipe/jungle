@@ -1,4 +1,4 @@
-type ButtonVariants = "primary" | "secondary" | "link"
+type ButtonVariants = "primary" | "secondary" | "link" | "cancel"
 type ButtonSizes = "small" | "regular"
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

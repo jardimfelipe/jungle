@@ -31,7 +31,7 @@ function* getQuestionary({ payload }: ActionType<typeof actions.getQuestionaryRe
 
 function* createQuestionary({ payload }: ActionType<typeof actions.createQuestionaryRequest>) {
   try {
-    yield call(api, `/questionnaires/`, { method: "POST", data: payload });
+    yield call(api, `/questionnaires/`, { method: "POST", data: { ...payload, company: '611adfc3d5cf2bc0b4f6bfc0' } });
     yield put(actions.createQuestionarySuccess());
   } catch (error) {
     if (error instanceof Error) {
