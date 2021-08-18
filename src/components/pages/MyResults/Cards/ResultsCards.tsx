@@ -18,7 +18,14 @@ const Cards: React.FC<{ analysis: ResultType['analysis'] }> = ({
   const theme = useTheme();
   return (
     <Row>
-      <Box params={{ display: 'flex', gap: '15px', width: '100%' }}>
+      <Box
+        params={{
+          display: 'flex',
+          gap: '15px',
+          width: '100%',
+          flexWrap: 'wrap',
+        }}
+      >
         <ResultsCard>
           <Row>
             <Col xs={12} xl={10}>

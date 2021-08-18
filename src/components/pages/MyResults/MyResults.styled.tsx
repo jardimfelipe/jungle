@@ -1,5 +1,6 @@
 import { Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { CardContainer } from '../../atoms/Card/Card.styled';
 
 export const SocialAspectsCard = styled(CardContainer)`
@@ -37,4 +38,7 @@ export const StyledCol = styled(Col)`
 
 export const ResultsCard = styled(CardContainer)`
   flex: 0 0 40%;
+  ${media.lessThan('medium')`
+    flex: 0 0 100%;
+  `}
 `;

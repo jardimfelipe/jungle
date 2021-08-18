@@ -68,7 +68,7 @@ export const CenterDot = styled.div`
   transform: translateX(-50%);
   z-index: 2;
   text-align: center;
-  width: 600px;
+  width: 350px;
 `;
 
 export const YouAreHereContainer = styled.div<{ position: string }>`
@@ -85,7 +85,7 @@ export const YouAreHereContainer = styled.div<{ position: string }>`
   color: ${(props) => props.theme.colors.blue};
   min-width: 200px;
   @media (max-width: 768px) {
-    bottom: 7px;
+    top: 16px;
   }
 `;
 
