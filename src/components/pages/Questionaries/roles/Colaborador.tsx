@@ -9,6 +9,7 @@ import {
   QuestionaryCard,
   SearchInput,
   QuestionaryModal,
+  QuestionaryEmptyState,
 } from '../../..';
 import { BiSearch } from 'react-icons/bi';
 import { QuestionariesGridContainer } from '../Questionaries.styled';
@@ -116,7 +117,7 @@ const Questionaries: React.FC = () => {
               </Box>
             ))}
           </>
-        ) : (
+        ) : questionaries.length ? (
           questionaries.map((questionary) => (
             <QuestionaryCard
               onClick={handleQuestionaryClick}
@@ -124,6 +125,8 @@ const Questionaries: React.FC = () => {
               key={questionary._id}
             />
           ))
+        ) : (
+          <QuestionaryEmptyState />
         )}
       </QuestionariesGridContainer>
       <QuestionaryModal

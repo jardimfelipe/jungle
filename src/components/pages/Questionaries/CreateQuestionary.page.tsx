@@ -204,7 +204,11 @@ const CreateQuestionary: React.FC = () => {
               />
               <Tag
                 size="large"
-                color={TagColors[question.priority as keyof typeof TagColors]}
+                color={
+                  TagColors[
+                    question.priority.toUpperCase() as keyof typeof TagColors
+                  ]
+                }
               >
                 {question.priority}
               </Tag>
@@ -239,6 +243,7 @@ const CreateQuestionary: React.FC = () => {
       required: true,
       dimension: questionary.dimension._id,
       question: checkedQuestions.map(({ id }) => id),
+      image: questionary.image,
     };
     dispatch(createQuestionaryRequest(model));
   };
@@ -274,7 +279,6 @@ const CreateQuestionary: React.FC = () => {
     }));
     setChartDatas(newChartDatas);
   }, [checkedQuestions, initialChartDatas]);
-  console.log(chartDatas);
   return (
     <Box
       params={{
@@ -350,7 +354,11 @@ const CreateQuestionary: React.FC = () => {
               >
                 Salvar pergunta
               </Button>
-              <Button size="small" variant="secondary">
+              <Button
+                onClick={handleBackButton}
+                size="small"
+                variant="secondary"
+              >
                 Salvar rascunho e sair
               </Button>
             </Box>

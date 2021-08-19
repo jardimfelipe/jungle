@@ -39,6 +39,7 @@ export { default as QuestionarySlider } from './molecules/QuestionarySlider/Ques
 export { default as Resume } from './molecules/Resume/Resume'
 export { default as TableMenu } from './molecules/TableMenu/TableMenu'
 export { default as QuestionaryCard } from './molecules/QuestionaryCard/QuestionaryCard'
+export { default as QuestionaryEmptyState } from './molecules/QuestionaryCard/QuestionaryEmptyState'
 
 export { default as CompanyTable } from './organisms/CompanyTable/CompanyTable'
 

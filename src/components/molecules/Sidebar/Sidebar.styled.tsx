@@ -35,6 +35,11 @@ export const MenuList = styled.ul`
   gap: 12px;
   width: 100%;
   list-style-type: none;
+  @media (max-width: 768px) {
+    .jungle-logo {
+      display: none;
+    }
+  }
 `;
 
 export const MenuItem = styled.li<MenuItemProps>`

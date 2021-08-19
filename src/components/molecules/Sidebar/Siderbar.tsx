@@ -45,11 +45,10 @@ const Sidebar: React.FC = () => {
           <Box params={{ alignSelf: 'flex-start' }}>
             <IconButton onClick={handleClick} icon={<FiChevronLeft />} />
           </Box>
-        ) : (
-          <Box params={{ padding: '0 25px' }}>
-            <img src={JungleLogo} alt="Jungle" />
-          </Box>
-        )}
+        ) : null}
+        <Box className="jungle-logo" params={{ padding: '0 25px' }}>
+          <img src={JungleLogo} alt="Jungle" />
+        </Box>
         {routes[currentUser.role as keyof typeof routes].map(
           ({ name, icon, isSoon, path }) =>
             name ? (

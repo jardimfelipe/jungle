@@ -298,11 +298,15 @@ const QuestionaryApplication: React.FC = () => {
                 alignItems: 'flex-start',
                 padding: '25px 32px',
                 gap: '15px',
+                width: '100%',
+                textAlign: 'center',
               }}
             >
-              <Title variant="primary" level={2}>
-                Parabéns {currentUser.name}!
-              </Title>
+              <Box params={{ display: 'block', width: '100%' }}>
+                <Title textAlign="center" variant="primary" level={2}>
+                  Parabéns {currentUser.name}!
+                </Title>
+              </Box>
               <Text textDecoration="strong">
                 Ficamos felizes que você concluíu com êxito o questionário
                 Autocobrança.
@@ -313,15 +317,17 @@ const QuestionaryApplication: React.FC = () => {
               </Text>
             </Box>
           </Col>
-          <Col xs>
-            <Box
-              params={{
-                padding: '25px 32px',
-              }}
-            >
-              <Image src={FinishQuestionary} />
-            </Box>
-          </Col>
+          {!isMobile && (
+            <Col xs>
+              <Box
+                params={{
+                  padding: '25px 32px',
+                }}
+              >
+                <Image src={FinishQuestionary} />
+              </Box>
+            </Col>
+          )}
           <ModalButton onClick={handleCloseModal} variant="primary" block>
             Fechar
           </ModalButton>

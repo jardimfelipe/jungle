@@ -7,6 +7,7 @@ import {
   Typography,
   QuestionaryModal,
   QuestionaryCard,
+  QuestionaryEmptyState,
 } from '../../..';
 import { BsArrowRight } from 'react-icons/bs';
 import { QuestionariesGridContainer } from '../Dashboard.styled';
@@ -108,7 +109,7 @@ const Colaborador: React.FC = () => {
               </Box>
             ))}
           </>
-        ) : (
+        ) : questionaries.length ? (
           questionaries.map((questionary) => (
             <QuestionaryCard
               onClick={handleQuestionaryClick}
@@ -116,6 +117,8 @@ const Colaborador: React.FC = () => {
               key={questionary._id}
             />
           ))
+        ) : (
+          <QuestionaryEmptyState />
         )}
       </QuestionariesGridContainer>
       <QuestionaryModal

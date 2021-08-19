@@ -35,6 +35,7 @@ import {
   protectionLevelData,
 } from '../TeamResults/populationChartDatas';
 import { rgba } from 'polished';
+import EmptyResults from './EmptyResults';
 
 const { Brain } = Icons;
 
@@ -47,6 +48,9 @@ const MyResults: React.FC = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
+  const isEmpty = () =>
+    results.statistics.every((statistic) => statistic.value === 0);
+
   useEffect(() => {
     dispatch(getResultsRequest());
   }, [dispatch]);
@@ -55,158 +59,171 @@ const MyResults: React.FC = () => {
       <PromotionalCard />
 
       <Title level={3}>Meus Resultados</Title>
-      <ResultsCards analysis={results.analysis} />
+      {isEmpty() ? (
+        <EmptyResults />
+      ) : (
+        <>
+          <ResultsCards analysis={results.analysis} />
 
-      {/* Níveis de proteção */}
-      <Title level={3}>Niveis de proteção</Title>
-      <FlexContainer>
-        {isLoading ? (
-          <>
-            <Box params={{ display: 'block', flex: 'auto' }}>
-              <Skeleton height={250} />
-            </Box>
-            <Box params={{ display: 'block', flex: 'auto' }}>
-              <Skeleton height={250} />
-            </Box>
-          </>
-        ) : (
-          results.statistics.map((result, index) =>
-            index <= 4 ? (
-              <Card key={`${result._id}-card-${index}`}>
-                <Box
-                  params={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '20px',
-                  }}
-                >
-                  <Box
-                    params={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                    }}
-                  >
+          <Title level={3}>Niveis de proteção</Title>
+          <FlexContainer>
+            {isLoading ? (
+              <>
+                <Box params={{ display: 'block', flex: 'auto' }}>
+                  <Skeleton height={250} />
+                </Box>
+                <Box params={{ display: 'block', flex: 'auto' }}>
+                  <Skeleton height={250} />
+                </Box>
+              </>
+            ) : (
+              results.statistics.map((result, index) =>
+                index <= 4 ? (
+                  <Card key={`${result._id}-card-${index}`}>
                     <Box
                       params={{
                         display: 'flex',
-                        alignItems: 'center',
-                        gap: '15px',
+                        flexDirection: 'column',
+                        gap: '20px',
                       }}
                     >
-                      <CardIcon>
-                        <BiFace color={theme.colors.darkGray} size="28" />
-                      </CardIcon>
                       <Box
                         params={{
                           display: 'flex',
                           flexDirection: 'column',
                         }}
                       >
-                        <Text textDecoration="strong" variant="primary">
-                          {result.name}
-                        </Text>
-                        <Text>{result.title}</Text>
-                      </Box>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    params={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '5px',
-                    }}
-                  >
-                    <Text textDecoration="strong">
-                      Análise dos especialistas
-                    </Text>
-                    <Text>{results.statistics[index].description}</Text>
-                  </Box>
-
-                  <ChartsBarContainer>
-                    <LevelsContainer>
-                      {protectionLevelData.map((level) => (
-                        <ProgressBarContainer
-                          key={`protection-leve-${level}-${Math.random()}`}
-                        >
-                          <Text color={level.color}>{level.level}</Text>
-                          <Box params={{ display: 'block', width: '140px' }}>
-                            <ProgressBar
-                              bgColor={level.color}
-                              height="10px"
-                              completed={level.amount}
-                              baseBgColor={rgba(level.color, 0.1)}
-                              isLabelVisible={false}
-                            />
-                          </Box>
-                        </ProgressBarContainer>
-                      ))}
-                    </LevelsContainer>
-
-                    <CardCharts align="center">
-                      <CharFlexContainer>
-                        <ChartWrapper size={100}>
-                          <TableChart
-                            options={{ cutout: 35 }}
-                            data={chartDataPopulation[index]}
-                          />
-                          <Text color="#0062FF" textDecoration="strong">
-                            {chartDataPopulation[index].datasets[0].data[0]}%
-                          </Text>
-                        </ChartWrapper>
-                        <Text>
-                          Nível de proteção na <strong>população</strong>
-                        </Text>
-                      </CharFlexContainer>
-                    </CardCharts>
-                  </ChartsBarContainer>
-                </Box>
-              </Card>
-            ) : null
-          )
-        )}
-      </FlexContainer>
-
-      <Title level={3}>Aspectos biopsicossociais</Title>
-      <Row>
-        <Col xs>
-          <Box
-            params={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
-          >
-            {isLoading
-              ? [...Array(5)].map((_, index) => (
-                  <Box
-                    key={`results-grid-skeleton${index}`}
-                    params={{ display: 'block' }}
-                  >
-                    <Skeleton height={200} />
-                  </Box>
-                ))
-              : results.statistics.map(
-                  ({ dimension, value, description, name }) => (
-                    <SocialAspectsCard key={`dimension-${dimension}`}>
-                      <CardHeader>
-                        <Text textDecoration="strong" variant="primary">
-                          <Brain color={theme.colors.blue} />
-                          {name}
-                        </Text>
-                      </CardHeader>
-                      <CardBody>
-                        <ResultLine
-                          results={{
-                            analise: description,
-                            total: value * 100,
+                        <Box
+                          params={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '15px',
                           }}
-                          hasAnalysis
-                          type={name}
-                        />
-                      </CardBody>
-                    </SocialAspectsCard>
-                  )
-                )}
-          </Box>
-        </Col>
-      </Row>
+                        >
+                          <CardIcon>
+                            <BiFace color={theme.colors.darkGray} size="28" />
+                          </CardIcon>
+                          <Box
+                            params={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                            }}
+                          >
+                            <Text textDecoration="strong" variant="primary">
+                              {result.name}
+                            </Text>
+                            <Text>{result.title}</Text>
+                          </Box>
+                        </Box>
+                      </Box>
+
+                      <Box
+                        params={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '5px',
+                        }}
+                      >
+                        <Text textDecoration="strong">
+                          Análise dos especialistas
+                        </Text>
+                        <Text>{results.statistics[index].description}</Text>
+                      </Box>
+
+                      <ChartsBarContainer>
+                        <LevelsContainer>
+                          {protectionLevelData.map((level) => (
+                            <ProgressBarContainer
+                              key={`protection-leve-${level}-${Math.random()}`}
+                            >
+                              <Text color={level.color}>{level.level}</Text>
+                              <Box
+                                params={{ display: 'block', width: '140px' }}
+                              >
+                                <ProgressBar
+                                  bgColor={level.color}
+                                  height="10px"
+                                  completed={level.amount}
+                                  baseBgColor={rgba(level.color, 0.1)}
+                                  isLabelVisible={false}
+                                />
+                              </Box>
+                            </ProgressBarContainer>
+                          ))}
+                        </LevelsContainer>
+
+                        <CardCharts align="center">
+                          <CharFlexContainer>
+                            <ChartWrapper size={100}>
+                              <TableChart
+                                options={{ cutout: 35 }}
+                                data={chartDataPopulation[index]}
+                              />
+                              <Text color="#0062FF" textDecoration="strong">
+                                {chartDataPopulation[index].datasets[0].data[0]}
+                                %
+                              </Text>
+                            </ChartWrapper>
+                            <Text>
+                              Nível de proteção na <strong>população</strong>
+                            </Text>
+                          </CharFlexContainer>
+                        </CardCharts>
+                      </ChartsBarContainer>
+                    </Box>
+                  </Card>
+                ) : null
+              )
+            )}
+          </FlexContainer>
+
+          <Title level={3}>Aspectos biopsicossociais</Title>
+          <Row>
+            <Col xs>
+              <Box
+                params={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '15px',
+                }}
+              >
+                {isLoading
+                  ? [...Array(5)].map((_, index) => (
+                      <Box
+                        key={`results-grid-skeleton${index}`}
+                        params={{ display: 'block' }}
+                      >
+                        <Skeleton height={200} />
+                      </Box>
+                    ))
+                  : results.statistics.map(
+                      ({ dimension, value, description, name }) =>
+                        value > 0 ? (
+                          <SocialAspectsCard key={`dimension-${dimension}`}>
+                            <CardHeader>
+                              <Text textDecoration="strong" variant="primary">
+                                <Brain color={theme.colors.blue} />
+                                {name}
+                              </Text>
+                            </CardHeader>
+                            <CardBody>
+                              <ResultLine
+                                results={{
+                                  analise: description,
+                                  total: value * 100,
+                                }}
+                                hasAnalysis
+                                type={name}
+                              />
+                            </CardBody>
+                          </SocialAspectsCard>
+                        ) : null
+                    )}
+              </Box>
+            </Col>
+          </Row>
+        </>
+      )}
     </Box>
   );
 };

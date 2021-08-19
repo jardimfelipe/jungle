@@ -8,3 +8,14 @@ export const QuestionaryTag = styled(Tag)`
   position: relative;
   left: -3px;
 `;
+
+export const EmptyStateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  img {
+    max-width: 350px;
+  }
+`;
