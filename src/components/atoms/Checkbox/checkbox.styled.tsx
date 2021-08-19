@@ -9,7 +9,7 @@ export const FlexWrapper = styled.div`
   }
 `;
 
-export const StyledCheckbox = styled.div`
+export const StyledCheckbox = styled.div<{ checked: boolean }>`
   input {
     position: relative;
     cursor: pointer;
@@ -30,6 +30,24 @@ export const StyledCheckbox = styled.div`
       border-radius: 5px;
       background-color: ${(props) => props.theme.colors.gray};
     }
+
+    ${(props) =>
+      props.checked &&
+      `
+      
+            &::before {
+        content: '';
+        display: block;
+        position: initial;
+        width: 16px;
+        height: 16px;
+        top: 0;
+        left: 0;
+        border: 12px solid ${props.theme.colors.blue};
+        border-radius: 4px;
+        background-color: ${props.theme.colors.blue};
+      }
+    `};
 
     &:checked {
       &::before {

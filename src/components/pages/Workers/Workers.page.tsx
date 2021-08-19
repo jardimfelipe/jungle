@@ -112,6 +112,25 @@ const Companies: React.FC = () => {
     setIsModalOpen(false);
   };
 
+  const handleDownload = () => {
+    fetch(`${process.env.PUBLIC_URL}/resources/planilha-funcionarios.xlsx`, {
+      method: 'GET',
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `planilha-funcionarios.xlsx`);
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        link.parentNode?.removeChild(link);
+      });
+  };
+
   const handleCloseButton = () => {
     setCurrentOpenMenu(-1);
   };
@@ -145,7 +164,12 @@ const Companies: React.FC = () => {
               flex: '0 0 60%',
             }}
           >
-            <Button block size="small" variant="secondary">
+            <Button
+              onClick={handleDownload}
+              block
+              size="small"
+              variant="secondary"
+            >
               Baixar Planilhas
             </Button>
           </Box>

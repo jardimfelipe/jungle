@@ -40,31 +40,10 @@ import { getResultsRequest } from '../../../store/modules/results/actions';
 import { useTheme } from 'styled-components';
 // import { rgba } from 'polished';
 import Skeleton from 'react-loading-skeleton';
+import { chartDataPopulation } from './populationChartDatas';
 
 const { Title, Text } = Typography;
 const { Brain } = Icons;
-
-const chartData = {
-  datasets: [
-    {
-      label: null,
-      data: [70, 30],
-      backgroundColor: ['#4ED9A7', '#F1F5FA'],
-      borderWidth: 0,
-    },
-  ],
-};
-
-const chartData2 = {
-  datasets: [
-    {
-      label: null,
-      data: [80, 20],
-      backgroundColor: ['#0062FF', '#F1F5FA'],
-      borderWidth: 0,
-    },
-  ],
-};
 
 const TeamResults: React.FC = () => {
   const theme = useTheme();
@@ -284,7 +263,19 @@ const TeamResults: React.FC = () => {
                         <ChartWrapper size={100}>
                           <TableChart
                             options={{ cutout: 35 }}
-                            data={chartData}
+                            data={{
+                              datasets: [
+                                {
+                                  label: null,
+                                  data: [
+                                    statistics.team_protection * 100,
+                                    statistics.team_protection * 100 - 100,
+                                  ],
+                                  backgroundColor: ['#4ED9A7', '#F1F5FA'],
+                                  borderWidth: 0,
+                                },
+                              ],
+                            }}
                           />
                           <Text color="#4ED9A7" textDecoration="strong">
                             {statistics.team_protection * 100}%
@@ -298,10 +289,10 @@ const TeamResults: React.FC = () => {
                         <ChartWrapper size={100}>
                           <TableChart
                             options={{ cutout: 35 }}
-                            data={chartData2}
+                            data={chartDataPopulation[index]}
                           />
                           <Text color="#0062FF" textDecoration="strong">
-                            {statistics.population_protection * 100}%
+                            {chartDataPopulation[index].datasets[0].data[0]}%
                           </Text>
                         </ChartWrapper>
                         <Text>
@@ -338,9 +329,6 @@ const TeamResults: React.FC = () => {
                 <Text textDecoration="strong" variant="primary">
                   <Brain color={theme.colors.blue} />
                   {statistic.name}
-                </Text>
-                <Text textDecoration="strong" variant="primary">
-                  {(statistic.team_protection * 100).toFixed(1)}%
                 </Text>
               </CardHeader>
               <CardBody>

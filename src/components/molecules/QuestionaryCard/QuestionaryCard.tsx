@@ -18,7 +18,7 @@ import { UserAnswer } from '../../../store/modules/questionaries/types';
 const { Title, Text } = Typography;
 
 type StartedQuestionary = {
-  id: string;
+  questionaryId: string;
   answers: UserAnswer[];
 };
 
@@ -31,7 +31,8 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
 
   const getPercentage = () => {
     const filledQuestionary = startedQuestionaries.find(
-      ({ id }: StartedQuestionary) => id === questionary._id
+      ({ questionaryId }: StartedQuestionary) =>
+        questionaryId === questionary._id
     );
     if (filledQuestionary) {
       const totalQuestions = questionary.question.length;
@@ -45,7 +46,7 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
     datasets: [
       {
         label: null,
-        data: [getPercentage(), 100],
+        data: [getPercentage(), 100 - getPercentage()],
         backgroundColor: ['#4ED9A7', '#F1F5FA'],
         borderWidth: 0,
       },

@@ -18,7 +18,6 @@ import { HiOutlineMail } from 'react-icons/hi';
 import { FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 
 import JungleLogo from '../../../assets/jungle.png';
-import MindsMatter from '../../../assets/mindsmatter-logo.png';
 import { Image } from '../../atoms/Image/Image.styled';
 import { useFormik } from 'formik';
 import schema from './schema';
@@ -71,11 +70,6 @@ const Login: React.FC = () => {
             }}
           >
             <Image style={{ width: '150px' }} src={JungleLogo} alt="Jungle" />
-            <Image
-              style={{ width: '100px' }}
-              src={MindsMatter}
-              alt="#MindsMatter"
-            />
           </Box>
           <Box params={{ width: '100%', textAlign: 'left' }}>
             <Title level={2}>Que bom ter você por aqui.</Title>

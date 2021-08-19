@@ -7,7 +7,7 @@ const Checkbox: React.FC<ICheckboxProps> = (props) => {
 
   return (
     <FlexWrapper>
-      <StyledCheckbox>
+      <StyledCheckbox checked={checked}>
         <input
           type="checkbox"
           checked={checked}

@@ -36,6 +36,18 @@ export const RadioWrapper = styled.span<{ checked: boolean }>`
     opacity: 0;
     width: 0;
     height: 0;
+    ${(props) =>
+      props.checked &&
+      `
+          & + ${RadioControl} {
+        border-color: ${checkboxColor};
+        background-color: #ffffff;
+        svg {
+          visibility: visible;
+          transform: scale(1);
+        }
+      }
+    `};
     &:checked {
       & + ${RadioControl} {
         border-color: ${checkboxColor};

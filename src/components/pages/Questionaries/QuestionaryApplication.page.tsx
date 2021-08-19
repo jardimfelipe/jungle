@@ -60,7 +60,7 @@ type RouteState = {
 };
 
 type StartedQuestionary = {
-  id: string;
+  questionaryId: string;
   answers: UserAnswer[];
 };
 
@@ -87,35 +87,11 @@ const QuestionaryApplication: React.FC = () => {
     setSelectedAnswer(e.target.value);
   };
 
-  const setAnswersBeforeLeave = (
-    savedAnswer: StartedQuestionary['answers']
-  ) => {
-    const filteredSavedAnswers = savedAnswer.filter(
-      ({ question_id }) =>
-        !answers.some((answer) => answer.question_id === question_id)
-    );
-    return [...filteredSavedAnswers, answers];
-  };
-
   const handleExitClick = () => {
-    const savedAnswers = getSavedState('worker.startedQuestionaries');
-    if (!savedAnswers) {
-      saveState('worker.startedQuestionaries', [
-        { id: questionary._id, answers: answers },
-      ]);
-    } else {
-      const newAnswers = savedAnswers.map(
-        (savedAnswer: StartedQuestionary) => ({
-          ...savedAnswer,
-          ...(savedAnswer.id === questionary._id
-            ? {
-                answers: setAnswersBeforeLeave(savedAnswer.answers),
-              }
-            : null),
-        })
-      );
-      saveState('worker.startedQuestionaries', newAnswers);
-    }
+    if (!answers.length) return history.goBack();
+    saveState('worker.startedQuestionaries', [
+      { questionaryId: questionary._id, answers: answers },
+    ]);
     history.goBack();
   };
 
@@ -131,7 +107,19 @@ const QuestionaryApplication: React.FC = () => {
       question_id: question._id,
       answer: option?.value || 0,
     };
-    setAnswers([...answers, newAnswer]);
+    if (answers.some((answer) => answer.question_id === question._id)) {
+      const recentAnswers = answers.map((answer) => ({
+        ...answer,
+        ...(answer.question_id === question._id
+          ? {
+              ...newAnswer,
+            }
+          : null),
+      }));
+      setAnswers(recentAnswers);
+    } else {
+      setAnswers([...answers, newAnswer]);
+    }
     if (isLastQuestion()) {
       const model = {
         questionnaire: questionary._id,
@@ -160,7 +148,8 @@ const QuestionaryApplication: React.FC = () => {
     if (!savedAnswers) return setSelectedAnswer('');
 
     const questionaryAnswers = savedAnswers.find(
-      ({ id }: StartedQuestionary) => id === questionary._id
+      ({ questionaryId }: StartedQuestionary) =>
+        questionaryId === questionary._id
     );
     if (!questionaryAnswers) return setSelectedAnswer('');
 
@@ -169,7 +158,10 @@ const QuestionaryApplication: React.FC = () => {
         question_id === questionary.question[currentQuestion]._id
     );
     if (questionIndex === -1) return setSelectedAnswer('');
-
+    setAnswers(
+      (answers) =>
+        (answers = [...answers, questionaryAnswers.answers[currentQuestion]])
+    );
     return setSelectedAnswer(
       questionaryAnswers.answers[currentQuestion].answer
     );

@@ -30,23 +30,15 @@ import { useTheme } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getResultsRequest } from '../../../store/modules/results/actions';
-import protectionLevelData from '../TeamResults/protectionLevelData';
+import {
+  chartDataPopulation,
+  protectionLevelData,
+} from '../TeamResults/populationChartDatas';
 import { rgba } from 'polished';
 
 const { Brain } = Icons;
 
 const { Title, Text } = Typography;
-
-const chartData = {
-  datasets: [
-    {
-      label: null,
-      data: [80, 20],
-      backgroundColor: ['#0062FF', '#F1F5FA'],
-      borderWidth: 0,
-    },
-  ],
-};
 
 const MyResults: React.FC = () => {
   const { results, isLoading } = useSelector(
@@ -156,10 +148,10 @@ const MyResults: React.FC = () => {
                         <ChartWrapper size={100}>
                           <TableChart
                             options={{ cutout: 35 }}
-                            data={chartData}
+                            data={chartDataPopulation[index]}
                           />
                           <Text color="#0062FF" textDecoration="strong">
-                            80%
+                            {chartDataPopulation[index].datasets[0].data[0]}%
                           </Text>
                         </ChartWrapper>
                         <Text>
@@ -197,9 +189,6 @@ const MyResults: React.FC = () => {
                         <Text textDecoration="strong" variant="primary">
                           <Brain color={theme.colors.blue} />
                           {name}
-                        </Text>
-                        <Text textDecoration="strong" variant="primary">
-                          {value * 100}%
                         </Text>
                       </CardHeader>
                       <CardBody>
