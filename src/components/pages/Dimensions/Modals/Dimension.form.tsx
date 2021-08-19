@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
 import { createDimensionsRequest } from '../../../../store/modules/dimensions/actions';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 type ModalProps = {
   onClose: () => void;
@@ -122,75 +122,119 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             >
               <SliderContainer>
                 <Label>Obrigatórias (P1)</Label>
-                <FormSlider
-                  value={formik.values.mandatory}
-                  onChange={(value) => formik.setFieldValue('mandatory', value)}
-                  trackStyle={{
-                    backgroundColor: theme.colors.p1,
-                    height: 8,
+                <Box
+                  params={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '15px',
                   }}
-                  handleStyle={handleSliderStyles}
-                  max={formik.values.qt_minimum}
-                  railStyle={{
-                    backgroundColor: theme.colors.darkGray,
-                    height: 8,
-                  }}
-                />
-                {!!formik.errors.mandatory && (
-                  <ErrorMessage>{formik.errors.mandatory}</ErrorMessage>
-                )}
+                >
+                  <Text>0</Text>
+                  <FormSlider
+                    value={formik.values.mandatory}
+                    onChange={(value) =>
+                      formik.setFieldValue('mandatory', value)
+                    }
+                    trackStyle={{
+                      backgroundColor: theme.colors.p1,
+                      height: 8,
+                    }}
+                    handleStyle={handleSliderStyles}
+                    max={formik.values.qt_maximum}
+                    railStyle={{
+                      backgroundColor: theme.colors.darkGray,
+                      height: 8,
+                    }}
+                  />
+                  <Text>{formik.values.qt_maximum}</Text>
+                  {!!formik.errors.mandatory && (
+                    <ErrorMessage>{formik.errors.mandatory}</ErrorMessage>
+                  )}
+                </Box>
               </SliderContainer>
 
               <SliderContainer>
                 <Label>Complementares (P2)</Label>
-                <FormSlider
-                  value={formik.values.complementary}
-                  onChange={(value) =>
-                    formik.setFieldValue('complementary', value)
-                  }
-                  trackStyle={{
-                    backgroundColor: theme.colors.p2,
-                    height: 8,
+                <Box
+                  params={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '15px',
                   }}
-                  maximumTrackStyle={{ backgroundColor: theme.colors.blue }}
-                  handleStyle={handleSliderStyles}
-                  max={
-                    formik.values.qt_maximum > 1
-                      ? formik.values.qt_maximum / 2
-                      : 0
-                  }
-                  railStyle={{
-                    backgroundColor: theme.colors.darkGray,
-                    height: 8,
-                  }}
-                />
-                {!!formik.errors.complementary && (
-                  <ErrorMessage>{formik.errors.complementary}</ErrorMessage>
-                )}
+                >
+                  <Text>0</Text>
+                  <FormSlider
+                    value={formik.values.complementary}
+                    onChange={(value) =>
+                      formik.setFieldValue('complementary', value)
+                    }
+                    trackStyle={{
+                      backgroundColor: theme.colors.p2,
+                      height: 8,
+                    }}
+                    maximumTrackStyle={{ backgroundColor: theme.colors.blue }}
+                    handleStyle={handleSliderStyles}
+                    max={
+                      formik.values.qt_maximum > 1
+                        ? formik.values.qt_maximum / 2
+                        : 0
+                    }
+                    railStyle={{
+                      backgroundColor: theme.colors.darkGray,
+                      height: 8,
+                    }}
+                  />
+                  <Text>
+                    {formik.values.qt_maximum > 1
+                      ? (formik.values.qt_maximum / 2).toFixed(0)
+                      : 0}
+                  </Text>
+                  {!!formik.errors.complementary && (
+                    <ErrorMessage>{formik.errors.complementary}</ErrorMessage>
+                  )}
+                </Box>
               </SliderContainer>
 
               <SliderContainer>
                 <Label>Opcionais (P3)</Label>
-                <FormSlider
-                  value={formik.values.optional}
-                  onChange={(value) => formik.setFieldValue('optional', value)}
-                  trackStyle={{
-                    backgroundColor: theme.colors.p3,
-                    height: 8,
+                <Box
+                  params={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '15px',
                   }}
-                  handleStyle={handleSliderStyles}
-                  max={
-                    formik.values.qt_maximum > 1
+                >
+                  <Text>0</Text>
+                  <FormSlider
+                    value={formik.values.optional}
+                    onChange={(value) =>
+                      formik.setFieldValue('optional', value)
+                    }
+                    trackStyle={{
+                      backgroundColor: theme.colors.p3,
+                      height: 8,
+                    }}
+                    handleStyle={handleSliderStyles}
+                    max={
+                      formik.values.qt_maximum > 1
+                        ? formik.values.qt_maximum -
+                          formik.values.mandatory -
+                          formik.values.complementary
+                        : 0
+                    }
+                    railStyle={{
+                      backgroundColor: theme.colors.darkGray,
+                      height: 8,
+                    }}
+                  />
+                  <Text>
+                    {formik.values.qt_maximum > 1
                       ? formik.values.qt_maximum -
                         formik.values.mandatory -
                         formik.values.complementary
-                      : 0
-                  }
-                  railStyle={{
-                    backgroundColor: theme.colors.darkGray,
-                    height: 8,
-                  }}
-                />
+                      : 0}
+                  </Text>
+                </Box>
                 {!!formik.errors.optional && (
                   <ErrorMessage>{formik.errors.optional}</ErrorMessage>
                 )}
