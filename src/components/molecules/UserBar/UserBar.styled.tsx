@@ -83,3 +83,5 @@ export const MindGiftsLink = styled.a`
     margin-top: 25px;
   }
 `;
+
+export const PasswordIcon = styled.div``;

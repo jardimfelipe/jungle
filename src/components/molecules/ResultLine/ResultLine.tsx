@@ -22,6 +22,8 @@ const ResultLine: React.FC<ResultLineProps> = ({
   results,
   type,
   hasAnalysis = true,
+  maxText,
+  minText,
 }) => {
   const [showAnalysis, setShowAnalysis] = useState(false);
   const isMobile = useMobileWidth();
@@ -40,7 +42,7 @@ const ResultLine: React.FC<ResultLineProps> = ({
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
       <ChartContainer>
         <TextContainer className="left-text">
-          <Text>Amigável</Text>
+          <Text>{minText}</Text>
         </TextContainer>
 
         <LineContainer className="chart">
@@ -62,7 +64,7 @@ const ResultLine: React.FC<ResultLineProps> = ({
           </YouAreHereContainer>
         </LineContainer>
         <TextContainer className="right-text">
-          <Text>Desafiador</Text>
+          <Text>{maxText}</Text>
         </TextContainer>
       </ChartContainer>
       {isMobile && (

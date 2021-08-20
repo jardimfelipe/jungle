@@ -2,6 +2,7 @@ import { Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
 import media from 'styled-media-query';
 import { CardContainer } from '../../atoms/Card/Card.styled';
+import { LineContainer } from '../../molecules/ResultLine/ResultLine.styled';
 import { SocialAspectsCard } from '../MyResults/MyResults.styled';
 
 export const CardImage = styled.div<{ side: 'left' | 'right' }>`
@@ -83,8 +84,11 @@ export const CardCharts = styled.div<{ align?: 'center' | 'space-between' }>`
   justify-content: ${({ align = 'space-between' }) => align};
   flex: 0 0 55%;
   flex-wrap: wrap;
+  .chart {
+    padding: 0 20px;
+  }
   ${media.lessThan('large')`
-    flex: auto
+    flex: auto;
   `}
 `;
 
@@ -95,4 +99,18 @@ export const CardIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const CardBody = styled.div`
+  background-color: #ffffff;
+  padding: 25px 20px 15px 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px 0px 8px 8px;
+  ${LineContainer} {
+    padding: 0 20px;
+    ${media.lessThan('medium')`
+    padding: 0;
+  `}
+  }
 `;

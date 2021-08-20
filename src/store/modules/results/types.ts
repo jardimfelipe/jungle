@@ -34,6 +34,8 @@ export type Statistics = {
   niveis: Nivel[]
   population_protection: number
   team_protection: number
+  maxText: string
+  minText: string
 }
 
 export type ResultType = {

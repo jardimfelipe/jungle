@@ -197,7 +197,14 @@ const MyResults: React.FC = () => {
                       </Box>
                     ))
                   : results.statistics.map(
-                      ({ dimension, value, description, name }) =>
+                      ({
+                        dimension,
+                        value,
+                        description,
+                        name,
+                        minText,
+                        maxText,
+                      }) =>
                         value > 0 ? (
                           <SocialAspectsCard key={`dimension-${dimension}`}>
                             <CardHeader>
@@ -212,6 +219,8 @@ const MyResults: React.FC = () => {
                                   analise: description,
                                   total: value * 100,
                                 }}
+                                minText={minText}
+                                maxText={maxText}
                                 hasAnalysis
                                 type={name}
                               />

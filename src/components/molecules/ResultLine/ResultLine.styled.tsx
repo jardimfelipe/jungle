@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { StyledButton } from '../../atoms/Button/Button.styled';
 
 export const LineContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 60px;
   align-items: center;
   position: relative;
   text-transform: capitalize;
@@ -27,6 +28,9 @@ export const LineContainer = styled.div`
     width: 40%;
     border-bottom: 3px dashed ${(props) => props.theme.colors.blue};
   }
+  ${media.lessThan('medium')`
+    padding: 0 0px;
+  `}
 `;
 
 export const ChartContainer = styled.div`

@@ -4,6 +4,8 @@ export type ResultLineProps = {
   results: ResumeProps;
   type: string;
   hasAnalysis?: boolean;
+  maxText: string;
+  minText: string;
 };
 
 export const LineTexts = {

@@ -11,11 +11,7 @@ import {
   ChartWrapper,
   TableChart,
 } from '../..';
-import {
-  CardBody,
-  CardHeader,
-  SocialAspectsCard,
-} from '../MyResults/MyResults.styled';
+import { CardHeader, SocialAspectsCard } from '../MyResults/MyResults.styled';
 import { BiFace } from 'react-icons/bi';
 import { Col, Row } from 'react-flexbox-grid';
 import {
@@ -28,6 +24,7 @@ import {
   LevelsContainer,
   ProgressBarContainer,
   StyledCol,
+  CardBody,
 } from './TeamResults.styled';
 import Woman from '../../../assets/team-resume/woman.png';
 import Man from '../../../assets/team-resume/man.png';
@@ -337,6 +334,8 @@ const TeamResults: React.FC = () => {
                     analise: statistic.description,
                     total: +(statistic.team_protection * 100).toFixed(1),
                   }}
+                  minText={statistic.minText}
+                  maxText={statistic.maxText}
                   hasAnalysis={false}
                   type={statistic.name}
                 />
