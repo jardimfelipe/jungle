@@ -38,6 +38,7 @@ import { useTheme } from 'styled-components';
 // import { rgba } from 'polished';
 import Skeleton from 'react-loading-skeleton';
 import { chartDataPopulation } from './populationChartDatas';
+import EmptyResults from '../MyResults/EmptyResults';
 
 const { Title, Text } = Typography;
 const { Brain } = Icons;
@@ -54,6 +55,9 @@ const TeamResults: React.FC = () => {
     if (labelArray.length > 1) return labelArray[1];
     return labelArray[0];
   };
+
+  const isEmpty = () =>
+    results.statistics.every((statistic) => statistic.team_protection === 0);
 
   useEffect(() => {
     dispatch(getResultsRequest('gestor'));
@@ -74,8 +78,12 @@ const TeamResults: React.FC = () => {
       >
         <Title level={3}>Entendendo a equipe</Title>
       </Box>
-      <Row>
-        {/* <StyledCol xs={12} lg={7}>
+      {isEmpty() ? (
+        <EmptyResults />
+      ) : (
+        <>
+          <Row>
+            {/* <StyledCol xs={12} lg={7}>
           <Card>
             <Title level={4} variant="primary">
               Análise dos especialistas
@@ -84,61 +92,65 @@ const TeamResults: React.FC = () => {
           </Card>
         </StyledCol> */}
 
-        <StyledCol xs={12} md={6}>
-          <Card>
-            <Row>
-              <Col xs={12} xl={10}>
-                <Title color={theme.colors.p3} variant="primary" level={4}>
-                  Proteção adequada contra
-                </Title>
-                <ul>
-                  {results.analysis.adequate_protection.map(
-                    (protection, index) => (
-                      <li key={`adequate-protection-${index}`}>{protection}</li>
-                    )
-                  )}
-                </ul>
-              </Col>
-              <CardImage side="right">
-                <Image src={Man} alt="Lorem Ipsum" />
-              </CardImage>
-            </Row>
-          </Card>
-        </StyledCol>
-        <StyledCol xs={12} md={6}>
-          <Card>
-            <Row>
-              <Col
-                xs
-                style={{
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  padding: 0,
-                }}
-              >
-                <CardImage side="left">
-                  <Image src={Woman} alt="Lorem Ipsum" />
-                </CardImage>
-              </Col>
-              <Col xs={12} xl={6}>
-                <Title color={theme.colors.p1} variant="primary" level={4}>
-                  Proteção menor contra
-                </Title>
-                <ul>
-                  {results.analysis.minor_protection.map(
-                    (protection, index) => (
-                      <li key={`minor-protection-${index}`}>{protection}</li>
-                    )
-                  )}
-                </ul>
-              </Col>
-            </Row>
-          </Card>
-        </StyledCol>
-      </Row>
-      <Row>
-        {/* <StyledCol xs={12} lg={7}>
+            <StyledCol xs={12} md={6}>
+              <Card>
+                <Row>
+                  <Col xs={12} xl={10}>
+                    <Title color={theme.colors.p3} variant="primary" level={4}>
+                      Proteção adequada contra
+                    </Title>
+                    <ul>
+                      {results.analysis.adequate_protection.map(
+                        (protection, index) => (
+                          <li key={`adequate-protection-${index}`}>
+                            {protection}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </Col>
+                  <CardImage side="right">
+                    <Image src={Man} alt="Lorem Ipsum" />
+                  </CardImage>
+                </Row>
+              </Card>
+            </StyledCol>
+            <StyledCol xs={12} md={6}>
+              <Card>
+                <Row>
+                  <Col
+                    xs
+                    style={{
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'flex-end',
+                      padding: 0,
+                    }}
+                  >
+                    <CardImage side="left">
+                      <Image src={Woman} alt="Lorem Ipsum" />
+                    </CardImage>
+                  </Col>
+                  <Col xs={12} xl={6}>
+                    <Title color={theme.colors.p1} variant="primary" level={4}>
+                      Proteção menor contra
+                    </Title>
+                    <ul>
+                      {results.analysis.minor_protection.map(
+                        (protection, index) => (
+                          <li key={`minor-protection-${index}`}>
+                            {protection}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </Col>
+                </Row>
+              </Card>
+            </StyledCol>
+          </Row>
+          <Row>
+            {/* <StyledCol xs={12} lg={7}>
           <Card>
             <Title level={4} color={theme.colors.p2}>
               Oportunidades de melhoria
@@ -156,7 +168,7 @@ const TeamResults: React.FC = () => {
           </Card>
         </StyledCol> */}
 
-        {/* <StyledCol xs>
+            {/* <StyledCol xs>
           <Card>
             <Title level={4} variant="primary">
               Como chegar lá?
@@ -169,181 +181,188 @@ const TeamResults: React.FC = () => {
             </ul>
           </Card>
         </StyledCol> */}
-      </Row>
+          </Row>
 
-      {/* Níveis de proteção */}
-      <Title level={3}>Niveis de proteção</Title>
-      <FlexContainer>
-        {isLoading ? (
-          <>
-            <Box params={{ display: 'block', flex: 'auto' }}>
-              <Skeleton height={250} />
-            </Box>
-            <Box params={{ display: 'block', flex: 'auto' }}>
-              <Skeleton height={250} />
-            </Box>
-          </>
-        ) : (
-          results.statistics.map((statistics, index) =>
-            index <= 4 ? (
-              <Card key={`${statistics}-card-${index}`}>
-                <Box
-                  params={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '20px',
-                  }}
-                >
-                  <Box
-                    params={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                    }}
-                  >
+          {/* Níveis de proteção */}
+          <Title level={3}>Niveis de proteção</Title>
+          <FlexContainer>
+            {isLoading ? (
+              <>
+                <Box params={{ display: 'block', flex: 'auto' }}>
+                  <Skeleton height={250} />
+                </Box>
+                <Box params={{ display: 'block', flex: 'auto' }}>
+                  <Skeleton height={250} />
+                </Box>
+              </>
+            ) : (
+              results.statistics.map((statistics, index) =>
+                index <= 4 ? (
+                  <Card key={`${statistics}-card-${index}`}>
                     <Box
                       params={{
                         display: 'flex',
-                        alignItems: 'center',
-                        gap: '15px',
+                        flexDirection: 'column',
+                        gap: '20px',
                       }}
                     >
-                      <CardIcon>
-                        <BiFace color={theme.colors.darkGray} size="28" />
-                      </CardIcon>
                       <Box
                         params={{
                           display: 'flex',
                           flexDirection: 'column',
                         }}
                       >
-                        <Text textDecoration="strong" variant="primary">
-                          {statistics.name}
-                        </Text>
-                        <Text>{statistics.title}</Text>
-                      </Box>
-                    </Box>
-                  </Box>
-
-                  <Box
-                    params={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '5px',
-                    }}
-                  >
-                    <Text textDecoration="strong">
-                      Análise dos especialistas
-                    </Text>
-                    <Text>{statistics.description}</Text>
-                  </Box>
-
-                  <ChartsBarContainer>
-                    <LevelsContainer>
-                      {statistics.niveis?.map((level) => (
-                        <ProgressBarContainer
-                          key={`protection-leve-${level}-${Math.random()}`}
+                        <Box
+                          params={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '15px',
+                          }}
                         >
-                          <Text>{getLevelLabel(level.label)}</Text>
-                          <Box params={{ display: 'block', width: '140px' }}>
-                            <ProgressBar
-                              height="10px"
-                              completed={level.qtd}
-                              isLabelVisible={false}
-                            />
-                          </Box>
-                        </ProgressBarContainer>
-                      ))}
-                    </LevelsContainer>
-
-                    <CardCharts>
-                      <CharFlexContainer>
-                        <ChartWrapper size={100}>
-                          <TableChart
-                            options={{ cutout: 35 }}
-                            data={{
-                              datasets: [
-                                {
-                                  label: null,
-                                  data: [
-                                    statistics.team_protection * 100,
-                                    statistics.team_protection * 100 - 100,
-                                  ],
-                                  backgroundColor: ['#4ED9A7', '#F1F5FA'],
-                                  borderWidth: 0,
-                                },
-                              ],
+                          <CardIcon>
+                            <BiFace color={theme.colors.darkGray} size="28" />
+                          </CardIcon>
+                          <Box
+                            params={{
+                              display: 'flex',
+                              flexDirection: 'column',
                             }}
-                          />
-                          <Text color="#4ED9A7" textDecoration="strong">
-                            {statistics.team_protection * 100}%
-                          </Text>
-                        </ChartWrapper>
-                        <Text>
-                          Nível de proteção na <strong>empresa</strong>
+                          >
+                            <Text textDecoration="strong" variant="primary">
+                              {statistics.name}
+                            </Text>
+                            <Text>{statistics.title}</Text>
+                          </Box>
+                        </Box>
+                      </Box>
+
+                      <Box
+                        params={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '5px',
+                        }}
+                      >
+                        <Text textDecoration="strong">
+                          Análise dos especialistas
                         </Text>
-                      </CharFlexContainer>
-                      <CharFlexContainer>
-                        <ChartWrapper size={100}>
-                          <TableChart
-                            options={{ cutout: 35 }}
-                            data={chartDataPopulation[index]}
-                          />
-                          <Text color="#0062FF" textDecoration="strong">
-                            {chartDataPopulation[index].datasets[0].data[0]}%
-                          </Text>
-                        </ChartWrapper>
-                        <Text>
-                          Nível de proteção na <strong>população</strong>
-                        </Text>
-                      </CharFlexContainer>
-                    </CardCharts>
-                  </ChartsBarContainer>
+                        <Text>{statistics.description}</Text>
+                      </Box>
+
+                      <ChartsBarContainer>
+                        <LevelsContainer>
+                          {statistics.niveis?.map((level) => (
+                            <ProgressBarContainer
+                              key={`protection-leve-${level}-${Math.random()}`}
+                            >
+                              <Text>{getLevelLabel(level.label)}</Text>
+                              <Box
+                                params={{ display: 'block', width: '140px' }}
+                              >
+                                <ProgressBar
+                                  height="10px"
+                                  completed={level.qtd}
+                                  isLabelVisible={false}
+                                />
+                              </Box>
+                            </ProgressBarContainer>
+                          ))}
+                        </LevelsContainer>
+
+                        <CardCharts>
+                          <CharFlexContainer>
+                            <ChartWrapper size={100}>
+                              <TableChart
+                                options={{ cutout: 35 }}
+                                data={{
+                                  datasets: [
+                                    {
+                                      label: null,
+                                      data: [
+                                        statistics.team_protection * 100,
+                                        statistics.team_protection * 100 - 100,
+                                      ],
+                                      backgroundColor: ['#4ED9A7', '#F1F5FA'],
+                                      borderWidth: 0,
+                                    },
+                                  ],
+                                }}
+                              />
+                              <Text color="#4ED9A7" textDecoration="strong">
+                                {statistics.team_protection * 100}%
+                              </Text>
+                            </ChartWrapper>
+                            <Text>
+                              Nível de proteção na <strong>empresa</strong>
+                            </Text>
+                          </CharFlexContainer>
+                          <CharFlexContainer>
+                            <ChartWrapper size={100}>
+                              <TableChart
+                                options={{ cutout: 35 }}
+                                data={chartDataPopulation[index]}
+                              />
+                              <Text color="#0062FF" textDecoration="strong">
+                                {chartDataPopulation[index].datasets[0].data[0]}
+                                %
+                              </Text>
+                            </ChartWrapper>
+                            <Text>
+                              Nível de proteção na <strong>população</strong>
+                            </Text>
+                          </CharFlexContainer>
+                        </CardCharts>
+                      </ChartsBarContainer>
+                    </Box>
+                  </Card>
+                ) : null
+              )
+            )}
+          </FlexContainer>
+
+          {/* Níveis de proteção */}
+
+          <Title level={3}>Aspectos biopsicossociais da equipe</Title>
+
+          <FlexContainer>
+            {isLoading ? (
+              <>
+                <Box params={{ display: 'block', flex: 'auto' }}>
+                  <Skeleton height={100} />
                 </Box>
-              </Card>
-            ) : null
-          )
-        )}
-      </FlexContainer>
-
-      {/* Níveis de proteção */}
-
-      <Title level={3}>Aspectos biopsicossociais da equipe</Title>
-
-      <FlexContainer>
-        {isLoading ? (
-          <>
-            <Box params={{ display: 'block', flex: 'auto' }}>
-              <Skeleton height={100} />
-            </Box>
-            <Box params={{ display: 'block', flex: 'auto' }}>
-              <Skeleton height={100} />
-            </Box>
-          </>
-        ) : (
-          results.statistics.map((statistic, index) => (
-            <SocialAspectsCard key={`social-${index}`}>
-              <CardHeader>
-                <Text textDecoration="strong" variant="primary">
-                  <Brain color={theme.colors.blue} />
-                  {statistic.name}
-                </Text>
-              </CardHeader>
-              <CardBody>
-                <ResultLine
-                  results={{
-                    analise: statistic.description,
-                    total: +(statistic.team_protection * 100).toFixed(1),
-                  }}
-                  minText={statistic.minText}
-                  maxText={statistic.maxText}
-                  hasAnalysis={false}
-                  type={statistic.name}
-                />
-              </CardBody>
-            </SocialAspectsCard>
-          ))
-        )}
-      </FlexContainer>
+                <Box params={{ display: 'block', flex: 'auto' }}>
+                  <Skeleton height={100} />
+                </Box>
+              </>
+            ) : (
+              results.statistics.map((statistic, index) =>
+                statistic.team_protection > 0 ? (
+                  <SocialAspectsCard key={`social-${index}`}>
+                    <CardHeader>
+                      <Text textDecoration="strong" variant="primary">
+                        <Brain color={theme.colors.blue} />
+                        {statistic.name}
+                      </Text>
+                    </CardHeader>
+                    <CardBody>
+                      <ResultLine
+                        results={{
+                          analise: statistic.description,
+                          total: +(statistic.team_protection * 100).toFixed(1),
+                        }}
+                        minText={statistic.minText}
+                        maxText={statistic.maxText}
+                        hasAnalysis={false}
+                        type={statistic.name}
+                      />
+                    </CardBody>
+                  </SocialAspectsCard>
+                ) : null
+              )
+            )}
+          </FlexContainer>
+        </>
+      )}
     </Box>
   );
 };
