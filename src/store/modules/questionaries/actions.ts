@@ -1,9 +1,9 @@
 import { action } from "typesafe-actions";
-import { RequestError } from "../exportTypes";
+import { RequestError, UserRoles } from "../exportTypes";
 import { QuestionariesTypeKeys, Questionary, QuestionaryAnswers, QuestionaryModel } from "./types";
 
-export function getQuestionariesRequest() {
-  return action(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST);
+export function getQuestionariesRequest(params: UserRoles = 'admin_jungle') {
+  return action(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST, params);
 }
 
 export function getQuestionariesSuccess(params: Questionary[]) {
@@ -35,6 +35,17 @@ export function createQuestionarySuccess() {
 
 export function createQuestionaryFailure(error: RequestError) {
   return action(QuestionariesTypeKeys.CREATE_QUESTIONARY_FAILURE, error);
+}
+
+export function deleteQuestionaryRequest(params: string) {
+  return action(QuestionariesTypeKeys.DELETE_QUESTIONARY_REQUEST, params);
+}
+export function deleteQuestionarySuccess() {
+  return action(QuestionariesTypeKeys.DELETE_QUESTIONARY_SUCCESS);
+}
+
+export function deleteQuestionaryFailure(error: RequestError) {
+  return action(QuestionariesTypeKeys.DELETE_QUESTIONARY_FAILURE, error);
 }
 
 export function resetFeeback() {

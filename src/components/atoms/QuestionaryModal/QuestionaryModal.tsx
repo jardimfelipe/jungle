@@ -8,12 +8,13 @@ import { ModalButton } from '../../pages/Dashboard/Dashboard.styled';
 
 import { QuestionaryModalProps } from './QuestionaryModal.types';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const QuestionaryModal: React.FC<QuestionaryModalProps> = ({
   onClick,
   onClose,
   isModalOpen,
+  questionaryTitle,
 }) => {
   const isMobile = useMobileWidth();
   return (
@@ -30,13 +31,8 @@ const QuestionaryModal: React.FC<QuestionaryModalProps> = ({
             }}
           >
             <Title variant="primary" level={2}>
-              Questionário autocobrança
+              Questionário {questionaryTitle}
             </Title>
-            <Text>
-              Sed in libero commodo enim laoreet auctor. Donec ac ultricies
-              nibh, non gravida nibh. Orci varius natoque penatibus et magnis
-              dis parturient montes, nascetur ridiculus mus.
-            </Text>
           </Box>
         </Col>
         {!isMobile && (

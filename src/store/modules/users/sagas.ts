@@ -8,9 +8,10 @@ import { User, UsersTypeKeys } from "./types";
 
 const hackyCall: any = Effects.call;
 
-function* getUsers() {
+function* getUsers({ payload }: ActionType<typeof actions.getUsersRequest>) {
   try {
-    const { data } = yield call(api, "/users");
+    const headers = payload?.headers || {}
+    const { data } = yield call(api, "/users", { headers });
     yield put(actions.getUsersSuccess(data));
   } catch (error) {
     if (error instanceof Error) {

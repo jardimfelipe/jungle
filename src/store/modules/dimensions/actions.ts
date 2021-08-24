@@ -22,6 +22,18 @@ export function createDimensionFailure(params: RequestError) {
   return action(DimensionsTypeKeys.CREATE_DIMENSIONS_FAILURE, params);
 }
 
+export function deleteDimensionsRequest(params: string) {
+  return action(DimensionsTypeKeys.DELETE_DIMENSIONS_REQUEST, params);
+}
+
+export function deleteDimensionsSuccess() {
+  return action(DimensionsTypeKeys.DELETE_DIMENSIONS_SUCCESS);
+}
+
+export function deleteDimensionFailure(params: RequestError) {
+  return action(DimensionsTypeKeys.DELETE_DIMENSIONS_FAILURE, params);
+}
+
 export function resetDimensionFeedback() {
   return action(DimensionsTypeKeys.RESET_FEEDBACK)
 }

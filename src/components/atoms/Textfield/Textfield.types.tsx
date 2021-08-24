@@ -1,4 +1,5 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
+import { maskArray } from 'react-text-mask';
 
 type Status = 'success' | 'error';
 
@@ -8,7 +9,7 @@ type Feedback = {
 };
 
 export interface TextFieldProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'ref'> {
   addonBefore?: ReactNode;
   allowClear?: boolean;
   disabled?: boolean;

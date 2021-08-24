@@ -1,8 +1,8 @@
 import { action } from "typesafe-actions";
-import { UsersTypeKeys, User } from "./types";
+import { UsersTypeKeys, User, GetUserParams } from "./types";
 
-export function getUsersRequest() {
-  return action(UsersTypeKeys.GET_USERS_REQUEST);
+export function getUsersRequest(params?: GetUserParams) {
+  return action(UsersTypeKeys.GET_USERS_REQUEST, params);
 }
 
 export function getUsersSuccess(params: User[]) {

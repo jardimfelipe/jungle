@@ -7,6 +7,10 @@ const INITIAL_STATE: CompaniesState = {
   error: {
     status: false,
     message: ''
+  },
+  questionaryFeedback: {
+    status: '',
+    message: ''
   }
 };
 
@@ -26,6 +30,22 @@ export default function Reducer(
 
     case CompaniesTypeKeys.GET_COMPANY_SUCCESS:
       return { ...state, company: action.payload, isLoading: false };
+
+    case CompaniesTypeKeys.INSERT_QUESTIONARY_REQUEST:
+      return { ...state, isLoading: true };
+
+    case CompaniesTypeKeys.INSERT_QUESTIONARY_SUCCESS:
+      return {
+        ...state, isLoading: false, questionaryFeedback: {
+          status: 'success',
+          message: 'Questionário adicionado com sucesso!'
+        }
+      };
+
+    case CompaniesTypeKeys.RESET_FEEDBACK:
+      return {
+        ...state, isLoading: false, questionaryFeedback: { ...INITIAL_STATE.questionaryFeedback }
+      };
     default:
       return state;
   }

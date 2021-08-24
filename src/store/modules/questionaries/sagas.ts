@@ -4,9 +4,9 @@ import api from "../../../services/api";
 import * as actions from "./actions";
 import { QuestionariesTypeKeys } from "./types";
 
-function* getQuestionaries() {
+function* getQuestionaries({ payload }: ActionType<typeof actions.getQuestionaryRequest>) {
   try {
-    const { data } = yield call(api, "/questionnaires");
+    const { data } = yield call(api, `/questionnaires/${payload === 'user' ? 'current' : ''}`);
     yield put(actions.getQuestionariesSuccess(data));
   } catch (error) {
     if (error instanceof Error) {
@@ -53,10 +53,24 @@ function* sendQuestionary({ payload }: ActionType<typeof actions.sendQuestionary
   }
 }
 
+function* deleteQuestionary({ payload }: ActionType<typeof actions.deleteQuestionaryRequest>) {
+  try {
+    yield call(api, `/questionnaires/${payload}`, { method: 'DELETE' });
+    yield put(actions.deleteQuestionarySuccess());
+    yield put(actions.getQuestionariesRequest())
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(actions.deleteQuestionaryFailure({ message: 'Ocorreu um erro, tente novamente', status: true }))
+    }
+
+  }
+}
+
 
 
 
 export default all([takeLatest(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST, getQuestionaries),
 takeLatest(QuestionariesTypeKeys.GET_QUESTIONARY_REQUEST, getQuestionary),
 takeLatest(QuestionariesTypeKeys.CREATE_QUESTIONARY_REQUEST, createQuestionary),
+takeLatest(QuestionariesTypeKeys.DELETE_QUESTIONARY_REQUEST, deleteQuestionary),
 takeLatest(QuestionariesTypeKeys.SEND_QUESTIONARY_REQUEST, sendQuestionary)]);

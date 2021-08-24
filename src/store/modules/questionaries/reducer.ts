@@ -7,6 +7,9 @@ const INITIAL_STATE: QuestionariesState = {
     track: '',
     _id: '',
     description: '',
+    answered: false,
+    tracking_end: new Date(),
+    tracking_start: new Date(),
     dimension: {
       dimension: '',
       _id: '',

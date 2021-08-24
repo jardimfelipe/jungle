@@ -13,7 +13,7 @@ import { SocialAspectsCard, CardHeader, CardBody } from './MyResults.styled';
 import { Col, Row } from 'react-flexbox-grid';
 import { Icons } from '../../';
 import Skeleton from 'react-loading-skeleton';
-import ResultsCards from './Cards/ResultsCards';
+// import ResultsCards from './Cards/ResultsCards';
 import {
   CardCharts,
   CardIcon,
@@ -51,6 +51,10 @@ const MyResults: React.FC = () => {
   const isEmpty = () =>
     results.statistics.every((statistic) => statistic.value === 0);
 
+  const getProtectionLevelItems = () => {
+    return results.statistics.filter((i, index) => index < 5);
+  };
+
   useEffect(() => {
     dispatch(getResultsRequest());
   }, [dispatch]);
@@ -63,7 +67,7 @@ const MyResults: React.FC = () => {
         <EmptyResults />
       ) : (
         <>
-          <ResultsCards analysis={results.analysis} />
+          <EmptyResults />
 
           <Title level={3}>Niveis de proteção</Title>
           <FlexContainer>
@@ -76,9 +80,11 @@ const MyResults: React.FC = () => {
                   <Skeleton height={250} />
                 </Box>
               </>
+            ) : getProtectionLevelItems().every((r) => r.value === 0) ? (
+              <EmptyResults />
             ) : (
-              results.statistics.map((result, index) =>
-                index <= 4 ? (
+              getProtectionLevelItems().map((result, index) =>
+                index <= 4 && result.value > 0 ? (
                   <Card key={`${result._id}-card-${index}`}>
                     <Box
                       params={{

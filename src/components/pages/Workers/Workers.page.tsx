@@ -19,7 +19,7 @@ import Profile from '../../../assets/profile.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import {
-  getGestoresRequest,
+  getUsersRequest,
   resetUsersErrors,
 } from '../../../store/modules/users/actions';
 import { Field } from '../../molecules/Table/table.types';
@@ -60,11 +60,6 @@ const Companies: React.FC = () => {
       key: 'email',
     },
     {
-      title: 'Telefone',
-      dataIndex: 'phone',
-      key: 'phone',
-    },
-    {
       title: 'Status',
       dataIndex: 'id',
       key: 'id',
@@ -98,6 +93,7 @@ const Companies: React.FC = () => {
   const { gestores, isLoading } = useSelector(
     (state: RootState) => state.users
   );
+  const { currentUser } = useSelector(({ login }: RootState) => login);
 
   const handleTableButtonClick = (index: number) => {
     setCurrentOpenMenu(index);
@@ -136,8 +132,8 @@ const Companies: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getGestoresRequest());
-  }, [dispatch]);
+    dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
+  }, [dispatch, currentUser]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
@@ -152,7 +148,7 @@ const Companies: React.FC = () => {
           alignItems: 'center',
         }}
       >
-        <Title level={3}>Empresas</Title>
+        <Title level={3}>Colaboradores</Title>
         <Box
           params={{ display: 'flex', justifyContent: 'flex-end', gap: '15px' }}
         >

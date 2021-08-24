@@ -139,6 +139,8 @@ const QuestionaryApplication: React.FC = () => {
     setCurrentQuestion(currentQuestion - 1);
   };
 
+  console.log(answers);
+
   const handleCloseModal = () => {
     dispatch(resetFeeback());
     history.push('/');
@@ -159,8 +161,7 @@ const QuestionaryApplication: React.FC = () => {
     );
     if (questionIndex === -1) return setSelectedAnswer('');
     setAnswers(
-      (answers) =>
-        (answers = [...answers, questionaryAnswers.answers[currentQuestion]])
+      (answers) => (answers = [...answers, ...questionaryAnswers.answers])
     );
     return setSelectedAnswer(
       questionaryAnswers.answers[currentQuestion].answer
@@ -170,6 +171,17 @@ const QuestionaryApplication: React.FC = () => {
   useEffect(() => {
     if (feedback.status === 'success') setIsModalOpen(true);
   }, [feedback]);
+
+  useEffect(() => {
+    const savedAnswers = getSavedState('worker.startedQuestionaries');
+    if (!savedAnswers) return;
+    const questionaryAnswers = savedAnswers.find(
+      ({ questionaryId }: StartedQuestionary) =>
+        questionaryId === questionary._id
+    );
+    if (!questionaryAnswers) return;
+    setCurrentQuestion(questionaryAnswers.answers.length);
+  }, [questionary]);
 
   // useEffect(() => {
   //   dispatch(getQuestionaryRequest(id));

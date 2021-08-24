@@ -54,3 +54,8 @@ export type UsersState = {
   fileSuccess: boolean;
 }
 
+export type GetUserParams = {
+  headers: {
+    company: string
+  }
+}

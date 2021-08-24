@@ -57,7 +57,7 @@ const Questionaries: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getQuestionariesRequest());
+    dispatch(getQuestionariesRequest('user'));
   }, [dispatch]);
 
   useEffect(() => {
@@ -133,6 +133,7 @@ const Questionaries: React.FC = () => {
         onClick={handleStartQuestionary}
         onClose={() => setIsModalOpen(false)}
         isModalOpen={isModalOpen}
+        questionaryTitle={clickedQuestionary.title || ''}
       />
     </Box>
   );

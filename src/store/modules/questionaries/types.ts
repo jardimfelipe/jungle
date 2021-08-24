@@ -15,6 +15,10 @@ export enum QuestionariesTypeKeys {
   CREATE_QUESTIONARY_FAILURE = "@companies/CREATE_QUESTIONARY_FAILURE",
   CREATE_QUESTIONARY_SUCCESS = "@companies/CREATE_QUESTIONARY_SUCCESS",
 
+  DELETE_QUESTIONARY_REQUEST = "@companies/DELETE_QUESTIONARY_REQUEST",
+  DELETE_QUESTIONARY_FAILURE = "@companies/DELETE_QUESTIONARY_FAILURE",
+  DELETE_QUESTIONARY_SUCCESS = "@companies/DELETE_QUESTIONARY_SUCCESS",
+
   SEND_QUESTIONARY_REQUEST = "@companies/SEND_QUESTIONARY_REQUEST",
   SEND_QUESTIONARY_SUCCESS = "@companies/SEND_QUESTIONARY_SUCCESS",
   SEND_QUESTIONARY_FAILURE = "@companies/SEND_QUESTIONARY_FAILURE",
@@ -54,6 +58,9 @@ export type Questionary = {
   required: boolean
   track: string;
   done?: string;
+  answered: boolean;
+  tracking_end: Date
+  tracking_start: Date
 }
 
 export type QuestionariesState = {

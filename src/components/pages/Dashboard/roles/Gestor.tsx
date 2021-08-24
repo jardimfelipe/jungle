@@ -7,21 +7,21 @@ import {
   ResumeCard,
   Typography,
   Table,
-  Image,
+  // Image,
 } from '../../..';
 import { BsArrowRight } from 'react-icons/bs';
-import { ResumeBox, GestorCard } from '../Dashboard.styled';
+import { ResumeBox } from '../Dashboard.styled';
 
 import { useHistory } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../store';
 import { getQuestionariesRequest } from '../../../../store/modules/questionaries/actions';
-import { Col, Row } from 'react-flexbox-grid';
-import { useTheme } from 'styled-components';
+// import { Col, Row } from 'react-flexbox-grid';
+// import { useTheme } from 'styled-components';
 
-import GestorResults from '../../../../assets/gestor-results.png';
-import GestorNegative from '../../../../assets/gestor-negative.png';
+// import GestorResults from '../../../../assets/gestor-results.png';
+// import GestorNegative from '../../../../assets/gestor-negative.png';
 import { Questionary } from '../../../../store/modules/questionaries/types';
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
 import { BiDockLeft } from 'react-icons/bi';
@@ -59,7 +59,7 @@ const tableFields = [
 
 const Gestor: React.FC = () => {
   const history = useHistory();
-  const theme = useTheme();
+  // const theme = useTheme();
   const dispatch = useDispatch();
   const {
     questionaries,
@@ -67,7 +67,7 @@ const Gestor: React.FC = () => {
     isLoading: isQuestionaryLoading,
   } = useSelector(({ questionaries }: RootState) => questionaries);
   const { currentUser } = useSelector((state: RootState) => state.login);
-  const { results } = useSelector((state: RootState) => state.results);
+  // const { results } = useSelector((state: RootState) => state.results);
 
   useEffect(() => {
     dispatch(getQuestionariesRequest());
@@ -92,7 +92,7 @@ const Gestor: React.FC = () => {
         </NavigationButton>
       </Box>
 
-      <Box
+      {/* <Box
         params={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -157,13 +157,13 @@ const Gestor: React.FC = () => {
             </Col>
           </Row>
         </GestorCard>
-      </Box>
+      </Box> */}
 
       <ResumeBox>
         <ResumeCard
           name="Questionários preenchidos"
           icon={<BiDockLeft color="#ffffff" />}
-          total={'20%'}
+          total="0"
         />
         <ResumeCard
           name="Questionários disponíveis"

@@ -55,8 +55,14 @@ const Colaborador: React.FC = () => {
     });
   };
 
+  const getPercentage = () => {
+    const answered = questionaries.filter((q) => q.answered).length;
+    const total = questionaries.length;
+    return (100 * answered) / total;
+  };
+
   useEffect(() => {
-    dispatch(getQuestionariesRequest());
+    dispatch(getQuestionariesRequest('user'));
     dispatch(getDimensionsRequest());
   }, [dispatch]);
 
@@ -88,13 +94,14 @@ const Colaborador: React.FC = () => {
           <ProgressBar
             bgColor={theme.colors.blue}
             height="8px"
-            completed={0}
+            completed={getPercentage()}
             baseBgColor={rgba(theme.colors.blue, 0.1)}
             isLabelVisible={false}
           />
         </Box>
         <Text variant="primary">
-          <strong>0</strong> de <strong>10</strong> preenchidos
+          <strong>{questionaries.filter((q) => q.answered).length}</strong> de{' '}
+          <strong>{questionaries.length}</strong> preenchidos
         </Text>
       </Box>
       <QuestionariesGridContainer>
@@ -125,6 +132,7 @@ const Colaborador: React.FC = () => {
         onClick={handleStartQuestionary}
         onClose={() => setIsModalOpen(false)}
         isModalOpen={isModalOpen}
+        questionaryTitle={clickedQuestionary.title || ''}
       />
     </Box>
   );

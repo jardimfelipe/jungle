@@ -1,6 +1,6 @@
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
-import { RequestError, RequestParams } from "../exportTypes";
+import { RequestError, RequestFeedback, RequestParams } from "../exportTypes";
 import { Questionary } from "../questionaries/types";
 
 export enum CompaniesTypeKeys {
@@ -12,6 +12,7 @@ export enum CompaniesTypeKeys {
   INSERT_QUESTIONARY_REQUEST = "@companies/INSERT_QUESTIONARY_REQUEST",
   INSERT_QUESTIONARY_SUCCESS = "@companies/INSERT_QUESTIONARY_SUCCESS",
 
+  RESET_FEEDBACK = "@companies/RESET_FEEDBACK",
 }
 
 export type CompaniesAction = ActionType<typeof actions>;
@@ -23,6 +24,8 @@ export type CompanyItem = {
   questionnaires: string,
   active: boolean,
   id: string,
+  completed: number
+  createdAt: Date
 }
 
 export type Worker = {
@@ -44,8 +47,16 @@ export type CompaniesState = {
   company: CompanyModel;
   isLoading: boolean;
   error: RequestError;
+  questionaryFeedback: RequestFeedback
 }
 
 export interface RequestParamsCompany extends RequestParams {
   headers?: any
+}
+
+export type TrackModel = {
+  company: string,
+  questionnaire: string,
+  start: string,
+  end: string
 }

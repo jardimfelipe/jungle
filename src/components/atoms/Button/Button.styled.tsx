@@ -59,4 +59,5 @@ export const StyledButton = styled.button<ButtonProps>`
   padding: ${({ size = 'regular' }) =>
     size === 'regular' ? '15px 5px' : '10px'};
   ${(props) => props.block && 'display: block; width: 100%;'};
+  ${(props) => props.flat && 'border-radius: 0'};
 `;

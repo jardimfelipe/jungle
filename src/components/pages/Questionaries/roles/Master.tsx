@@ -11,12 +11,16 @@ import {
   Table,
   TableMenu,
   ColumnButton,
+  ConfirmationModal,
 } from '../../../';
 import { BiBuildings, BiDockLeft } from 'react-icons/bi';
 import PromotionalCard from '../../../molecules/PromotionalCard/PromotionalCard';
 
 import { useTheme } from 'styled-components';
-import { getQuestionariesRequest } from '../../../../store/modules/questionaries/actions';
+import {
+  deleteQuestionaryRequest,
+  getQuestionariesRequest,
+} from '../../../../store/modules/questionaries/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
 import { Questionary } from '../../../../store/modules/questionaries/types';
@@ -41,29 +45,29 @@ const Master: React.FC = () => {
       onClick: (index: number) =>
         history.push(`/questionaries/edit/${questionaries[index]._id}`),
     },
+    // {
+    //   title: 'Editar',
+    //   onClick: () => console.log('onClick'),
+    // },
+    // {
+    //   title: 'Editar rastreio',
+    //   onClick: () => console.log('onClick'),
+    // },
+    // {
+    //   title: 'Resultados',
+    //   onClick: () => console.log('onClick'),
+    // },
+    // {
+    //   title: 'Duplicar',
+    //   onClick: () => console.log('onClick'),
+    // },
     {
-      title: 'Editar',
-      onClick: () => console.log('onClick'),
-    },
-    {
-      title: 'Editar rastreio',
-      onClick: () => console.log('onClick'),
-    },
-    {
-      title: 'Resultados',
-      onClick: () => console.log('onClick'),
-    },
-    {
-      title: 'Duplicar',
-      onClick: () => console.log('onClick'),
-    },
-    {
-      title: 'Histório',
+      title: 'Ativar/Desativar',
       onClick: () => console.log('onClick'),
     },
     {
       title: 'Excluir',
-      onClick: () => console.log('onClick'),
+      onClick: () => handleDeleteClick(),
       isDanger: true,
     },
   ];
@@ -88,22 +92,10 @@ const Master: React.FC = () => {
       ),
     },
     {
-      title: 'Cliente',
-      dataIndex: 'client',
-      key: 'client',
-      render: () => <Text>Magalu</Text>,
-    },
-    {
       title: 'Criado em',
       dataIndex: 'replied',
       key: 'replied',
       render: () => <Text>01/06/2021</Text>,
-    },
-    {
-      title: 'Rastreio',
-      dataIndex: '_id',
-      key: '_id',
-      render: () => <Text>16/06 a 20/07</Text>,
     },
     {
       title: 'Status',
@@ -140,6 +132,7 @@ const Master: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<PageTabs>('questionarios');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { companies } = useSelector(({ companies }: RootState) => companies);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
   const resumeItems = [
     {
@@ -164,6 +157,10 @@ const Master: React.FC = () => {
     },
   ];
 
+  const handleDeleteClick = () => {
+    setIsConfirmationModalOpen(true);
+  };
+
   const handleTableButtonClick = (index: number) => {
     setCurrentOpenMenu(index);
   };
@@ -178,6 +175,18 @@ const Master: React.FC = () => {
 
   const handleClose = () => {
     setIsModalOpen(false);
+  };
+
+  const handleConfirmationModalClose = () => {
+    setIsConfirmationModalOpen(false);
+  };
+
+  const handleFeedbackClick = (value: boolean) => {
+    if (value) {
+      dispatch(deleteQuestionaryRequest(questionaries[currentOpenMenu]._id));
+    }
+    setIsConfirmationModalOpen(false);
+    setCurrentOpenMenu(-1);
   };
 
   useEffect(() => {
@@ -240,6 +249,12 @@ const Master: React.FC = () => {
       </Row>
       <CreateQuestionary isModalOpen={isModalOpen} onClose={handleClose} />
       <Table isLoading={isLoading} items={questionaries} fields={tableFields} />
+
+      <ConfirmationModal
+        onFeedbackClick={handleFeedbackClick}
+        isOpen={isConfirmationModalOpen}
+        onClose={handleConfirmationModalClose}
+      />
     </Box>
   );
 };

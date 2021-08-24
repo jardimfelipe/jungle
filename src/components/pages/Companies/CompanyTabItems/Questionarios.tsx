@@ -42,13 +42,13 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
       title: 'Criado em',
       dataIndex: 'createdAt',
       key: 'createdAt',
-      render: (value: Question[]) => <Text>06/2021</Text>,
+      render: (value: Question[]) => <Text>{value}</Text>,
     },
     {
       title: 'Rastreio',
       dataIndex: 'track',
       key: 'track',
-      render: () => <Text>06/2021</Text>,
+      render: () => <Text>08/2021</Text>,
     },
     {
       title: 'Status',

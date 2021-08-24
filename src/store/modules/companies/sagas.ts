@@ -34,7 +34,7 @@ function* getCompany({ payload }: ActionType<typeof actions.getCompanyRequest>) 
 
 function* insertQuestionary({ payload }: ActionType<typeof actions.insertQuestionaryRequest>) {
   try {
-    yield call(api, "/questionnaires", { method: "PUT", data: payload });
+    yield call(api, "/questionnaires/tracking", { method: "POST", data: payload });
     yield put(actions.insertQuestionarySuccess());
   } catch (error) {
     if (error instanceof Error) {

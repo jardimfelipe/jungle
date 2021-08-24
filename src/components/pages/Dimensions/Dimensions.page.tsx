@@ -5,20 +5,27 @@ import {
   Box,
   Button,
   ColumnButton,
+  ConfirmationModal,
   IconButton,
   // Pagination,
   PromotionalCard,
   Table,
+  TableMenu,
   Typography,
 } from '../..';
-import { BiSearch, BiDotsVertical } from 'react-icons/bi';
+import { BiSearch } from 'react-icons/bi';
 import { useTheme } from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
+import {
+  deleteDimensionsRequest,
+  getDimensionsRequest,
+} from '../../../store/modules/dimensions/actions';
 import DimensionForm from './Modals/Dimension.form';
 import FeedbackModal from './Modals/FeedbackModal';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { Field } from '../../molecules/Table/table.types';
 
 const { Title, Text } = Typography;
 
@@ -27,15 +34,49 @@ const Dimensions: React.FC = () => {
   const { dimensions, isLoading } = useSelector(
     ({ dimensions }: RootState) => dimensions
   );
+  const [currentOpenMenu, setCurrentOpenMenu] = useState(-1);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+
+  const tableMenuItems = [
+    {
+      title: 'Excluir',
+      onClick: () => handleDeleteClick(),
+      isDanger: true,
+    },
+  ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDeleteClick = () => {
+    setIsConfirmationModalOpen(true);
+  };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
+  const handleConfirmationModalClose = () => {
+    setIsConfirmationModalOpen(false);
+  };
+
   const handleCreateDimension = () => {
     setIsModalOpen(true);
+  };
+
+  const handleTableButtonClick = (index: number) => {
+    setCurrentOpenMenu(index);
+  };
+
+  const handleCloseButton = () => {
+    setCurrentOpenMenu(-1);
+  };
+
+  const handleFeedbackClick = (value: boolean) => {
+    if (value) {
+      dispatch(deleteDimensionsRequest(dimensions[currentOpenMenu]._id));
+    }
+    setIsConfirmationModalOpen(false);
+    setCurrentOpenMenu(-1);
   };
 
   // const [pageNumber, setPageNumber] = useState(1);
@@ -49,7 +90,7 @@ const Dimensions: React.FC = () => {
     dispatch(getDimensionsRequest());
   }, [dispatch]);
 
-  const tableFields = [
+  const tableFields: Field[] = [
     {
       title: 'Dimensão',
       dataIndex: 'name',
@@ -107,13 +148,22 @@ const Dimensions: React.FC = () => {
       title: '',
       dataIndex: 'id',
       key: 'id',
-      render: (value: string) => (
-        <ColumnButton onClick={() => console.log(value)}>
-          <BiDotsVertical size="24" />
-        </ColumnButton>
+      render: (value, object, index) => (
+        <>
+          <TableMenu
+            onClose={() => handleCloseButton()}
+            isOpen={currentOpenMenu === index}
+            menuItems={tableMenuItems}
+            itemIndex={index}
+          />
+          <ColumnButton onClick={() => handleTableButtonClick(index)}>
+            <BsThreeDotsVertical color={theme.colors.black} size="24" />
+          </ColumnButton>
+        </>
       ),
     },
   ];
+
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />
@@ -158,6 +208,12 @@ const Dimensions: React.FC = () => {
 
       <DimensionForm isModalOpen={isModalOpen} onClose={handleModalClose} />
       <FeedbackModal />
+
+      <ConfirmationModal
+        onFeedbackClick={handleFeedbackClick}
+        isOpen={isConfirmationModalOpen}
+        onClose={handleConfirmationModalClose}
+      />
 
       {/* <Row end="xs">
         <Pagination onChange={handlePagination} totalItems={30} pageSize={5} />

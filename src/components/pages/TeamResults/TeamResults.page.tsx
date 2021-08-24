@@ -5,7 +5,7 @@ import {
   Card,
   PromotionalCard,
   Typography,
-  Image,
+  // Image,
   Icons,
   ResultLine,
   ChartWrapper,
@@ -13,21 +13,21 @@ import {
 } from '../..';
 import { CardHeader, SocialAspectsCard } from '../MyResults/MyResults.styled';
 import { BiFace } from 'react-icons/bi';
-import { Col, Row } from 'react-flexbox-grid';
+// import { Col, Row } from 'react-flexbox-grid';
 import {
   CardCharts,
   CardIcon,
-  CardImage,
+  // CardImage,
   CharFlexContainer,
   ChartsBarContainer,
   FlexContainer,
   LevelsContainer,
   ProgressBarContainer,
-  StyledCol,
+  // StyledCol,
   CardBody,
 } from './TeamResults.styled';
-import Woman from '../../../assets/team-resume/woman.png';
-import Man from '../../../assets/team-resume/man.png';
+// import Woman from '../../../assets/team-resume/woman.png';
+// import Man from '../../../assets/team-resume/man.png';
 import ProgressBar from '@ramonak/react-progress-bar';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,6 +56,10 @@ const TeamResults: React.FC = () => {
     return labelArray[0];
   };
 
+  const getProtectionLevelItems = () => {
+    return results.statistics.filter((i, index) => index < 5);
+  };
+
   const isEmpty = () =>
     results.statistics.every((statistic) => statistic.team_protection === 0);
 
@@ -82,15 +86,15 @@ const TeamResults: React.FC = () => {
         <EmptyResults />
       ) : (
         <>
-          <Row>
-            {/* <StyledCol xs={12} lg={7}>
-          <Card>
-            <Title level={4} variant="primary">
-              Análise dos especialistas
-            </Title>
-            <Text paragraph>{results.analysis.expert_analysis}</Text>
-          </Card>
-        </StyledCol> */}
+          {/* <Row>
+            <StyledCol xs={12} lg={7}>
+              <Card>
+                <Title level={4} variant="primary">
+                  Análise dos especialistas
+                </Title>
+                <Text paragraph>{results.analysis.expert_analysis}</Text>
+              </Card>
+            </StyledCol>
 
             <StyledCol xs={12} md={6}>
               <Card>
@@ -150,38 +154,38 @@ const TeamResults: React.FC = () => {
             </StyledCol>
           </Row>
           <Row>
-            {/* <StyledCol xs={12} lg={7}>
-          <Card>
-            <Title level={4} color={theme.colors.p2}>
-              Oportunidades de melhoria
-            </Title>
-            <Text>Foco em:</Text>
-            <ul>
-              {results.analysis.improvement_opportunity.map(
-                (opportunity, index) => (
-                  <li key={`improvement_opportunity-${index}`}>
-                    {opportunity}
-                  </li>
-                )
-              )}
-            </ul>
-          </Card>
-        </StyledCol> */}
+            <StyledCol xs={12} lg={7}>
+              <Card>
+                <Title level={4} color={theme.colors.p2}>
+                  Oportunidades de melhoria
+                </Title>
+                <Text>Foco em:</Text>
+                <ul>
+                  {results.analysis.improvement_opportunity.map(
+                    (opportunity, index) => (
+                      <li key={`improvement_opportunity-${index}`}>
+                        {opportunity}
+                      </li>
+                    )
+                  )}
+                </ul>
+              </Card>
+            </StyledCol>
 
-            {/* <StyledCol xs>
-          <Card>
-            <Title level={4} variant="primary">
-              Como chegar lá?
-            </Title>
-            <Text>Foco em:</Text>
-            <ul>
-              {results.analysis.how_to.map((opportunity, index) => (
-                <li key={`how-to-${index}`}>{opportunity}</li>
-              ))}
-            </ul>
-          </Card>
-        </StyledCol> */}
-          </Row>
+            <StyledCol xs>
+              <Card>
+                <Title level={4} variant="primary">
+                  Como chegar lá?
+                </Title>
+                <Text>Foco em:</Text>
+                <ul>
+                  {results.analysis.how_to.map((opportunity, index) => (
+                    <li key={`how-to-${index}`}>{opportunity}</li>
+                  ))}
+                </ul>
+              </Card>
+            </StyledCol>
+          </Row> */}
 
           {/* Níveis de proteção */}
           <Title level={3}>Niveis de proteção</Title>
@@ -195,9 +199,13 @@ const TeamResults: React.FC = () => {
                   <Skeleton height={250} />
                 </Box>
               </>
+            ) : getProtectionLevelItems().every(
+                (r) => r.team_protection === 0
+              ) ? (
+              <EmptyResults />
             ) : (
-              results.statistics.map((statistics, index) =>
-                index <= 4 ? (
+              getProtectionLevelItems().map((statistics, index) =>
+                index <= 4 && statistics.team_protection > 0 ? (
                   <Card key={`${statistics}-card-${index}`}>
                     <Box
                       params={{

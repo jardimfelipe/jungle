@@ -12,6 +12,9 @@ export const ChartWrapper = styled.div<{ size?: number }>`
     top: 56%;
     left: 52%;
     transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* color: #4ed9a7; */
   }
 `;

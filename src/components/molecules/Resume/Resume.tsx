@@ -1,6 +1,10 @@
 import React, { ReactNode } from 'react';
 
 import { Box, Card, ChartWrapper, TableChart, Typography } from '../..';
+import {
+  TableContainer,
+  TableImage,
+} from '../../organisms/CompanyTable/CompanyTable.styled';
 
 const { Text } = Typography;
 
@@ -14,9 +18,13 @@ type ResumeProps = {
   items: Item[];
   date?: string;
   filled?: number;
+  company?: {
+    image: string;
+    name: string;
+  };
 };
 
-const Resume: React.FC<ResumeProps> = ({ items, date, filled }) => {
+const Resume: React.FC<ResumeProps> = ({ items, date, filled, company }) => {
   const chartData = {
     datasets: [
       {
@@ -37,12 +45,23 @@ const Resume: React.FC<ResumeProps> = ({ items, date, filled }) => {
         }}
       >
         <Box params={{ display: 'flex', flexDirection: 'column' }}>
-          <Text>
-            <small>Resumo</small>
-          </Text>
-          <Text size={24} textDecoration="strong" variant="primary">
-            Jungle
-          </Text>
+          {company ? (
+            <TableContainer>
+              <TableImage src={company.image} alt={company.image} />
+              <Text textDecoration="strong" variant="primary">
+                {company.name}
+              </Text>
+            </TableContainer>
+          ) : (
+            <>
+              <Text>
+                <small>Resumo</small>
+              </Text>
+              <Text size={24} textDecoration="strong" variant="primary">
+                Jungle
+              </Text>
+            </>
+          )}
         </Box>
 
         <Box params={{ display: 'flex', gap: '24px' }}>

@@ -4,7 +4,7 @@ import { rgba } from 'polished';
 import QuestionImage from '../../../assets/question.png';
 import { StyledButton } from '../Button/Button.styled';
 
-export const Questionary = styled.div<{ image: string }>`
+export const Questionary = styled.div<{ image: string; isFuture: boolean }>`
   width: 100%;
   border-radius: 10px;
   display: flex;
@@ -17,6 +17,7 @@ export const Questionary = styled.div<{ image: string }>`
   min-height: 70px;
   padding: 28px 32px;
   color: #ffffff;
+  ${(props) => (props.isFuture ? 'opacity: 0.5' : null)};
   h3 {
     line-height: 1;
   }

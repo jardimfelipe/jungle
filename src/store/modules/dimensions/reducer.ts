@@ -29,6 +29,15 @@ export default function Reducer(
     case DimensionsTypeKeys.CREATE_DIMENSIONS_FAILURE:
       return { ...state, isLoading: false };
 
+    case DimensionsTypeKeys.DELETE_DIMENSIONS_REQUEST:
+      return { ...state, isLoading: true };
+
+    case DimensionsTypeKeys.DELETE_DIMENSIONS_SUCCESS:
+      return { ...state, isLoading: false }
+
+    case DimensionsTypeKeys.DELETE_DIMENSIONS_FAILURE:
+      return { ...state, isLoading: false };
+
     case DimensionsTypeKeys.RESET_FEEDBACK:
       return {
         ...state, feedback: {

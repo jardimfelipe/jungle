@@ -11,7 +11,7 @@ import {
 import { Col, Row } from 'react-flexbox-grid';
 import Resume from '../../molecules/Resume/Resume';
 import { FiUsers } from 'react-icons/fi';
-import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
+import { BsArrowLeft } from 'react-icons/bs';
 import { BiDockLeft, BiSearch } from 'react-icons/bi';
 import { Colaboradores, Questionarios } from './CompanyTabItems';
 
@@ -52,12 +52,12 @@ const Company: React.FC = () => {
     {
       name: 'Questionários',
       icon: <BiDockLeft size="32" color="#3BC8E3" />,
-      total: company.questionaries.length,
+      total: routeCompany.questionnaires,
     },
     {
       name: 'Ativos',
       icon: <BiDockLeft size="32" color={theme.colors.p3} />,
-      total: company.questionaries.filter(({ active }) => active).length,
+      total: routeCompany.questionnaires,
     },
     {
       name: 'Inativos',
@@ -101,13 +101,21 @@ const Company: React.FC = () => {
           <BsArrowLeft />
           <Text>Voltar</Text>
         </NavigationButton>
-        <NavigationButton textColor="primary">
+        {/* <NavigationButton textColor="primary">
           <Text>Editar Cadastro</Text>
           <BsArrowRight />
-        </NavigationButton>
+        </NavigationButton> */}
       </Box>
 
-      <Resume items={companyItems} date="15/06/2021" filled={70} />
+      <Resume
+        company={{
+          name: routeCompany.name,
+          image: routeCompany.image,
+        }}
+        items={companyItems}
+        date="15/06/2021"
+        filled={70}
+      />
 
       <Row middle="xs" between="xs">
         <Col xs>

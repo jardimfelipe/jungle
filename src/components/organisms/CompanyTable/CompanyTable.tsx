@@ -23,17 +23,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CompanyItem, RootState } from '../../../store';
 import { getCompaniesRequest } from '../../../store/modules/companies/actions';
 
-const chartData = {
-  datasets: [
-    {
-      label: null,
-      data: [70, 30],
-      backgroundColor: ['#4ED9A7', '#F1F5FA'],
-      borderWidth: 0,
-    },
-  ],
-};
-
 const { Text } = Typography;
 
 const CompanyTable: React.FC<CompanyTableProps> = ({
@@ -63,10 +52,7 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
       key: 'company',
       render: (value, object: CompanyItem) => (
         <TableContainer>
-          <TableImage
-            src="https://media.glassdoor.com/sqll/382606/magazine-luiza-squarelogo-1564520166281.png"
-            alt={object.image}
-          />
+          <TableImage src={object.image} alt={object.image} />
           <Text textDecoration="strong" variant="primary">
             {object.name}
           </Text>
@@ -97,13 +83,24 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
     },
     {
       title: 'Preenchimento',
-      dataIndex: 'filled',
-      key: 'filled',
+      dataIndex: 'completed',
+      key: 'completed',
       render: (value) => (
         <TableContainer>
           <ChartWrapper>
-            <TableChart data={chartData} />
-            <Text textDecoration="strong">52%</Text>
+            <TableChart
+              data={{
+                datasets: [
+                  {
+                    label: null,
+                    data: [value * 100, value * 100 - 100],
+                    backgroundColor: ['#4ED9A7', '#F1F5FA'],
+                    borderWidth: 0,
+                  },
+                ],
+              }}
+            />
+            <Text textDecoration="strong">{(value * 100).toFixed(0)}%</Text>
           </ChartWrapper>
           <Text>Preenchimento</Text>
         </TableContainer>
@@ -111,9 +108,9 @@ const CompanyTable: React.FC<CompanyTableProps> = ({
     },
     {
       title: 'Ativo',
-      dataIndex: 'active',
-      key: 'active',
-      render: () => '15/06/2021',
+      dataIndex: 'createAt',
+      key: 'createAt',
+      render: (value) => value || new Date().toLocaleDateString('pt-br'),
     },
     {
       title: '',

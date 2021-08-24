@@ -1,6 +1,6 @@
-export type ModalProps = {
+export interface ModalProps {
   isOpen: boolean;
-  onClose?: (e: any) => void;
+  onClose?: (e?: any) => void;
   width?: number;
   height?: number;
-};
+}

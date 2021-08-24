@@ -3,13 +3,15 @@ export interface RequestParams {
   pageNumber?: number
 }
 
+export type Feedbacks = 'error' | 'success' | ''
+
 export type RequestError = {
   status: boolean;
   message: string;
 }
 
 export type RequestFeedback = {
-  status: 'error' | 'success' | '';
+  status: Feedbacks;
   message: string
 }
 
