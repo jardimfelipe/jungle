@@ -57,6 +57,7 @@ const Master: React.FC = () => {
     dispatch(getDimensionsRequest());
     dispatch(getQuestionsRequest());
   }, [dispatch]);
+
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard

@@ -76,7 +76,7 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
             <ProgressBar
               bgColor={ProtectionLevelColors[params.result]}
               height="8px"
-              completed={params.value}
+              completed={100 - params.value * 100}
               baseBgColor={lighten(0.35, ProtectionLevelColors[params.result])}
               isLabelVisible={false}
             />

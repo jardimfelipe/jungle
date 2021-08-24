@@ -58,7 +58,7 @@ const ResultLine: React.FC<ResultLineProps> = ({
             <FiArrowRight size="32" color={theme.colors.blue} />
           </ArrowBox>
 
-          <YouAreHereContainer position={`${getUserPosition()}%`}>
+          <YouAreHereContainer position={`${100 - getUserPosition()}%`}>
             <GoPrimitiveDot size="18px" />
             {!isMobile && <Text>Você está aqui</Text>}
           </YouAreHereContainer>

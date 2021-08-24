@@ -287,8 +287,10 @@ const TeamResults: React.FC = () => {
                                     {
                                       label: null,
                                       data: [
-                                        statistics.team_protection * 100,
-                                        statistics.team_protection * 100 - 100,
+                                        100 - statistics.team_protection * 100,
+                                        100 -
+                                          statistics.team_protection * 100 -
+                                          100,
                                       ],
                                       backgroundColor: ['#4ED9A7', '#F1F5FA'],
                                       borderWidth: 0,
@@ -297,7 +299,7 @@ const TeamResults: React.FC = () => {
                                 }}
                               />
                               <Text color="#4ED9A7" textDecoration="strong">
-                                {statistics.team_protection * 100}%
+                                {100 - statistics.team_protection * 100}%
                               </Text>
                             </ChartWrapper>
                             <Text>
