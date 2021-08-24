@@ -7,6 +7,8 @@ import { Box, Typography, IconButton } from '../..';
 import { useTheme } from 'styled-components';
 import { lighten } from 'polished';
 import { Statistics } from '../../../store/modules/results/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 const { Text } = Typography;
 enum ProtectionLevelColors {
@@ -19,8 +21,13 @@ enum ProtectionLevelColors {
 const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
   const theme = useTheme();
   const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
+  const { currentUser } = useSelector(({ login }: RootState) => login);
 
   const handleClick = () => {
+    if (
+      params[currentUser.role === 'gestor' ? 'team_protection' : 'value'] === 0
+    )
+      return;
     setIsAnalysisOpen(!isAnalysisOpen);
   };
 
@@ -47,20 +54,25 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
           <Box params={{ display: 'flex', alignItems: 'flex-end' }}>
             <Text
               color={
-                params['team_protection' || 'value'] === 0
+                params[
+                  currentUser.role === 'gestor' ? 'team_protection' : 'value'
+                ] === 0
                   ? theme.colors.black
                   : ProtectionLevelColors[params.result]
               }
               textDecoration="strong"
             >
               <small>
-                {params['team_protection' || 'value'] === 0
+                {params[
+                  currentUser.role === 'gestor' ? 'team_protection' : 'value'
+                ] === 0
                   ? 'Ainda não avaliado'
                   : params.result}
               </small>
             </Text>
           </Box>
-          {params['team_protection' || 'value'] !== 0 && (
+          {params[currentUser.role === 'gestor' ? 'team_protection' : 'value'] >
+            0 && (
             <ProgressBar
               bgColor={ProtectionLevelColors[params.result]}
               height="8px"

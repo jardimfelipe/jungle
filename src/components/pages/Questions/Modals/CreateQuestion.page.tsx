@@ -52,6 +52,11 @@ const weightOptions = [
 
 const typeOptions = [{ value: 'choice', label: 'Escolha' }];
 
+const valueOptions = [...new Array(11)].map((v, i) => ({
+  value: i,
+  label: i,
+}));
+
 const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -79,6 +84,14 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
       e.preventDefault();
       handleAddOption();
     }
+  };
+
+  const handleOptionValue = (index: number, value: number) => {
+    const newOptions = formik.values.options.map((option, optionIndex) => ({
+      label: option.label,
+      value: index === optionIndex ? value : option.value,
+    }));
+    formik.setFieldValue('options', newOptions);
   };
 
   const handleCancelButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -250,13 +263,26 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
           </InputWrapper>
 
           <AnswerBox>
-            {formik.values.options.map(({ label }) => (
+            {formik.values.options.map(({ label }, index) => (
               <Box
                 key={`options-${label}-${Math.random()}`}
                 params={{ display: 'flex', alignItems: 'center', gap: '5px' }}
               >
                 <OptionMark />
                 <Text>{label}</Text>
+                <Box params={{ flex: '0 0 150px' }}>
+                  <Select
+                    onChange={(selectedOption: OptionType | null) =>
+                      handleOptionValue(index, selectedOption?.value)
+                    }
+                    value={valueOptions.find(
+                      (option) =>
+                        +option.value === +formik.values.options[index].value
+                    )}
+                    placeholder="Selecione"
+                    options={valueOptions}
+                  />
+                </Box>
               </Box>
             ))}
             <Textfield

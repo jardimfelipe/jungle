@@ -12,6 +12,7 @@ import useMobileWidth from '../../../../hooks/useMobileWidth';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
 import { getResultsRequest } from '../../../../store/modules/results/actions';
+import { getCompaniesRequest } from '../../../../store/modules/companies/actions';
 
 const { Text } = Typography;
 
@@ -23,10 +24,15 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
   const isMobile = useMobileWidth();
   const dispatch = useDispatch();
   const { results } = useSelector((state: RootState) => state.results);
+  const { companies } = useSelector(({ companies }: RootState) => companies);
 
   useEffect(() => {
     !results.statistics.length && dispatch(getResultsRequest(currentUser.role));
   }, [dispatch, results, currentUser]);
+
+  useEffect(() => {
+    dispatch(getCompaniesRequest());
+  }, [dispatch]);
 
   return (
     <>
@@ -54,7 +60,10 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
           {currentUser.name}
         </Text>
         <Text variant="primary" textDecoration="strong">
-          Magalu
+          {
+            companies.find((company) => company.id === currentUser.company)
+              ?.name
+          }
         </Text>
       </UserInfo>
       <Box params={{ marginTop: '50px' }}>

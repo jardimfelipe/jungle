@@ -107,7 +107,7 @@ const Resume: React.FC<ResumeProps> = ({
           </Box>
         )}
 
-        {filled && (
+        {!!filled && (
           <Box params={{ display: 'flex', alignItems: 'center' }}>
             <ChartWrapper>
               <TableChart data={chartData} />
