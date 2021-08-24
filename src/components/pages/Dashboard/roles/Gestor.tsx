@@ -70,9 +70,11 @@ const Gestor: React.FC = () => {
   // const { results } = useSelector((state: RootState) => state.results);
 
   useEffect(() => {
-    dispatch(getQuestionariesRequest());
+    dispatch(
+      getQuestionariesRequest({ headers: { company: currentUser.company } })
+    );
     dispatch(getResultsRequest('gestor'));
-  }, [dispatch]);
+  }, [dispatch, currentUser]);
 
   useEffect(() => {
     feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));

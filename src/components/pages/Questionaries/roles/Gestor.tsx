@@ -65,6 +65,7 @@ const Questionaries: React.FC = () => {
   const { questionaries, feedback, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
+  const { currentUser } = useSelector(({ login }: RootState) => login);
   const [currentTab, setCurrentTab] = useState<TabComponents>('Ativos');
   const isMobile = useMobileWidth();
 
@@ -73,8 +74,14 @@ const Questionaries: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getQuestionariesRequest());
-  }, [dispatch]);
+    dispatch(
+      getQuestionariesRequest({
+        headers: {
+          company: currentUser.company,
+        },
+      })
+    );
+  }, [dispatch, currentUser]);
 
   useEffect(() => {
     feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));

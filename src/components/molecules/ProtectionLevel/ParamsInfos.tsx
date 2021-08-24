@@ -46,19 +46,29 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
           <Text textDecoration="strong">{params.name}</Text>
           <Box params={{ display: 'flex', alignItems: 'flex-end' }}>
             <Text
-              color={ProtectionLevelColors[params.result]}
+              color={
+                params['team_protection' || 'value'] === 0
+                  ? theme.colors.black
+                  : ProtectionLevelColors[params.result]
+              }
               textDecoration="strong"
             >
-              <small>{params.result}</small>
+              <small>
+                {params['team_protection' || 'value'] === 0
+                  ? 'Ainda não avaliado'
+                  : params.result}
+              </small>
             </Text>
           </Box>
-          <ProgressBar
-            bgColor={ProtectionLevelColors[params.result]}
-            height="8px"
-            completed={params.value}
-            baseBgColor={lighten(0.35, ProtectionLevelColors[params.result])}
-            isLabelVisible={false}
-          />
+          {params['team_protection' || 'value'] !== 0 && (
+            <ProgressBar
+              bgColor={ProtectionLevelColors[params.result]}
+              height="8px"
+              completed={params.value}
+              baseBgColor={lighten(0.35, ProtectionLevelColors[params.result])}
+              isLabelVisible={false}
+            />
+          )}
         </ParamInfosContainer>
         <IconButton onClick={handleClick} icon={icon} />
       </Box>

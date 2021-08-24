@@ -4,9 +4,11 @@ import api from "../../../services/api";
 import * as actions from "./actions";
 import { QuestionariesTypeKeys } from "./types";
 
-function* getQuestionaries({ payload }: ActionType<typeof actions.getQuestionaryRequest>) {
+function* getQuestionaries({ payload }: ActionType<typeof actions.getQuestionariesRequest>) {
   try {
-    const { data } = yield call(api, `/questionnaires/${payload === 'user' ? 'current' : ''}`);
+    const headers = payload?.headers || {}
+    const userRole = payload?.userRole || 'admin_jungle'
+    const { data } = yield call(api, `/questionnaires/${userRole === 'user' ? 'current' : ''}`, { headers });
     yield put(actions.getQuestionariesSuccess(data));
   } catch (error) {
     if (error instanceof Error) {

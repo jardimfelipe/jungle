@@ -1,5 +1,5 @@
 import { ActionType } from "typesafe-actions";
-import { DimensionItem, RequestFeedback } from "../exportTypes";
+import { DimensionItem, RequestFeedback, UserRoles } from "../exportTypes";
 import * as actions from "./actions";
 
 export enum QuestionariesTypeKeys {
@@ -89,4 +89,11 @@ export type QuestionaryAnswers = {
   dimension: string,
   user: string
   answers: UserAnswer[]
+}
+
+export type GetQuestionariesParams = {
+  userRole?: UserRoles;
+  headers?: {
+    company: string;
+  }
 }

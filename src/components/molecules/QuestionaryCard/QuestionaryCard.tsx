@@ -95,7 +95,10 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
           {questionary.dimension?.name || 'Ansiedade'}
         </Tag>
         {!questionary.answered && (
-          <QuestionaryTag size="large">{getDateInfo()}</QuestionaryTag>
+          <QuestionaryTag size="large">
+            {' '}
+            Disponível até {getDateInfo()}
+          </QuestionaryTag>
         )}
       </div>
       <Box params={{ display: 'flex', flexDirection: 'column' }}>

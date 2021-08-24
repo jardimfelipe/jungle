@@ -62,7 +62,7 @@ const Colaborador: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getQuestionariesRequest('user'));
+    dispatch(getQuestionariesRequest({ userRole: 'user' }));
     dispatch(getDimensionsRequest());
   }, [dispatch]);
 

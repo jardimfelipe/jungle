@@ -57,7 +57,7 @@ const Questionaries: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getQuestionariesRequest('user'));
+    dispatch(getQuestionariesRequest({ userRole: 'user' }));
   }, [dispatch]);
 
   useEffect(() => {

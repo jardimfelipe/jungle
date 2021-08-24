@@ -90,9 +90,7 @@ const Companies: React.FC = () => {
   const [currentOpenMenu, setCurrentOpenMenu] = useState(-1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const { gestores, isLoading } = useSelector(
-    (state: RootState) => state.users
-  );
+  const { users, isLoading } = useSelector((state: RootState) => state.users);
   const { currentUser } = useSelector(({ login }: RootState) => login);
 
   const handleTableButtonClick = (index: number) => {
@@ -190,7 +188,7 @@ const Companies: React.FC = () => {
 
       <Row>
         <Col xs>
-          <Table items={gestores} fields={tableFields} isLoading={isLoading} />
+          <Table items={users} fields={tableFields} isLoading={isLoading} />
         </Col>
       </Row>
 

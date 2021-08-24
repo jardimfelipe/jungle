@@ -1,8 +1,8 @@
 import { action } from "typesafe-actions";
-import { RequestError, UserRoles } from "../exportTypes";
-import { QuestionariesTypeKeys, Questionary, QuestionaryAnswers, QuestionaryModel } from "./types";
+import { RequestError } from "../exportTypes";
+import { GetQuestionariesParams, QuestionariesTypeKeys, Questionary, QuestionaryAnswers, QuestionaryModel } from "./types";
 
-export function getQuestionariesRequest(params: UserRoles = 'admin_jungle') {
+export function getQuestionariesRequest(params?: GetQuestionariesParams) {
   return action(QuestionariesTypeKeys.GET_QUESTIONARIES_REQUEST, params);
 }
 
