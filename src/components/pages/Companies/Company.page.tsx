@@ -113,8 +113,8 @@ const Company: React.FC = () => {
           image: routeCompany.image,
         }}
         items={companyItems}
-        date="15/06/2021"
-        filled={70}
+        date={routeCompany.createdAt || new Date().toLocaleDateString('pt-br')}
+        filled={(routeCompany.completed * 100).toFixed(0)}
       />
 
       <Row middle="xs" between="xs">

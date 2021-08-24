@@ -16,20 +16,25 @@ type Item = {
 
 type ResumeProps = {
   items: Item[];
-  date?: string;
-  filled?: number;
+  date?: string | Date;
+  filled?: number | string;
   company?: {
     image: string;
     name: string;
   };
 };
 
-const Resume: React.FC<ResumeProps> = ({ items, date, filled, company }) => {
+const Resume: React.FC<ResumeProps> = ({
+  items,
+  date,
+  filled = 0,
+  company,
+}) => {
   const chartData = {
     datasets: [
       {
         label: null,
-        data: [70, 30],
+        data: [filled, +filled - 100],
         backgroundColor: ['#4ED9A7', '#F1F5FA'],
         borderWidth: 0,
       },
