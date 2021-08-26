@@ -24,6 +24,7 @@ import { Questionary as QuestionaryType } from '../../../../store/modules/questi
 import { getDimensionsRequest } from '../../../../store/modules/dimensions/actions';
 import { useTheme } from 'styled-components';
 import { rgba } from 'polished';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -31,6 +32,7 @@ const Colaborador: React.FC = () => {
   const theme = useTheme();
   const history = useHistory();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { currentUser } = useSelector((state: RootState) => state.login);
   const [clickedQuestionary, setClickedQuestionary] = useState<
     Partial<QuestionaryType>
@@ -72,9 +74,8 @@ const Colaborador: React.FC = () => {
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
-        title={`Estamos felizes em ver você, ${currentUser.name}.`}
-        text="Todos nossos questionários são sigilosos, cientificamente validados,
-        para que você tenha uma vida mais saudável e produtiva."
+        title={`${t('greetings.user.title')}, ${currentUser.name}.`}
+        text={t('greetings.user.text')}
       />
 
       <Box
@@ -89,21 +90,23 @@ const Colaborador: React.FC = () => {
           <Text>Ver todos </Text> <BsArrowRight />
         </NavigationButton>
       </Box>
-      <Box params={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-        <Box params={{ display: 'block', width: '150px' }}>
-          <ProgressBar
-            bgColor={theme.colors.blue}
-            height="8px"
-            completed={getPercentage()}
-            baseBgColor={rgba(theme.colors.blue, 0.1)}
-            isLabelVisible={false}
-          />
+      {questionaries.length > 0 && (
+        <Box params={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <Box params={{ display: 'block', width: '150px' }}>
+            <ProgressBar
+              bgColor={theme.colors.blue}
+              height="8px"
+              completed={getPercentage()}
+              baseBgColor={rgba(theme.colors.blue, 0.1)}
+              isLabelVisible={false}
+            />
+          </Box>
+          <Text variant="primary">
+            <strong>{questionaries.filter((q) => q.answered).length}</strong> de{' '}
+            <strong>{questionaries.length}</strong> preenchidos
+          </Text>
         </Box>
-        <Text variant="primary">
-          <strong>{questionaries.filter((q) => q.answered).length}</strong> de{' '}
-          <strong>{questionaries.length}</strong> preenchidos
-        </Text>
-      </Box>
+      )}
       <QuestionariesGridContainer>
         {isQuestionaryLoading ? (
           <>

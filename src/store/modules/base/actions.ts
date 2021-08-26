@@ -1,5 +1,5 @@
 import { action } from "typesafe-actions";
-import { BaseKeys } from "./types";
+import { BaseKeys, Languages } from "./types";
 
 export function setSidebarState(state: boolean) {
   return action(BaseKeys.SET_SIDEBAR_STATE, state);
@@ -15,4 +15,8 @@ export function setSnackbarOpen(message: string) {
 
 export function setSnackbarClose() {
   return action(BaseKeys.SET_SNACKBAR_CLOSE)
+}
+
+export function setLanguage(param: Languages) {
+  return action(BaseKeys.SET_LANGUAGE, param)
 }

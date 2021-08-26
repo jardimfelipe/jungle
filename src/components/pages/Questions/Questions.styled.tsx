@@ -27,8 +27,8 @@ export const AnswerBox = styled.div`
   padding: 15px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   gap: 15px;
+  overflow-y: auto;
   height: 250px;
 `;
 

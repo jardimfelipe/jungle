@@ -29,9 +29,9 @@ import { getQuestionaryRequest } from '../../../store/modules/questionaries/acti
 const { Text, Title } = Typography;
 
 enum TagColors {
-  P1 = 'error',
-  P2 = 'warning',
-  P3 = 'success',
+  p1 = 'error',
+  p2 = 'warning',
+  p3 = 'success',
 }
 
 type CheckedQuestion = {

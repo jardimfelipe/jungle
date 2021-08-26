@@ -9,6 +9,7 @@ import {
   Select,
   RadioButton,
   Button,
+  IconButton,
 } from '../../..';
 import { Col, Row } from 'react-flexbox-grid';
 import {
@@ -21,7 +22,7 @@ import {
 } from '../Questions.styled';
 
 import { useTheme } from 'styled-components';
-import { AiFillPlusCircle } from 'react-icons/ai';
+import { AiFillPlusCircle, AiFillCloseCircle } from 'react-icons/ai';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getDimensionsRequest } from '../../../../store/modules/dimensions/actions';
@@ -96,7 +97,20 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
 
   const handleCancelButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    formik.resetForm();
     onClose();
+  };
+
+  const removeOption = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    e.preventDefault();
+    const removedOptionArray = formik.values.options.filter(
+      (_, optionIndex) => optionIndex !== index
+    );
+    console.log(removedOptionArray);
+    formik.setFieldValue('options', removedOptionArray);
   };
 
   const handleManualInputChanges = (input: string, value: string) => {
@@ -283,6 +297,12 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                     options={valueOptions}
                   />
                 </Box>
+                <IconButton
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                    removeOption(e, index)
+                  }
+                  icon={<AiFillCloseCircle />}
+                />
               </Box>
             ))}
             <Textfield

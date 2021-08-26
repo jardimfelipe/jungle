@@ -2,13 +2,14 @@ import React, { ReactNode } from 'react';
 import { StyledIconButton } from './IconButton.styled';
 
 // import { Container } from './styles';
-type IconButtonProps = {
+interface IconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
-  onClick?: () => void;
-};
+}
 
-const IconButton: React.FC<IconButtonProps> = ({ icon, onClick }) => {
-  return <StyledIconButton onClick={onClick}>{icon}</StyledIconButton>;
+const IconButton: React.FC<IconButtonProps> = (props) => {
+  const { icon, ...rest } = props;
+  return <StyledIconButton {...rest}>{icon}</StyledIconButton>;
 };
 
 export default IconButton;

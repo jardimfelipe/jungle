@@ -6,7 +6,8 @@ const INITIAL_STATE: BaseState = {
   snackbar: {
     snackbarMessage: '',
     snackbarState: false
-  }
+  },
+  currentLanguage: "ptBR"
 };
 
 export default function Reducer(
@@ -37,6 +38,13 @@ export default function Reducer(
           snackbarState: false,
           snackbarMessage: ''
         }
+      };
+    }
+
+    case BaseKeys.SET_LANGUAGE: {
+      return {
+        ...state,
+        currentLanguage: action.payload
       };
     }
 
