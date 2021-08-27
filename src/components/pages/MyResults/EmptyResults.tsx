@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Image, Typography } from '../../';
 
@@ -8,16 +9,14 @@ import { EmptyStateContainer } from '../../molecules/QuestionaryCard/Questionary
 const { Title, Text } = Typography;
 
 const EmptyResults: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <EmptyStateContainer>
       <Image src={EmptyQuestionary} />
       <Title variant="primary" level={2}>
-        Ainda não há resultados a serem exibidos
+        {t('emptyStates.myResults.title')}
       </Title>
-      <Text>
-        Após o preenchimento dos questionários será exibidos os resultados nesta
-        seção.
-      </Text>
+      <Text>{t('emptyStates.myResults.description')}</Text>
     </EmptyStateContainer>
   );
 };

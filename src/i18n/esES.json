@@ -3,6 +3,71 @@
     "user": {
       "title": "Estamos felices de verte",
       "text": "Todos nuestros cuestionarios son confidenciales, validados científicamente, para que puedas tener una vida más saludable y productiva"
+    },
+    "gestor": {
+      "title": "Bienvenido,",
+      "text": "Todos nuestros cuestionarios se crearon sobre una base científica. Vea los resultados que obtuvimos de su equipo."
+    },
+    "teamResults": {
+      "title": "¡Resultados de Ourmind!",
+      "text": "Aquí encontrarás el perfil de síntomas que encontramos en tu equipo. Este es el informe global de su empresa, es confidencial y no es posible identificar a ninguno de los encuestados. Cada dimensión principal (síntomas de ansiedad, síntomas depresivos, síntomas de agotamiento, estrés y riesgo de consumo de sustancias) se representa en un gráfico separado. Consulte la descripción de los hallazgos en los subtítulos."
+    },
+    "questionnaires": "Aquí encontrarás una lista de todos los cuestionarios disponibles, detalles como el plazo para cumplimentar, ¡además de poder hacer un seguimiento de la participación del equipo!"
+  },
+  "pages": {
+    "title": {
+      "questionaries": "Cuestionarios",
+      "teamResults": "Resultados del equipo",
+      "lastQuestionaries": "Utimos cuestionarios",
+      "understandingTeam": "Entendiendo al equipo",
+      "myResults": "Mis Resultados",
+      "protecionLevels": "Niveles de protección",
+      "biopsychosocialAspects": "Aspectos biopsicosociales",
+      "specialistAnalysis": "Análisis experto",
+      "youAreHere": "Tu estás aquí"
+    },
+    "filled": "llenados"
+  },
+  "button": {
+    "seeAll": "Ver todo",
+    "availables": "Disponíbles",
+    "inProgress": "En proceso",
+    "done": "Finalizados",
+    "changePersonalData": "Cambiar datos personales",
+    "changePassword": "Cambiar contraseña",
+    "talkToEspecialist": "Hablar con un experto",
+    "actives": "Activos",
+    "inactives": "Inactivos",
+    "soon": "Pronto"
+  },
+  "emptyStates": {
+    "questionaries": {
+      "title": "Aún no tienes cuestionarios para completar.",
+      "description": "Una vez que su empresa tenga cuestionarios, estarán disponibles aquí en esta sección."
+    },
+    "myResults": {
+      "title": "Aún no hay resultados para mostrar.",
+      "description": "Después de completar los cuestionarios, se mostrarán los resultados en esta sección."
     }
-  }
+  },
+  "table": {
+    "headers": {
+      "title": "Título",
+      "dimension": "Dimensión",
+      "questionNumber": "Número de preguntas",
+      "track": "Seguimiento",
+      "respondents": "Encuestados",
+      "replied": "Respondido"
+    }
+  },
+  "availableUntil": "Disponible hasta {{- date}}",
+  "availableIn": "Disponible en",
+  "questions": "preguntas",
+  "checkAnswers": "Revisar respuestas",
+  "resumeQuiz": "Reanudar la prueba",
+  "startQuestionarie": "Iniciar cuestionario",
+  "notRatedYet": "Aún no calificado",
+  "weAreHereToHelp": "Estamos aquí para ayudar",
+  "filledQuestionaries": "Cuestionarios completados",
+  "availableQuestionaries": "Cuestionarios disponibles"
 }

@@ -3,6 +3,71 @@
     "user": {
       "title": "We are happy to see you",
       "text": "All our questionnaires are confidential, scientifically validated, so you can have a healthier and more productive life."
+    },
+    "gestor": {
+      "title": "Welcome,",
+      "text": "All our questionnaires were created on a scientific basis. See the results we got from your team."
+    },
+    "teamResults": {
+      "title": "Ourmind Results!",
+      "text": "Here you will find the profile of symptoms that we found in your team. This is your company's global report and is confidential, and it is not possible to identify any of the respondents. Each main dimension (anxiety symptoms, depressive symptoms, burnout symptoms, stress and risk of substance use) is represented in a separate graph. See description of findings in captions."
+    },
+    "questionnaires": "Here you will find a list of all available questionnaires, details such as the period for filling in, as well as being able to follow up on the team's participation!"
+  },
+  "pages": {
+    "title": {
+      "questionaries": "Questionaries",
+      "teamResults": "Team results",
+      "lastQuestionaries": "Last questionnaires",
+      "myResults": "My results",
+      "protecionLevels": "Protection levels",
+      "biopsychosocialAspects": "Biopsychosocial aspects",
+      "specialistAnalysis": "Specialist analysis",
+      "youAreHere": "You are here",
+      "understandingTeam": "Understanding the team"
+    },
+    "filled": "filled"
+  },
+  "button": {
+    "seeAll": "See all",
+    "availables": "Availables",
+    "inProgress": "In progress",
+    "done": "Done",
+    "changePersonalData": "Change personal data",
+    "changePassword": "Change password",
+    "talkToEspecialist": "Talk to especialist",
+    "actives": "Actives",
+    "inactives": "Inactives",
+    "soon": "Soon"
+  },
+  "emptyStates": {
+    "questionaries": {
+      "title": "You do not have questionnaires to complete yet.",
+      "description": "Once your company has questionnaires, they will be made available here in this section"
+    },
+    "myResults": {
+      "title": "There are no results to display yet..",
+      "description": "After completing the questionnaires, the results in this section will be displayed."
     }
-  }
+  },
+  "table": {
+    "headers": {
+      "title": "Title",
+      "dimension": "Dimension",
+      "questionNumber": "Number of questions",
+      "track": "Track",
+      "respondents": "Respondents",
+      "replied": "Replied"
+    }
+  },
+  "availableUntil": "Available until {{- date}}",
+  "availableIn": "Available in",
+  "questions": "questions",
+  "checkAnswers": "Check answers",
+  "resumeQuiz": "Resume quiz",
+  "startQuestionarie": "Start quiz",
+  "notRatedYet": "Not rated yet",
+  "weAreHereToHelp": "We are here to help",
+  "filledQuestionaries": "Completed questionnaires",
+  "availableQuestionaries": "Available questionnaires"
 }

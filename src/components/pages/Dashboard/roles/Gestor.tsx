@@ -26,40 +26,14 @@ import { Questionary } from '../../../../store/modules/questionaries/types';
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
 import { BiDockLeft } from 'react-icons/bi';
 import { getResultsRequest } from '../../../../store/modules/results/actions';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
-
-const tableFields = [
-  {
-    title: 'Título',
-    dataIndex: 'title',
-    key: 'title',
-  },
-  {
-    title: 'Dimensão',
-    dataIndex: 'dimension',
-    key: 'dimension',
-    render: (value: Questionary['dimension']) => <Text>{value?.name}</Text>,
-  },
-  {
-    title: 'Número de perguntas',
-    dataIndex: 'question',
-    key: 'question',
-    render: (value: Questionary['question']) => (
-      <Text>{value.length} perguntas</Text>
-    ),
-  },
-  {
-    title: 'Rastreio',
-    dataIndex: '_id',
-    key: '_id',
-    render: () => <Text>16/06 a 20/07</Text>,
-  },
-];
 
 const Gestor: React.FC = () => {
   const history = useHistory();
   // const theme = useTheme();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const {
     questionaries,
@@ -79,18 +53,47 @@ const Gestor: React.FC = () => {
   useEffect(() => {
     feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
   }, [feedback, dispatch]);
+
+  const tableFields = [
+    {
+      title: t('table.headers.title'),
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: t('table.headers.dimension'),
+      dataIndex: 'dimension',
+      key: 'dimension',
+      render: (value: Questionary['dimension']) => <Text>{value?.name}</Text>,
+    },
+    {
+      title: t('table.headers.questionNumber'),
+      dataIndex: 'question',
+      key: 'question',
+      render: (value: Questionary['question']) => (
+        <Text>
+          {value.length} {t('questions')}
+        </Text>
+      ),
+    },
+    {
+      title: t('table.headers.track'),
+      dataIndex: '_id',
+      key: '_id',
+      render: () => <Text>16/06 a 20/07</Text>,
+    },
+  ];
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
-        title={`Seja bem-vindo ${currentUser.name}`}
-        text="Todos nossos questionários foram criados com base científica.
-        Veja os resultados que obtivemos da sua equipe."
+        title={`${t('greetings.gestor.title')} ${currentUser.name}`}
+        text={t('greetings.gestor.text')}
       />
 
       <Box params={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Title level={3}>Resultados do time</Title>
+        <Title level={3}>{t('pages.title.teamResults')}</Title>
         <NavigationButton onClick={() => history.push('/team-results')}>
-          <Text>Ver todos </Text> <BsArrowRight />
+          <Text>{t('button.seeAll')} </Text> <BsArrowRight />
         </NavigationButton>
       </Box>
 
@@ -163,21 +166,21 @@ const Gestor: React.FC = () => {
 
       <ResumeBox>
         <ResumeCard
-          name="Questionários preenchidos"
+          name={t('filledQuestionaries')}
           icon={<BiDockLeft color="#ffffff" />}
           total="0"
         />
         <ResumeCard
-          name="Questionários disponíveis"
+          name={t('availableQuestionaries')}
           icon={<BiDockLeft color="#ffffff" />}
           total={questionaries.length}
         />
       </ResumeBox>
 
       <Box params={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Title level={3}>Últimos questionários</Title>
+        <Title level={3}>{t('pages.title.lastQuestionaries')}</Title>
         <NavigationButton onClick={() => history.push('/questionaries')}>
-          <Text>Ver todos </Text> <BsArrowRight />
+          <Text>{t('button.seeAll')} </Text> <BsArrowRight />
         </NavigationButton>
       </Box>
 

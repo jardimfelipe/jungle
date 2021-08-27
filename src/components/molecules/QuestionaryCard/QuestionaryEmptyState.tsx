@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Image, Typography } from '../../';
 
@@ -8,16 +9,14 @@ import { EmptyStateContainer } from './QuestionaryCard.styled';
 const { Title, Text } = Typography;
 
 const QuestionaryEmptyState: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <EmptyStateContainer>
       <Image src={EmptyQuestionary} />
       <Title variant="primary" level={2}>
-        Você ainda tem questionários para preencher
+        {t('emptyStates.questionaries.title')}
       </Title>
-      <Text>
-        Assim que sua empresa tiver questionários, eles serão disponibilizados
-        aqui nesta seção
-      </Text>
+      <Text>{t('emptyStates.questionaries.description')}</Text>
     </EmptyStateContainer>
   );
 };

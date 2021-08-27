@@ -9,6 +9,7 @@ import { lighten } from 'polished';
 import { Statistics } from '../../../store/modules/results/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
+import { useTranslation } from 'react-i18next';
 
 const { Text } = Typography;
 enum ProtectionLevelColors {
@@ -20,6 +21,7 @@ enum ProtectionLevelColors {
 
 const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
   const { currentUser } = useSelector(({ login }: RootState) => login);
 
@@ -66,7 +68,7 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
                 {params[
                   currentUser.role === 'gestor' ? 'team_protection' : 'value'
                 ] === 0
-                  ? 'Ainda não avaliado'
+                  ? t('notRatedYet')
                   : params.result}
               </small>
             </Text>

@@ -17,50 +17,14 @@ import { getQuestionariesRequest } from '../../../../store/modules/questionaries
 import { RootState } from '../../../../store';
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
 import { Questionary } from '../../../../store/modules/questionaries/types';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
 type TabComponents = 'Ativos' | 'inativos' | 'em breve';
 
-const tableFields = [
-  {
-    title: 'Título',
-    dataIndex: 'title',
-    key: 'title',
-  },
-  {
-    title: 'Dimensão',
-    dataIndex: 'dimension',
-    key: 'dimension',
-    render: (value: Questionary['dimension']) => <Text>{value?.name}</Text>,
-  },
-  {
-    title: 'Número de perguntas',
-    dataIndex: 'question',
-    key: 'question',
-    render: (value: Questionary['question']) => (
-      <Text>{value.length} perguntas</Text>
-    ),
-  },
-  {
-    title: 'Respondentes',
-    dataIndex: 'respondents',
-    key: 'respondents',
-  },
-  {
-    title: 'Responderam',
-    dataIndex: 'replied',
-    key: 'replied',
-  },
-  {
-    title: 'Rastreio',
-    dataIndex: '_id',
-    key: '_id',
-    render: () => <Text>16/06 a 20/07</Text>,
-  },
-];
-
 const Questionaries: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { questionaries, feedback, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
@@ -86,11 +50,51 @@ const Questionaries: React.FC = () => {
   useEffect(() => {
     feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
   }, [feedback, dispatch]);
+
+  const tableFields = [
+    {
+      title: t('table.headers.title'),
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: t('table.headers.dimension'),
+      dataIndex: 'dimension',
+      key: 'dimension',
+      render: (value: Questionary['dimension']) => <Text>{value?.name}</Text>,
+    },
+    {
+      title: t('table.headers.questionNumber'),
+      dataIndex: 'question',
+      key: 'question',
+      render: (value: Questionary['question']) => (
+        <Text>
+          {value.length} {t('questions')}
+        </Text>
+      ),
+    },
+    {
+      title: t('table.headers.respondents'),
+      dataIndex: 'respondents',
+      key: 'respondents',
+    },
+    {
+      title: t('table.headers.replied'),
+      dataIndex: 'replied',
+      key: 'replied',
+    },
+    {
+      title: t('table.headers.track'),
+      dataIndex: '_id',
+      key: '_id',
+      render: () => <Text>16/06 a 20/07</Text>,
+    },
+  ];
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
-        title="Questionários disponíveis"
-        text="Aqui você encontrará a relação de todos os questionários disponíveis, detalhes como o período para preenchimento além de poder acompanhar como está a participação da equipe!"
+        title={t('availableQuestionaries')}
+        text={t('greetings.questionnaires')}
       />
 
       <Box
@@ -101,7 +105,7 @@ const Questionaries: React.FC = () => {
           flexWrap: 'wrap',
         }}
       >
-        <Title level={3}>Questionários</Title>
+        <Title level={3}>{t('pages.title.questionaries')}</Title>
         <Box
           params={{
             display: 'flex',
@@ -116,19 +120,19 @@ const Questionaries: React.FC = () => {
               onClick={() => handleTabClick('Ativos')}
               isActive={currentTab === 'Ativos'}
             >
-              Ativos
+              {t('button.actives')}
             </TabNavigation>
             <TabNavigation
               onClick={() => handleTabClick('inativos')}
               isActive={currentTab === 'inativos'}
             >
-              Inativos
+              {t('button.inactives')}
             </TabNavigation>
             <TabNavigation
               onClick={() => handleTabClick('em breve')}
               isActive={currentTab === 'em breve'}
             >
-              Em breve
+              {t('button.soon')}
             </TabNavigation>
           </Box>
         </Box>

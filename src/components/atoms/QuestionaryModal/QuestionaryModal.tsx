@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-flexbox-grid';
+import { useTranslation } from 'react-i18next';
 
 import { Box, Modal, Typography, Image } from '../..';
 import QuestionayImage from '../../../assets/questionary-modal.png';
@@ -17,6 +18,7 @@ const QuestionaryModal: React.FC<QuestionaryModalProps> = ({
   questionaryTitle,
 }) => {
   const isMobile = useMobileWidth();
+  const { t } = useTranslation();
   return (
     <Modal isOpen={isModalOpen} onClose={onClose}>
       <Row>
@@ -47,7 +49,7 @@ const QuestionaryModal: React.FC<QuestionaryModalProps> = ({
           </Col>
         )}
         <ModalButton onClick={onClick} variant="primary" block>
-          Iniciar questionário
+          {t('startQuestionarie')}
         </ModalButton>
       </Row>
     </Modal>

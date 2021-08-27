@@ -16,6 +16,7 @@ import {
 import useMobileWidth from '../../../hooks/useMobileWidth';
 import { useTheme } from 'styled-components';
 import { ResultLineProps } from './ResultLine.types';
+import { useTranslation } from 'react-i18next';
 
 const { Text } = Typography;
 const ResultLine: React.FC<ResultLineProps> = ({
@@ -26,6 +27,7 @@ const ResultLine: React.FC<ResultLineProps> = ({
   minText,
 }) => {
   const [showAnalysis, setShowAnalysis] = useState(false);
+  const { t } = useTranslation();
   const isMobile = useMobileWidth();
   const theme = useTheme();
 
@@ -60,7 +62,7 @@ const ResultLine: React.FC<ResultLineProps> = ({
 
           <YouAreHereContainer position={`${100 - getUserPosition()}%`}>
             <GoPrimitiveDot size="18px" />
-            {!isMobile && <Text>Você está aqui</Text>}
+            {!isMobile && <Text>{t('pages.title.youAreHere')}</Text>}
           </YouAreHereContainer>
         </LineContainer>
         <TextContainer className="right-text">
@@ -70,13 +72,13 @@ const ResultLine: React.FC<ResultLineProps> = ({
       {isMobile && (
         <Box params={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
           <GoPrimitiveDot size="18px" color={theme.colors.blue} />
-          <Text>Você está aqui</Text>
+          <Text>{t('pages.title.youAreHere')}</Text>
         </Box>
       )}
       {hasAnalysis && (
         <>
           <SpecialistButton onClick={handleClick}>
-            Análise dos especialistas:
+            {t('pages.title.specialistAnalysis')}
             {showAnalysis ? (
               <BiCaretUp color={theme.colors.darkGray} />
             ) : (

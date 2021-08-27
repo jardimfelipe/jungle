@@ -39,12 +39,14 @@ import { useTheme } from 'styled-components';
 import Skeleton from 'react-loading-skeleton';
 import { chartDataPopulation } from './populationChartDatas';
 import EmptyResults from '../MyResults/EmptyResults';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 const { Brain } = Icons;
 
 const TeamResults: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { results, isLoading } = useSelector(
     (state: RootState) => state.results
@@ -69,8 +71,8 @@ const TeamResults: React.FC = () => {
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
-        title="Resultados Ourmind!"
-        text="Aqui você encontra o perfil de sintomas que encontramos em sua equipe. Este é o relatório global da sua empresa é confidencial, não sendo possível identificar nenhum dos respondentes. Cada dimensão principal (sintomas de  ansiedade, sintomas depressivos, sintomas de burnout, estresse e risco de uso de substancias) está representada em um gráfico distinto. Veja a descrição dos achados nas legendas."
+        title={t('greetings.teamResults.title')}
+        text={t('greetings.teamResults.text')}
       />
       <Box
         params={{
@@ -80,7 +82,7 @@ const TeamResults: React.FC = () => {
           flexWrap: 'wrap',
         }}
       >
-        <Title level={3}>Entendendo a equipe</Title>
+        <Title level={3}>{t('pages.title.understandingTeam')}</Title>
       </Box>
       {isEmpty() ? (
         <EmptyResults />

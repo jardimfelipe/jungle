@@ -3,6 +3,71 @@
     "user": {
       "title": "Estamos felizes em ver você",
       "text": "Todos nossos questionários são sigilosos, cientificamente validados, para que você tenha uma vida mais saudável e produtiva."
+    },
+    "gestor": {
+      "title": "Bem-vindo,",
+      "text": "Todos os nossos questionários foram criados com base científica. Veja os resultados que obtivemos de sua equipe."
+    },
+    "teamResults": {
+      "title": "Resultados Ourmind!",
+      "text": "Aqui você encontra o perfil de sintomas que encontramos em sua equipe. Este é o relatório global da sua empresa é confidencial, não sendo possível identificar nenhum dos respondentes. Cada dimensão principal (sintomas de ansiedade, sintomas depressivos, sintomas de burnout, estresse e risco de uso de substancias) está representada em um gráfico distinto. Veja a descrição dos achados nas legendas."
+    },
+    "questionnaires": "Aqui você encontrará a relação de todos os questionários disponíveis, detalhes como o período para preenchimento além de poder acompanhar como está a participação da equipe!"
+  },
+  "pages": {
+    "title": {
+      "questionaries": "Questionários",
+      "teamResults": "Resultados do time",
+      "lastQuestionaries": "Utimos questionários",
+      "myResults": "Meus Resultados",
+      "protecionLevels": "Níveis de proteção",
+      "biopsychosocialAspects": "Aspectos biopsicossociais",
+      "specialistAnalysis": "Análise dos especialistas",
+      "youAreHere": "Você está aqui",
+      "understandingTeam": "Entendendo a equipe"
+    },
+    "filled": "preenchido(s)"
+  },
+  "button": {
+    "seeAll": "Ver todos",
+    "availables": "Disponíveis",
+    "inProgress": "Em andamento",
+    "done": "Finalizados",
+    "changePersonalData": "Alterar dados pessoais",
+    "changePassword": "Alterar senha",
+    "talkToEspecialist": "Falar com especialista",
+    "actives": "Ativos",
+    "inactives": "Inativos",
+    "soon": "Em breve"
+  },
+  "emptyStates": {
+    "questionaries": {
+      "title": "Você ainda não tem questionários para preencher",
+      "description": "Assim que sua empresa tiver questionários, eles serão disponibilizados aqui nesta seção"
+    },
+    "myResults": {
+      "title": "Ainda não há resultados a serem exibidos",
+      "description": "Após o preenchimento dos questionários, serão exibidos os resultados nesta seção"
     }
-  }
+  },
+  "table": {
+    "headers": {
+      "title": "Título",
+      "dimension": "Dimensão",
+      "questionNumber": "Número de perguntas",
+      "track": "Rastreio",
+      "respondents": "Respondentes",
+      "replied": "Responderam"
+    }
+  },
+  "availableUntil": "Disponível até {{- date}}",
+  "availableIn": "Disponível em",
+  "questions": "questões",
+  "checkAnswers": "Conferir respostas",
+  "resumeQuiz": "Retomar questionário",
+  "startQuestionarie": "Iniciar questionário",
+  "notRatedYet": "Ainda não avaliado",
+  "weAreHereToHelp": "Estamos aqui para ajudar",
+  "filledQuestionaries": "Questionários preenchidos",
+  "availableQuestionaries": "Questionários disponíveis"
 }

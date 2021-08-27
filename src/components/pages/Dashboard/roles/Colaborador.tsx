@@ -85,9 +85,9 @@ const Colaborador: React.FC = () => {
           alignItems: 'center',
         }}
       >
-        <Title level={3}>Questionários</Title>
+        <Title level={3}>{t('pages.title.questionaries')}</Title>
         <NavigationButton onClick={() => history.push('/questionaries')}>
-          <Text>Ver todos </Text> <BsArrowRight />
+          <Text>{t('button.seeAll')}</Text> <BsArrowRight />
         </NavigationButton>
       </Box>
       {questionaries.length > 0 && (
@@ -103,7 +103,7 @@ const Colaborador: React.FC = () => {
           </Box>
           <Text variant="primary">
             <strong>{questionaries.filter((q) => q.answered).length}</strong> de{' '}
-            <strong>{questionaries.length}</strong> preenchidos
+            <strong>{questionaries.length}</strong> {t('pages.filled')}
           </Text>
         </Box>
       )}
@@ -120,13 +120,16 @@ const Colaborador: React.FC = () => {
             ))}
           </>
         ) : questionaries.length ? (
-          questionaries.map((questionary) => (
-            <QuestionaryCard
-              onClick={handleQuestionaryClick}
-              questionary={questionary}
-              key={questionary._id}
-            />
-          ))
+          questionaries.map(
+            (questionary, index) =>
+              index < 3 && (
+                <QuestionaryCard
+                  onClick={handleQuestionaryClick}
+                  questionary={questionary}
+                  key={questionary._id}
+                />
+              )
+          )
         ) : (
           <QuestionaryEmptyState />
         )}

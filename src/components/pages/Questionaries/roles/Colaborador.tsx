@@ -22,6 +22,8 @@ import Skeleton from 'react-loading-skeleton';
 import { setSnackbarOpen } from '../../../../store/modules/base/actions';
 import { useHistory } from 'react-router-dom';
 import { Questionary as QuestionaryType } from '../../../../store/modules/questionaries/types';
+
+import { useTranslation } from 'react-i18next';
 const { Title } = Typography;
 
 type TabComponents = 'disponiveis' | 'em andamento' | 'finalizados';
@@ -29,6 +31,7 @@ type TabComponents = 'disponiveis' | 'em andamento' | 'finalizados';
 const Questionaries: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { t } = useTranslation();
   const { questionaries, feedback, isLoading } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
@@ -75,7 +78,7 @@ const Questionaries: React.FC = () => {
           flexWrap: 'wrap',
         }}
       >
-        <Title level={3}>Questionários</Title>
+        <Title level={3}>{t('pages.title.questionaries')}</Title>
         <Box
           params={{
             display: 'flex',
@@ -90,19 +93,19 @@ const Questionaries: React.FC = () => {
               onClick={() => handleTabClick('disponiveis')}
               isActive={currentTab === 'disponiveis'}
             >
-              Disponíveis
+              {t('button.availables')}
             </TabNavigation>
             <TabNavigation
               onClick={() => handleTabClick('em andamento')}
               isActive={currentTab === 'em andamento'}
             >
-              Em andamento
+              {t('button.inProgress')}
             </TabNavigation>
             <TabNavigation
               onClick={() => handleTabClick('finalizados')}
               isActive={currentTab === 'finalizados'}
             >
-              Finalizados
+              {t('button.done')}
             </TabNavigation>
           </Box>
         </Box>

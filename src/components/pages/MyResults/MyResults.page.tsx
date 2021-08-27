@@ -36,6 +36,7 @@ import {
 } from '../TeamResults/populationChartDatas';
 import { rgba } from 'polished';
 import EmptyResults from './EmptyResults';
+import { useTranslation } from 'react-i18next';
 
 const { Brain } = Icons;
 
@@ -47,6 +48,7 @@ const MyResults: React.FC = () => {
   );
   const dispatch = useDispatch();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const isEmpty = () =>
     results.statistics.every((statistic) => statistic.value === 0);
@@ -62,14 +64,14 @@ const MyResults: React.FC = () => {
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />
 
-      <Title level={3}>Meus Resultados</Title>
+      <Title level={3}>{t('pages.title.myResults')}</Title>
       {isEmpty() ? (
         <EmptyResults />
       ) : (
         <>
           <ResultsCards analysis={results.analysis} />
 
-          <Title level={3}>Niveis de proteção</Title>
+          <Title level={3}>{t('pages.title.protecionLevels')}</Title>
           <FlexContainer>
             {isLoading ? (
               <>
@@ -131,7 +133,7 @@ const MyResults: React.FC = () => {
                         }}
                       >
                         <Text textDecoration="strong">
-                          Análise dos especialistas
+                          {t('pages.title.specialistAnalysis')}
                         </Text>
                         <Text>{results.statistics[index].description}</Text>
                       </Box>
@@ -183,7 +185,7 @@ const MyResults: React.FC = () => {
             )}
           </FlexContainer>
 
-          <Title level={3}>Aspectos biopsicossociais</Title>
+          <Title level={3}>{t('pages.title.biopsychosocialAspects')}</Title>
           <Row>
             <Col xs>
               <Box

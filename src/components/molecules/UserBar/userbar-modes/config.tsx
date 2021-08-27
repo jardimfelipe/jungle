@@ -6,6 +6,9 @@ import { UserBarButton, UserInfo } from '../UserBar.styled';
 
 import Profile from '../../../../assets/profile.jpg';
 import { UserBarConfigProps } from '../UserBar.types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { useTranslation } from 'react-i18next';
 
 const { Text } = Typography;
 
@@ -14,6 +17,8 @@ const UserBarConfig: React.FC<UserBarConfigProps> = ({
   onBackButtonClick,
   onPasswordButtonClick,
 }) => {
+  const { t } = useTranslation();
+  const { companies } = useSelector(({ companies }: RootState) => companies);
   return (
     <>
       <Box
@@ -36,7 +41,10 @@ const UserBarConfig: React.FC<UserBarConfigProps> = ({
           {currentUser.name}
         </Text>
         <Text variant="primary" textDecoration="strong">
-          Magalu
+          {
+            companies.find((company) => company.id === currentUser.company)
+              ?.name
+          }
         </Text>
         <Box
           params={{
@@ -48,10 +56,10 @@ const UserBarConfig: React.FC<UserBarConfigProps> = ({
           }}
         >
           <UserBarButton>
-            Alterar dados pessoais <BsArrowRight />
+            {t('button.changePersonalData')} <BsArrowRight />
           </UserBarButton>
           <UserBarButton onClick={onPasswordButtonClick}>
-            Alterar senha <BsArrowRight />
+            {t('button.changePassword')} <BsArrowRight />
           </UserBarButton>
         </Box>
       </UserInfo>
