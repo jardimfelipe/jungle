@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@google-cloud/translate": "^6.2.7",
     "@ramonak/react-progress-bar": "^3.1.0",
     "@types/react-text-mask": "^5.4.9",
     "@types/react-transition-group": "^4.4.2",
@@ -10,6 +11,7 @@
     "chart.js": "^3.3.2",
     "date-fns": "^2.23.0",
     "formik": "^2.2.9",
+    "google-auth-library": "^7.6.2",
     "i18next": "^20.4.0",
     "jwt-decode": "^3.1.2",
     "polished": "^4.1.3",

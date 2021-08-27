@@ -24,6 +24,7 @@ import { useHistory } from 'react-router-dom';
 import { Questionary as QuestionaryType } from '../../../../store/modules/questionaries/types';
 
 import { useTranslation } from 'react-i18next';
+
 const { Title } = Typography;
 
 type TabComponents = 'disponiveis' | 'em andamento' | 'finalizados';
@@ -66,6 +67,7 @@ const Questionaries: React.FC = () => {
   useEffect(() => {
     feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
   }, [feedback, dispatch]);
+
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />

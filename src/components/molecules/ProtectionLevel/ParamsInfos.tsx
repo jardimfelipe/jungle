@@ -67,22 +67,26 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
               <small>
                 {params[
                   currentUser.role === 'gestor' ? 'team_protection' : 'value'
-                ] === 0
+                ] === 0 || !params.result
                   ? t('notRatedYet')
                   : params.result}
               </small>
             </Text>
           </Box>
           {params[currentUser.role === 'gestor' ? 'team_protection' : 'value'] >
-            0 && (
-            <ProgressBar
-              bgColor={ProtectionLevelColors[params.result]}
-              height="8px"
-              completed={100 - params.value * 100}
-              baseBgColor={lighten(0.35, ProtectionLevelColors[params.result])}
-              isLabelVisible={false}
-            />
-          )}
+            0 &&
+            !!params.result && (
+              <ProgressBar
+                bgColor={ProtectionLevelColors[params.result]}
+                height="8px"
+                completed={100 - params.value * 100}
+                baseBgColor={lighten(
+                  0.35,
+                  ProtectionLevelColors[params.result]
+                )}
+                isLabelVisible={false}
+              />
+            )}
         </ParamInfosContainer>
         <IconButton onClick={handleClick} icon={icon} />
       </Box>
