@@ -38,6 +38,16 @@ export const QuestionariesGridContainer = styled.div`
       flex: 0 0 calc(50% - 10px);
     }
   }
+  .questionary-card {
+    @media (max-width: 768px) {
+      &:first-child {
+        flex: 0 0 100%;
+      }
+      &:not(:first-child) {
+        flex: 0 0 100%;
+      }
+    }
+  }
 `;
 
 export const ModalButton = styled(StyledButton)`

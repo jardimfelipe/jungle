@@ -77,7 +77,24 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
         }}
       >
         {isMobile ? (
-          <IconButton onClick={onMobileClick} icon={<FiChevronRight />} />
+          <Box
+            params={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '100%',
+            }}
+          >
+            <IconButton onClick={onMobileClick} icon={<FiChevronRight />} />
+            <Box params={{ flex: '0 0 100px' }}>
+              <Select
+                onChange={handleLanguageChange}
+                value={languages.find(({ value }) => value === currentLanguage)}
+                placeholder="Selecione"
+                options={languages}
+              />
+            </Box>
+          </Box>
         ) : (
           <Box
             params={{

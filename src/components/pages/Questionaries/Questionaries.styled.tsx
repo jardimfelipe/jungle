@@ -29,6 +29,16 @@ export const QuestionariesGridContainer = styled.div`
       }
     }
   }
+  .questionary-card {
+    @media (max-width: 768px) {
+      &:first-child {
+        flex: 0 0 100%;
+      }
+      &:not(:first-child) {
+        flex: 0 0 100%;
+      }
+    }
+  }
 `;
 
 export const ImageContainer = styled.div`
