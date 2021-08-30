@@ -6,7 +6,7 @@ import {
   Image,
   Typography,
   IconButton,
-  Select,
+  LanguageSelect,
 } from '../../..';
 import { MindGiftsLink, UserInfo, UserTag } from '../UserBar.styled';
 import { FiChevronRight, FiSettings } from 'react-icons/fi';
@@ -21,25 +21,8 @@ import { RootState } from '../../../../store';
 import { getResultsRequest } from '../../../../store/modules/results/actions';
 import { getCompaniesRequest } from '../../../../store/modules/companies/actions';
 import { useTranslation } from 'react-i18next';
-import { OptionType } from '../../../atoms/Select/Select.types';
-import { setLanguage } from '../../../../store/modules/base/actions';
 
 const { Text } = Typography;
-
-const languages = [
-  {
-    label: 'pt-br',
-    value: 'ptBR',
-  },
-  {
-    label: 'en-us',
-    value: 'enUS',
-  },
-  {
-    label: 'es-es',
-    value: 'esES',
-  },
-];
 
 const UserbarProfiles: React.FC<UserBarProfileProps> = ({
   currentUser,
@@ -49,15 +32,8 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
   const isMobile = useMobileWidth();
   const dispatch = useDispatch();
   const { results } = useSelector((state: RootState) => state.results);
-  const { currentLanguage } = useSelector((state: RootState) => state.base);
   const { companies } = useSelector(({ companies }: RootState) => companies);
-  const { t, i18n } = useTranslation();
-
-  const handleLanguageChange = (option: OptionType | null) => {
-    if (!option) return;
-    i18n.changeLanguage(option.value);
-    dispatch(setLanguage(option.value));
-  };
+  const { t } = useTranslation();
 
   useEffect(() => {
     !results.statistics.length && dispatch(getResultsRequest(currentUser.role));
@@ -87,12 +63,7 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
           >
             <IconButton onClick={onMobileClick} icon={<FiChevronRight />} />
             <Box params={{ flex: '0 0 100px' }}>
-              <Select
-                onChange={handleLanguageChange}
-                value={languages.find(({ value }) => value === currentLanguage)}
-                placeholder="Selecione"
-                options={languages}
-              />
+              <LanguageSelect />
             </Box>
           </Box>
         ) : (
@@ -106,12 +77,7 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
           >
             <IconButton onClick={onConfigClick} icon={<FiSettings />} />
             <Box params={{ flex: '0 0 100px' }}>
-              <Select
-                onChange={handleLanguageChange}
-                value={languages.find(({ value }) => value === currentLanguage)}
-                placeholder="Selecione"
-                options={languages}
-              />
+              <LanguageSelect />
             </Box>
           </Box>
         )}

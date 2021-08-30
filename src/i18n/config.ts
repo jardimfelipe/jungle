@@ -3,6 +3,7 @@ import pt from "./ptBR.json";
 import en from "./enUS.json";
 import es from "./esES.json";
 import { initReactI18next } from "react-i18next";
+import { getSavedState } from "../utils/localStorage";
 
 export const resources = {
   enUS: { translation: { ...en } },
@@ -11,7 +12,7 @@ export const resources = {
 } as const;
 
 i18n.use(initReactI18next).init({
-  lng: "ptBR",
+  lng: getSavedState('user.currentLanguage') || "ptBR",
   resources,
 });
 

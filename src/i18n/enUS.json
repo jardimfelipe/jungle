@@ -81,5 +81,11 @@
   "weAreHereToHelp": "We are here to help",
   "filledQuestionaries": "Completed questionnaires",
   "availableQuestionaries": "Available questionnaires",
-  "manager": "manager"
+  "manager": "manager",
+  "niceHaveYouHere": "It is nice to have you here",
+  "informYourEmail": "Type your email",
+  "informYourPassword": "Type your password",
+  "rememberUser": "Remember user",
+  "login": "Login",
+  "password": "Password"
 }

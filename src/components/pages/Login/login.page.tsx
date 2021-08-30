@@ -6,14 +6,21 @@ import { RootState } from '../../../store';
 import { loginRequest } from '../../../store/modules/login/actions';
 
 import {
-  AdminAccessContainer,
   LoginContainer,
   LoginForm,
   LoginImage,
   LoginRow,
 } from './login.styled';
 import { Col } from 'react-flexbox-grid';
-import { Box, Button, Typography, Textfield, Label, Checkbox } from '../..';
+import {
+  Box,
+  Button,
+  Typography,
+  Textfield,
+  Label,
+  Checkbox,
+  LanguageSelect,
+} from '../..';
 import { HiOutlineMail } from 'react-icons/hi';
 import { FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 
@@ -23,12 +30,14 @@ import { useFormik } from 'formik';
 import schema from './schema';
 
 import { useTheme } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
 const Login: React.FC = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const history = useHistory();
   const { isLoggedIn, error, isLoading } = useSelector(
     ({ login }: RootState) => login
@@ -72,7 +81,7 @@ const Login: React.FC = () => {
             <Image style={{ width: '150px' }} src={JungleLogo} alt="Jungle" />
           </Box>
           <Box params={{ width: '100%', textAlign: 'left' }}>
-            <Title level={2}>Que bom ter você por aqui.</Title>
+            <Title level={2}>{t('niceHaveYouHere')}</Title>
           </Box>
           <LoginForm onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
             <Textfield
@@ -81,7 +90,7 @@ const Login: React.FC = () => {
               id="email"
               value={formik.values.email}
               onChange={formik.handleChange}
-              placeholder="Digite seu email"
+              placeholder={t('informYourEmail')}
               label="E-mail"
               error={!!formik.errors.email ? formik.errors.email : undefined}
             />
@@ -89,7 +98,7 @@ const Login: React.FC = () => {
               <Box
                 params={{ display: 'flex', justifyContent: 'space-between' }}
               >
-                <Label>Senha</Label>
+                <Label>{t('password')}</Label>
                 <a href="/">Esqueci minha senha &gt;</a>
               </Box>
               <Textfield
@@ -102,7 +111,7 @@ const Login: React.FC = () => {
                   )
                 }
                 type={isPasswordType ? 'password' : 'text'}
-                placeholder="Informe sua senha"
+                placeholder={t('informYourPassword')}
                 name="password"
                 id="password"
                 value={formik.values.password}
@@ -112,9 +121,16 @@ const Login: React.FC = () => {
                 }
               />
             </div>
-            <Checkbox checked={false} label="Lembrar usuário" />
+
+            <Box params={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Checkbox checked={false} label={t('rememberUser')} />
+              <Box params={{ flex: '0 0 100px' }}>
+                <LanguageSelect />
+              </Box>
+            </Box>
+
             <Button isLoading={isLoading} type="submit" block variant="primary">
-              Acessar
+              {t('login')}
             </Button>
             {error.status && (
               <Box params={{ display: 'flex', justifyContent: 'center' }}>
@@ -124,9 +140,6 @@ const Login: React.FC = () => {
               </Box>
             )}
           </LoginForm>
-          <AdminAccessContainer>
-            <a href="/">Acessar como administrador</a>
-          </AdminAccessContainer>
         </LoginContainer>
       </Col>
     </LoginRow>

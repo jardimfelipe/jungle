@@ -24,6 +24,7 @@ export { default as Snackbar } from './atoms/Snackbar/Snackbar'
 export { default as QuestionaryModal } from './atoms/QuestionaryModal/QuestionaryModal'
 export { default as FileUploader } from './atoms/FileUploader/FileUploader'
 export { default as ImageUploader } from './atoms/ImageUploader/ImageUploader'
+export { default as LanguageSelect } from './atoms/LanguageSelect/LanguageSelect'
 
 export { default as Sidebar } from './molecules/Sidebar/Siderbar'
 export { default as UserBar } from './molecules/UserBar/UserBar'

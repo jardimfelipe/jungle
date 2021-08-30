@@ -1,3 +1,4 @@
+import { getSavedState } from "../../../utils/localStorage";
 import { BaseAction, BaseState, BaseKeys } from "./types";
 
 const INITIAL_STATE: BaseState = {
@@ -7,7 +8,7 @@ const INITIAL_STATE: BaseState = {
     snackbarMessage: '',
     snackbarState: false
   },
-  currentLanguage: "ptBR"
+  currentLanguage: getSavedState('user.currentLanguage') || "ptBR"
 };
 
 export default function Reducer(
