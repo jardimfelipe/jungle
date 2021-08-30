@@ -60,6 +60,17 @@
       "replied": "Replied"
     }
   },
+  "menu": {
+    "dashboard": "Dashboard",
+    "questionnaires": "Questionnaires",
+    "teamResults": "Team results",
+    "myResults": "My results",
+    "workers": "Workers",
+    "playbook": "Playbook",
+    "marketplace": "Marketplace",
+    "masterclass": "MasterClass",
+    "logout": "Logout"
+  },
   "availableUntil": "Available until {{- date}}",
   "availableIn": "Available in",
   "questions": "questions",
@@ -69,5 +80,6 @@
   "notRatedYet": "Not rated yet",
   "weAreHereToHelp": "We are here to help",
   "filledQuestionaries": "Completed questionnaires",
-  "availableQuestionaries": "Available questionnaires"
+  "availableQuestionaries": "Available questionnaires",
+  "manager": "manager"
 }

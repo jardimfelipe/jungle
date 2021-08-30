@@ -32,6 +32,7 @@ export const routes = {
   admin_jungle: [
     {
       name: 'Dashboard',
+      translationName: 'dashboard',
       path: '/',
       icon: <BiHomeAlt />,
       component: <Dashboard />,
@@ -43,6 +44,7 @@ export const routes = {
     },
     {
       name: 'Empresas',
+      translationName: 'companies',
       path: '/companies',
       icon: <BiBuildings />,
       component: <Companies />,
@@ -63,6 +65,7 @@ export const routes = {
     },
     {
       name: 'Dimensões',
+      translationName: 'dimensions',
       path: '/dimensions',
       icon: <BiPurchaseTag />,
       component: <Dimensions />,
@@ -74,6 +77,7 @@ export const routes = {
     },
     {
       name: 'Perguntas',
+      translationName: 'questions',
       path: '/questions',
       icon: <BiMessageSquareDetail />,
       render: () => (
@@ -84,6 +88,7 @@ export const routes = {
     },
     {
       name: 'Questionários',
+      translationName: 'questionnaires',
       path: '/questionaries',
       icon: <BiDockLeft />,
       render: () => (
@@ -110,30 +115,35 @@ export const routes = {
     },
     {
       name: 'Playbook',
+      translationName: 'playbook',
       path: '/playbook',
       icon: <BiBuildings />,
       isSoon: true,
     },
     {
       name: 'Marketplace',
+      translationName: 'marketplace',
       path: '/marketplace',
       isSoon: true,
       icon: <BiGridAlt />,
     },
     {
       name: 'MasterClass',
+      translationName: 'MasterClass',
       path: '/master-class',
       isSoon: true,
       icon: <BiBookOpen />,
     },
     {
       name: 'MindGifts',
+      translationName: 'mindgifts',
       path: '/mind-gifts',
       icon: <BiGift />,
       isSoon: true,
     },
     {
       name: 'Jungle Medical',
+      translationName: 'junglemedical',
       path: '/jungle-medical',
       isSoon: true,
       icon: <MdLocalHospital />,
@@ -142,6 +152,7 @@ export const routes = {
   user: [
     {
       name: 'Dashboard',
+      translationName: 'dashboard',
       path: '/',
       icon: <BiHomeAlt />,
       component: <Dashboard />,
@@ -153,6 +164,7 @@ export const routes = {
     },
     {
       name: 'Questionários',
+      translationName: 'questionnaires',
       path: '/questionaries',
       icon: <BiDockLeft />,
       render: () => (
@@ -163,6 +175,7 @@ export const routes = {
     },
     {
       name: 'Meus resultados',
+      translationName: 'myResults',
       path: '/my-results',
       icon: <IoFolderOutline />,
       render: () => (
@@ -173,18 +186,21 @@ export const routes = {
     },
     {
       name: 'Playbook',
+      translationName: 'playbook',
       path: '/playbook',
       icon: <BiBuildings />,
       isSoon: true,
     },
     {
       name: 'Marketplace',
+      translationName: 'marketplace',
       path: '/marketplace',
       icon: <BiGridAlt />,
       isSoon: true,
     },
     {
       name: 'MasterClass',
+      translationName: 'masterclass',
       path: '/master-class',
       icon: <BiBookOpen />,
       isSoon: true,
@@ -193,6 +209,7 @@ export const routes = {
   gestor: [
     {
       name: 'Dashboard',
+      translationName: 'dashboard',
       path: '/',
       icon: <BiHomeAlt />,
       component: <Dashboard />,
@@ -204,6 +221,7 @@ export const routes = {
     },
     {
       name: 'Questionários',
+      translationName: 'questionnaires',
       path: '/questionaries',
       icon: <BiDockLeft />,
       render: () => (
@@ -214,6 +232,7 @@ export const routes = {
     },
     {
       name: 'Resultados do time',
+      translationName: 'teamResults',
       path: '/team-results',
       icon: <IoFolderOutline />,
       render: () => (
@@ -224,6 +243,7 @@ export const routes = {
     },
     {
       name: 'Colaboradores',
+      translationName: 'workers',
       path: '/workers',
       icon: <FiUsers />,
       render: () => (
@@ -234,18 +254,21 @@ export const routes = {
     },
     {
       name: 'Playbook',
+      translationName: 'playbook',
       path: '/playbook',
       icon: <BiBuildings />,
       isSoon: true,
     },
     {
       name: 'Marketplace',
+      translationName: 'marketplace',
       path: '/marketplace',
       icon: <BiGridAlt />,
       isSoon: true,
     },
     {
       name: 'MasterClass',
+      translationName: 'masterclass',
       path: '/master-class',
       icon: <BiBookOpen />,
       isSoon: true,

@@ -37,6 +37,7 @@ import {
 import { rgba } from 'polished';
 import EmptyResults from './EmptyResults';
 import { useTranslation } from 'react-i18next';
+import { Statistics } from '../../../store/modules/results/types';
 
 const { Brain } = Icons;
 
@@ -55,6 +56,15 @@ const MyResults: React.FC = () => {
 
   const getProtectionLevelItems = () => {
     return results.statistics.filter((i, index) => index < 5);
+  };
+
+  const getBarColor = (result: Statistics, level: any) => {
+    if (!result.result) return '#011F3B';
+    const string = result.result.split(' ')[1];
+    if (!string) return '#011F3B';
+    return result.result.split(' ')[1] === level.level
+      ? level.color
+      : '#011F3B';
   };
 
   useEffect(() => {
@@ -135,7 +145,7 @@ const MyResults: React.FC = () => {
                         <Text textDecoration="strong">
                           {t('pages.title.specialistAnalysis')}
                         </Text>
-                        <Text>{results.statistics[index].description}</Text>
+                        <Text>{result.description}</Text>
                       </Box>
 
                       <ChartsBarContainer>
@@ -149,10 +159,13 @@ const MyResults: React.FC = () => {
                                 params={{ display: 'block', width: '140px' }}
                               >
                                 <ProgressBar
-                                  bgColor={level.color}
+                                  bgColor={getBarColor(result, level)}
                                   height="10px"
-                                  completed={level.amount}
-                                  baseBgColor={rgba(level.color, 0.1)}
+                                  completed={100 - result.value * 100}
+                                  baseBgColor={rgba(
+                                    getBarColor(result, level),
+                                    0.1
+                                  )}
                                   isLabelVisible={false}
                                 />
                               </Box>

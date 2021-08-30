@@ -18,10 +18,12 @@ import { setSidebarState } from '../../../store/modules/base/actions';
 import { removeState } from '../../../utils/localStorage';
 import { logout } from '../../../store/modules/login/actions';
 import { routes } from '../../../app/Routes';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { isSidebarOpen } = useSelector(({ base }: RootState) => base);
   const isMobile = useMobileWidth();
   const { currentUser } = useSelector(({ login }: RootState) => login);
@@ -50,7 +52,7 @@ const Sidebar: React.FC = () => {
           <img src={JungleLogo} alt="Jungle" />
         </Box>
         {routes[currentUser.role as keyof typeof routes].map(
-          ({ name, icon, isSoon, path }) =>
+          ({ name, icon, isSoon, path, translationName = '' }) =>
             name ? (
               <MenuItem
                 isActive={checkActiveRoute(path)}
@@ -58,7 +60,8 @@ const Sidebar: React.FC = () => {
                 key={path}
               >
                 <Link to={path}>
-                  {icon} {name} {isSoon && <Tag>em breve</Tag>}
+                  {icon} {t(`menu.${translationName}`)}{' '}
+                  {isSoon && <Tag>em breve</Tag>}
                 </Link>
               </MenuItem>
             ) : null
@@ -72,7 +75,7 @@ const Sidebar: React.FC = () => {
           <MenuList style={{ marginTop: '0' }}>
             <MenuItem>
               <Link to="/" onClick={handleLogout}>
-                <BiLogOut /> Deslogar
+                <BiLogOut /> {t('menu.logout')}
               </Link>
             </MenuItem>
           </MenuList>

@@ -1,15 +1,14 @@
-import { rgba } from "polished"
 
 export const protectionLevelData = [
   {
     level: 'Ótima',
     amount: 16,
-    color: rgba('#011F3B', 0.3)
+    color: '#F548E4'
   },
   {
     level: 'Boa',
     amount: 18,
-    color: rgba('#011F3B', 0.3)
+    color: '#4ED9A7'
   },
   {
     level: 'Moderada',
@@ -19,7 +18,7 @@ export const protectionLevelData = [
   {
     level: 'Leve',
     amount: 16,
-    color: rgba('#011F3B', 0.3)
+    color: '#FFAE33'
   },
 ]
 

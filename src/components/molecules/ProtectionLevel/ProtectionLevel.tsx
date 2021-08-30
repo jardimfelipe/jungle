@@ -6,8 +6,6 @@ import { QuestionButton } from './ProtectionLevel.styled';
 import { useTheme } from 'styled-components';
 import ParamsInfos from './ParamsInfos';
 
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store';
 import { Statistics } from '../../../store/modules/results/types';
 import { useTranslation } from 'react-i18next';
 
@@ -18,7 +16,6 @@ const ProtectionLevel: React.FC<{ statistics: Statistics[] }> = ({
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const { currentUser } = useSelector(({ login }: RootState) => login);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
       <Box
@@ -29,8 +26,7 @@ const ProtectionLevel: React.FC<{ statistics: Statistics[] }> = ({
         }}
       >
         <Text textDecoration="strong" variant="primary">
-          {t('pages.title.protecionLevels')}{' '}
-          {currentUser.role === 'gestor' && 'da empresa'}
+          {t('pages.title.protecionLevels')}
         </Text>
         <QuestionButton>
           <BsQuestion size="24" color={theme.colors.darkGray} />

@@ -51,7 +51,7 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
   const { results } = useSelector((state: RootState) => state.results);
   const { currentLanguage } = useSelector((state: RootState) => state.base);
   const { companies } = useSelector(({ companies }: RootState) => companies);
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleLanguageChange = (option: OptionType | null) => {
     if (!option) return;
@@ -103,7 +103,7 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
         <div className="userInfo__points">
           <img src={Profile} alt="profile" />
           {currentUser.role === 'gestor' && (
-            <UserTag role={currentUser.role}> {currentUser.role} </UserTag>
+            <UserTag role={currentUser.role}> {t('manager')}</UserTag>
           )}
         </div>
         <Text textDecoration="strong" className="userInfo__userName">
