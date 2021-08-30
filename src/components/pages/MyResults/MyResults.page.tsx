@@ -59,12 +59,12 @@ const MyResults: React.FC = () => {
   };
 
   const getBarColor = (result: Statistics, level: any) => {
-    if (!result.result) return '#011F3B';
+    if (!result.result) return rgba('#011F3B', 0.1);
     const string = result.result.split(' ')[1];
-    if (!string) return '#011F3B';
+    if (!string) return rgba('#011F3B', 0.5);
     return result.result.split(' ')[1] === level.level
       ? level.color
-      : '#011F3B';
+      : rgba('#011F3B', 0.5);
   };
 
   useEffect(() => {
@@ -154,7 +154,9 @@ const MyResults: React.FC = () => {
                             <ProgressBarContainer
                               key={`protection-leve-${level}-${Math.random()}`}
                             >
-                              <Text color={level.color}>{level.level}</Text>
+                              <Text color={getBarColor(result, level)}>
+                                {level.level}
+                              </Text>
                               <Box
                                 params={{ display: 'block', width: '140px' }}
                               >

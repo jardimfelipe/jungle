@@ -1,7 +1,7 @@
 
 export const protectionLevelData = [
   {
-    level: 'Ótima',
+    level: 'Alta',
     amount: 16,
     color: '#F548E4'
   },
