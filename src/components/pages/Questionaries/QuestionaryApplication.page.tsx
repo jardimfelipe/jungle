@@ -139,8 +139,6 @@ const QuestionaryApplication: React.FC = () => {
     setCurrentQuestion(currentQuestion - 1);
   };
 
-  console.log(answers);
-
   const handleCloseModal = () => {
     dispatch(resetFeeback());
     history.push('/');

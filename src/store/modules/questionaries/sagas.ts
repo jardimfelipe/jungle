@@ -1,12 +1,13 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import { ActionType } from "typesafe-actions";
 import api from "../../../services/api";
+import { getResultsRequest } from "../results/actions";
 import * as actions from "./actions";
 import { QuestionariesTypeKeys } from "./types";
 
 function* getQuestionaries({ payload }: ActionType<typeof actions.getQuestionariesRequest>) {
   try {
-    const headers = payload?.headers || {}
+    const headers = payload?.headers || { }
     const userRole = payload?.userRole || 'admin_jungle'
     const { data } = yield call(api, `/questionnaires/${userRole === 'user' ? 'current' : ''}`, { headers });
     yield put(actions.getQuestionariesSuccess(data));
@@ -47,6 +48,7 @@ function* sendQuestionary({ payload }: ActionType<typeof actions.sendQuestionary
   try {
     yield call(api, `/answers`, { method: "POST", data: payload });
     yield put(actions.sendQuestionarySuccess());
+    yield put(getResultsRequest())
   } catch (error) {
     if (error instanceof Error) {
       yield put(actions.sendQuestionaryFailure({ message: 'Ocorreu um erro, tente novamente', status: true }))

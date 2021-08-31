@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Select } from '../..';
 import { RootState } from '../../../store';
 import { setLanguage } from '../../../store/modules/base/actions';
+import { getResultsRequest } from '../../../store/modules/results/actions';
 import { saveState } from '../../../utils/localStorage';
 import { OptionType } from '../Select/Select.types';
 
@@ -31,7 +32,9 @@ const LanguageSelect: React.FC = () => {
     i18n.changeLanguage(option.value);
     dispatch(setLanguage(option.value));
     saveState('user.currentLanguage', option.value);
+    dispatch(getResultsRequest());
   };
+
   return (
     <Select
       onChange={handleLanguageChange}

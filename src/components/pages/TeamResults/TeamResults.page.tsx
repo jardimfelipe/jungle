@@ -66,8 +66,8 @@ const TeamResults: React.FC = () => {
     results.statistics.every((statistic) => statistic.team_protection === 0);
 
   useEffect(() => {
-    dispatch(getResultsRequest('gestor'));
-  }, [dispatch]);
+    !results.statistics.length && dispatch(getResultsRequest('gestor'));
+  }, [dispatch, results]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
@@ -190,7 +190,7 @@ const TeamResults: React.FC = () => {
           </Row> */}
 
           {/* Níveis de proteção */}
-          <Title level={3}>Niveis de proteção</Title>
+          <Title level={3}>{t('pages.title.protecionLevels')}</Title>
           <FlexContainer>
             {isLoading ? (
               <>
@@ -254,7 +254,7 @@ const TeamResults: React.FC = () => {
                         }}
                       >
                         <Text textDecoration="strong">
-                          Análise dos especialistas
+                          {t('pages.title.specialistAnalysis')}
                         </Text>
                         <Text>{statistics.description}</Text>
                       </Box>
@@ -304,9 +304,7 @@ const TeamResults: React.FC = () => {
                                 {100 - statistics.team_protection * 100}%
                               </Text>
                             </ChartWrapper>
-                            <Text>
-                              Nível de proteção na <strong>empresa</strong>
-                            </Text>
+                            <Text>{t('companyProtectionLevel')}</Text>
                           </CharFlexContainer>
                           <CharFlexContainer>
                             <ChartWrapper size={100}>
@@ -319,9 +317,7 @@ const TeamResults: React.FC = () => {
                                 %
                               </Text>
                             </ChartWrapper>
-                            <Text>
-                              Nível de proteção na <strong>população</strong>
-                            </Text>
+                            <Text>{t('populationProtectionLevel')}</Text>
                           </CharFlexContainer>
                         </CardCharts>
                       </ChartsBarContainer>

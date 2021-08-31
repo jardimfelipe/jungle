@@ -52,7 +52,8 @@ const MyResults: React.FC = () => {
   const { t } = useTranslation();
 
   const isEmpty = () =>
-    results.statistics.every((statistic) => statistic.value === 0);
+    results.statistics.every((statistic) => statistic.value === 0) &&
+    !isLoading;
 
   const getProtectionLevelItems = () => {
     return results.statistics.filter((i, index) => index < 5);
@@ -68,8 +69,8 @@ const MyResults: React.FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getResultsRequest());
-  }, [dispatch]);
+    !results.statistics.length && dispatch(getResultsRequest());
+  }, [dispatch, results]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard />
@@ -79,7 +80,7 @@ const MyResults: React.FC = () => {
         <EmptyResults />
       ) : (
         <>
-          <ResultsCards analysis={results.analysis} />
+          <ResultsCards isLoading={isLoading} analysis={results.analysis} />
 
           <Title level={3}>{t('pages.title.protecionLevels')}</Title>
           <FlexContainer>
@@ -187,9 +188,7 @@ const MyResults: React.FC = () => {
                                 %
                               </Text>
                             </ChartWrapper>
-                            <Text>
-                              Nível de proteção na <strong>população</strong>
-                            </Text>
+                            <Text>{t('populationProtectionLevel')}</Text>
                           </CharFlexContainer>
                         </CardCharts>
                       </ChartsBarContainer>

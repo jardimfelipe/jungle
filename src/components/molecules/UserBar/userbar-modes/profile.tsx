@@ -40,8 +40,8 @@ const UserbarProfiles: React.FC<UserBarProfileProps> = ({
   }, [dispatch, results, currentUser]);
 
   useEffect(() => {
-    dispatch(getCompaniesRequest());
-  }, [dispatch]);
+    !companies.length && dispatch(getCompaniesRequest());
+  }, [dispatch, companies]);
 
   return (
     <>
