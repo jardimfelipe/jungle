@@ -27,12 +27,13 @@ const LanguageSelect: React.FC = () => {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   const { currentLanguage } = useSelector((state: RootState) => state.base);
+  const { isLoggedIn } = useSelector((state: RootState) => state.login);
   const handleLanguageChange = (option: OptionType | null) => {
     if (!option) return;
     i18n.changeLanguage(option.value);
     dispatch(setLanguage(option.value));
     saveState('user.currentLanguage', option.value);
-    dispatch(getResultsRequest());
+    isLoggedIn && dispatch(getResultsRequest());
   };
 
   return (
