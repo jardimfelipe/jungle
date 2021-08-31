@@ -7,6 +7,7 @@ export function getResultsRequest(role?: UserRoles) {
 }
 
 export function getResultsSuccess(params: ResultsState["results"]) {
+  console.log(params)
   return action(ResultsTypeKeys.GET_RESULTS_SUCCESS, params);
 }
 
