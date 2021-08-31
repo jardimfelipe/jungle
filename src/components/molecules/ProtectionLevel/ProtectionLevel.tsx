@@ -5,15 +5,19 @@ import { BsQuestion } from 'react-icons/bs';
 import { QuestionButton } from './ProtectionLevel.styled';
 import { useTheme } from 'styled-components';
 import ParamsInfos from './ParamsInfos';
+import Skeleton from 'react-loading-skeleton';
 
 import { Statistics } from '../../../store/modules/results/types';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 const { Text } = Typography;
 
 const ProtectionLevel: React.FC<{ statistics: Statistics[] }> = ({
   statistics,
 }) => {
+  const { isLoading } = useSelector((state: RootState) => state.results);
   const theme = useTheme();
   const { t } = useTranslation();
   return (
@@ -32,11 +36,13 @@ const ProtectionLevel: React.FC<{ statistics: Statistics[] }> = ({
           <BsQuestion size="24" color={theme.colors.darkGray} />
         </QuestionButton>
       </Box>
-      {statistics.map((item, index) =>
-        index <= 4 ? (
-          <ParamsInfos key={`params-${index}`} params={item} />
-        ) : null
-      )}
+      {isLoading
+        ? [...Array(5)].map((_) => <Skeleton height={40} />)
+        : statistics.map((item, index) =>
+            index <= 4 ? (
+              <ParamsInfos key={`params-${index}`} params={item} />
+            ) : null
+          )}
     </Box>
   );
 };

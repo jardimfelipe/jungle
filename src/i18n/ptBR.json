@@ -87,5 +87,9 @@
   "informYourPassword": "Digite sua senha",
   "rememberUser": "Lembrar usuário",
   "login": "Entrar",
-  "password": "Senha"
+  "password": "Senha",
+  "populationProtectionLevel": "Nível de proteção da população",
+  "companyProtectionLevel": "Nível de proteção da empresa",
+  "adequateProtection": "Proteção adequada contra",
+  "minorProtection": "Proteção menor contra"
 }

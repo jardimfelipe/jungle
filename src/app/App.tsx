@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Provider } from 'react-redux';
 import store from '../store';
@@ -11,8 +11,12 @@ import theme from '../theme/theme';
 
 import './styles.css';
 import { SkeletonTheme } from 'react-loading-skeleton';
+import { setConfig } from '../utils/translateApiConfig';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    setConfig();
+  }, []);
   return (
     <SkeletonTheme
       color={theme.colors.darkGray}

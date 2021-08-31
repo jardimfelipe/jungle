@@ -109,7 +109,6 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     const removedOptionArray = formik.values.options.filter(
       (_, optionIndex) => optionIndex !== index
     );
-    console.log(removedOptionArray);
     formik.setFieldValue('options', removedOptionArray);
   };
 

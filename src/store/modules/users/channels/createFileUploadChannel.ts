@@ -13,7 +13,6 @@ export const createUploadFileChannel = (endpoint: string, file: File) => {
       cancelToken: source.token
     })
       .then((e) => {
-        console.log(e)
         if (e.data[0]['já existe']) {
           emitter({ err: 'Usuário(s) já cadastrado(s)' });
         } else {
