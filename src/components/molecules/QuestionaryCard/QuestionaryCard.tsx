@@ -125,7 +125,7 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
             {questionary.answered ? (
               <FaCheckCircle size={24} />
             ) : (
-              `${chartData.datasets[0].data[0]}%`
+              `${chartData.datasets[0].data[0].toFixed(0)}%`
             )}
           </Text>
         </ChartWrapper>

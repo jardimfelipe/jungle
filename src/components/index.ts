@@ -42,6 +42,7 @@ export { default as TableMenu } from './molecules/TableMenu/TableMenu'
 export { default as QuestionaryCard } from './molecules/QuestionaryCard/QuestionaryCard'
 export { default as QuestionaryEmptyState } from './molecules/QuestionaryCard/QuestionaryEmptyState'
 export { default as ConfirmationModal } from './molecules/ConfirmationModal/ConfirmationModal'
+export { default as TermsConditionsModal } from './molecules/TermsConditionsModal/TermsConditionsModal'
 
 export { default as CompanyTable } from './organisms/CompanyTable/CompanyTable'
 

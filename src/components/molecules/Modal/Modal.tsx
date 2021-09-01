@@ -32,6 +32,7 @@ const Modal: React.FC<ModalProps> = ({
   children,
   width,
   height,
+  hasCloseButton = true,
 }) => {
   const modalTransition = {
     entering: { width: 0, height: 0 },
@@ -54,17 +55,19 @@ const Modal: React.FC<ModalProps> = ({
               ...modalTransition[state as keyof typeof modalTransition],
             }}
           >
-            <Box
-              params={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                padding: '15px 10px',
-              }}
-            >
-              <CloseButton onClick={onClose}>
-                <GrClose size="18" />
-              </CloseButton>
-            </Box>
+            {hasCloseButton && (
+              <Box
+                params={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  padding: '15px 10px',
+                }}
+              >
+                <CloseButton onClick={onClose}>
+                  <GrClose size="18" />
+                </CloseButton>
+              </Box>
+            )}
             {children}
           </ModalContainer>
         </Overlay>

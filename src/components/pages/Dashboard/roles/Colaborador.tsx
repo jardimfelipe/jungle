@@ -8,6 +8,7 @@ import {
   QuestionaryModal,
   QuestionaryCard,
   QuestionaryEmptyState,
+  TermsConditionsModal,
 } from '../../..';
 import { BsArrowRight } from 'react-icons/bs';
 import { QuestionariesGridContainer } from '../Dashboard.styled';
@@ -140,6 +141,7 @@ const Colaborador: React.FC = () => {
         isModalOpen={isModalOpen}
         questionaryTitle={clickedQuestionary.title || ''}
       />
+      <TermsConditionsModal />
     </Box>
   );
 };

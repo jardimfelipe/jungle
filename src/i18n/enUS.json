@@ -91,5 +91,16 @@
   "populationProtectionLevel": "Population protection level",
   "companyProtectionLevel": "Company protection level",
   "adequateProtection": "Adequate protection against",
-  "minorProtection": "Minor protection against"
+  "minorProtection": "Minor protection against",
+  "termsConditions": {
+    "header": "To use the Jungle platform, you must accept the Terms of Consent",
+    "introduction": [
+      "CONSENT INFORMATION FOR THE TREATMENT OF PERSONAL DATA - Jungle Medical Science for Business. He was invited to participate in the Cycle of detection of Great Questions for Healthier Minds, developed by JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118 / 0001-10 )) and offered by your contracting company.This document aims to register the free, informed and unequivocal expression by which you accept the treatment of your personal data in accordance with the LGPD - General Law of Protection of Personal Data, Law No. 13.709 / 18, and other applicable legislation, as well as the Privacy Policy and Data Protection of Jungle Medical Science for Business (www.junglex.com/politica-de-privacidade/). ",
+      "By expressing your acceptance of this term, you consent and agree that the processing of your personal data [1] and sensitive personal data [2] will be carried out for the specific purposes set out in this document.",
+      "In case of non-acceptance of the terms proposed here, your participation will continue to be impossible."
+    ],
+    "purpose": {
+      "title": "I - Purpose of the program"
+    }
+  }
 }
