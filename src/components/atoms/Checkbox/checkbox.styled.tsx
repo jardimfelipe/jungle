@@ -48,6 +48,13 @@ export const StyledCheckbox = styled.div<{ checked: boolean }>`
         background-color: ${props.theme.colors.blue};
       }
     `};
+ 
+    &:not(:checked){
+      &::before {
+        border: 1px solid ${(props) => props.theme.colors.blue}
+      }
+    }
+
 
     &:checked {
       &::before {
@@ -63,5 +70,6 @@ export const StyledCheckbox = styled.div<{ checked: boolean }>`
         background-color: ${(props) => props.theme.colors.blue};
       }
     }
+
   }
 `;
