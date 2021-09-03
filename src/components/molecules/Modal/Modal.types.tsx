@@ -3,4 +3,5 @@ export interface ModalProps {
   onClose?: (e?: any) => void;
   width?: number;
   height?: number;
+  hasCloseButton?: boolean;
 }
