@@ -48,6 +48,20 @@ export const ImageContainer = styled.div`
   height: 100vh;
 `;
 
+export const QuestionaryWrapper = styled.div`
+  flex-basis: 0 1 60%;
+  ${media.lessThan('huge')`
+    flex: 0 1 100%;
+  `}
+`;
+
+export const ImageWrapper = styled.div`
+  flex: auto;
+  ${media.lessThan('huge')`
+    display: none;
+  `}
+`;
+
 export const QuestionaryContainer = styled.div`
   flex: auto;
   background-color: #ffffff;

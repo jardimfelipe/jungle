@@ -43,6 +43,12 @@ const Gestor: React.FC = () => {
   const { currentUser } = useSelector((state: RootState) => state.login);
   // const { results } = useSelector((state: RootState) => state.results);
 
+  const getTotalRespondents = () => {
+    return questionaries.reduce((acc, curr) => {
+      return acc + curr.replied;
+    }, 0);
+  };
+
   useEffect(() => {
     dispatch(
       getQuestionariesRequest({ headers: { company: currentUser.company } })
@@ -168,7 +174,7 @@ const Gestor: React.FC = () => {
         <ResumeCard
           name={t('filledQuestionaries')}
           icon={<BiDockLeft color="#ffffff" />}
-          total="0"
+          total={getTotalRespondents()}
         />
         <ResumeCard
           name={t('availableQuestionaries')}
@@ -186,7 +192,7 @@ const Gestor: React.FC = () => {
 
       <Table
         isLoading={isQuestionaryLoading}
-        items={questionaries}
+        items={questionaries.filter((q, index) => index <= 5)}
         fields={tableFields}
       />
     </Box>

@@ -12,7 +12,19 @@
       "title": "Ourmind Results!",
       "text": "Here you will find the profile of symptoms that we found in your team. This is your company's global report and is confidential, and it is not possible to identify any of the respondents. Each main dimension (anxiety symptoms, depressive symptoms, burnout symptoms, stress and risk of substance use) is represented in a separate graph. See description of findings in captions."
     },
-    "questionnaires": "Here you will find a list of all available questionnaires, details such as the period for filling in, as well as being able to follow up on the team's participation!"
+    "myResults": {
+      "title": "Here you can find out more about yourself!",
+      "text": "Below you will find the results of all the questionnaires already answered. Here you can find out more about yourself! Remember that your results are confidential and your company will never be able to identify respondents or individual results."
+    },
+    "questionnaires": {
+      "colaborador": {
+        "title": "Knowing more about your profile!",
+        "text": "Below you will find all your available questionnaires, as well as the start and end dates in which you can answer them. Remember that your results are confidential and available only to you. Take this opportunity to get to know yourself better and receive the most appropriate feedbacks according to your reality, all our questionnaires are scientifically validated with high levels of evidence (level A)."
+      },
+      "gestor": {
+        "text": "Here you will find a list of all available questionnaires, details such as the period for filling in, as well as being able to follow up on the team's participation!"
+      }
+    }
   },
   "pages": {
     "title": {
@@ -91,5 +103,7 @@
   "populationProtectionLevel": "Population protection level",
   "companyProtectionLevel": "Company protection level",
   "adequateProtection": "Adequate protection against",
-  "minorProtection": "Minor protection against"
+  "minorProtection": "Minor protection against",
+  "saveAndLeave": "Save and leave",
+  "mandatoryQuestion": "Mandatory question"
 }

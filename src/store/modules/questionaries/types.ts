@@ -61,6 +61,8 @@ export type Questionary = {
   answered: boolean;
   tracking_end: Date
   tracking_start: Date
+  respondents: number
+  replied: number
 }
 
 export type QuestionariesState = {

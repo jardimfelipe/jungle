@@ -70,7 +70,10 @@ const Questionaries: React.FC = () => {
 
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <PromotionalCard />
+      <PromotionalCard
+        title={t('greetings.questionnaires.colaborador.title')}
+        text={t('greetings.questionnaires.colaborador.text')}
+      />
 
       <Box
         params={{

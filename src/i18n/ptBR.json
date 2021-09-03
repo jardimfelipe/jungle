@@ -12,7 +12,19 @@
       "title": "Resultados Ourmind!",
       "text": "Aqui você encontra o perfil de sintomas que encontramos em sua equipe. Este é o relatório global da sua empresa é confidencial, não sendo possível identificar nenhum dos respondentes. Cada dimensão principal (sintomas de ansiedade, sintomas depressivos, sintomas de burnout, estresse e risco de uso de substancias) está representada em um gráfico distinto. Veja a descrição dos achados nas legendas."
     },
-    "questionnaires": "Aqui você encontrará a relação de todos os questionários disponíveis, detalhes como o período para preenchimento além de poder acompanhar como está a participação da equipe!"
+    "myResults": {
+      "title": "Aqui você poderá descobrir mais sobre você mesmo!",
+      "text": "Abaixo você encontra os resultados de todos os questionários já respondidos. Aqui você poderá descobrir mais sobre você mesmo! Lembre-se que seus resultados são sigilosos e sua empresa nunca poderá identificar os respondentes ou resultados individuais."
+    },
+    "questionnaires": {
+      "colaborador": {
+        "title": "Conhecendo mais o seu perfil!",
+        "text": "Abaixo você encontra todos os seus questionários disponíveis, além das datas de início e fim em que você poderá respondê-los. Lembre-se que seus resultados são sigilosos e ficam disponíveis apenas para você. Aproveite esta oportunidade para se conhecer melhor e receber os feedbacks mais adequados de acordo com a sua realidade, todos os nossos questionários são validados cientificamente com elevados níveis de evidência (nível A)."
+      },
+      "gestor": {
+        "text": "Aqui você encontrará a relação de todos os questionários disponíveis, detalhes como o período para preenchimento além de poder acompanhar como está a participação da equipe!"
+      }
+    }
   },
   "pages": {
     "title": {
@@ -91,5 +103,7 @@
   "populationProtectionLevel": "Nível de proteção da população",
   "companyProtectionLevel": "Nível de proteção da empresa",
   "adequateProtection": "Proteção adequada contra",
-  "minorProtection": "Proteção menor contra"
+  "minorProtection": "Proteção menor contra",
+  "saveAndLeave": "Salvar e sair",
+  "mandatoryQuestion": "Pergunta obrigatória"
 }

@@ -60,7 +60,10 @@ const Sidebar: React.FC = () => {
                 key={path}
               >
                 <Link to={path}>
-                  {icon} {t(`menu.${translationName}`)}{' '}
+                  {icon}{' '}
+                  {currentUser.role === 'admin_jungle'
+                    ? name
+                    : t(`menu.${translationName}`)}{' '}
                   {isSoon && <Tag>em breve</Tag>}
                 </Link>
               </MenuItem>

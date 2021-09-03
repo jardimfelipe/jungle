@@ -43,9 +43,14 @@ const Login: React.FC = () => {
     ({ login }: RootState) => login
   );
   const [isPasswordType, setIsPasswordType] = useState(true);
+  const [rememberUser, setRememberUser] = useState(false);
 
   const handleInputType = () => {
     setIsPasswordType(!isPasswordType);
+  };
+
+  const handleCheckboxChange = () => {
+    setRememberUser(!rememberUser);
   };
 
   const formik = useFormik({
@@ -123,7 +128,11 @@ const Login: React.FC = () => {
             </div>
 
             <Box params={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Checkbox checked={false} label={t('rememberUser')} />
+              <Checkbox
+                checked={rememberUser}
+                onChange={handleCheckboxChange}
+                label={t('rememberUser')}
+              />
               <Box params={{ flex: '0 0 100px' }}>
                 <LanguageSelect />
               </Box>

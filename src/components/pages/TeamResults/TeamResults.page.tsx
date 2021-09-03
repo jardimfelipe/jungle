@@ -5,7 +5,6 @@ import {
   Card,
   PromotionalCard,
   Typography,
-  // Image,
   Icons,
   ResultLine,
   ChartWrapper,
@@ -13,21 +12,16 @@ import {
 } from '../..';
 import { CardHeader, SocialAspectsCard } from '../MyResults/MyResults.styled';
 import { BiFace } from 'react-icons/bi';
-// import { Col, Row } from 'react-flexbox-grid';
 import {
   CardCharts,
   CardIcon,
-  // CardImage,
   CharFlexContainer,
   ChartsBarContainer,
   FlexContainer,
   LevelsContainer,
   ProgressBarContainer,
-  // StyledCol,
   CardBody,
 } from './TeamResults.styled';
-// import Woman from '../../../assets/team-resume/woman.png';
-// import Man from '../../../assets/team-resume/man.png';
 import ProgressBar from '@ramonak/react-progress-bar';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,6 +34,9 @@ import Skeleton from 'react-loading-skeleton';
 import { chartDataPopulation } from './populationChartDatas';
 import EmptyResults from '../MyResults/EmptyResults';
 import { useTranslation } from 'react-i18next';
+import { rgba } from 'polished';
+import { Statistics } from '../../../store/modules/results/types';
+import ResultsCards from '../MyResults/Cards/ResultsCards';
 
 const { Title, Text } = Typography;
 const { Brain } = Icons;
@@ -60,6 +57,16 @@ const TeamResults: React.FC = () => {
 
   const getProtectionLevelItems = () => {
     return results.statistics.filter((i, index) => index < 5);
+  };
+
+  const getBarColor = (result: Statistics, level: any) => {
+    console.log(result);
+    if (!result.result) return rgba('#011F3B', 0.1);
+    const string = result.result.split(' ')[1];
+    if (!string) return rgba('#011F3B', 0.5);
+    return result.result.split(' ')[1] === level.level
+      ? level.color
+      : rgba('#011F3B', 0.5);
   };
 
   const isEmpty = () =>
@@ -84,26 +91,26 @@ const TeamResults: React.FC = () => {
       >
         <Title level={3}>{t('pages.title.understandingTeam')}</Title>
       </Box>
-      {isEmpty() ? (
+      {isEmpty() && !isLoading ? (
         <EmptyResults />
       ) : (
         <>
-          {/* <Row>
-            <StyledCol xs={12} lg={7}>
+          {/* <StyledCol xs={12} lg={7}>
               <Card>
                 <Title level={4} variant="primary">
                   Análise dos especialistas
                 </Title>
                 <Text paragraph>{results.analysis.expert_analysis}</Text>
               </Card>
-            </StyledCol>
+            </StyledCol> */}
+          <ResultsCards isLoading={isLoading} analysis={results.analysis} />
 
-            <StyledCol xs={12} md={6}>
+          {/* <StyledCol xs={12} md={6}>
               <Card>
                 <Row>
                   <Col xs={12} xl={10}>
                     <Title color={theme.colors.p3} variant="primary" level={4}>
-                      Proteção adequada contra
+                      {t('adequateProtection')}
                     </Title>
                     <ul>
                       {results.analysis.adequate_protection.map(
@@ -153,9 +160,8 @@ const TeamResults: React.FC = () => {
                   </Col>
                 </Row>
               </Card>
-            </StyledCol>
-          </Row>
-          <Row>
+            </StyledCol> */}
+          {/* <Row>
             <StyledCol xs={12} lg={7}>
               <Card>
                 <Title level={4} color={theme.colors.p2}>
@@ -270,8 +276,15 @@ const TeamResults: React.FC = () => {
                                 params={{ display: 'block', width: '140px' }}
                               >
                                 <ProgressBar
+                                  bgColor={getBarColor(statistics, level)}
                                   height="10px"
-                                  completed={level.qtd}
+                                  completed={
+                                    100 - statistics.team_protection * 100
+                                  }
+                                  baseBgColor={rgba(
+                                    getBarColor(statistics, level),
+                                    0.1
+                                  )}
                                   isLabelVisible={false}
                                 />
                               </Box>
@@ -301,7 +314,11 @@ const TeamResults: React.FC = () => {
                                 }}
                               />
                               <Text color="#4ED9A7" textDecoration="strong">
-                                {100 - statistics.team_protection * 100}%
+                                {(
+                                  100 -
+                                  statistics.team_protection * 100
+                                ).toFixed(0)}
+                                %
                               </Text>
                             </ChartWrapper>
                             <Text>{t('companyProtectionLevel')}</Text>
@@ -344,7 +361,7 @@ const TeamResults: React.FC = () => {
               </>
             ) : (
               results.statistics.map((statistic, index) =>
-                statistic.team_protection > 0 ? (
+                statistic.team_protection > 0 && index > 4 ? (
                   <SocialAspectsCard key={`social-${index}`}>
                     <CardHeader>
                       <Text textDecoration="strong" variant="primary">
@@ -360,7 +377,7 @@ const TeamResults: React.FC = () => {
                         }}
                         minText={statistic.minText}
                         maxText={statistic.maxText}
-                        hasAnalysis={false}
+                        hasAnalysis
                         type={statistic.name}
                       />
                     </CardBody>

@@ -11,6 +11,7 @@ export const RadioControl = styled.span`
   border-radius: 50%;
   border: 2px solid ${(props) => props.theme.colors.darkGray};
   position: relative;
+  flex-shrink: 0;
   svg {
     transform: scale(0);
     width: 1em;

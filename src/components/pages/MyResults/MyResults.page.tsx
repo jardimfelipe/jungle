@@ -73,7 +73,10 @@ const MyResults: React.FC = () => {
   }, [dispatch, results]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <PromotionalCard />
+      <PromotionalCard
+        title={t('greetings.myResults.title')}
+        text={t('greetings.myResults.text')}
+      />
 
       <Title level={3}>{t('pages.title.myResults')}</Title>
       {isEmpty() ? (
@@ -219,15 +222,18 @@ const MyResults: React.FC = () => {
                       </Box>
                     ))
                   : results.statistics.map(
-                      ({
-                        dimension,
-                        value,
-                        description,
-                        name,
-                        minText,
-                        maxText,
-                      }) =>
-                        value > 0 ? (
+                      (
+                        {
+                          dimension,
+                          value,
+                          description,
+                          name,
+                          minText,
+                          maxText,
+                        },
+                        index
+                      ) =>
+                        value > 0 && index > 4 ? (
                           <SocialAspectsCard key={`dimension-${dimension}`}>
                             <CardHeader>
                               <Text textDecoration="strong" variant="primary">

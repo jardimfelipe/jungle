@@ -30,7 +30,7 @@ function* getResults({ payload = 'user' }: ActionType<typeof actions.getResultsR
     const { data } = yield call(api, `/results/${payload === 'user' ? 'me' : 'team'}`);
     const currentLanguage = getSavedState('user.currentLanguage')
     const { results: statistics, adequate_protection, minor_protection, ...rest } = data
-    if (currentLanguage !== "ptBR") {
+    if (currentLanguage && currentLanguage !== "ptBR") {
       const [translate_adequate_protection, translate_minor_protection]: ReturnType<typeof translateText>[] = yield all([
         call(translateText, adequate_protection, currentLanguage.replace(/[^a-z]/g, '')),
         call(translateText, minor_protection, currentLanguage.replace(/[^a-z]/g, '')),
@@ -38,6 +38,7 @@ function* getResults({ payload = 'user' }: ActionType<typeof actions.getResultsR
       const translatedStatistics: ReturnType<typeof getTranslatedStatistics> = yield call(getTranslatedStatistics, statistics)
       yield put(actions.getResultsSuccess({ statistics: translatedStatistics as unknown as Statistics[], analysis: { adequate_protection: translate_adequate_protection as unknown as string[], minor_protection: translate_minor_protection as unknown as string[], ...rest } }));
     } else {
+      console.log('pter')
       yield put(actions.getResultsSuccess({ statistics, analysis: { adequate_protection, minor_protection, ...rest } }));
     }
   } catch (error) {

@@ -3,7 +3,7 @@ import { ICheckboxProps } from './checkbox.types';
 import { FlexWrapper, StyledCheckbox } from './checkbox.styled';
 
 const Checkbox: React.FC<ICheckboxProps> = (props) => {
-  const { disabled = false, checked, ...rest } = props;
+  const { disabled = false, checked, id = 'checkbox', ...rest } = props;
 
   return (
     <FlexWrapper>
@@ -13,10 +13,13 @@ const Checkbox: React.FC<ICheckboxProps> = (props) => {
           checked={checked}
           disabled={disabled}
           data-testid="checkbox-component"
+          id={id}
           {...rest}
         />
       </StyledCheckbox>
-      <label data-testid="checkbox-label">{props.label}</label>
+      <label htmlFor={id} data-testid="checkbox-label">
+        {props.label}
+      </label>
     </FlexWrapper>
   );
 };

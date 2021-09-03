@@ -12,7 +12,19 @@
       "title": "¡Resultados de Ourmind!",
       "text": "Aquí encontrarás el perfil de síntomas que encontramos en tu equipo. Este es el informe global de su empresa, es confidencial y no es posible identificar a ninguno de los encuestados. Cada dimensión principal (síntomas de ansiedad, síntomas depresivos, síntomas de agotamiento, estrés y riesgo de consumo de sustancias) se representa en un gráfico separado. Consulte la descripción de los hallazgos en los subtítulos."
     },
-    "questionnaires": "Aquí encontrarás una lista de todos los cuestionarios disponibles, detalles como el plazo para cumplimentar, ¡además de poder hacer un seguimiento de la participación del equipo!"
+    "myResults": {
+      "title": "¡Aquí puedes descubrir más sobre ti!",
+      "text": "A continuación encontrará los resultados de todos los cuestionarios ya respondidos. ¡Aquí puedes descubrir más sobre ti! Recuerde que sus resultados son confidenciales y su empresa nunca podrá identificar a los encuestados ni a los resultados individuales."
+    },
+    "questionnaires": {
+      "colaborador": {
+        "title": "¡Conociendo más sobre tu perfil!",
+        "text": "A continuación encontrará todos sus cuestionarios disponibles, así como las fechas de inicio y finalización en las que podrá responderlos. Recuerde que sus resultados son confidenciales y solo están disponibles para usted. Aprovecha para conocerte mejor y recibir las retroalimentaciones más adecuadas según tu realidad, todos nuestros cuestionarios están validados científicamente con altos niveles de evidencia (nivel A)."
+      },
+      "gestor": {
+        "text": "Aquí encontrarás una lista de todos los cuestionarios disponibles, detalles como el plazo para cumplimentar, ¡además de poder hacer un seguimiento de la participación del equipo!"
+      }
+    }
   },
   "pages": {
     "title": {
@@ -91,5 +103,7 @@
   "populationProtectionLevel": "Nivel de protección de la población",
   "companyProtectionLevel": "Nivel de protección de la empresa",
   "adequateProtection": "Protección adecuada contra",
-  "minorProtection": "Protección menor contra"
+  "minorProtection": "Protección menor contra",
+  "saveAndLeave": "Guardar e salir",
+  "mandatoryQuestion": "Pregunta obligatoria"
 }

@@ -18,6 +18,7 @@ import { UserAnswer } from '../../../store/modules/questionaries/types';
 import { useTheme } from 'styled-components';
 import { differenceInDays, isFuture } from 'date-fns';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
@@ -110,7 +111,9 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
       </Box>
       <Box params={{ display: 'flex', justifyContent: 'space-between' }}>
         {questionary.answered ? (
-          <Text color={theme.colors.p3}>{t('checkAnswers')}</Text>
+          <Link to="/my-results" style={{ color: theme.colors.p3 }}>
+            {t('checkAnswers')}
+          </Link>
         ) : (
           <QuestionaryButton onClick={handleClick}>
             <div>
@@ -125,7 +128,7 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
             {questionary.answered ? (
               <FaCheckCircle size={24} />
             ) : (
-              `${chartData.datasets[0].data[0]}%`
+              `${chartData.datasets[0].data[0].toFixed(0)}%`
             )}
           </Text>
         </ChartWrapper>

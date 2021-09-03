@@ -19,6 +19,8 @@ import {
   QuestionText,
   OptionsContainer,
   QuestionContainer,
+  QuestionaryWrapper,
+  ImageWrapper,
 } from './Questionaries.styled';
 import { BsArrowRight } from 'react-icons/bs';
 
@@ -45,6 +47,7 @@ import {
 import { LoaderWrapper } from '../../molecules/Table/table.styled';
 import { Oval } from 'react-loading-icons';
 import { getSavedState, saveState } from '../../../utils/localStorage';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -68,6 +71,7 @@ const QuestionaryApplication: React.FC = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const history = useHistory();
+  const { t } = useTranslation();
   const {
     state: { questionary },
   } = useLocation<RouteState>();
@@ -199,7 +203,7 @@ const QuestionaryApplication: React.FC = () => {
       <LoaderWrapper isLoading={isLoading}>
         <Oval stroke={theme.colors.blue} height={50} />
       </LoaderWrapper>
-      <Box params={{ flex: '1 0 70%' }}>
+      <QuestionaryWrapper>
         <QuestionaryContainer>
           <Grid>
             <Box
@@ -213,7 +217,7 @@ const QuestionaryApplication: React.FC = () => {
                 {questionary?.dimension?.name}
               </Tag>
               <Button onClick={handleExitClick}>
-                Salvar e sair <BsArrowRight />
+                {t('saveAndLeave')} <BsArrowRight />
               </Button>
             </Box>
 
@@ -223,7 +227,9 @@ const QuestionaryApplication: React.FC = () => {
               <Title variant="primary" level={2}>
                 {questionary?.title}
               </Title>
-              <Text>{questionary.question.length} perguntas</Text>
+              <Text>
+                {questionary.question.length} {t('questions')}
+              </Text>
             </Box>
 
             <QuestionarySlider
@@ -244,7 +250,9 @@ const QuestionaryApplication: React.FC = () => {
                       ],
                     }}
                   >
-                    <Text color={theme.colors.p1}>Perguntar obrigatória</Text>
+                    <Text color={theme.colors.p1}>
+                      {t('mandatoryQuestion')}
+                    </Text>
                     <Box
                       params={{
                         display: 'flex',
@@ -291,11 +299,11 @@ const QuestionaryApplication: React.FC = () => {
             </QuestionButton>
           )}
         </QuestionaryContainer>
-      </Box>
+      </QuestionaryWrapper>
       {!isMobile && (
-        <Box params={{ flex: '0 0 30%' }}>
+        <ImageWrapper>
           <ImageContainer />
-        </Box>
+        </ImageWrapper>
       )}
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <Row>
@@ -318,12 +326,8 @@ const QuestionaryApplication: React.FC = () => {
                 </Title>
               </Box>
               <Text textDecoration="strong">
-                Ficamos felizes que você concluíu com êxito o questionário
-                Autocobrança.
-              </Text>
-              <Text>
-                Sed in libero commodo enim laoreet auctor. Donec ac ultricies
-                nibh, non gravida nibh.
+                Ficamos felizes que você concluíu com êxito o questionário{' '}
+                {questionary.dimension.name}
               </Text>
             </Box>
           </Col>

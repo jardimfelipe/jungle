@@ -37,7 +37,9 @@ const ProtectionLevel: React.FC<{ statistics: Statistics[] }> = ({
         </QuestionButton>
       </Box>
       {isLoading
-        ? [...Array(5)].map((_) => <Skeleton height={40} />)
+        ? [...Array(5)].map((_, index) => (
+            <Skeleton key={`protec-skel-${index}`} height={40} />
+          ))
         : statistics.map((item, index) =>
             index <= 4 ? (
               <ParamsInfos key={`params-${index}`} params={item} />

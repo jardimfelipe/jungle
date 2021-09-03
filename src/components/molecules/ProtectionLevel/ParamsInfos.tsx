@@ -79,7 +79,13 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
               <ProgressBar
                 bgColor={ProtectionLevelColors[params.result]}
                 height="8px"
-                completed={100 - params.value * 100}
+                completed={
+                  100 -
+                  params[
+                    currentUser.role === 'gestor' ? 'team_protection' : 'value'
+                  ] *
+                    100
+                }
                 baseBgColor={lighten(
                   0.35,
                   ProtectionLevelColors[params.result]

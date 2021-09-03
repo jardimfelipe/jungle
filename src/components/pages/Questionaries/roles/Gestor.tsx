@@ -94,7 +94,7 @@ const Questionaries: React.FC = () => {
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
         title={t('availableQuestionaries')}
-        text={t('greetings.questionnaires')}
+        text={t('greetings.questionnaires.gestor.text')}
       />
 
       <Box
