@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { removeState } from '../../../utils/localStorage';
+import { removeState, saveState, getSavedState } from '../../../utils/localStorage';
 import { logout } from '../../../store/modules/login/actions';
 
 import { Box, Modal, Typography, Checkbox, Button } from '../..';
@@ -17,28 +17,37 @@ const TermsConditionsModal: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(true);
   const [ opcao1, setOpcao1 ] = useState(false);
   const [ opcao2, setOpcao2 ] = useState(false);
   const [ opcao3, setOpcao3 ] = useState(false);
   const { currentUser } = useSelector(({login}: RootState)=>login);
+  const [isModalOpen, setIsModalOpen] = useState(getSavedState('modal'+currentUser['_id']));
 
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    saveState('modal'+currentUser['_id'], false)
   };
 
+  
   const handleLogout = () => {
     removeState('auth.token')
     dispatch(logout())
+    removeState('modal'+currentUser['_id'])
   };
 
   useEffect(()=>{
-    console.log(opcao1, opcao2, opcao3)
+      if (getSavedState('modal'+currentUser['_id']) == null){
+         saveState('modal'+currentUser['_id'], true);
+          console.log('Abrir? '+getSavedState('modal'+currentUser['_id']))
+      }
+      else{
+        console.log('Abrir? '+getSavedState('modal'+currentUser['_id']))
+      }
+      
   })
 
-  console.log(t('termsConditions.introduction'));
-
+ 
   return (
     <Modal
       hasCloseButton={false}

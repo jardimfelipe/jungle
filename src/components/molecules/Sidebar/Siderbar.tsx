@@ -15,7 +15,7 @@ import useMobileWidth from '../../../hooks/useMobileWidth';
 import { RootState } from '../../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSidebarState } from '../../../store/modules/base/actions';
-import { removeState } from '../../../utils/localStorage';
+import { removeState, saveState, getSavedState } from '../../../utils/localStorage';
 import { logout } from '../../../store/modules/login/actions';
 import { routes } from '../../../app/Routes';
 import { useTranslation } from 'react-i18next';
