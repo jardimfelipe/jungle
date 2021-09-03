@@ -26,13 +26,16 @@ import { Field } from '../../molecules/Table/table.types';
 import { useTheme } from 'styled-components';
 import TableMenu from './TableMenu';
 import CreateUser from './Modals/CreateUser';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
 const Companies: React.FC = () => {
+  const { t } = useTranslation();
+
   const tableFields: Field[] = [
     {
-      title: 'Colaborador',
+      title: t('table.headers.worker'),
       dataIndex: 'name',
       key: 'name',
       render: (value) => (
@@ -43,24 +46,24 @@ const Companies: React.FC = () => {
       ),
     },
     {
-      title: 'Setor',
+      title: t('table.headers.sector'),
       dataIndex: 'sector',
       key: 'sector',
       render: (value) => value || 'Financeiro',
     },
     {
-      title: 'Função',
+      title: t('table.headers.function'),
       dataIndex: 'function',
       key: 'function',
       render: (value) => value || 'Contador',
     },
     {
-      title: 'E-mail',
+      title: t('table.headers.email'),
       dataIndex: 'email',
       key: 'email',
     },
     {
-      title: 'Status',
+      title: t('table.headers.status'),
       dataIndex: 'id',
       key: 'id',
       render: (value) => (
@@ -135,8 +138,8 @@ const Companies: React.FC = () => {
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
-        title="Colaboradores da sua equipe"
-        text="Olá! Aqui você encontra a relação de colaboradores de sua equipe que foram cadastrados na jornada Jungle. Caso haja modificação no staff, podemos incluir ou retirar pessoas de nossa análise sigilosa ok?"
+        title={t('greetings.workers.title')}
+        text={t('greetings.workers.text')}
       />
 
       <Box
@@ -146,7 +149,7 @@ const Companies: React.FC = () => {
           alignItems: 'center',
         }}
       >
-        <Title level={3}>Colaboradores</Title>
+        <Title level={3}>{t('menu.workers')}</Title>
         <Box
           params={{ display: 'flex', justifyContent: 'flex-end', gap: '15px' }}
         >
@@ -164,7 +167,7 @@ const Companies: React.FC = () => {
               size="small"
               variant="secondary"
             >
-              Baixar Planilhas
+              {t('button.downloadSpreadsheet')}
             </Button>
           </Box>
           <Box
@@ -180,7 +183,7 @@ const Companies: React.FC = () => {
               size="small"
               variant="primary"
             >
-              Cadastrar Usuários
+              {t('button.registerUsers')}
             </Button>
           </Box>
         </Box>

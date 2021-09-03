@@ -24,6 +24,10 @@
       "gestor": {
         "text": "Here you will find a list of all available questionnaires, details such as the period for filling in, as well as being able to follow up on the team's participation!"
       }
+    },
+    "workers": {
+      "title": "Team Workers",
+      "text": "Hi! Here you will find the list of collaborators of your team who were registered in the Jungle journey. If there is a change in the staff, we can include or remove people from our confidential analysis ok?"
     }
   },
   "pages": {
@@ -50,7 +54,9 @@
     "talkToEspecialist": "Talk to especialist",
     "actives": "Actives",
     "inactives": "Inactives",
-    "soon": "Soon"
+    "soon": "Soon",
+    "downloadSpreadsheet": "Download spreadsheet",
+    "registerUsers": "Register users"
   },
   "emptyStates": {
     "questionaries": {
@@ -69,7 +75,12 @@
       "questionNumber": "Number of questions",
       "track": "Track",
       "respondents": "Respondents",
-      "replied": "Replied"
+      "replied": "Replied",
+      "worker": "Worker",
+      "sector": "Sector",
+      "function": "Function",
+      "email": "Email",
+      "status": "Status"
     }
   },
   "menu": {

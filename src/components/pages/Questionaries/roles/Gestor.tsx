@@ -43,6 +43,7 @@ const Questionaries: React.FC = () => {
         headers: {
           company: currentUser.company,
         },
+        userRole: 'gestor',
       })
     );
   }, [dispatch, currentUser]);

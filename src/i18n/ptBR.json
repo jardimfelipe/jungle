@@ -23,6 +23,10 @@
       },
       "gestor": {
         "text": "Aqui você encontrará a relação de todos os questionários disponíveis, detalhes como o período para preenchimento além de poder acompanhar como está a participação da equipe!"
+      },
+      "workers": {
+        "title": "Colaboradores da sua equipe",
+        "text": "Olá! Aqui você encontra a relação de colaboradores de sua equipe que foram cadastrados na jornada Jungle. Caso haja modificação no staff, podemos incluir ou retirar pessoas de nossa análise sigilosa ok?"
       }
     }
   },
@@ -50,7 +54,9 @@
     "talkToEspecialist": "Falar com especialista",
     "actives": "Ativos",
     "inactives": "Inativos",
-    "soon": "Em breve"
+    "soon": "Em breve",
+    "downloadSpreadsheet": "Baixar planilha",
+    "registerUsers": "Cadastrar usuários"
   },
   "emptyStates": {
     "questionaries": {
@@ -69,7 +75,12 @@
       "questionNumber": "Número de perguntas",
       "track": "Rastreio",
       "respondents": "Respondentes",
-      "replied": "Responderam"
+      "replied": "Responderam",
+      "worker": "Colaborador",
+      "sector": "Setor",
+      "function": "Função",
+      "email": "Email",
+      "status": "Status"
     }
   },
   "menu": {

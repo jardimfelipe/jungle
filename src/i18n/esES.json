@@ -24,6 +24,10 @@
       "gestor": {
         "text": "Aquí encontrarás una lista de todos los cuestionarios disponibles, detalles como el plazo para cumplimentar, ¡además de poder hacer un seguimiento de la participación del equipo!"
       }
+    },
+    "workers": {
+      "title": "Colaboradores de tu equipo",
+      "text": "¡Hola! Aquí encontrarás la lista de colaboradores de tu equipo que se registraron en el viaje Jungle. Si hay un cambio en el personal, podemos incluir o eliminar personas de nuestro análisis confidencial, ¿de acuerdo?"
     }
   },
   "pages": {
@@ -50,7 +54,9 @@
     "talkToEspecialist": "Hablar con un experto",
     "actives": "Activos",
     "inactives": "Inactivos",
-    "soon": "Pronto"
+    "soon": "Pronto",
+    "downloadSpreadsheet": "Descargar documento",
+    "registerUsers": "Registrar usuarios"
   },
   "emptyStates": {
     "questionaries": {
@@ -69,7 +75,12 @@
       "questionNumber": "Número de preguntas",
       "track": "Seguimiento",
       "respondents": "Encuestados",
-      "replied": "Respondido"
+      "replied": "Respondido",
+      "worker": "Colaborador",
+      "sector": "Sector",
+      "function": "Ocupación",
+      "email": "Email",
+      "status": "Status"
     }
   },
   "menu": {

@@ -9,7 +9,7 @@ function* getQuestionaries({ payload }: ActionType<typeof actions.getQuestionari
   try {
     const headers = payload?.headers || { }
     const userRole = payload?.userRole || 'admin_jungle'
-    const { data } = yield call(api, `/questionnaires/${userRole === 'user' ? 'current' : ''}`, { headers });
+    const { data } = yield call(api, `/questionnaires/${userRole !== 'admin_jungle' ? 'current' : ''}`, { headers });
     yield put(actions.getQuestionariesSuccess(data));
   } catch (error) {
     if (error instanceof Error) {

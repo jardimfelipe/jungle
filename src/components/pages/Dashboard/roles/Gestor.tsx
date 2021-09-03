@@ -51,7 +51,10 @@ const Gestor: React.FC = () => {
 
   useEffect(() => {
     dispatch(
-      getQuestionariesRequest({ headers: { company: currentUser.company } })
+      getQuestionariesRequest({
+        headers: { company: currentUser.company },
+        userRole: 'gestor',
+      })
     );
     dispatch(getResultsRequest('gestor'));
   }, [dispatch, currentUser]);
