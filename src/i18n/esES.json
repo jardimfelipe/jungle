@@ -1,8 +1,8 @@
 {
   "greetings": {
     "user": {
-      "title": "Estamos felices de verte",
-      "text": "Todos nuestros cuestionarios son confidenciales, validados científicamente, para que puedas tener una vida más saludable y productiva"
+      "title": "Nos alegra verte",
+      "text": "Todos nuestros cuestionarios son confidenciales, científicamente validados, para que pueda vivir una vida más saludable y productiva."
     },
     "gestor": {
       "title": "Bienvenido,",
@@ -10,44 +10,44 @@
     },
     "teamResults": {
       "title": "¡Resultados de Ourmind!",
-      "text": "Aquí encontrarás el perfil de síntomas que encontramos en tu equipo. Este es el informe global de su empresa, es confidencial y no es posible identificar a ninguno de los encuestados. Cada dimensión principal (síntomas de ansiedad, síntomas depresivos, síntomas de agotamiento, estrés y riesgo de consumo de sustancias) se representa en un gráfico separado. Consulte la descripción de los hallazgos en los subtítulos."
+      "text": "Aquí puedes encontrar el perfil de síntomas que encontramos en tu equipo. Este es el informe global de tu empresa es confidencial, no es posible identificar a ninguno de los encuestados. Cada dimensión principal (síntomas de ansiedad, síntomas depresivos, síntomas de agotamiento, estrés y riesgo de consumo de sustancias) está representado en un gráfico separado. Consulte la descripción de los hallazgos en las leyendas ."
     },
-    "questionnaires": "Aquí encontrarás una lista de todos los cuestionarios disponibles, detalles como el plazo para cumplimentar, ¡además de poder hacer un seguimiento de la participación del equipo!"
+    "questionnaires": "Aquí encontrará una lista de todos los cuestionarios disponibles, detalles como el período para completar, ¡además de poder monitorear cómo está participando el equipo!"
   },
   "pages": {
     "title": {
       "questionaries": "Cuestionarios",
       "teamResults": "Resultados del equipo",
-      "lastQuestionaries": "Utimos cuestionarios",
-      "understandingTeam": "Entendiendo al equipo",
-      "myResults": "Mis Resultados",
+      "lastQuestionaries": "Últimos cuestionarios",
+      "myResults": "Mis resultados",
       "protecionLevels": "Niveles de protección",
       "biopsychosocialAspects": "Aspectos biopsicosociales",
-      "specialistAnalysis": "Análisis experto",
-      "youAreHere": "Tu estás aquí"
+      "specialtyAnalysis": "Análisis experto",
+      "youAreHere": "Estás aquí",
+      "understandingTeam": "Comprensión del equipo"
     },
-    "filled": "llenados"
+    "filled": "lleno"
   },
   "button": {
     "seeAll": "Ver todo",
-    "availables": "Disponíbles",
-    "inProgress": "En proceso",
-    "done": "Finalizados",
+    "availables": "Disponibles",
+    "inProgress": "En progreso",
+    "done": "Terminado",
     "changePersonalData": "Cambiar datos personales",
     "changePassword": "Cambiar contraseña",
-    "talkToEspecialist": "Hablar con un experto",
+    "talkToEspecialist": "Habla con un experto",
     "actives": "Activos",
     "inactives": "Inactivos",
-    "soon": "Pronto"
+    "soon": "pronto"
   },
   "emptyStates": {
     "questionaries": {
-      "title": "Aún no tienes cuestionarios para completar.",
-      "description": "Una vez que su empresa tenga cuestionarios, estarán disponibles aquí en esta sección."
+      "title": "Aún no tiene ningún cuestionario que completar",
+      "description": "Una vez que su empresa tenga cuestionarios, estarán disponibles aquí en esta sección"
     },
     "myResults": {
-      "title": "Aún no hay resultados para mostrar.",
-      "description": "Después de completar los cuestionarios, se mostrarán los resultados en esta sección."
+      "title": "Aún no hay resultados para mostrar",
+      "description": "Después de completar los cuestionarios, se mostrarán los resultados de esta sección"
     }
   },
   "table": {
@@ -57,11 +57,11 @@
       "questionNumber": "Número de preguntas",
       "track": "Seguimiento",
       "respondents": "Encuestados",
-      "replied": "Respondido"
+      "replied": "Respondió"
     }
   },
   "menu": {
-    "dashboard": "Dashboard",
+    "dashboard": "Tablero",
     "questionnaires": "Cuestionarios",
     "teamResults": "Resultados del equipo",
     "myResults": "Mis resultados",
@@ -69,38 +69,100 @@
     "playbook": "Playbook",
     "marketplace": "Marketplace",
     "masterclass": "MasterClass",
-    "logout": "Deslogar"
+    "logout": "Cerrar sesión"
   },
-  "availableUntil": "Disponible hasta {{- date}}",
+  "availableUntil": "Disponible hasta el {{-date}}",
   "availableIn": "Disponible en",
   "questions": "preguntas",
-  "checkAnswers": "Revisar respuestas",
-  "resumeQuiz": "Reanudar la prueba",
+  "checkAnswers": "Comprobar respuestas",
+  "resumeQuiz": "Reanudar cuestionario",
   "startQuestionarie": "Iniciar cuestionario",
   "notRatedYet": "Aún no calificado",
   "weAreHereToHelp": "Estamos aquí para ayudar",
-  "filledQuestionaries": "Cuestionarios completados",
+  "filledQuestionaries": "Cuestionarios llenos",
   "availableQuestionaries": "Cuestionarios disponibles",
   "manager": "gerente",
-  "niceHaveYouHere": "Es bueno tenerte aqui",
-  "informYourEmail": "Escriba su correo electrónico",
-  "informYourPassword": "Escribe tu contraseña",
-  "rememberUser": "Recordar usuário",
-  "login": "Entrar",
+  "niceHaveYouHere": "Me alegro de tenerte cerca",
+  "informYourEmail": "Ingrese su correo electrónico",
+  "informYourPassword": "Introduzca su contraseña",
+  "RememberUser": "Recordar usuario",
+  "login": "Iniciar sesión",
   "password": "Contraseña",
   "populationProtectionLevel": "Nivel de protección de la población",
   "companyProtectionLevel": "Nivel de protección de la empresa",
   "adequateProtection": "Protección adecuada contra",
   "minorProtection": "Protección menor contra",
   "termsConditions": {
-    "header": "Para utilizar la plataforma Jungle, debe aceptar los Términos de consentimiento",
+    "header": "Para utilizar la plataforma Jungle debe aceptar las Condiciones de consentimiento",
+    "cb_terms0": "Soy consciente",
+    "cb_terms1": "Acepto participar",
     "introduction": [
       "INFORMACIÓN DE CONSENTIMIENTO PARA EL TRATAMIENTO DE DATOS PERSONALES - Jungle Medical Science for Business. Fue invitado a participar en el Ciclo de detección de Grandes Preguntas para Mentes más Saludables, desarrollado por JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118 / 0001-10)) y ofrecido por su empresa contratante. Este documento tiene como objetivo registrar la expresión libre, informada e inequívoca por la cual usted acepta el tratamiento de sus datos personales de acuerdo con la LGPD - Ley General de Protección de Datos Personales, Ley N ° 13.709 / 18, y otra legislación aplicable, así como la Política de Privacidad y Protección de Datos de Jungle Medical Science for Business (www.junglex.com/politica-de-privacidade/). ",
-      "Al expresar su aceptación de este término, usted da su consentimiento y acepta que el procesamiento de sus datos personales [1] y datos personales sensibles [2] se llevará a cabo para los fines específicos establecidos en este documento.",
-      "En caso de no aceptación de los términos aquí propuestos, su participación seguirá siendo imposible."
+      "Al expresar su aceptación de este término, usted consiente y acepta que el procesamiento de sus datos personales [1] y datos personales sensibles [2] se llevará a cabo para los fines específicos establecidos en este documento.",
+      "En caso de no acEn cumplimiento de los términos propuestos en este documento, su participación seguirá siendo imposible. "
     ],
     "purpose": {
-      "title": "I - Propósito del programa"
-    }
+      "title": "I - Propósito del programa",
+      "text": [
+        "The Great Questions for Healthier Minds Screening Cycle es un programa de preselección / mapeo que recopila información sobre los niveles de síntomas relacionados con la salud mental del participante mediante la aplicación de cuestionarios basados ​​en escalas científicas validadas en estudios publicados por la academia, para verificar los niveles de protección contra síntomas de Ansiedad, Burnout, Depresión, Estrés y Uso de Sustancias, además de aspectos intrínsecos al individuo como resiliencia, flexibilidad, conciliación, autorrealización, familia, trabajo, organización financiera y calidad de vida, con con el propósito de proponer Programas de Promoción de la Salud y el Bienestar. ",
+        "El ciclo de Cribado Grandes Preguntas para Mentes Más Saludables se llevará a cabo bajo la supervisión de un médico especialista en la selva (Psiquiatra) de forma remota (plataforma online), contemplando los siguientes pasos:",
+        "§ Cuestionarios en línea: aplicación de cuestionarios individuales y anónimos a través de una plataforma en línea (Jungle Collaborator Dashboard) en los temas enumerados anteriormente;",
+        "§ Análisis: de la información recogida mediante cuestionarios basados ​​en escalas científicas;",
+        
+        "§ Emisión de Informe Individual: que se pondrá a disposición de forma confidencial. El Participante a través de la plataforma online (Jungle Employee Dashboard);",
+        "§ Seguimiento: con alcance motivacional, educativo y de apoyo, el Participante tendrá disponible un canal de correo electrónico directo con el equipo médico de Jungle para consultas sobre dudas y recopilación de información sobre el programa y sus resultados.",
+        "§ Emisión de Informe Global: que se pondrá a disposición de la empresa contratante (Dashboard)",
+        "Si hay un retorno del Participante a los correos electrónicos que envían el token de acceso individual a la plataforma en línea (Jungle Collaborator Dashboard), se registrará como si no hubiera interés en participar en el programa",
+        "En ningún caso se realizará el diagnóstico de enfermedades ni se prescribirá ningún tratamiento médico"
+       ]
+    },
+       "purpose2": {
+        "title": "II - Tratamiento de datos personales",
+        "text": [
+          "Recopilamos sus datos personales y datos personales sensibles, como nombre completo, CPF, fecha de nacimiento, teléfono, correo electrónico y otros datos de salud que fueron procesados ​​durante la participación en el Programa, para su correcta ejecución, para ofrecer otros programas que usted esté poder participar y que nos comuniquemos con usted. ",
+          "Todos los datos personales y los datos personales sensibles serán considerados confidenciales y como tales estarán protegidos con el fin de proteger la privacidad de los titulares de dichos datos, en cumplimiento de la legislación pertinente, en especial LGPD, sin perjuicio del deber de secreto en relación a la información médica ."
+        ]
+    },
+       "purpose3": {
+        "title": "III - Intercambio de datos personales",
+        "text": [
+          "Para la provisión completa y adecuada del ciclo de Grandes Preguntas para un examen mental más saludable, sus datos personales comunes y los datos personales confidenciales (datos de salud) estarán disponibles para su consulta por parte del equipo de Jungle, dentro de los límites de la confidencialidad médica, LGPD y otra legislación aplicable. , respetando los límites de estricta necesidad, asegurando que el destinatario pueda salvaguardar la confidencialidad y la protección adecuada. ",
+          "En relación a los datos de salud, Jungle aclara que los datos que reciba su empresa contratante serán estadísticos con el fin de brindar índices para la aplicación de políticas internas de salud y bienestar."
+        ]
+    },
+       "purpose4": {
+        "title": "IV - Almacenamiento de datos personales",
+        "text": [
+          "Sus datos personales serán eliminados por Jungle cuando dejen de ser necesarios o relevantes para los fines aquí definidos o bajo su solicitud, siempre que esto no entre en conflicto con el cumplimiento de obligaciones legales y reglamentarias y / o para el ejercicio regular de nuestra derechos ."
+        ]
+    },
+       "purpose5": {
+        "title": "V - Medidas de seguridad de los datos personales",
+        "text": [
+          "Jungle observará estrictos estándares de seguridad y buenas prácticas mediante el uso de herramientas y tecnologías razonables y disponibles, así como medidas técnicas y administrativas capaces de proteger los datos personales del acceso no autorizado y de situaciones accidentales o ilegales."
+        ]
+    },
+       "purpose6": {
+        "title": "VI - Derecho de revocación del consentimiento",
+        "text": [
+          "El consentimiento expresado en este documento puede ser revocado por usted, el Participante, en cualquier momento, previa solicitud por correo electrónico.",
+          "Al completar y marcar en consecuencia este  forma, usted, el Participante, declara expresa e inequívocamente que conoce: ",
+        "§ de los objetivos, propósito y funcionamiento de las Grandes Preguntas para el Ciclo de Detección de Mindis más Saludables;",
+        "§ la recopilación y el procesamiento de sus datos personales, incluidos sus datos sensibles (datos clínicos / de salud);",
+        "§ compartir entre Jungle y la empresa contratante, dentro de los límites de la confidencialidad médica y en los términos de la ley de protección de datos vigente y demás legislación aplicable;",
+        "§ que la participación en el Programa es completamente gratuita, queda totalmente a su discreción, y puede optar por no participar en cualquier momento mediante notificación expresa."
+        ]
+       },
+        "end": {
+          "text": [
+            "Después de leer atentamente la información anterior y aclarar todas las dudas.",
+            "ACEPTO PARTICIPAR",
+            ", por mi propia voluntad, del ciclo de detección de Grandes preguntas para mentes más saludables y estoy de acuerdo con los términos establecidos en este documento.",
+            "2021 - JUNGLE CONSULTORIA LTDA - www.junglex.com",
+            "Lea el término completo y avísenos si está de acuerdo."
+          ],
+          "link": "No acepto y quiero salir de la plataforma",
+          "button": "Finalizar"
+        }
   }
-}
+} 

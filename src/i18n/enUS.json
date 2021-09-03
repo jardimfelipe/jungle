@@ -2,52 +2,52 @@
   "greetings": {
     "user": {
       "title": "We are happy to see you",
-      "text": "All our questionnaires are confidential, scientifically validated, so you can have a healthier and more productive life."
+      "text": "All our questionnaires are confidential, scientifically validated, so you can live a healthier and more productive life."
     },
-    "gestor": {
+    "manager": {
       "title": "Welcome,",
       "text": "All our questionnaires were created on a scientific basis. See the results we got from your team."
     },
     "teamResults": {
-      "title": "Ourmind Results!",
-      "text": "Here you will find the profile of symptoms that we found in your team. This is your company's global report and is confidential, and it is not possible to identify any of the respondents. Each main dimension (anxiety symptoms, depressive symptoms, burnout symptoms, stress and risk of substance use) is represented in a separate graph. See description of findings in captions."
+      "title": "Ourmind results!",
+      "text": "Here you can find the profile of symptoms we found in your team. This is your company's global report is confidential, it is not possible to identify any of the respondents. Each main dimension (anxiety symptoms, depressive symptoms, symptoms of burnout, stress and risk of substance use) is represented in a separate graph. See description of findings in the legends."
     },
-    "questionnaires": "Here you will find a list of all available questionnaires, details such as the period for filling in, as well as being able to follow up on the team's participation!"
+    "questionnaires": "Here you will find a list of all available questionnaires, details such as the period for filling in, and you can follow up on the team's participation!"
   },
   "pages": {
     "title": {
-      "questionaries": "Questionaries",
+      "questionaries": "Questionnaires",
       "teamResults": "Team results",
-      "lastQuestionaries": "Last questionnaires",
-      "myResults": "My results",
+      "lastQuestionaries": "Last Questionnaires",
+      "myResults": "My Results",
       "protecionLevels": "Protection levels",
-      "biopsychosocialAspects": "Biopsychosocial aspects",
-      "specialistAnalysis": "Specialist analysis",
+      "biopsychosocialAspects": "Biopsychosocial Aspects",
+      "specialistAnalysis": "Expert analysis",
       "youAreHere": "You are here",
       "understandingTeam": "Understanding the team"
     },
     "filled": "filled"
   },
   "button": {
-    "seeAll": "See all",
+    "seeAll": "See All",
     "availables": "Availables",
     "inProgress": "In progress",
-    "done": "Done",
-    "changePersonalData": "Change personal data",
+    "done": "Finished",
+    "changePersonalData": "Change Personal Data",
     "changePassword": "Change password",
-    "talkToEspecialist": "Talk to especialist",
-    "actives": "Actives",
+    "talkToEspecialist": "Talk to Expert",
+    "actives": "Assets",
     "inactives": "Inactives",
     "soon": "Soon"
   },
   "emptyStates": {
     "questionaries": {
-      "title": "You do not have questionnaires to complete yet.",
-      "description": "Once your company has questionnaires, they will be made available here in this section"
+      "title": "You still don't have any questionnaires to fill out",
+      "description": "Once your company has questionnaires, they will be available here in this section"
     },
     "myResults": {
-      "title": "There are no results to display yet..",
-      "description": "After completing the questionnaires, the results in this section will be displayed."
+      "title": "No results to display yet",
+      "description": "After completing the questionnaires, the results in this section will be displayed"
     }
   },
   "table": {
@@ -55,111 +55,115 @@
       "title": "Title",
       "dimension": "Dimension",
       "questionNumber": "Number of questions",
-      "track": "Track",
+      "track": "Tracking",
       "respondents": "Respondents",
       "replied": "Replied"
     }
   },
   "menu": {
     "dashboard": "Dashboard",
-    "questionnaires": "Questionnaires",
+    "Questionnaires": "Questionnaires",
     "teamResults": "Team results",
-    "myResults": "My results",
-    "workers": "Workers",
+    "myResults": "My Results",
+    "workers": "Collaborators",
     "playbook": "Playbook",
     "marketplace": "Marketplace",
     "masterclass": "MasterClass",
     "logout": "Logout"
   },
-  "availableUntil": "Available until {{- date}}",
+  "availableUntil": "Available until {{-date}}",
   "availableIn": "Available in",
   "questions": "questions",
-  "checkAnswers": "Check answers",
+  "checkAnswers": "Check Answers",
   "resumeQuiz": "Resume quiz",
   "startQuestionarie": "Start quiz",
-  "notRatedYet": "Not rated yet",
+  "notRatedYet": "Not yet rated",
   "weAreHereToHelp": "We are here to help",
-  "filledQuestionaries": "Completed questionnaires",
-  "availableQuestionaries": "Available questionnaires",
+  "filledQuestionaries": "Filled Questionnaires",
+  "availableQuestionaries": "Available Questionnaires",
   "manager": "manager",
-  "niceHaveYouHere": "It is nice to have you here",
-  "informYourEmail": "Type your email",
-  "informYourPassword": "Type your password",
-  "rememberUser": "Remember user",
+  "niceHaveYouHere": "Glad to have you around",
+  "informYourEmail": "Enter your email",
+  "informYourPassword": "Enter your password",
+  "rememberUser": "Remember User",
   "login": "Login",
   "password": "Password",
-  "populationProtectionLevel": "Population protection level",
-  "companyProtectionLevel": "Company protection level",
+  "populationProtectionLevel": "Population Protection Level",
+  "companyProtectionLevel": "Company Protection Level",
   "adequateProtection": "Adequate protection against",
   "minorProtection": "Minor protection against",
   "termsConditions": {
-    "header": "To use the Jungle platform, you must accept the Terms of Consent",
+    "header": "To use the Jungle platform you must accept the Terms of Consent",
+    "cb_terms0": "I'm aware",
+    "cb_terms1": "I accept to participate",
     "introduction": [
-      "CONSENT INFORMATION FOR THE TREATMENT OF PERSONAL DATA - Jungle Medical Science for Business. He was invited to participate in the Cycle of detection of Great Questions for Healthier Minds, developed by JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118 / 0001-10 )) and offered by your contracting company.This document aims to register the free, informed and unequivocal expression by which you accept the treatment of your personal data in accordance with the LGPD - General Law of Protection of Personal Data, Law No. 13.709 / 18, and other applicable legislation, as well as the Privacy Policy and Data Protection of Jungle Medical Science for Business (www.junglex.com/politica-de-privacidade/). ",
-      "By expressing your acceptance of this term, you consent and agree that the processing of your personal data [1] and sensitive personal data [2] will be carried out for the specific purposes set out in this document.",
-      "In case of non-acceptance of the terms proposed here, your participation will continue to be impossible."
+      "INFORMATION OF CONSENT FOR PROCESSING PERSONAL DATA – Jungle Medical Science for Business. You were invited to participate in the Great Questions for Healthier Minds Screening Cycle, developed by JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118/0001-10) ) and offered by your contracting company. This document aims to register the free, informed and unambiguous expression by which you agree with the treatment of your personal data in accordance with the LGPD - General Law for the Protection of Personal Data, Law No. 13.709/18, and other applicable legislation, as well as the Jungle Medical Science for Business Privacy and Data Protection Policy (www.junglex.com/politica-de-privacidade/).",
+      "By expressing your acceptance of this term, you consent and agree that the processing of your personal data[1] and sensitive personal data[2] will be carried out for the specific purposes set forth herein.",
+      "In the event of not acection of the terms proposed herein, your participation will remain impossible."
     ],
     "purpose": {
       "title": "I - Purpose of the program",
       "text": [
-          "The Great Questions for Healthier Minds Screening Cycle is a pre-screening/mapping program that collects information on the participant's levels of symptoms related to mental health, by applying questionnaires based on scientific scales validated in studies published by the academy, to verify the levels of protection against symptoms of Anxiety, Burnout, Depression, Stress and Substance Use, in addition to aspects intrinsic to the individual such as resilience, flexibility, work-life balance, self-fulfillment, family, work, financial organization and quality of life, with the purpose of proposing Health and Wellness Promotion Programs. ",
-          "The Great Questions for Healthier Minds Screening cycle will be carried out under the supervision of a jungle medical specialist (Psychiatrist) remotely (online platform), including the following steps:",
-          "§ Online questionnaires: application of individual and anonymous questionnaires via an online platform (Jungle Collaborator Dashboard) on the topics listed above; ",
-          "§ Analysis: of the information collected via questionnaires based on scientific scales;",
-          "§ Issue of Individual Report: which will be made available confidentially. the Participant via an online platform (Jungle Employee Dashboard); ",
-          "§ Monitoring: with a motivational, educational and support scope, the Participant will have available a direct e-mail channel with the Jungle medical team for queries about doubts and gathering information about the program and its results.",
-          "§ Issuance of Global Report: which will be made available to the contracting company (Dashboard)",
-          "If there is a return from the Participant to e-mails sending the individual access token to the online platform (Jungle Collaborator Dashboard), it will be registered as if there was no interest in participating in the program.",
-          "Under no circumstances will a diagnosis of diseases be carried out, nor will any medical treatment be prescribed."
-      ]},
-      "purpose2": {
+        "The Great Questions for Healthier Minds Screening Cycle is a pre-screening/mapping program that collects information on the participant's levels of symptoms related to mental health by applying questionnaires based on scientific scales validated in studies published by the academy , to verify the levels of protection against symptoms of Anxiety, Burnout, Depression, Stress and Substance Use, in addition to aspects intrinsic to the individual such as resilience, flexibility, work-life balance, self-fulfillment, family, work, financial organization and quality of life , with the purpose of proposing Programs for the Promotion of Health and Well-being.",
+        "The cycle of Great Questions for Healthier Minds Screenings will be carried out under the supervision of a jungle medical specialist (Psychiatrist) remotely (online platform), contemplating the following steps:",
+        "§ Online questionnaires: application of individual and anonymous questionnaires via an online platform (Jungle Collaborator Dashboard) on the topics listed above;",
+        "§ Analysis: of the information collected via questionnaires based on scientific scales;",
+        
+        "§ Issue of Individual Report: which will be made available confidentially. the Participant via online platform (Dashboard of Jungle Employee);",
+        "§ Monitoring: with motivational, educational and support scope, the Participant will have available a direct e-mail channel with the Jungle medical team for queries about doubts and gathering information about the program and its results.",
+        "§ Issuance of Global Report: which will be made available to the contracting company (Dashboard)",
+        "If there is a return from the Participant to the emails sending the individual access token to the online platform (Jungle Collaborator Dashboard), it will be registered as if there was no interest in participating in the program.",
+        "Under no circumstances will the diagnosis of diseases be carried out nor will any medical treatment be prescribed."
+       ]
+    },
+       "purpose2": {
         "title": "II - Treatment of Personal Data",
         "text": [
-          "Coletamos seus dados pessoais e dados pessoais sensiveis, como nome completo, CPF, data de nascimento, telefone, e-mail e outros dados de saúde que vieram a ser tratados durante a participação no Programa, para sua devida execução, para oferecimento de outros programas que você tenha condições de participar e para nos comunicarmos com você.",
-          "All personal data and sensitive personal data will be considered confidential and as such will be protected in order to protect the privacy of the holders of said data, in compliance with the relevant legislation, especially LGPD, without prejudice to the duty of confidentiality in relation to the information medical. "
+          "We collect your personal data and sensitive personal data, such as full name, CPF, date of birth, telephone, email and other health data that were processed during participation in the Program, for its proper execution, to offer others programs that you are able to participate in and for us to communicate with you.",
+          "All personal data and sensitive personal data will be considered confidential and as such will be protected in order to protect the privacy of the holders of said data, in compliance with the relevant legislation, especially LGPD, without prejudice to the duty of secrecy in relation to medical information."
         ]
-      },
-      "purpose3": {
+    },
+       "purpose3": {
         "title": "III - Sharing of Personal Data",
         "text": [
-          "For full and adequate provision of the Great Questions for Healthier Mind Screening Cycle, your common personal data and sensitive personal data (health data) will be available for consultation by the Jungle team, within the limits of medical confidentiality, LGPD and other applicable legislation, observing the limits of strict necessity, ensuring that the recipient is able to safeguard confidentiality and adequate protection. ",
-          "Regarding health data, Jungle clarifies that the data received by its contracting company will be statistical in order to provide indexes for the application of internal health and well-being policies."
+          "For full and adequate provision of the Great Questions for Healthier Mind Screening Cycle, your common personal data and sensitive personal data (health data) will be available for consultation by the Jungle team, within the limits of medical confidentiality, LGPD and other applicable legislation , observing the limits of strict necessity, ensuring that the recipient is able to safeguard confidentiality and adequate protection.",
+          "In relation to health data, Jungle clarifies that the data received by its contracting company will be statistical in order to provide indexes for the application of internal health and well-being policies."
         ]
-      },
-      "purpose4": {
-        "title": "IV - Storage of Personal Data",
+    },
+       "purpose4": {
+        "title": "IV - Personal Data Storage",
         "text": [
-          "Your personal data will be deleted by Jungle when they are no longer necessary or relevant for the purposes defined herein or upon your request, provided that this does not conflict with the fulfillment of legal, regulatory obligations and/or the regular exercise of our rights."
+          "Your personal data will be deleted by Jungle when they are no longer necessary or relevant for the purposes defined herein or upon your request, provided that this does not conflict with the fulfillment of legal and regulatory obligations and/or for the regular exercise of our rights. "
         ]
-      },
-      "purpose5": {
+    },
+       "purpose5": {
         "title": "V - Personal Data Security Measures",
         "text": [
           "Jungle will observe strict security standards and good practices through the use of reasonable and available tools and technologies, in addition to technical and administrative measures capable of protecting personal data from unauthorized access and from accidental or illegal situations."
         ]
-      },
-      "purpose6": {
+    },
+       "purpose6": {
         "title": "VI - Right of Withdrawal of Consent",
         "text": [
           "The consent expressed herein may be revoked by you, the Participant, at any time, upon request by email.",
-          "By completing and marking this form accordingly, you, the Participant, expressly and unequivocally declare that you are aware:",
-          "§ the objectives, purpose and functioning of the Great Questions for Healthier Mindis Screening Cycle;",
-          "§ the collection and processing of your personal data, including your sensitive data (clinical/health data);",
-          "§ sharing between Jungle and the contracting company, within the limits of medical confidentiality and under the terms of the current data protection law and other applicable legislation;",
-          "§  que a participação no Programa é totalmente livre, ficando inteiramente a seu critério, podendo deixar de participar a qualquer momento mediante comunicação expressa."
+          "By completing and marking accordingly this form, you, the Participant, expressly and unequivocally declare that you are aware:",
+        "§ of the objectives, purpose and functioning of the Great Questions for Healthier Mindis Screening Cycle;",
+        "§ the collection and processing of your personal data, including your sensitive data (clinical/health data);",
+        "§ sharing between Jungle and the contracting company, within the limits of medical confidentiality and under the terms of the current data protection law and other applicable legislation;",
+        "§ that participation in the Program is completely free, being entirely at its discretion, and may opt-out at any time by express notice."
         ]
-      },
-      "end": {
-        "text": [
-          "After carefully reading the above information and clarifying any doubts.",
-          "I AGREE TO PARTICIPATE",
-          ", of my own free will, of the Great Questions for Healthier Minds Screening Cycle and I agree with the terms set forth herein."
-        ]
-      },
-      "end_link": "I don't accept and I want to leave the platform",
-      "end_text": "Read the entire term and let us know if you agree.",
-      "end_button": "Finish"
+       },
+        "end": {
+          "text": [
+            "After carefully reading the above information and clarifying all doubts.",
+            "I AGREE TO PARTICIPATE",
+            ", of my own free will, of the Great Questions for Healthier Minds Screening Cycle and I agree with the terms set forth herein.",
+            "2021 - JUNGLE CONSULTORIA LTDA - www.junglex.com",
+            "Read the entire term and let us know if you agree."
+          ],
+          "link": "I don't accept and I want to leave the platform",
+          "button": "Finish"
+        }
   }
-}
- 
- 
+} 
+
