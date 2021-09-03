@@ -2,21 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store';
+import { removeState } from '../../../utils/localStorage';
+import { logout } from '../../../store/modules/login/actions';
+
 import { Box, Modal, Typography, Checkbox, Button } from '../..';
 
 const { Text, Title } = Typography;
 
 
+
 const TermsConditionsModal: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [ opcao1, setOpcao1 ] = useState(false);
   const [ opcao2, setOpcao2 ] = useState(false);
   const [ opcao3, setOpcao3 ] = useState(false);
+  const { currentUser } = useSelector(({login}: RootState)=>login);
+
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    removeState('auth.token')
+    dispatch(logout())
   };
 
   useEffect(()=>{
@@ -114,7 +128,7 @@ const TermsConditionsModal: React.FC = () => {
 
             <Checkbox label={`${t('termsConditions.cb_terms1')}`} checked={opcao3} onChange={()=>{ setOpcao3(!opcao3) }}></Checkbox>
                    
-          <Button variant="link" >{`${t('termsConditions.end.link')}`}</Button>
+          <Button variant="link" onClick={handleLogout}>{`${t('termsConditions.end.link')}`}</Button>
 
           </Box>
           <Text paragraph textAlign="justify">{`${t('termsConditions.end.text.3')}`}</Text>
