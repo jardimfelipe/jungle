@@ -94,6 +94,12 @@
     "masterclass": "MasterClass",
     "logout": "Deslogar"
   },
+  "indexes": {
+    "hight": "Alta",
+    "good": "Boa",
+    "moderate": "Moderado",
+    "thin": "Leve"
+  },
   "availableUntil": "Disponível até {{- date}}",
   "availableIn": "Disponível em",
   "questions": "questões",

@@ -94,6 +94,12 @@
     "masterclass": "MasterClass",
     "logout": "Logout"
   },
+  "indexes": {
+    "hight": "Hight",
+    "good": "Good",
+    "moderate": "Moderate",
+    "thin": "Thin"
+  },
   "availableUntil": "Available until {{-date}}",
   "availableIn": "Available in",
   "questions": "questions",
