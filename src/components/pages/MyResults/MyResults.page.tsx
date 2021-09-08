@@ -30,10 +30,7 @@ import { useTheme } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getResultsRequest } from '../../../store/modules/results/actions';
-import {
-  chartDataPopulation,
-  protectionLevelData,
-} from '../TeamResults/populationChartDatas';
+import { chartDataPopulation } from '../TeamResults/populationChartDatas';
 import { rgba } from 'polished';
 import EmptyResults from './EmptyResults';
 import { useTranslation } from 'react-i18next';
@@ -71,6 +68,30 @@ const MyResults: React.FC = () => {
   useEffect(() => {
     !results.statistics.length && dispatch(getResultsRequest());
   }, [dispatch, results]);
+
+  const protectionLevelData = [
+    {
+      level: t('indexes.hight'),
+      amount: 16,
+      color: '#F548E4',
+    },
+    {
+      level: t('indexes.good'),
+      amount: 18,
+      color: '#4ED9A7',
+    },
+    {
+      level: t('indexes.moderate'),
+      amount: 50,
+      color: '#0CC3E7',
+    },
+    {
+      level: t('indexes.thin'),
+      amount: 16,
+      color: '#FFAE33',
+    },
+  ];
+
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard

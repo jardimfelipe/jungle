@@ -38,7 +38,7 @@
       "myResults": "Mis resultados",
       "protecionLevels": "Niveles de protección",
       "biopsychosocialAspects": "Aspectos biopsicosociales",
-      "specialtyAnalysis": "Análisis experto",
+      "specialistAnalysis": "Análisis experto",
       "youAreHere": "Estás aquí",
       "understandingTeam": "Comprensión del equipo"
     },
@@ -93,6 +93,12 @@
     "marketplace": "Marketplace",
     "masterclass": "MasterClass",
     "logout": "Cerrar sesión"
+  },
+  "indexes": {
+    "hight": "Elevada",
+    "good": "Buena",
+    "moderate": "Moderado",
+    "thin": "Leve"
   },
   "availableUntil": "Disponible hasta el {{-date}}",
   "availableIn": "Disponible en",

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ParamIcon, ParamInfosContainer } from './ProtectionLevel.styled';
 import { BiFace, BiCaretDown, BiCaretUp } from 'react-icons/bi';
@@ -10,6 +10,7 @@ import { Statistics } from '../../../store/modules/results/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { useTranslation } from 'react-i18next';
+import { translateText } from '../../../utils/translateApiConfig';
 
 const { Text } = Typography;
 enum ProtectionLevelColors {
@@ -24,6 +25,8 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
   const { t } = useTranslation();
   const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
   const { currentUser } = useSelector(({ login }: RootState) => login);
+  const { currentLanguage } = useSelector(({ base }: RootState) => base);
+  const [indexText, setIndexText] = useState('');
 
   const handleClick = () => {
     if (
@@ -38,6 +41,17 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
   ) : (
     <BiCaretDown size="18px" color={theme.colors.darkGray} />
   );
+
+  useEffect(() => {
+    (async () => {
+      if (currentLanguage === 'ptBR') return setIndexText(params.result);
+      const translatedText = await translateText(
+        params.result,
+        currentLanguage.replace(/[^a-z]/g, '')
+      );
+      setIndexText(translatedText as string);
+    })();
+  }, [currentLanguage, params]);
   return (
     <>
       <Box
@@ -69,7 +83,7 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
                   currentUser.role === 'gestor' ? 'team_protection' : 'value'
                 ] === 0 || !params.result
                   ? t('notRatedYet')
-                  : params.result}
+                  : indexText}
               </small>
             </Text>
           </Box>

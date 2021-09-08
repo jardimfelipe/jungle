@@ -75,6 +75,7 @@ const TeamResults: React.FC = () => {
   useEffect(() => {
     !results.statistics.length && dispatch(getResultsRequest('gestor'));
   }, [dispatch, results]);
+
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
