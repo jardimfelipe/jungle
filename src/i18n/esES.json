@@ -62,13 +62,19 @@
   },
   "menu": {
     "dashboard": "Tablero",
+    "questions": "Preguntas",
+    "companies": "Compañías",
+    "dimensions": "Dimensiones",
     "questionnaires": "Cuestionarios",
     "teamResults": "Resultados del equipo",
     "myResults": "Mis resultados",
     "workers": "Colaboradores",
     "playbook": "Playbook",
     "marketplace": "Marketplace",
+    "MasterClass": "MasterClass",
     "masterclass": "MasterClass",
+    "mindgifts": "Mindgifts",
+    "junglemedical": "Jungle Medical",
     "logout": "Cerrar sesión"
   },
   "availableUntil": "Disponible hasta el {{-date}}",
@@ -164,5 +170,45 @@
           "link": "No acepto y quiero salir de la plataforma",
           "button": "Finalizar"
         }
+  },
+  "registerCollaborator": {
+    "title": "Registrar colaborador",
+    "positions": [
+      {"value": "Gerente ejecutivo y senior", "label": "Gerente ejecutivo y senior"},
+      {"value": "Gerente y supervisor", "label": "Gerente y supervisor"},
+      {"value": "Coordinator", "label": "Coordinator"},
+      {"value": "Experto", "label": "Experto"},
+      {"value": "Technical", "label": "Technical"},
+      {"value": "Analista", "etiqueta": "Analista"},
+      {"value": "Administrativo", "etiqueta": "Administrativo"},
+      {"value": "Operational", "label": "Operational"},
+      {"value": "Becario", "label": "Becario"},
+      {"value": "Doctor", "label": "Doctor"},
+      {"value": "Enfermera", "label": "Enfermera"}
+    ],
+    "typeOfPositions": [
+      {"value": "Gerente-supervisión o administración operativa", "label": "Gerente-supervisión o administración operativa"},
+      {"value": "Gerente-administración intermedia", "label": "Gerente-administración intermedia"},
+      {"value": "Gerente-presidencia / junta", "label": "Gerente-presidente / junta"},
+      {"value": "Colaborador", "etiqueta": "Colaborador"},
+      {"value": "Outsourcing / Outsourcing", "label": "Outsourcing / Outsourcing"}
+    ],
+    "peopleLeader": [
+      {"value": true, "etiqueta": "Sí"},
+      {"value": false, "etiqueta": "No"}
+    ],
+    "areaOrDepartmentOrDirectory": [
+      {"value": "Administrativo / Financiero", "label": "Administrativo / Financiero"},
+      {"value": "Legal / Auditoría / Cumplimiento", "label": "Legal / Auditoría / Cumplimiento"},
+      {"value": "Logística / Cadena de suministro", "label": "Logística / Cadena de suministro"},
+      {"value": "Mantenimiento", "label": "Mantenimiento"},
+      {"value": "Marketing / Éxito del cliente", "label": "Marketing / Éxito del cliente"},
+      {"value": "Producción / Operación", "label": "Producción / Operación"},
+      {"value": "Calidad / Procesos", "label": "Calidad / Procesos"},
+      {"value": "Recursos humanos / Medicina ocupacional", "label": "Recursos humanos / Medicina ocupacional"},
+      {"value": "Regional / Agency / Representatives", "label": "Regional / Agency / Representatives"},
+      {"value": "Tecnología de la información", "etiqueta": "Tecnología de la información"},
+      {"value": "Ventas / Comercial", "label": "Ventas / Comercial"}
+    ]
   }
 } 

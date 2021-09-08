@@ -1,9 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 
 import { Box, Modal, Typography, FileUploader } from '../../..';
 import { ModalButton } from '../../../pages/Dashboard/Dashboard.styled';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { Oval } from 'react-loading-icons';
+import { Row, Col } from 'react-flexbox-grid';
+
+import  { Button, Textfield,  Select } from '../../../';
 
 import { createUsersRequest } from '../../../../store/modules/users/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +15,10 @@ import { RootState } from '../../../../store';
 import { useTheme } from 'styled-components';
 import { rgba } from 'polished';
 import { FaCheckCircle } from 'react-icons/fa';
+
+import { OptionType } from '../../../atoms/Select/Select.types';
+
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -96,8 +103,191 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     return isFileLoading ? <Oval height="28" /> : text;
   };
 
+  const [isModalOpen2, setModalOpen2] = useState(false);
+  const [isModalOpen3, setModalOpen3] = useState(false);
+
+  const onClose2 = () => {
+    console.error('botão clicado')
+    setModalOpen2(false);
+  }
+  const onClose3 = () => {
+    setModalOpen3(false);
+  }
+
+ const { t }  = useTranslation(); 
+
+  const listaCargos = () => {
+    let lista = [];
+    for(let i=0;i <= 10;i++){
+      let valor = t('registerCollaborator.positions.'+i+'.value')
+      let texto = t('registerCollaborator.positions.'+i+'.label')
+      let objeto = {value: valor, label: texto}
+      lista.push(objeto)
+    }
+    return lista   
+  }
+  const listaTipoDeCargos = () => {
+    let lista = [];
+    for(let i=0;i <= 4;i++){
+      let valor = t('registerCollaborator.typeOfPositions.'+i+'.value')
+      let texto = t('registerCollaborator.typeOfPositions.'+i+'.label')
+      let objeto = {value: valor, label: texto}
+      lista.push(objeto)
+    }
+    return lista
+  }
+
+  const listaLideranca = () => {
+    let lista = [];
+    for(let i=0;i <= 1;i++){
+      let valor = t('registerCollaborator.peopleLeader.'+i+'.value')
+      let texto = t('registerCollaborator.peopleLeader.'+i+'.label')
+      let objeto = {value: valor, label: texto}
+      lista.push(objeto)
+    }
+    return lista
+  }
+
+  const listaArea = () => {
+    let lista = [];
+    for(let i=0;i <= 10;i++){
+      let valor = t('registerCollaborator.areaOrDepartmentOrDirectory.'+i+'.value')
+      let texto = t('registerCollaborator.areaOrDepartmentOrDirectory.'+i+'.label')
+      let objeto = {value: valor, label: texto}
+      lista.push(objeto)
+    }
+    return lista
+  }
+
+  const [tipoDeCargoOptions, setTipoDeCargoOptions] = useState<OptionType[]>(listaTipoDeCargos);
+  const [cargoOptions, setCargoOptions] = useState<OptionType[]>(listaCargos);
+  const [liderOptions, setLiderOptions] = useState<OptionType[]>(listaLideranca);
+  const [areaOptions, setAreaOptions] = useState<OptionType[]>(listaArea);
+
+
+ 
+
+
+  useEffect(()=>{
+    
+    
+  })
+
+
   return (
     <Modal width={550} height={500} isOpen={isModalOpen} onClose={onClose}>
+      <Modal width={500} height={500} isOpen={isModalOpen3} onClose={onClose3}>
+        <Row>
+          <Col md={6}>  
+            <Button variant="secondary" block>
+              Fechar
+            </Button>
+          </Col>
+          <Col md={6}>  
+            <Button variant="primary" block>
+              Cadastrar outra pergunta
+            </Button>
+          </Col>
+         </Row>
+      </Modal>
+
+      <Modal width={700} height={600} isOpen={isModalOpen2} onClose={onClose2}>
+        <Box params={{
+            padding: '10px'
+      
+        }}>
+          <Row>
+            <Col md={12}>
+              <Title>
+                {`${t('registerCollaborator.title')}`}
+              </Title>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+             <Textfield label="Nome completo" placeholder="Informe o nome" />
+            </Col>
+            <Col md={6}>
+             <Textfield label="E-mail" placeholder="Informe o e-mail" />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <Textfield label="Unidade/Localização" placeholder="Informe a unidade ou localização" />
+            </Col>
+            <Col md={6}>
+              <Text>
+                Tipo de cargo
+              </Text>
+              <Select 
+                options={tipoDeCargoOptions}
+                placeholder="Selecione" />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <Text>
+                Cargo
+              </Text>
+              <Select 
+                options={cargoOptions}
+                placeholder="Selecione"
+                />  
+            </Col>
+            <Col md={6}>
+              <Text>
+                Área/Departamento/Diretoria
+              </Text>
+              <Select 
+                options={areaOptions}
+                placeholder="Selecione"
+                />   
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              
+              <Text>
+                Lider de pessoas
+              </Text>
+              <Select 
+                options={liderOptions}
+                placeholder="Selecione"
+                />  
+                
+            </Col>
+            <Col md={6}>
+             <Textfield label="Gestor direto" placeholder="Informe o e-mail do gestor" />
+            </Col>
+          </Row>
+
+
+          <Row>
+            <Col md={6} onClick={onClose2}>
+              <Button variant="cancel" block>
+                Cancelar
+              </Button>
+            </Col>
+            <Col md={6}>
+              <Button variant="primary" block onClick={()=>{
+                onClose2();
+                setModalOpen3(true);
+              }}>
+                Adicionar colaborador 
+              </Button>
+            </Col>
+          </Row>
+        </Box>
+      </Modal>
+      
+
+      
+
+      <Button block variant="primary" onClick={()=> setModalOpen2(true)}>
+        Cadastrar manualmente um novo colaborador.
+      </Button>
+
+  
       {isFileLoading && (
         <Box
           params={{

@@ -27,7 +27,7 @@
       "understandingTeam": "Understanding the team"
     },
     "filled": "filled"
-  },
+  }, 
   "button": {
     "seeAll": "See All",
     "availables": "Availables",
@@ -62,13 +62,19 @@
   },
   "menu": {
     "dashboard": "Dashboard",
-    "Questionnaires": "Questionnaires",
+    "questions": "Questions",
+    "companies": "Companies",
+    "dimensions": "Dimensions",
+    "questionnaires": "Questionnaires",
     "teamResults": "Team results",
     "myResults": "My Results",
     "workers": "Collaborators",
     "playbook": "Playbook",
     "marketplace": "Marketplace",
+    "MasterClass": "MasterClass",
     "masterclass": "MasterClass",
+    "mindgifts": "Mindgifts",
+    "junglemedical": "Jungle Medical",
     "logout": "Logout"
   },
   "availableUntil": "Available until {{-date}}",
@@ -164,6 +170,46 @@
           "link": "I don't accept and I want to leave the platform",
           "button": "Finish"
         }
+  },
+  "registerCollaborator": {
+    "title": "Register Collaborator",
+    "positions": [
+      {"value": "Executive and senior manager", "label": "Executive and senior manager"},
+      {"value": "Manager and supervisor", "label": "Manager and supervisor"},
+      {"value": "Coordinator", "label": "Coordinator"},
+      {"value": "Expert", "label": "Expert"},
+      {"value": "Technical", "label": "Technical"},
+      {"value": "Analyst", "label": "Analyst"},
+      {"value": "Administrative", "label": "Administrative"},
+      {"value": "Operational", "label": "Operational"},
+      {"value": "Intern", "label": "Intern"},
+      {"value": "Doctor", "label": "Doctor"},
+      {"value": "Nurse", "label": "Nurse"}
+    ],
+    "typeOfPositions": [
+      {"value": "Manager-supervision or operational management", "label": "Manager-supervision or operational management"},
+      {"value": "Manager-middle management", "label": "Manager-middle management"},
+      {"value": "Manager-presidency/board", "label": "Manager-president/board"},
+      {"value": "Collaborator", "label": "Collaborator"},
+      {"value": "Outsourced/Outsourcing", "label": "Outsourced/Outsourcing"}
+    ],
+    "peopleLeader": [
+      {"value": true, "label": "Yes"},
+      {"value": false, "label": "No"}
+    ],
+    "areaOrDepartmentOrDirectory": [
+      {"value": "Administrative/Financial", "label": "Administrative/Financial"},
+      {"value": "Legal/Audit/Compliance", "label": "Legal/Audit/Compliance"},
+      {"value": "Logistics/Supply Chain", "label": "Logistics/Supply Chain"},
+      {"value": "Maintenance", "label": "Maintenance"},
+      {"value": "Marketing/Customer Success", "label": "Marketing/Customer Success"},
+      {"value": "Production/Operation", "label": "Production/Operation"},
+      {"value": "Quality/Processes", "label": "Quality/Processes"},
+      {"value": "Human Resources/Occupational Medicine", "label": "Human Resources/Occupational Medicine"},
+      {"value": "Regional/Agency/Representatives", "label": "Regional/Agency/Representatives"},
+      {"value": "Information technology", "label": "Information technology"},
+      {"value": "Sales/Commercial", "label": "Sales/Commercial"}
+    ]
   }
 } 
 

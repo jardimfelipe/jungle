@@ -62,13 +62,19 @@
   },
   "menu": {
     "dashboard": "Dashboard",
+    "questions": "Perguntas",
+    "companies": "Empresas",
+    "dimensions": "Dimensões",
     "questionnaires": "Questionários",
     "teamResults": "Resultados do time",
     "myResults": "Meus resultados",
     "workers": "Colaboradores",
     "playbook": "Playbook",
     "marketplace": "Marketplace",
+    "MasterClass": "MasterClass",
     "masterclass": "MasterClass",
+    "mindgifts": "Mindgifts",
+    "junglemedical": "Jungle Medical",
     "logout": "Deslogar"
   },
   "availableUntil": "Disponível até {{- date}}",
@@ -164,5 +170,45 @@
           "link": "Não aceito e desejo sair da plataforma",
           "button": "Finalizar"
         }
-  }
+  },
+  "registerCollaborator": {
+    "title": "Cadastrar Colaborador",
+    "positions": [
+      {"value": "Executivo e gestor sênior", "label": "Executivo e gestor sênior"},
+      {"value": "Gerente e supervisor", "label": "Gerente e supervisor"},
+      {"value": "Coordenador", "label": "Coordenador"},
+      {"value": "Especialista", "label": "Especialista"},
+      {"value": "Técnico", "label": "Técnico"},
+      {"value": "Analista", "label": "Analista"},
+      {"value": "Administrativo", "label": "Administrativo"},
+      {"value": "Operacional", "label": "Operacional"},
+      {"value": "Estagiário", "label": "Estagiário"},
+      {"value": "Médico", "label": "Médico"},
+      {"value": "Enfermeiro", "label": "Enfermeiro"}
+    ],
+    "typeOfPositions": [
+      {"value": "Gestor-supervisão ou gerência operacional", "label": "Gestor-supervisão ou gerência operacional"},
+      {"value": "Gestor-média gerência", "label": "Gestor-média gerência"},
+      {"value": "Gestor-presidência/diretoria", "label": "Gestor-presidência/diretoria"},
+      {"value": "Colaborador", "label": "Colaborador"},
+      {"value": "Tercerizado/Outsourcing", "label": "Tercerizado/Outsourcing"}
+    ],
+    "peopleLeader": [
+      {"value": true, "label": "Sim"},
+      {"value": false, "label": "Não"}
+    ],
+    "areaOrDepartmentOrDirectory": [
+      {"value": "Administrativo/Financeiro", "label": "Administrativo/Financeiro"},
+      {"value": "Jurídico/Auditoria/Compliance", "label": "Jurídico/Auditoria/Compliance"},
+      {"value": "Logística/Supply Chain", "label": "Logística/Supply Chain"},
+      {"value": "Manutenção", "label": "Manutenção"},
+      {"value": "Marketing/Sucesso do Cliente", "label": "Marketing/Sucesso do Cliente"},
+      {"value": "Produção/Operação", "label": "Produção/Operação"},
+      {"value": "Qualidade/Processos", "label": "Qualidade/Processos"},
+      {"value": "Recursos Humanos/Medicina do trabalho", "label": "Recursos Humanos/Medicina do trabalho"},
+      {"value": "Regionais/Agência/Representantes", "label": "Regionais/Agência/Representantes"},
+      {"value": "Tecnologia da informação", "label": "Tecnologia da informação"},
+      {"value": "Vendas/Comercial", "label": "Vendas/Comercial"}
+    ]
+  } 
 }
