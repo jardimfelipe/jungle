@@ -22,7 +22,11 @@ import {
 } from '../Questions.styled';
 
 import { useTheme } from 'styled-components';
-import { AiFillPlusCircle, AiFillCloseCircle } from 'react-icons/ai';
+import {
+  AiFillPlusCircle,
+  AiFillCloseCircle,
+  AiFillEdit,
+} from 'react-icons/ai';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getDimensionsRequest } from '../../../../store/modules/dimensions/actions';
@@ -64,6 +68,7 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const { dimensions } = useSelector(({ dimensions }: RootState) => dimensions);
   const [dimensionOptions, setDimensionOptions] = useState<OptionType[]>([]);
   const [optionLabel, setOptionLabel] = useState('');
+  const [questionToEdit, setQuestionToEdit] = useState(-1);
 
   const handleAddOption = () => {
     if (!optionLabel) return;
@@ -112,6 +117,36 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     formik.setFieldValue('options', removedOptionArray);
   };
 
+  const editOption = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    index: number,
+    label: string
+  ) => {
+    e.preventDefault();
+    setQuestionToEdit(index);
+    formik.setFieldValue('editedQuestion', label);
+  };
+
+  const handleSubmitEditedQuestion = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    questionIndex: number
+  ) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const newOptions = formik.values.options.map((option, index) => ({
+        ...option,
+        ...(index === questionIndex
+          ? {
+              label: formik.values.editedQuestion,
+            }
+          : null),
+      }));
+      setQuestionToEdit(-1);
+      formik.setFieldValue('editedQuestion', '');
+      formik.setFieldValue('options', newOptions);
+    }
+  };
+
   const handleManualInputChanges = (input: string, value: string) => {
     formik.setFieldValue(input, value);
   };
@@ -128,9 +163,11 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
       title: '',
       type: '',
       options: [] as OptionModel[],
+      editedQuestion: '',
     },
     onSubmit: (values) => {
-      dispatch(createQuestionRequest(values));
+      const { editedQuestion, ...rest } = values;
+      dispatch(createQuestionRequest(rest));
     },
     validateOnChange: false,
     validationSchema: schema,
@@ -279,10 +316,23 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             {formik.values.options.map(({ label }, index) => (
               <Box
                 key={`options-${label}-${Math.random()}`}
-                params={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+                params={{ display: 'flex', alignItems: 'center', gap: '15px' }}
               >
                 <OptionMark />
-                <Text>{label}</Text>
+                {questionToEdit === index ? (
+                  <Textfield
+                    noSpacing
+                    name="editedQuestion"
+                    id="editedQuestion"
+                    placeholder="editar questão"
+                    value={formik.values.editedQuestion}
+                    onChange={formik.handleChange}
+                    onKeyDown={(e) => handleSubmitEditedQuestion(e, index)}
+                  />
+                ) : (
+                  <Text>{label}</Text>
+                )}
+
                 <Box params={{ flex: '0 0 150px' }}>
                   <Select
                     onChange={(selectedOption: OptionType | null) =>
@@ -296,12 +346,21 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                     options={valueOptions}
                   />
                 </Box>
-                <IconButton
-                  onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-                    removeOption(e, index)
-                  }
-                  icon={<AiFillCloseCircle />}
-                />
+
+                <Box params={{ display: 'flex' }}>
+                  <IconButton
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                      removeOption(e, index)
+                    }
+                    icon={<AiFillCloseCircle />}
+                  />
+                  <IconButton
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                      editOption(e, index, label)
+                    }
+                    icon={<AiFillEdit />}
+                  />
+                </Box>
               </Box>
             ))}
             <Textfield

@@ -52,7 +52,7 @@ export const StyledInput = styled.input.attrs((props) => ({
 
 export const InputWrapper = styled.div<InputWrapperProps>`
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: ${({ noSpacing }) => (noSpacing ? '0' : '15px')};
   display: flex;
   flex-direction: column;
   gap: 7px;

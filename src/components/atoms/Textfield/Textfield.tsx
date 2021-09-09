@@ -26,10 +26,11 @@ const Textfield: React.FC<TextFieldProps> = ({
   suffix,
   error,
   isTransparent,
+  noSpacing = false,
   onKeyDown,
 }) => {
   return (
-    <InputWrapper inline={inline}>
+    <InputWrapper noSpacing={noSpacing} inline={inline}>
       {label && <Label>{label}</Label>}
       {prefix && <PrefixWrapper>{prefix}</PrefixWrapper>}
       <StyledInput

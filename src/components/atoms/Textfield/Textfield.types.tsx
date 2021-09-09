@@ -1,5 +1,4 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
-import { maskArray } from 'react-text-mask';
 
 type Status = 'success' | 'error';
 
@@ -25,6 +24,7 @@ export interface TextFieldProps
   isSearch?: boolean;
   error?: string;
   isTransparent?: boolean;
+  noSpacing?: boolean;
 }
 
 export type InputWrapperProps = TextFieldProps;
