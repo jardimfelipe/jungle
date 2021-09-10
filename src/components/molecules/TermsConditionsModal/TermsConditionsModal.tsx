@@ -8,6 +8,7 @@ import { removeState, saveState, getSavedState } from '../../../utils/localStora
 import { logout } from '../../../store/modules/login/actions';
 
 import { Box, Modal, Typography, Checkbox, Button } from '../..';
+import { Row, Col } from 'react-flexbox-grid';
 
 const { Text, Title } = Typography;
 
@@ -17,9 +18,7 @@ const TermsConditionsModal: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [ opcao1, setOpcao1 ] = useState(false);
-  const [ opcao2, setOpcao2 ] = useState(false);
-  const [ opcao3, setOpcao3 ] = useState(false);
+  const [ checkbox, setCheckbox ] = useState(false);
   const { currentUser } = useSelector(({login}: RootState)=>login);
   const [isModalOpen, setIsModalOpen] = useState(getSavedState('modal'+currentUser['_id']));
 
@@ -44,10 +43,64 @@ const TermsConditionsModal: React.FC = () => {
       else{
         console.log('Abrir? '+getSavedState('modal'+currentUser['_id']))
       }
-      
   })
 
- 
+  function setLista(nome: string){
+     let lista = [];
+     if(nome == 'cabecalho'){
+       for(let i = 0; i < 5; i++){
+         lista.push(`${t('termsConditions.purposes.header.text.'+i)}`)
+       }
+     }
+     if(nome == 'proposicao0'){
+       for (var i = 0; i < 9; i++) {
+         lista.push(`${t('termsConditions.purposes.purpose0.text.'+i)}`)
+       }
+     }
+     if(nome == 'proposicao1'){
+       for (var i = 0; i < 2; i++) {
+         lista.push(`${t('termsConditions.purposes.purpose1.text.'+i)}`)
+       }
+     }
+     if(nome == 'proposicao2'){
+       for (var i = 0; i < 2; i++) {
+         lista.push(`${t('termsConditions.purposes.purpose2.text.'+i)}`)
+       }
+     }
+     if(nome == 'proposicao3'){
+       for (var i = 0; i < 1; i++) {
+         lista.push(`${t('termsConditions.purposes.purpose3.text.'+i)}`)
+       }
+     }
+     if(nome == 'proposicao4'){
+       for (var i = 0; i < 1; i++) {
+         lista.push(`${t('termsConditions.purposes.purpose4.text.'+i)}`)
+       }
+     }
+     if(nome == 'proposicao5'){
+       for (var i = 0; i < 6; i++) {
+         lista.push(`${t('termsConditions.purposes.purpose5.text.'+i)}`)
+       }
+     }
+     if(nome == 'rodape'){
+        for (var i = 0; i < 2; i++) {
+          lista.push(`${t('termsConditions.purposes.footer.text.'+i)}`)
+        }
+        lista.push(`${t('termsConditions.purposes.footer.otherText')}`)
+        lista.push(`${t('termsConditions.purposes.footer.button')}`)
+     }
+     return lista;
+  }
+
+  const [ cabecalho, setCabecalho ] = useState<string[]>(setLista('cabecalho'));
+  const [ proposicao0, setProposicao0 ] = useState<string[]>(setLista('proposicao0'));
+  const [ proposicao1, setProposicao1 ] = useState<string[]>(setLista('proposicao1'));
+  const [ proposicao2, setProposicao2 ] = useState<string[]>(setLista('proposicao2'));
+  const [ proposicao3, setProposicao3 ] = useState<string[]>(setLista('proposicao3'));
+  const [ proposicao4, setProposicao4 ] = useState<string[]>(setLista('proposicao4'));
+  const [ proposicao5, setProposicao5 ] = useState<string[]>(setLista('proposicao5'));
+  const [ rodape, setRodape ] = useState<string[]>(setLista('rodape'));
+
   return (
     <Modal
       hasCloseButton={false}
@@ -63,7 +116,7 @@ const TermsConditionsModal: React.FC = () => {
           }}
         >
           <Text color="#ffffff" textDecoration="strong">
-            {t('termsConditions.header')}
+            {`${t('termsConditions.purposes.header.title')}`}
           </Text>
         </Box>
 
@@ -72,93 +125,93 @@ const TermsConditionsModal: React.FC = () => {
             padding: '15px 25px',
             backgroundColor: theme.colors.gray,
             overflowY: 'auto',
-            maxHeight: '230px',
+            maxHeight: '260px',
           }}
         >
-          <Text paragraph textAlign="justify">{`${t('termsConditions.introduction.0')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.introduction.1')}`}</Text>
 
-          <Text textDecoration="strong" paragraph>
-            {t('termsConditions.introduction.2')}
-          </Text>
+        {cabecalho.map((valor, chave)=>{
+          if(chave == (cabecalho.length - 1)){
+            return <Text paragraph textAlign="justify"><b>{valor}</b></Text>
+          }
+          else{
+            return <Text paragraph textAlign="justify">{valor}</Text>
+          }
+        })}
 
-          <Title level={3}>{t('termsConditions.purpose.title')}</Title>
+        <Title level={3}>{`${t('termsConditions.purposes.purpose0.title')}`}</Title>
 
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose.text.0')}`}</Text> 
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose.text.1')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose.text.2')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose.text.3')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose.text.4')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose.text.5')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose.text.6')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose.text.7')}`}</Text>
+        {proposicao0.map((valor, chave)=>{
+          if([2,3,4,5,6].includes(chave)){
+            return <li>{valor}</li>
+          }
+          else{
+            return <Text paragraph textAlign="justify">{valor}</Text>
+          }
+        })}
 
-          <Checkbox label={`${t('termsConditions.cb_terms0')}`} checked={opcao1} onChange={()=>{ setOpcao1(!opcao1) }}></Checkbox>
+        <Title level={3}>{`${t('termsConditions.purposes.purpose1.title')}`}</Title>
+        {proposicao1.map((valor, chave)=>{
+          return <Text paragraph textAlign="justify">{valor}</Text>  
+        })}
 
-          <Title level={3}>{t('termsConditions.purpose2.title')}</Title>
-  
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose2.text.0')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose2.text.1')}`}</Text>
- 
-          <Title level={3}>{t('termsConditions.purpose3.title')}</Title>
-          
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose3.text.0')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose3.text.1')}`}</Text>
-          
-          <Title level={3}>{`${t('termsConditions.purpose4.title')}`}</Title>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose4.text.0')}`}</Text>
-               
-          <Title level={3}>{`${t('termsConditions.purpose5.title')}`}</Title>
-         
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose5.text.0')}`}</Text>
+        <Title level={3}>{`${t('termsConditions.purposes.purpose2.title')}`}</Title>
+        {proposicao2.map((valor, chave)=>{
+          return <Text paragraph textAlign="justify">{valor}</Text>  
+        })}
 
-          <Title level={3}>{`${t('termsConditions.purpose6.title')}`}</Title>
-                   
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose6.text.0')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose6.text.1')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose6.text.2')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose6.text.3')}`}</Text> 
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose6.text.4')}`}</Text>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.purpose6.text.5')}`}</Text>
 
-          
-          <Checkbox label={`${t('termsConditions.cb_terms0')}`}  checked={opcao2} onChange={()=>{
-  setOpcao2(!opcao2) }} ></Checkbox>
-          
-            <Text paragraph textAlign="justify">
-              {`${t('termsConditions.end.text.0')}`}
-              <Text textDecoration="strong">{`${t('termsConditions.end.text.1')}`}</Text>
-              {`${t('termsConditions.end.text.2')}`}
-            </Text>
-          
-          <Box params={{
-            display: 'flex'
-          }}>
+        <Title level={3}>{`${t('termsConditions.purposes.purpose3.title')}`}</Title>
+        {proposicao3.map((valor, chave)=>{
+          return <Text paragraph textAlign="justify">{valor}</Text>  
+        })}
 
-            <Checkbox label={`${t('termsConditions.cb_terms1')}`} checked={opcao3} onChange={()=>{ setOpcao3(!opcao3) }}></Checkbox>
-                   
-          <Button variant="link" onClick={handleLogout}>{`${t('termsConditions.end.link')}`}</Button>
 
-          </Box>
-          <Text paragraph textAlign="justify">{`${t('termsConditions.end.text.3')}`}</Text>
+        <Title level={3}>{`${t('termsConditions.purposes.purpose4.title')}`}</Title>
+        {proposicao4.map((valor, chave)=>{
+          return <Text paragraph textAlign="justify">{valor}</Text>  
+        })}
+
+
+        <Title level={3}>{`${t('termsConditions.purposes.purpose5.title')}`}</Title>
+        {proposicao5.map((valor, chave)=>{
+          if([2,3,4,5].includes(chave)){
+            return <li>{valor}</li>
+          }
+          else{
+            return <Text paragraph textAlign="justify">{valor}</Text>
+          }
+        })}          
+
+        {rodape.map((valor, chave)=>{
+           if([0, 1].includes(chave)){
+             return <Text paragraph textAlign="justify">{valor}</Text>  
+           }
+        })}  
+        
+
+
+
         </Box>
         <Box params={{
-          paddingTop:  '10px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
+          padding:  '15px'
         }}>
-          <Text paragraph>{`${t('termsConditions.end.text.4')}`}</Text>
-
-          <Button variant="primary"  size="small" disabled={
-opcao1 && opcao2 && opcao3 ? false : true
-          }
-          onClick={handleModalClose}
-          >
-            {`${t('termsConditions.end.button')}`}
-          </Button>
-
-            
+          <Row>
+            {rodape.map((valor, chave)=>{
+               if(chave == 2){
+                 return <Col md={6}> 
+                           <Checkbox 
+                             label={valor}  
+                             checked={checkbox} 
+                             onChange={()=>{setCheckbox(!checkbox) }} ></Checkbox>
+                        </Col>
+               }
+               if(chave == 3){
+                 return <Col md={6}>
+                         <Button variant="primary" onClick={handleModalClose} block disabled={checkbox ? false : true}>{valor}</Button>
+                        </Col>
+               }
+            })} 
+          </Row>
         </Box>
       </Box>
     </Modal>

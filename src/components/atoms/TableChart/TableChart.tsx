@@ -25,7 +25,7 @@ const TableChart: React.FC<TableChartProps> = (props) => {
   }, [options]);
 
   return (
-    <Doughnut {...rest} options={stateOptions} type="Doughnut" data={data} />
+    <Doughnut  data={data} />
   );
 };
 

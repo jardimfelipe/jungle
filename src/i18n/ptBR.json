@@ -12,23 +12,11 @@
       "title": "Resultados Ourmind!",
       "text": "Aqui você encontra o perfil de sintomas que encontramos em sua equipe. Este é o relatório global da sua empresa é confidencial, não sendo possível identificar nenhum dos respondentes. Cada dimensão principal (sintomas de ansiedade, sintomas depressivos, sintomas de burnout, estresse e risco de uso de substancias) está representada em um gráfico distinto. Veja a descrição dos achados nas legendas."
     },
-    "myResults": {
-      "title": "Aqui você poderá descobrir mais sobre você mesmo!",
-      "text": "Abaixo você encontra os resultados de todos os questionários já respondidos. Aqui você poderá descobrir mais sobre você mesmo! Lembre-se que seus resultados são sigilosos e sua empresa nunca poderá identificar os respondentes ou resultados individuais."
-    },
-    "questionnaires": {
-      "colaborador": {
-        "title": "Conhecendo mais o seu perfil!",
-        "text": "Abaixo você encontra todos os seus questionários disponíveis, além das datas de início e fim em que você poderá respondê-los. Lembre-se que seus resultados são sigilosos e ficam disponíveis apenas para você. Aproveite esta oportunidade para se conhecer melhor e receber os feedbacks mais adequados de acordo com a sua realidade, todos os nossos questionários são validados cientificamente com elevados níveis de evidência (nível A)."
-      },
-      "gestor": {
-        "text": "Aqui você encontrará a relação de todos os questionários disponíveis, detalhes como o período para preenchimento além de poder acompanhar como está a participação da equipe!"
-      },
       "workers": {
         "title": "Colaboradores da sua equipe",
         "text": "Olá! Aqui você encontra a relação de colaboradores de sua equipe que foram cadastrados na jornada Jungle. Caso haja modificação no staff, podemos incluir ou retirar pessoas de nossa análise sigilosa ok?"
-      }
-    }
+      },
+    "questionnaires": "Aqui você encontrará a relação de todos os questionários disponíveis, detalhes como o período para preenchimento além de poder acompanhar como está a participação da equipe!"
   },
   "pages": {
     "title": {
@@ -54,9 +42,9 @@
     "talkToEspecialist": "Falar com especialista",
     "actives": "Ativos",
     "inactives": "Inativos",
-    "soon": "Em breve",
     "downloadSpreadsheet": "Baixar planilha",
-    "registerUsers": "Cadastrar usuários"
+    "registerUsers": "Cadastrar usuários",
+    "soon": "Em breve"
   },
   "emptyStates": {
     "questionaries": {
@@ -75,30 +63,25 @@
       "questionNumber": "Número de perguntas",
       "track": "Rastreio",
       "respondents": "Respondentes",
-      "replied": "Responderam",
-      "worker": "Colaborador",
-      "sector": "Setor",
-      "function": "Função",
-      "email": "Email",
-      "status": "Status"
+      "replied": "Responderam"
     }
   },
   "menu": {
     "dashboard": "Dashboard",
+    "questions": "Perguntas",
+    "companies": "Empresas",
+    "dimensions": "Dimensões",
     "questionnaires": "Questionários",
     "teamResults": "Resultados do time",
     "myResults": "Meus resultados",
     "workers": "Colaboradores",
     "playbook": "Playbook",
     "marketplace": "Marketplace",
+    "MasterClass": "MasterClass",
     "masterclass": "MasterClass",
+    "mindgifts": "Mindgifts",
+    "junglemedical": "Jungle Medical",
     "logout": "Deslogar"
-  },
-  "indexes": {
-    "hight": "Alta",
-    "good": "Boa",
-    "moderate": "Moderado",
-    "thin": "Leve"
   },
   "availableUntil": "Disponível até {{- date}}",
   "availableIn": "Disponível em",
@@ -116,84 +99,157 @@
   "informYourPassword": "Digite sua senha",
   "rememberUser": "Lembrar usuário",
   "login": "Entrar",
-  "password": "Senha",
+  "password": "Senha", 
   "populationProtectionLevel": "Nível de proteção da população",
   "companyProtectionLevel": "Nível de proteção da empresa",
   "adequateProtection": "Proteção adequada contra",
   "minorProtection": "Proteção menor contra",
-  "saveAndLeave": "Salvar e sair",
-  "mandatoryQuestion": "Pergunta obrigatória",
   "termsConditions": {
-    "header": "Para utilizar a plataforma Jungle é necessário que você aceite os Termos de Conscentimento",
-    "cb_terms0": "Estou ciente",
-    "cb_terms1": "Aceito participar",
-    "introduction": [
-      "TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS PESSOAIS – Jungle Medical Science for Business. Você foi convidada(o) a participar do Ciclo de Rastreios Great Questions for Healthier Minds, desenvolvido pela JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118/0001-10) e oferecido por sua empresa contratante .Este documento visa registrar a manifestação livre, informada e inequívoca pela qual você concorda com o tratamento de seus dados pessoais em conformidade com a LGPD – Lei Geral de Proteção de Dados Pessoais, Lei nº 13.709/18, e demais legislações aplicáveis, bem como com a Política de Privacidade e Proteção de Dados de Jungle Medical Science for Business (www.junglexp.com/politica-de-privacidade/).",
-      "Ao manifestar sua aceitação ao presente termo você consente e concorda que seja realizado o tratamento de seus dados pessoais[1] e dados pessoais sensíveis[2] para as finalidades específicas aqui dispostas.",
-      "Na hipótese de não aceitação dos termos aqui propostos, sua participação restará impossibilitada."
-    ],
-    "purpose": {
-      "title": "I - Finalidade do programa",
-      "text": [
-        "O Ciclo de Rastreios Great Questions for Healthier Minds é um programa de triagem/mapeamento prévio que coleta informações sobre os níveis de sintomas relativos a saúde mental do(a) Participante, mediante aplicação de questionários baseados em escalas científicas validadas em estudos publicados pela academia, para verificação do níveis de proteção contra sintomas de Ansiedade, Burnout, Depressão, Estresse e Uso de Substâncias, além de aspectos intrínsecos ao indivíduo como resiliência, flexibilidade, equilíbrio trabalho-vida, autorrealização, familiares, trabalho, organização financeira e qualidade de vida, com a finalidade de propor Programas de Promoção da Saúde e Bem-estar.",
-        "O ciclo de Rastreios Great Questions for Healthier Minds será realizado sob a supervisão de um especialista médico da jungle (Psquiatra) de modo remoto (plataforma online), contemplando as seguintes etapas:",
-        "§  Questionários online: aplicação de questionários individuais e anônimos via plataforma online (Dashboard do Colaborador Jungle) nos temas acima relacionados;",
-        "§  Análise: das informações levantadas via questionários com base nas escalas científicas;",
-
-        "§  Emissão de Relatório Individual: que será disponibilizado de forma confidencial. o(a) Participante via plataforma online (Dashboard do Colaborador Jungle);",
-        "§  Monitoramento: com escopo motivacional, educacional e de suporte, o(a) Participante terá disponível um canal de e-mail direto com a equipe médica Jungle para consulta de sobre dúvidas e coleta de informações sobre o programa e seus resultados.",
-        "§  Emissão de Relatório Global: que será disponibilizado a empresa contratante (Dashboard )",
-        "Caso haja retorno do(a) Participante aos e-mails com envio do token de acesso individual a plataforma online (Dashboard do Colaborator Jungle), será registrado como se não houvesse interesse pela participação do programa.",
-        "Em nenhuma hipótese será realizado o diagnóstico de doenças e tampouco será prescrito qualquer tratamento médico."
+    "purposes": {
+      "header": {
+          "title": "Para acessar a plataforma jungle é necessário que você aceite os Termos de Concentimento",
+          "text":[
+              "TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS PESSOAIS - Jungle Medical Science for Business",
+              "Você foi convidada(o) a participar do Ciclo de Rastreios Great Questions for Healthier Minds, desenvolvido pela JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118/0001-10) e oferecido por sua empresa contratante.",
+              "1.Este documento visa registrar a manifestação livre, informada e inequivoca pela qual você concorda com o tratamento de seus dados pessoais em conformidade com a LGPD — Lei Geral de Proteção de Dados Pessoais. Lei nº 13-709/18, e demais legislações aplicáveis. bem como com a Politica de Privacidade e Proteção de Dados de Jungle Medical Science for Business (www.junglexp.com/politica-de-privacidade/).",
+              "Ao manifestar sua aceitação ao presente termo você consente e concorda que seja realizado o tratamento de seus dados pessoais[1] e dados pessoais sensiveis[2] para as finalidades especificas aqui dispostas",
+              "Na hipótese de não aceitação dos termos aqui propostos. sua participação restará impossibilitada."
+            ]
+      },
+      "purpose0": {
+          "title": "I — Finalidade do Programa",
+          "text": [
+            "O Ciclo de Rastreios Great Questions for Healthier Minds é um programa de triagem/ mapeamento previo que coleta informações sobre os niveis de sintomas relativos a saúde mental do(a) Participante. mediante aplicação de questionarios baseados em escalas cientificas validadas em estudos publicados pela academia. para verificação do niveis de proteção contra sintomas de Ansiedade. Burnout. Depressão. Estresse e Uso de Substâncias, além de aspectos intrínsecos ao individuo como resiliência. flexibilidade, equilíbrio trabalho-vida, autorrealização, familiares, trabalho, organização financeira e qualidade de vida. com a finalidade de propor Programas de Promoção da Saude e Bem-estar.",
+            "O Ciclo de Rastreios Great Questions for Healthier Minds será realizado sob a supervisão de um especialista médico da Jungle (Psiquiatra) de modo remoto (plataforma online). contemplando as seguintes etapas:",
+            "Questionários online: aplicação de questionários individuais e anónimos via plataforma online (Dashboard do Colaborador Jungle) nos temas acima relacionados;",
+            "Análise: das informações levantadas via questionários com base nas escalas cientificas;",
+            "Emissão de Relatório Individual que será disponibilizado de forma confidencial ao(a) Participante via plataforma online (Dashboard do Colaborador Jungle);",
+            "Monitoramento: com escopo motivacional. educacional e de suporte, o(a) Participante terá disponivel um canal de e-mail direto com a equipe medica Jungle para consulta de sobre dúvidas e coleta de informações sobre o programa e seus resultados",
+            "Emissão de Relatório Global: que sera disponibilizado a empresa contratante (Dashboard do Gestor Jungle) com os resultados consolidados de todo o grupo por áreas e demografias. de forma a não permitir em nenhuma hipótese a visualização dos resultados por individuais, garantindo a anonimização de todos os Participantes.",
+            "Caso não haja retorno do(a) Participante aos e-mails com envio do token de acesso individual a plataforma online (Dashboard do Colaborador Jungle). será registrado como se não houvesse interesse pela participação no programa.",
+            "Em nenhuma hipotese sera realizado o diagnóstico de doenças e tampouco será prescrito qualquer tratamento medico."
+          ]
+      },
+      "purpose1": {
+          "title": "II — Tratamento dos Dados Pessoais",
+          "text": [
+            "Coletamos seus dados pessoais e dados pessoais sensíveis. como nome completo, CPE data de nascimento, telefone, e-mail e outros dados de saúde que vierem a ser tratados durante a participação no Programa,  para sua devida execução, para oferecimento de outros programas que você tenha condiçOes de participar e para nos comunicarmos com você.",
+            "Todos os dados pessoais e dados pessoais sensíveis seráo considerados confidenciais e como tal serão protegidos de forma a resguardar a privacidade dos titulares dos referidos dados, em observância à legislação pertinente, sobretudo a LGPD. sem prejuizo. ainda. do dever de sigilo em relação às informações médicas"
+          ]
+      },
+      "purpose2": {
+        "title": "III — Compartilhamento dos Dados Pessoais",
+        "text": [
+          "Para a integral e adequada prestação do Ciclo de Rastreios Great Questions for Healthier Minds, seus dados pessoais comuns e dados pessoais sensiveis (dados de saúde) estarão disponiveis para consulta da equipe Jungle, nos limites do sigilo medico, da LGPD e demais legislações aplicáveis, observando os limites da estrita necessidade, assegurando-se que o destinatário tenha condições de resguardar a confidencialidade e adequada proteção.",
+          "Em relação aos dados de saúde. a Jungle esclarece que os dados recebidos pela sua empresa contratante, serão estatísticos com finalidade de proporcionar indices para aplicação de politicas internas de saúde e bem-estar"
+        ]
+      },
+      "purpose3": {
+        "title": "IV — Armazenamento dos Dados Pessoais",
+        "text": [
+          "Os seus dados pessoais serão eliminados pela Jungle quando deixarem de ser necessários ou pertinentes para as finalidades aqui definidas ou mediante a sua solicitação, desde que esta não conflite com o cumprimento de obrigações legais, regulatórias elou para o exercicio regular de nossos direitos"
+        ]
+      },
+      "purpose4": {
+        "title": "V — Medidas de Seguranca aos Dados Pessoais",
+        "text": [
+          "A Jungle observara rigidos padröes de seguranca e boas-pråticas mediante a utilizaçäo de ferramentas e tecnologias razoáveis e disponiveis. além de medidas tecnicas e administrativas aptas a proteger os dados pessoais de acessos näo autorizados e de situagöes acidentais ou ilicitas."
+        ]
+      },
+      "purpose5": {
+        "title": "VI — Direito de Revogacäo do Consentimento",
+        "text": [
+          "O consentimento aqui manifestado poderá ser revogado por vocé, Participante, a qualquer momento, mediante solicitacäo por e-mail.",
+          "Ao preencher e assinalar de acordo este formulário, você, Participante, declara de maneira expressa e inequivoca que está ciente:",
+          "dos objetivos, finalidade e funcionamento do CicLo de Rastreios Great Ouestions for Healthier Minds;",
+          "da coleta e tratamento dos seus dados pessoais, incluindo seus dados sensiveis(dados clinicos/de saude);",
+          "do compartilhamento entre a Jungle e a empresa contratante, nos limites do sigilo médico e nos termos da lei de proteção de dados vigente e demais legislacöes aplicaveis;",
+          "que a participação no Programa é totalmente Livre, ficando inteiramente a Seu critério, podendo deixar de participara qualquer momento mediante comunicação expressa"
+          ]
+      },
+      "footer": {
+        "text": [ 
+          "3. Após Ler atentamente as informacöes acima e escLarecer todas as düvidas, ACEITO PARTICIPAR, por livre e espontânea vontade, do Ciclo de Rastreios Great Questions for Healthier Minds e concordo com os termos aqui propostos.",
+          "2021 - JUNGLE CONSULTORIA LTDA - www.junglexp.com"
+        ],
+        "otherText": "Estou ciente dos termos e aceito participar",
+        "button": "Confirmar"
+      }
+    } 
+  },
+  "registerCollaborator": {
+    "title": "Cadastrar Colaborador",
+    "subtitle": "Informa os dados abaixo para cadastrar um novo colaborador a sua empresa.",
+    "name": {
+      "label": "Nome Completo",
+      "placeholder": "Informe o nome completo"
+    },
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Informe o e-mail"
+    },
+    "emailGestor": {
+      "label": "E-mail do gestor direto",
+      "placeholder": "Informe o e-mail do gestor direto"
+    },
+    "unityOrLocalization": {
+      "label": "Unidade/Localização",
+      "placeholder": "Informe a unidade ou a localização"
+    },
+    "positions": {
+      "label": "Cargo",
+      "default": "Selecione",
+      "select": [
+          {"value": "Executivo e gestor sênior", "label": "Executivo e gestor sênior"},
+          {"value": "Gerente e supervisor", "label": "Gerente e supervisor"},
+          {"value": "Coordenador", "label": "Coordenador"},
+          {"value": "Especialista", "label": "Especialista"},
+          {"value": "Técnico", "label": "Técnico"},
+          {"value": "Analista", "label": "Analista"},
+          {"value": "Administrativo", "label": "Administrativo"},
+          {"value": "Operacional", "label": "Operacional"},
+          {"value": "Estagiário", "label": "Estagiário"},
+          {"value": "Médico", "label": "Médico"},
+          {"value": "Enfermeiro", "label": "Enfermeiro"}
+        ]
+    },
+    "typeOfPositions": {
+      "label": "Tipo de cargo",
+      "default": "Selecione",
+      "select": [
+        {"value": "Gestor-supervisão ou gerência operacional", "label": "Gestor-supervisão ou gerência operacional"},
+        {"value": "Gestor-média gerência", "label": "Gestor-média gerência"},
+        {"value": "Gestor-presidência/diretoria", "label": "Gestor-presidência/diretoria"},
+        {"value": "Colaborador", "label": "Colaborador"},
+        {"value": "Tercerizado/Outsourcing", "label": "Tercerizado/Outsourcing"}
       ]
     },
-    "purpose2": {
-      "title": "II - Tratamento dos Dados Pessoais",
-      "text": [
-        "Coletamos seus dados pessoais e dados pessoais sensiveis, como nome completo, CPF, data de nascimento, telefone, e-mail e outros dados de saúde que vieram a ser tratados durante a participação no Programa, para sua devida execução, para oferecimento de outros programas que você tenha condições de participar e para nos comunicarmos com você.",
-        "Todos os dados pessoais e dados pessoais sensiveis serão considerados confidenciais e como tal serão protegidos de forma a resguardar a privacidade dos titulares dos referidos dados, em observância à legisllação pertinente, sobre tudo LGPD, sem prejuizo, ainda do dever de sigilo em relação às informações médicas."
+    "peopleLeader": {
+      "label": "Lider de pessoas",
+      "default": "Selecione",
+      "select": [
+        {"value": true, "label": "Sim"},
+        {"value": false, "label": "Não"}
       ]
     },
-    "purpose3": {
-      "title": "III - Compartilhamento dos Dados Pessoais",
-      "text": [
-        "Para integral e adequada prestação do Ciclo de Rastreios Great Questions for Healthier Mind, seus dados pessoais comuns e dados pessoais sensiveis (dados de saúde ) estarão disponíveis para a consulta de equipe Jungle, nos limites do sigilo médico, da LGPD e demais legislações aplicaveis, obserbando os limites da estrita necessidade assegurando-se que o destinatário tenha condições de resguardar a confidencialidade e adequada proteção.",
-        "Em relação aos dados de saúde, a Jungle esclarece que os dados recebidos pela sua empresa contratante, serão estatísticos com finalidade de proporcionar índices para a aplicação de políticas internas de saúde e bem-estar."
+    "areaOrDepartmentOrDirectory": { 
+      "label": "Área/Departamento/Diretoria",
+      "default": "Selecione",
+      "select": [
+        {"value": "Administrativo/Financeiro", "label": "Administrativo/Financeiro"},
+        {"value": "Jurídico/Auditoria/Compliance", "label": "Jurídico/Auditoria/Compliance"},
+        {"value": "Logística/Supply Chain", "label": "Logística/Supply Chain"},
+        {"value": "Manutenção", "label": "Manutenção"},
+        {"value": "Marketing/Sucesso do Cliente", "label": "Marketing/Sucesso do Cliente"},
+        {"value": "Produção/Operação", "label": "Produção/Operação"},
+        {"value": "Qualidade/Processos", "label": "Qualidade/Processos"},
+        {"value": "Recursos Humanos/Medicina do trabalho", "label": "Recursos Humanos/Medicina do trabalho"},
+        {"value": "Regionais/Agência/Representantes", "label": "Regionais/Agência/Representantes"},
+        {"value": "Tecnologia da informação", "label": "Tecnologia da informação"},
+        {"value": "Vendas/Comercial", "label": "Vendas/Comercial"}
       ]
     },
-    "purpose4": {
-      "title": "IV - Armazenamento dos Dados Pessoais",
-      "text": [
-        "Os seus dados pessoais serão eliminados pela Jungle quando deixarem de ser necessários ou pertinentes para finalidades aqui definidas ou mediante a sua solicitação, desde que esta não conflite com o comprimento de obrigações legais, regulatórias e/ou para o exercício regular de nossos direitos."
-      ]
-    },
-    "purpose5": {
-      "title": "V - Medidas de Segurança aos Dados Pessoais",
-      "text": [
-        "A Jungle observará rigidos padrões de segurança e boas-práticas mediante a utilização de ferramentas e tecnologias razoáveis e disponíveis, além de medidas técnicas e administrativas aptas a proteger os dados pessoais de acessos não autorizados e de situações acidentais ou ilicitas."
-      ]
-    },
-    "purpose6": {
-      "title": "VI - Direito de Revogação do Consentimento",
-      "text": [
-        "O consentimento aqui manifestado poderá ser revogado por você, Participante, a qualquer momento, mediante solicitação por e-mail.",
-        "Ao preencher e assinalar de acordo este formulário, você, Participante, declara de maneira expressa e inequivoca que está ciente:",
-        "§  dos objetivos, finalidade e funcionamento do Ciclo de Rastreios Great Questions for Healthier Mindis;",
-        "§  da coleta e tratamento dos seus dados pessoais, incluindo seus dados sensíveis(dados clínicos/de saúde);",
-        "§  do compartilhamento emtre a Jungle e a empresa contratante, nos limites do sigilo médico e nos termos da lei de proteção de dados vigente e demais legislações aplicáveis;",
-        "§  que a participação no Programa é totalmente livre, ficando inteiramente a seu critério, podendo deixar de participar a qualquer momento mediante comunicação expressa."
-      ]
-    },
-    "end": {
-      "text": [
-        "Após ler atentamente as informações acima e esclarecer todas as dúvidas.",
-        "ACEITO PARTICIPAR",
-        ", por livre e espontânea vontade, do Ciclo de Rastreios Great Questions for Healthier Minds e concordo com os termos aqui dispostos.",
-        "2021 - JUNGLE CONSULTORIA LTDA - www.junglexp.com",
-        "Leia todo o termo e informe se está de acordo."
-      ],
-      "link": "Não aceito e desejo sair da plataforma",
-      "button": "Finalizar"
-    }
-  }
+    "buttonCancel": "Cancelar",
+    "buttonAdd": "Adicionar Colaborador"
+  } 
 }
