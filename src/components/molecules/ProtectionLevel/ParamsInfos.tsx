@@ -42,6 +42,10 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
     <BiCaretDown size="18px" color={theme.colors.darkGray} />
   );
 
+  const getValues = () => {
+    return currentUser.role === 'gestor' ? 'team_protection' : 'value';
+  };
+
   useEffect(() => {
     (async () => {
       if (currentLanguage === 'ptBR') return setIndexText(params.result);
@@ -70,43 +74,28 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
           <Box params={{ display: 'flex', alignItems: 'flex-end' }}>
             <Text
               color={
-                params[
-                  currentUser.role === 'gestor' ? 'team_protection' : 'value'
-                ] === 0
+                params[getValues()] === null
                   ? theme.colors.black
                   : ProtectionLevelColors[params.result]
               }
               textDecoration="strong"
             >
               <small>
-                {params[
-                  currentUser.role === 'gestor' ? 'team_protection' : 'value'
-                ] === 0 || !params.result
+                {params[getValues()] === null || !params.result
                   ? t('notRatedYet')
                   : indexText}
               </small>
             </Text>
           </Box>
-          {params[currentUser.role === 'gestor' ? 'team_protection' : 'value'] >
-            0 &&
-            !!params.result && (
-              <ProgressBar
-                bgColor={ProtectionLevelColors[params.result]}
-                height="8px"
-                completed={
-                  100 -
-                  params[
-                    currentUser.role === 'gestor' ? 'team_protection' : 'value'
-                  ] *
-                    100
-                }
-                baseBgColor={lighten(
-                  0.35,
-                  ProtectionLevelColors[params.result]
-                )}
-                isLabelVisible={false}
-              />
-            )}
+          {params[getValues()] !== null && !!params.result && (
+            <ProgressBar
+              bgColor={ProtectionLevelColors[params.result]}
+              height="8px"
+              completed={100 - (params[getValues()] || 0) * 100}
+              baseBgColor={lighten(0.35, ProtectionLevelColors[params.result])}
+              isLabelVisible={false}
+            />
+          )}
         </ParamInfosContainer>
         <IconButton onClick={handleClick} icon={icon} />
       </Box>

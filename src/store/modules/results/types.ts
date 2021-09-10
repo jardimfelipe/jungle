@@ -27,13 +27,13 @@ export type Statistics = {
   user: string
   __v: number
   _id: string
-  value: number
+  value?: number
   description: string
   title: string
   name: string
   niveis: Nivel[]
   population_protection: number
-  team_protection: number
+  team_protection?: number
   maxText: string
   minText: string
 }

@@ -121,7 +121,7 @@ const MyResults: React.FC = () => {
               <EmptyResults />
             ) : (
               getProtectionLevelItems().map((result, index) =>
-                index <= 4 && result.value > 0 ? (
+                index <= 4 && !!result.value ? (
                   <Card key={`${result._id}-card-${index}`}>
                     <Box
                       params={{
@@ -188,7 +188,7 @@ const MyResults: React.FC = () => {
                                 <ProgressBar
                                   bgColor={getBarColor(result, level)}
                                   height="10px"
-                                  completed={100 - result.value * 100}
+                                  completed={100 - (result.value || 0) * 100}
                                   baseBgColor={rgba(
                                     getBarColor(result, level),
                                     0.1
@@ -254,7 +254,7 @@ const MyResults: React.FC = () => {
                         },
                         index
                       ) =>
-                        value > 0 && index > 4 ? (
+                        !!value && index > 4 ? (
                           <SocialAspectsCard key={`dimension-${dimension}`}>
                             <CardHeader>
                               <Text textDecoration="strong" variant="primary">

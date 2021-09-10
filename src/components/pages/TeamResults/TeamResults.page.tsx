@@ -214,7 +214,7 @@ const TeamResults: React.FC = () => {
               <EmptyResults />
             ) : (
               getProtectionLevelItems().map((statistics, index) =>
-                index <= 4 && statistics.team_protection > 0 ? (
+                index <= 4 && !!statistics.team_protection ? (
                   <Card key={`${statistics}-card-${index}`}>
                     <Box
                       params={{
@@ -280,7 +280,8 @@ const TeamResults: React.FC = () => {
                                   bgColor={getBarColor(statistics, level)}
                                   height="10px"
                                   completed={
-                                    100 - statistics.team_protection * 100
+                                    100 -
+                                    (statistics.team_protection || 0) * 100
                                   }
                                   baseBgColor={rgba(
                                     getBarColor(statistics, level),
@@ -362,7 +363,7 @@ const TeamResults: React.FC = () => {
               </>
             ) : (
               results.statistics.map((statistic, index) =>
-                statistic.team_protection > 0 && index > 4 ? (
+                !!statistic.team_protection && index > 4 ? (
                   <SocialAspectsCard key={`social-${index}`}>
                     <CardHeader>
                       <Text textDecoration="strong" variant="primary">
