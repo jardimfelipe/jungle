@@ -19,7 +19,6 @@ import { useTranslation } from 'react-i18next';
 const { Title, Text } = Typography;
 
 
-
 type ModalProps = {
   onClose: () => void;
   isModalOpen: boolean;
@@ -176,6 +175,16 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const [ areaOrDepartamentOrDirectory, setAreaOrDepartamentOrDirectory ] = useState<Object[]>(setLista('areaOrDepartmentOrDirectory'));
   const [ emailGestor, setEmailGestor ] = useState<Object[]>(setLista('emailGestor'));
 
+  const [ nameForm, setNameForm ] = useState<string>("");
+  const [ emailForm, setEmailForm ] = useState<string>("");
+  const [ unityOrLocalizationForm, setUnityOrLocalizationForm ] = useState<string>("");
+  const [ positionsForm, setPositionsForm ] = useState<string>("");
+  const [ typeOfPositionsForm, setTypeOfPositionsForm ] = useState<string>("");
+  const [ peopleLeaderForm, setPeopleLeaderForm ] = useState<string>("");
+  const [ areaOrDepartamentOrDirectoryForm, setAreaOrDepartamentOrDirectoryForm ] = useState<string>("");
+  const [ emailGestorForm, setEmailGestorForm ] = useState<string>("");
+
+
   function setSublista(name: string){
     let lista = [];
     let sublista = null;
@@ -197,11 +206,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const [ typeOfPositionsList, setTypeOfPositionsList ] = useState<Object[]>(setSublista('typeOfPositions'));
   const [ peopleLeaderList, setPeopleLeaderList ] = useState<Object[]>(setSublista('peopleLeader'));
   const [ areaOrDepartamentOrDirectoryList, setAreaOrDepartamentOrDirectoryList ] = useState<Object[]>(setSublista('areaOrDepartmentOrDirectory'));
- 
 
-   useEffect(()=>{
-     console.log(positionsList, typeOfPositionsList, peopleLeaderList, areaOrDepartamentOrDirectoryList)
-   })
 
   return (
     <Modal width={800} height={600} isOpen={isModalOpen} onClose={onClose}>
@@ -219,7 +224,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
           <Title level={1}>{`${t('registerCollaborator.title')}`}</Title>
           <Text paragraph>{`${t('registerCollaborator.subtitle')}`}</Text>
         </Box>
-
+        
         <Box params={{
           display: 'flex',
           flexDirection: 'column',
@@ -228,15 +233,15 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
         }}>
           <Row>
             <Col md={6}>
-              <Textfield label={name[0].toString()} placeholder={name[1].toString()} />
+              <Textfield value={nameForm}  onChange={(e)=>{setNameForm(e.target.value)}}  label={name[0].toString()} placeholder={name[1].toString()} />
             </Col>
             <Col md={6}>
-              <Textfield type="email" label={email[0].toString()} placeholder={email[1].toString()} />
+              <Textfield value={emailForm}  onChange={(e)=>{setEmailForm(e.target.value)}}  type="email" label={email[0].toString()} placeholder={email[1].toString()} />
             </Col>
           </Row>
           <Row>
             <Col md={6}>
-              <Textfield label={unityOrLocalization[0].toString()} placeholder={unityOrLocalization[1].toString()} />
+              <Textfield value={unityOrLocalizationForm}  onChange={(e)=>{setUnityOrLocalizationForm(e.target.value)}}   label={unityOrLocalization[0].toString()} placeholder={unityOrLocalization[1].toString()} />
             </Col>
             <Col md={6}>
               <Box params={{ marginBottom: '9px' }}>
@@ -246,6 +251,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Select 
                 options={typeOfPositionsList}
                 placeholder={typeOfPositions[1].toString()}
+                onChange={(e)=>{if(e != null)setTypeOfPositionsForm(e.value)}}
                 />
             </Col>
           </Row>
@@ -258,6 +264,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Select 
                 options={positionsList}
                 placeholder={positions[1].toString()}
+                onChange={(e)=>{if(e != null)setPositionsForm(e.value)}}
                 />
             </Col>
              <Col md={6}>
@@ -268,6 +275,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Select 
                 options={areaOrDepartamentOrDirectoryList}
                 placeholder={areaOrDepartamentOrDirectory[1].toString()}
+                onChange={(e)=>{if(e != null)setAreaOrDepartamentOrDirectoryForm(e.value)}}
                 />
             </Col>
           </Row>
@@ -281,11 +289,12 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Select 
                 options={peopleLeaderList}
                 placeholder={peopleLeader[1].toString()}
+                onChange={(e)=>{if(e != null)setPeopleLeaderForm(e.value)}} 
                 />
             </Col>
 
             <Col md={6}>
-              <Textfield label={emailGestor[0].toString()} placeholder={emailGestor[1].toString()} />                        
+              <Textfield value={emailGestorForm} onChange={(e)=>{setEmailGestorForm(e.target.value)}} label={emailGestor[0].toString()} placeholder={emailGestor[1].toString()} />                        
             </Col>
           </Row>
 
@@ -296,7 +305,35 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               </Button>
             </Col>
             <Col md={6}>
-              <Button variant="primary" block>
+              <Button variant="primary" block onClick={()=>{
+                let name = nameForm;
+                let email = emailForm;
+                let typeOfPositions = typeOfPositionsForm;
+                let emailGestor = emailGestorForm;
+                let unityOrLocalization = unityOrLocalizationForm;
+                let positions = positionsForm;
+                let peopleLeader = peopleLeaderForm;
+                let areaOrDepartamentOrDirectory = areaOrDepartamentOrDirectoryForm;
+              
+                let fd = new FormData();
+                
+                fd.append('name', name);
+                fd.append('email', email);
+                fd.append('typeOfPositions', typeOfPositions);
+                fd.append('emailGestor', emailGestor);
+                fd.append('unityOrLocalization', unityOrLocalization)
+                fd.append('positions', positions);
+                fd.append('peopleLeader', peopleLeader)
+                fd.append('areaOrDepartamentOrDirectory', areaOrDepartamentOrDirectory)
+
+
+                console.error('fd: ');
+                fd.forEach((valor, chave)=>{
+                  console.error(`\t ${chave}: ${valor}`);
+                })
+                console.error('');
+
+              }}>
                 {`${t('registerCollaborator.buttonAdd')}`}
               </Button>
             </Col>
