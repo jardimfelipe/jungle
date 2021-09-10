@@ -8,6 +8,7 @@ import UserbarProfiles from './userbar-modes/profile';
 import UserBarConfig from './userbar-modes/config';
 import { SwitchTransition, Transition } from 'react-transition-group';
 
+
 import { useHistory } from 'react-router-dom';
 import PasswordModal from './PasswordModal';
 
@@ -62,6 +63,10 @@ const Userbar: React.FC = () => {
 
   return (
     <>
+
+   
+
+
       <UserBarContainer isUserbarOpen={isUserbarOpen}>
         <SwitchTransition>
           <Transition key={userBarType} timeout={100} unmountOnExit>
@@ -97,6 +102,7 @@ const Userbar: React.FC = () => {
           </Transition>
         </SwitchTransition>
       </UserBarContainer>
+     
       <PasswordModal onCancel={handleCancelButton} isModalOpen={isModalOpen} />
     </>
   );

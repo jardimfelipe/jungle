@@ -12,4 +12,4 @@ export type SelectProps = {
   selectProps?: any;
   placeholder?: string;
   value?: OptionType | null | undefined;
-};
+}; 

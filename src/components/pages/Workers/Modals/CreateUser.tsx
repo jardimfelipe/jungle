@@ -165,123 +165,18 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const [areaOptions, setAreaOptions] = useState<OptionType[]>(listaArea);
 
 
- 
+   return (
+  <div>
 
 
-  useEffect(()=>{
-    
-    
-  })
 
-
-  return (
     <Modal width={550} height={500} isOpen={isModalOpen} onClose={onClose}>
-      <Modal width={500} height={500} isOpen={isModalOpen3} onClose={onClose3}>
-        <Row>
-          <Col md={6}>  
-            <Button variant="secondary" block>
-              Fechar
-            </Button>
-          </Col>
-          <Col md={6}>  
-            <Button variant="primary" block>
-              Cadastrar outra pergunta
-            </Button>
-          </Col>
-         </Row>
+        
+      <Modal isOpen={isModalOpen2} onClose={onClose2}>
+        <Title >
+          {`${t('registerCollaborator.title')}`}
+        </Title>
       </Modal>
-
-      <Modal width={700} height={600} isOpen={isModalOpen2} onClose={onClose2}>
-        <Box params={{
-            padding: '10px'
-      
-        }}>
-          <Row>
-            <Col md={12}>
-              <Title>
-                {`${t('registerCollaborator.title')}`}
-              </Title>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
-             <Textfield label="Nome completo" placeholder="Informe o nome" />
-            </Col>
-            <Col md={6}>
-             <Textfield label="E-mail" placeholder="Informe o e-mail" />
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
-              <Textfield label="Unidade/Localização" placeholder="Informe a unidade ou localização" />
-            </Col>
-            <Col md={6}>
-              <Text>
-                Tipo de cargo
-              </Text>
-              <Select 
-                options={tipoDeCargoOptions}
-                placeholder="Selecione" />
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
-              <Text>
-                Cargo
-              </Text>
-              <Select 
-                options={cargoOptions}
-                placeholder="Selecione"
-                />  
-            </Col>
-            <Col md={6}>
-              <Text>
-                Área/Departamento/Diretoria
-              </Text>
-              <Select 
-                options={areaOptions}
-                placeholder="Selecione"
-                />   
-            </Col>
-          </Row>
-          <Row>
-            <Col md={6}>
-              
-              <Text>
-                Lider de pessoas
-              </Text>
-              <Select 
-                options={liderOptions}
-                placeholder="Selecione"
-                />  
-                
-            </Col>
-            <Col md={6}>
-             <Textfield label="Gestor direto" placeholder="Informe o e-mail do gestor" />
-            </Col>
-          </Row>
-
-
-          <Row>
-            <Col md={6} onClick={onClose2}>
-              <Button variant="cancel" block>
-                Cancelar
-              </Button>
-            </Col>
-            <Col md={6}>
-              <Button variant="primary" block onClick={()=>{
-                onClose2();
-                setModalOpen3(true);
-              }}>
-                Adicionar colaborador 
-              </Button>
-            </Col>
-          </Row>
-        </Box>
-      </Modal>
-      
-
-      
 
       <Button block variant="primary" onClick={()=> setModalOpen2(true)}>
         Cadastrar manualmente um novo colaborador.
@@ -320,6 +215,11 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
         {buttonContent()}
       </ModalButton>
     </Modal>
+
+
+
+
+  </div>
   );
 };
 

@@ -9,9 +9,9 @@ const DropdownIndicator = (props: any) => {
   return (
     <components.DropdownIndicator {...props}>
       <BiCaretDown size="24" />
-    </components.DropdownIndicator>
+    </components.DropdownIndicator> 
   );
-};
+}; 
 
 const ReactSelect: React.FC<SelectProps> = (props) => {
   const theme = useTheme();
@@ -19,7 +19,7 @@ const ReactSelect: React.FC<SelectProps> = (props) => {
     control: (styles: any) => ({
       ...styles,
       backgroundColor: theme.colors.gray,
-      height: '45px',
+      height: '55px',
       border: '1px solid #B8CAE8',
       borderRadius: '10px',
     }),

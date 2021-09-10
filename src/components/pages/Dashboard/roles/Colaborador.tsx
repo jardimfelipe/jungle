@@ -8,7 +8,8 @@ import {
   QuestionaryModal,
   QuestionaryCard,
   QuestionaryEmptyState,
-  TermsConditionsModal,
+  TermsConditionsModal, 
+  Button
 } from '../../..';
 import { BsArrowRight } from 'react-icons/bs';
 import { QuestionariesGridContainer } from '../Dashboard.styled';
@@ -73,7 +74,9 @@ const Colaborador: React.FC = () => {
     feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
   }, [feedback, dispatch]);
   return (
+
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+     
       <PromotionalCard
         title={`${t('greetings.user.title')}, ${currentUser.name}.`}
         text={t('greetings.user.text')}
