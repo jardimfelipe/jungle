@@ -3,7 +3,7 @@ import store from "../store";
 import { logout } from "../store/modules/login/actions";
 import { getSavedState, removeState } from "../utils/localStorage";
 
-const { REACT_APP_API_BASE_URL: baseURL } = process.env;
+const baseURL = window.location.href === 'http://homologacao.app.junglexp.com.br/' ? 'https://jungle-api-hml-ozjujigmba-uc.a.run.app/' : process.env.REACT_APP_API_BASE_URL
 
 const api = axios.create({
   baseURL,
