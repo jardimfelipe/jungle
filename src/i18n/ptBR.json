@@ -178,6 +178,8 @@
     } 
   },
   "registerCollaborator": {
+    "btnRegisterForm": "Cadastrar Usuário utilizando um formulário",
+    "btnRegisterFile": "Cadastrar Usuário utilizando um arquivo",
     "title": "Cadastrar Colaborador",
     "subtitle": "Informa os dados abaixo para cadastrar um novo colaborador a sua empresa.",
     "name": {
@@ -251,5 +253,28 @@
     },
     "buttonCancel": "Cancelar",
     "buttonAdd": "Adicionar Colaborador"
+  },
+  "companies": {
+    "btnCompanies": "Cadastrar Empresa",
+    "corporateName": {
+      "label": "Razão Social",
+      "placeholder": "Informe a Razão Social"
+    },
+    "cnpj": {
+      "label": "CNPJ",
+      "placeholder": "Isira o CNPJ"
+    },
+    "managerName": {
+      "label": "Nome do Gestor",
+      "placeholder": "Informe o nome do Gestor"
+    },
+    "emailGestor": {
+      "label": "E-mail do Gestor",
+      "placeholder": "Informe o e-mail do gestor"
+    },
+    "telephoneGestor": {
+      "label": "Telefone do Gestor",
+      "placeholder": "Informe o telefone do gestor"
+    }
   } 
 }

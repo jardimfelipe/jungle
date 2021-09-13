@@ -178,6 +178,8 @@
     }
   },
  "registerCollaborator": {
+  "btnRegisterForm": "Registrar usuario mediante un formulario",
+     "btnRegisterFile": "Registrar usuario usando un archivo", 
     "title": "Registrar colaborador",
     "subtitle": "Ingrese los datos a continuación para registrar un nuevo empleado para su empresa.",
     "name": {
@@ -251,5 +253,28 @@
     },
     "buttonCancel": "Cancelar",
     "buttonAdd": "Agregar colaborador"
+  },
+  "companies": {
+    "btnCompanies": "Registrar empresa",
+    "corporateName": {
+      "label": "Nombre corporativo",
+      "placeholder": "Informar el nombre de la empresa"
+    },
+    "cnpj": {
+      "label": "CNPJ",
+      "placeholder": "Isira la CNPJ"
+    },
+    "managerName": {
+      "label": "Nombre del administrador",
+      "placeholder": "Ingrese el nombre del administrador"
+    },
+    "emailManager": {
+      "label": "Correo electrónico del administrador",
+      "placeholder": "Ingrese el correo electrónico del administrador"
+    },
+    "phoneManager": {
+      "label": "Teléfono del administrador",
+      "placeholder": "Ingrese el número de teléfono del administrador"
+    }
   }
-}
+} 

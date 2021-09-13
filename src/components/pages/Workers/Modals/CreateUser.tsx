@@ -208,9 +208,81 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const [ areaOrDepartamentOrDirectoryList, setAreaOrDepartamentOrDirectoryList ] = useState<Object[]>(setSublista('areaOrDepartmentOrDirectory'));
 
 
-  return (
-    <Modal width={800} height={600} isOpen={isModalOpen} onClose={onClose}>
+  const [ isModalOpen2, setIsModalOpen2 ] = useState<boolean>(false);
+  const [ isModalOpen3, setIsModalOpen3 ] = useState<boolean>(false);
 
+  const onClose2 = ()=>{
+    setIsModalOpen2(false)
+  }
+
+  const onClose3 = () => {
+    setIsModalOpen3(false)
+  }
+
+
+  return (<div>
+    <Modal width={400} height={230} isOpen={isModalOpen} onClose={onClose}>
+      <Box 
+        params={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          padding: '10px'
+        }}>
+
+          <Box params={{ margin: '25px' }} onClick={()=>{setIsModalOpen3(true)}}>
+              <Button variant="primary" block size="regular">
+
+                {`${t('registerCollaborator.btnRegisterForm')}`}
+              </Button>
+          </Box>
+          <Box params={{ margin: '25px' }} onClick={()=>{setIsModalOpen2(true)}}>
+              <Button variant="primary" block size="regular">
+
+                {`${t('registerCollaborator.btnRegisterFile')}`}              
+              </Button>
+          </Box>                  
+
+        </Box>
+    </Modal>
+
+    <Modal width={550} height={500} isOpen={isModalOpen3} onClose={onClose3}>
+      {isFileLoading && (
+        <Box
+          params={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <ProgressBar
+            bgColor={theme.colors.blue}
+            height="3px"
+            completed={userFileProgress}
+            baseBgColor={rgba(theme.colors.blue, 0.1)}
+            isLabelVisible={false}
+            transitionDuration="0.3s"
+          />
+        </Box>
+      )}
+
+      {fileSuccess ? successFeedback() : usersFileUploader()}
+
+      <ModalButton
+        disabled={!currentFile || isFileLoading}
+        onClick={handleSubmit}
+        variant="primary"
+        block
+      >
+        {buttonContent()}
+      </ModalButton>
+    </Modal>
+
+    <Modal width={800} height={600} isOpen={isModalOpen2} onClose={onClose2}>
       <Box 
         params={{
           position: 'absolute',
@@ -300,7 +372,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
 
           <Row>
             <Col md={6}>
-              <Button variant="cancel" block onClick={onClose}>
+              <Button variant="cancel" block onClick={onClose2}>
                 {`${t('registerCollaborator.buttonCancel')}`}
               </Button>
             </Col>
@@ -332,7 +404,10 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                   console.error(`\t ${chave}: ${valor}`);
                 })
                 console.error('');
-
+                
+                let resp = createUsersRequest(fd);
+                
+                console.log(resp)
               }}>
                 {`${t('registerCollaborator.buttonAdd')}`}
               </Button>
@@ -341,7 +416,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
         </Box>
       </Box>
     </Modal>
-  );
+  
+  </div>);
 };
 
 export default CreateUser;

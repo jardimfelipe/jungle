@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
-import { Box, IconButton, Typography, CompanyTable } from '../..';
+import { Box, IconButton, Typography, CompanyTable, Button } from '../..';
 import { BiSearch } from 'react-icons/bi';
 import { BiBuildings, BiDockLeft } from 'react-icons/bi';
 import PromotionalCard from '../../molecules/PromotionalCard/PromotionalCard';
 import { FilterLink } from './Companies.styled';
 import Resume from '../../molecules/Resume/Resume';
+
+import CreateCompany from './Modals/InsertCompany';
+
+
+import  { useTranslation } from 'react-i18next'
 
 import { useHistory } from 'react-router-dom';
 
@@ -21,10 +26,16 @@ const Companies: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const theme = useTheme();
+  const { t } = useTranslation();
   const { companies } = useSelector(({ companies }: RootState) => companies);
   const { questionaries } = useSelector(
     ({ questionaries }: RootState) => questionaries
   );
+  const  [isModalOpen, setIsModalOpen ] = useState<boolean>(false);
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  }
 
   const resumeItems = [
     {
@@ -67,6 +78,18 @@ const Companies: React.FC = () => {
         text="Aqui você tem acesso a todas as empresas que participam de nossas jornadas e pode acompanhar o status dos projetos e o engajamento dos colaboradores."
       />
 
+      <Box params={{
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        width: '100%' 
+      }}>
+        <Button variant="primary" onClick={()=>{
+          setIsModalOpen(true)
+        }}>
+          {`${t('companies.btnCompanies')}`}
+        </Button>
+      </Box>
+
       <Box
         params={{
           display: 'flex',
@@ -91,6 +114,8 @@ const Companies: React.FC = () => {
       </Row>
 
       <CompanyTable onClick={handleTableClick} />
+
+      <CreateCompany onClose={handleModalClose} isModalOpen={isModalOpen} />
     </Box>
   );
 };

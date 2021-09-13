@@ -178,6 +178,8 @@
     }
   },
 "registerCollaborator": {
+    "btnRegisterForm": "Register User using a form",
+    "btnRegisterFile": "Register User using a file", 
     "title": "Register Collaborator",
     "subtitle": "Enter the data below to register a new employee for your company.",
     "name": {
@@ -251,5 +253,28 @@
     },
     "buttonCancel": "Cancel",
     "buttonAdd": "Add Contributor"
+  },
+  "companies": {
+    "btnCompanies": "Register Company",
+    "corporateName": {
+      "label": "Corporate Name",
+      "placeholder": "Inform the Company Name"
+    },
+    "CNPJ": {
+      "label": "CNPJ",
+      "placeholder": "Isira the CNPJ"
+    },
+    "managerName": {
+      "label": "Manager's Name",
+      "placeholder": "Enter Manager's name"
+    },
+    "emailManager": {
+      "label": "Manager's Email",
+      "placeholder": "Enter manager's email"
+    },
+    "telephoneManager": {
+      "label": "Manager's Phone",
+      "placeholder": "Enter manager's phone number"
+    }
   }
-}
+} 
