@@ -57,6 +57,8 @@ const MyResults: React.FC = () => {
   };
 
   const getBarColor = (result: Statistics, level: any) => {
+    console.log(result);
+    console.log(level);
     if (!result.result) return rgba('#011F3B', 0.1);
     const string = result.result.split(' ')[1];
     if (!string) return rgba('#011F3B', 0.5);

@@ -22,7 +22,7 @@ import { Link } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 
-type StartedQuestionary = {
+export type StartedQuestionary = {
   questionaryId: string;
   answers: UserAnswer[];
 };

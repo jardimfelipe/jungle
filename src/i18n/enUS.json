@@ -92,7 +92,8 @@
     "playbook": "Playbook",
     "marketplace": "Marketplace",
     "masterclass": "MasterClass",
-    "logout": "Logout"
+    "logout": "Logout",
+    "questionnaires": "Questionnaires"
   },
   "indexes": {
     "hight": "Hight",

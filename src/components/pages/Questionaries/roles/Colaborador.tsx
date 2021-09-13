@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import {
   Box,
@@ -24,6 +24,8 @@ import { useHistory } from 'react-router-dom';
 import { Questionary as QuestionaryType } from '../../../../store/modules/questionaries/types';
 
 import { useTranslation } from 'react-i18next';
+import { getSavedState } from '../../../../utils/localStorage';
+import { StartedQuestionary } from '../../../molecules/QuestionaryCard/QuestionaryCard';
 
 const { Title } = Typography;
 
@@ -37,6 +39,9 @@ const Questionaries: React.FC = () => {
     ({ questionaries }: RootState) => questionaries
   );
   const [currentTab, setCurrentTab] = useState<TabComponents>('disponiveis');
+  const [startedQuestionaries] = useState(
+    getSavedState('worker.startedQuestionaries') || []
+  );
   const [clickedQuestionary, setClickedQuestionary] = useState<
     Partial<QuestionaryType>
   >({});
@@ -46,6 +51,15 @@ const Questionaries: React.FC = () => {
   const handleTabClick = (tab: TabComponents) => {
     setCurrentTab(tab);
   };
+
+  const isFilledQuestionary = useCallback(
+    (id: string) => {
+      return !!startedQuestionaries.find(
+        ({ questionaryId }: StartedQuestionary) => questionaryId === id
+      );
+    },
+    [startedQuestionaries]
+  );
 
   const handleQuestionaryClick = (questionary: QuestionaryType) => {
     setIsModalOpen(true);
@@ -59,6 +73,23 @@ const Questionaries: React.FC = () => {
       state: { questionary: clickedQuestionary },
     });
   };
+
+  const filteredQuestionnaires = useCallback(() => {
+    if (currentTab === 'disponiveis')
+      return questionaries.filter(
+        (questionary) =>
+          !questionary.answered && !isFilledQuestionary(questionary._id)
+      );
+
+    if (currentTab === 'em andamento')
+      return questionaries.filter(
+        (questionary) =>
+          !questionary.answered && isFilledQuestionary(questionary._id)
+      );
+    if (currentTab === 'finalizados')
+      return questionaries.filter(({ answered }) => answered);
+    return questionaries;
+  }, [currentTab, isFilledQuestionary, questionaries]);
 
   useEffect(() => {
     dispatch(getQuestionariesRequest({ userRole: 'user' }));
@@ -126,7 +157,7 @@ const Questionaries: React.FC = () => {
             ))}
           </>
         ) : questionaries.length ? (
-          questionaries.map((questionary) => (
+          filteredQuestionnaires().map((questionary) => (
             <QuestionaryCard
               onClick={handleQuestionaryClick}
               questionary={questionary}

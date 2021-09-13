@@ -97,7 +97,7 @@
   "indexes": {
     "hight": "Alta",
     "good": "Boa",
-    "moderate": "Moderado",
+    "moderate": "Moderada",
     "thin": "Leve"
   },
   "availableUntil": "Disponível até {{- date}}",

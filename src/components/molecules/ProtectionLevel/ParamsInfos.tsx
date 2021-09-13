@@ -30,7 +30,8 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
 
   const handleClick = () => {
     if (
-      params[currentUser.role === 'gestor' ? 'team_protection' : 'value'] === 0
+      params[currentUser.role === 'gestor' ? 'team_protection' : 'value'] ===
+      null
     )
       return;
     setIsAnalysisOpen(!isAnalysisOpen);
