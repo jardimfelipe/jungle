@@ -20,7 +20,7 @@ function* getCompany({ payload }: ActionType<typeof actions.getCompanyRequest>) 
   try {
     const { headers } = payload
     const [{ data: questionaries }, { data: workers }] = yield all([
-      call(api.get, "/questionnaires", { headers }),
+      call(api.get, "/questionnaires/current", { headers }),
       call(api.get, "users", { headers }),
     ]);
     yield put(actions.getCompanySuccess({ questionaries, workers }));
