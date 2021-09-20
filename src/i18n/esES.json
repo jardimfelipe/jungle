@@ -124,6 +124,7 @@
   "populationProtectionLevel": "Nivel de protección de la población",
   "companyProtectionLevel": "Nivel de protección de la empresa",
   "adequateProtection": "Protección adecuada contra",
+  "notAvailable": "Pasó la fecha de vencimiento",
   "minorProtection": "Protección menor contra",
   "saveAndLeave": "Guardar e salir",
   "mandatoryQuestion": "Pregunta obligatoria",

@@ -124,6 +124,7 @@
   "login": "Entrar",
   "createPassword": "Cadastrar senha",
   "password": "Senha",
+  "notAvailable": "Vencido",
   "code": "Código",
   "populationProtectionLevel": "Nível de proteção da população",
   "companyProtectionLevel": "Nível de proteção da empresa",

@@ -16,7 +16,7 @@ import { QuestionaryTag } from './QuestionaryCard.styled';
 import { getSavedState } from '../../../utils/localStorage';
 import { UserAnswer } from '../../../store/modules/questionaries/types';
 import { useTheme } from 'styled-components';
-import { differenceInDays, isFuture } from 'date-fns';
+import { differenceInDays, isFuture, isPast } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -72,6 +72,10 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
     return isFuture(new Date(questionary.tracking_start));
   };
 
+  const isQuestionaryAvailableOnPast = () => {
+    return isPast(new Date(questionary.tracking_end));
+  };
+
   const handleClick = () => {
     if (isQuestionaryAvailableOnFuture()) return;
     onClick(questionary);
@@ -80,9 +84,11 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
   const getDateInfo = () => {
     if (isQuestionaryAvailableOnFuture()) {
       return `${t('availableIn')} ${differenceInDays(
-        new Date(),
-        new Date(questionary.tracking_start)
+        new Date(questionary.tracking_start),
+        new Date()
       )} dias`;
+    } else if (isQuestionaryAvailableOnPast()) {
+      return t('notAvailable');
     } else {
       return t('availableUntil', {
         date: new Date(questionary.tracking_end).toLocaleDateString('pt-br'),
@@ -91,7 +97,9 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
   };
   return (
     <Questionary
-      isFuture={isQuestionaryAvailableOnFuture()}
+      isFuture={
+        isQuestionaryAvailableOnFuture() || isQuestionaryAvailableOnPast()
+      }
       className="questionary-card"
       image=""
     >

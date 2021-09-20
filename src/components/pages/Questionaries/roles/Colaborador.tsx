@@ -26,6 +26,7 @@ import { Questionary as QuestionaryType } from '../../../../store/modules/questi
 import { useTranslation } from 'react-i18next';
 import { getSavedState } from '../../../../utils/localStorage';
 import { StartedQuestionary } from '../../../molecules/QuestionaryCard/QuestionaryCard';
+import { isFuture, isPast } from 'date-fns';
 
 const { Title } = Typography;
 
@@ -78,7 +79,10 @@ const Questionaries: React.FC = () => {
     if (currentTab === 'disponiveis')
       return questionaries.filter(
         (questionary) =>
-          !questionary.answered && !isFilledQuestionary(questionary._id)
+          !questionary.answered &&
+          !isFilledQuestionary(questionary._id) &&
+          !isPast(new Date(questionary.tracking_end)) &&
+          !isFuture(new Date(questionary.tracking_start))
       );
 
     if (currentTab === 'em andamento')
@@ -87,7 +91,9 @@ const Questionaries: React.FC = () => {
           !questionary.answered && isFilledQuestionary(questionary._id)
       );
     if (currentTab === 'finalizados')
-      return questionaries.filter(({ answered }) => answered);
+      return questionaries.filter(
+        (q) => q.answered || isPast(new Date(q.tracking_end))
+      );
     return questionaries;
   }, [currentTab, isFilledQuestionary, questionaries]);
 

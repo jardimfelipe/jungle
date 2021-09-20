@@ -124,6 +124,7 @@
   "code": "Code",
   "populationProtectionLevel": "Population Protection Level",
   "companyProtectionLevel": "Company Protection Level",
+  "notAvailable": "Expired",
   "adequateProtection": "Adequate protection against",
   "minorProtection": "Minor protection against",
   "saveAndLeave": "Save and leave",

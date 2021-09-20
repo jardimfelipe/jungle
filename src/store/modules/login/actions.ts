@@ -23,7 +23,7 @@ export function getUserInfo() {
 }
 
 export function firstAccessRequest(params: FirstAccessParams) {
-  return action(LoginTypeKeys.FIRST_ACCESS_REQUEST)
+  return action(LoginTypeKeys.FIRST_ACCESS_REQUEST, params)
 }
 
 export function firstAccessFailure() {
