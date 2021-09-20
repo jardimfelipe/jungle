@@ -70,7 +70,7 @@ const TeamResults: React.FC = () => {
   };
 
   const isEmpty = () =>
-    results.statistics.every((statistic) => statistic.team_protection === 0);
+    results.statistics.every((statistic) => statistic.team_protection === null);
 
   useEffect(() => {
     !results.statistics.length && dispatch(getResultsRequest('gestor'));

@@ -4,7 +4,7 @@
       "title": "We are happy to see you",
       "text": "All our questionnaires are confidential, scientifically validated, so you can live a healthier and more productive life."
     },
-    "manager": {
+    "gestor": {
       "title": "Welcome,",
       "text": "All our questionnaires were created on a scientific basis. See the results we got from your team."
     },
@@ -56,7 +56,8 @@
     "inactives": "Inactives",
     "soon": "Soon",
     "downloadSpreadsheet": "Download spreadsheet",
-    "registerUsers": "Register users"
+    "registerUsers": "Register users",
+    "backToLogin": "Back to login"
   },
   "emptyStates": {
     "questionaries": {
@@ -115,15 +116,22 @@
   "niceHaveYouHere": "Glad to have you around",
   "informYourEmail": "Enter your email",
   "informYourPassword": "Enter your password",
+  "informYourCode": "Enter the code received by email",
   "rememberUser": "Remember User",
   "login": "Login",
+  "createPassword": "Create password",
   "password": "Password",
+  "code": "Code",
   "populationProtectionLevel": "Population Protection Level",
   "companyProtectionLevel": "Company Protection Level",
   "adequateProtection": "Adequate protection against",
   "minorProtection": "Minor protection against",
   "saveAndLeave": "Save and leave",
   "mandatoryQuestion": "Mantatory question",
+  "itsYourFirstAccess": "Hello, this is your first login.",
+  "createYourPassword": "To access, register your password below.",
+  "confirmPassword": "Confirm password",
+  "firstAccessSuccessfull": "Password registered successfully. Click to return to login screen",
   "termsConditions": {
     "header": "To use the Jungle platform you must accept the Terms of Consent",
     "cb_terms0": "I'm aware",

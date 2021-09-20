@@ -56,7 +56,8 @@
     "inactives": "Inactivos",
     "soon": "Pronto",
     "downloadSpreadsheet": "Descargar documento",
-    "registerUsers": "Registrar usuarios"
+    "registerUsers": "Registrar usuarios",
+    "backToLogin": "Volver a la pantalla de inicio de sesión"
   },
   "emptyStates": {
     "questionaries": {
@@ -117,12 +118,19 @@
   "RememberUser": "Recordar usuario",
   "login": "Iniciar sesión",
   "password": "Contraseña",
+  "createPassword": "Registrar contraseña",
+  "informYourCode": "Ingrese el código recibido por correo electrónico",
+  "code": "Codigo",
   "populationProtectionLevel": "Nivel de protección de la población",
   "companyProtectionLevel": "Nivel de protección de la empresa",
   "adequateProtection": "Protección adecuada contra",
   "minorProtection": "Protección menor contra",
   "saveAndLeave": "Guardar e salir",
   "mandatoryQuestion": "Pregunta obligatoria",
+  "itsYourFirstAccess": "Hola, este es tu primer inicio de sesión.",
+  "createYourPassword": "Para acceder, registre su contraseña a continuación.",
+  "confirmPassword": "Confirmar seña",
+  "firstAccessSuccessfull": "Contraseña registrada correctamente. Haga clic para volver a la pantalla de inicio de sesión",
   "termsConditions": {
     "header": "Para utilizar la plataforma Jungle debe aceptar las Condiciones de consentimiento",
     "cb_terms0": "Soy consciente",

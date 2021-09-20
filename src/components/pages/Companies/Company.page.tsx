@@ -34,7 +34,7 @@ const Company: React.FC = () => {
   const {
     state: { company: routeCompany },
   } = useLocation<RouteState>();
-  const { company, isLoading } = useSelector(
+  const { company, isLoading, questionaryFeedback } = useSelector(
     ({ companies }: RootState) => companies
   );
   const history = useHistory();
@@ -87,7 +87,7 @@ const Company: React.FC = () => {
       company: routeCompany.id,
     };
     dispatch(getCompanyRequest({ headers }));
-  }, [dispatch, routeCompany]);
+  }, [dispatch, routeCompany, questionaryFeedback]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <Card size="small" hasCloseButton background="#E5EEF7">

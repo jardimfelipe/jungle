@@ -6,6 +6,11 @@ export enum LoginTypeKeys {
   LOGIN_REQUEST = "@login/LOGIN_REQUEST",
   LOGIN_SUCCESS = "@login/LOGIN_SUCCESS",
   LOGIN_FAILURE = "@login/LOGIN_FAILURE",
+
+  FIRST_ACCESS_REQUEST = "@login/FIRST_ACCESS_REQUEST",
+  FIRST_ACCESS_SUCCESS = "@login/FIRST_ACCESS_SUCCESS",
+  FIRST_ACCESS_FAILURE = "@login/FIRST_ACCESS_FAILURE",
+
   GET_USER_INFO = "@login/GET_USER_INFO",
   LOGOUT = "@login/LOGOUT",
   RESET_STORE = "@login/RESET_STORE"
@@ -25,11 +30,18 @@ export type LoginState = {
   isLoading: boolean;
   isLoggedIn: boolean;
   error: RequestError;
+  firstAccessFeedback: '' | 'error' | 'success'
 }
 
 export type LoginParams = {
   email: string;
   password: string
+}
+
+export type FirstAccessParams = {
+  email: string;
+  password: string;
+  code: string
 }
 
 

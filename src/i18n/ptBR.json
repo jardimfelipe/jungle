@@ -8,6 +8,10 @@
       "title": "Bem-vindo,",
       "text": "Todos os nossos questionários foram criados com base científica. Veja os resultados que obtivemos de sua equipe."
     },
+    "workers": {
+      "title": "Colaboradores da sua equipe",
+      "text": "Olá! Aqui você encontra a relação de colaboradores de sua equipe que foram cadastrados na jornada Jungle. Caso haja modificação no staff, podemos incluir ou retirar pessoas de nossa análise sigilosa ok?"
+    },
     "teamResults": {
       "title": "Resultados Ourmind!",
       "text": "Aqui você encontra o perfil de sintomas que encontramos em sua equipe. Este é o relatório global da sua empresa é confidencial, não sendo possível identificar nenhum dos respondentes. Cada dimensão principal (sintomas de ansiedade, sintomas depressivos, sintomas de burnout, estresse e risco de uso de substancias) está representada em um gráfico distinto. Veja a descrição dos achados nas legendas."
@@ -34,7 +38,7 @@
     "title": {
       "questionaries": "Questionários",
       "teamResults": "Resultados do time",
-      "lastQuestionaries": "Utimos questionários",
+      "lastQuestionaries": "Últimos questionários",
       "myResults": "Meus Resultados",
       "protecionLevels": "Níveis de proteção",
       "biopsychosocialAspects": "Aspectos biopsicossociais",
@@ -56,7 +60,8 @@
     "inactives": "Inativos",
     "soon": "Em breve",
     "downloadSpreadsheet": "Baixar planilha",
-    "registerUsers": "Cadastrar usuários"
+    "registerUsers": "Cadastrar usuários",
+    "backToLogin": "Voltar para o login"
   },
   "emptyStates": {
     "questionaries": {
@@ -114,15 +119,22 @@
   "niceHaveYouHere": "Que bom ter você por aqui",
   "informYourEmail": "Digite seu email",
   "informYourPassword": "Digite sua senha",
+  "informYourCode": "Digite o código recebido por email",
   "rememberUser": "Lembrar usuário",
   "login": "Entrar",
+  "createPassword": "Cadastrar senha",
   "password": "Senha",
+  "code": "Código",
   "populationProtectionLevel": "Nível de proteção da população",
   "companyProtectionLevel": "Nível de proteção da empresa",
   "adequateProtection": "Proteção adequada contra",
   "minorProtection": "Proteção menor contra",
   "saveAndLeave": "Salvar e sair",
   "mandatoryQuestion": "Pergunta obrigatória",
+  "itsYourFirstAccess": "Olá, esse é seu primeiro acesso.",
+  "createYourPassword": "Para acessar, cadastre abaixo a sua senha.",
+  "confirmPassword": "Confirmar senha",
+  "firstAccessSuccessfull": "Senha cadastrada com succeso. Clique para voltar a tela de login",
   "termsConditions": {
     "header": "Para utilizar a plataforma Jungle é necessário que você aceite os Termos de Conscentimento",
     "cb_terms0": "Estou ciente",

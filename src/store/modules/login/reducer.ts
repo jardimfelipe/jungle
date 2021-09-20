@@ -14,7 +14,8 @@ const INITIAL_STATE: LoginState = {
   error: {
     status: false,
     message: ''
-  }
+  },
+  firstAccessFeedback: ''
 };
 
 export default function Reducer(
@@ -38,6 +39,15 @@ export default function Reducer(
 
     case LoginTypeKeys.LOGOUT:
       return { ...state, currentUser: { name: '', email: '', role: '', _id: '', company: '' }, isLoggedIn: false }
+
+    case LoginTypeKeys.FIRST_ACCESS_REQUEST:
+      return { ...state, isLoggedIn: true }
+
+    case LoginTypeKeys.FIRST_ACCESS_SUCCESS:
+      return { ...state, isLoggedIn: false, firstAccessFeedback: 'success' }
+
+    case LoginTypeKeys.FIRST_ACCESS_FAILURE:
+      return { ...state, isLoggedIn: false, firstAccessFeedback: 'error' }
 
     default:
       return state;

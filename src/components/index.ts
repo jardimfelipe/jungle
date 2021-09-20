@@ -58,6 +58,7 @@ export { default as Workers } from './pages/Workers/Workers.page'
 export { default as Questions } from './pages/Questions/Questions.page'
 export { default as CreateQuestionary } from './pages/Questionaries/CreateQuestionary.page'
 export { default as EditQuestionary } from './pages/Questionaries/EditQuestionary.page'
+export { default as FirstAccess } from './pages/FirstAccess/first-access.page'
 
 export { default as BasicTemplate } from './templates/Basic/Basic.template'
 export { default as WorkerTemplate } from './templates/Worker/Worker.template'

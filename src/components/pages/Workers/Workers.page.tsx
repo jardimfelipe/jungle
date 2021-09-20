@@ -7,14 +7,14 @@ import {
   IconButton,
   Table,
   Typography,
-  Avatar,
+  // Avatar,
   Tag,
   ColumnButton,
 } from '../..';
 import { BiSearch } from 'react-icons/bi';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import PromotionalCard from '../../molecules/PromotionalCard/PromotionalCard';
-import Profile from '../../../assets/profile.jpg';
+// import Profile from '../../../assets/profile.jpg';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
@@ -40,7 +40,7 @@ const Companies: React.FC = () => {
       key: 'name',
       render: (value) => (
         <Box params={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <Avatar image={Profile} />
+          {/* <Avatar image={Profile} /> */}
           {value}
         </Box>
       ),
