@@ -47,15 +47,15 @@ const Companies: React.FC = () => {
     },
     {
       title: t('table.headers.sector'),
-      dataIndex: 'sector',
-      key: 'sector',
-      render: (value) => value || 'Financeiro',
+      dataIndex: 'department',
+      key: 'department',
+      render: (value) => value || '---',
     },
     {
       title: t('table.headers.function'),
-      dataIndex: 'function',
-      key: 'function',
-      render: (value) => value || 'Contador',
+      dataIndex: 'office',
+      key: 'office',
+      render: (value) => value || '---',
     },
     {
       title: t('table.headers.email'),

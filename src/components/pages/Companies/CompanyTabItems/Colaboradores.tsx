@@ -16,13 +16,13 @@ const Colaboradores: React.FC<TabItemsProps> = ({ company, isLoading }) => {
     },
     {
       title: 'Setor da empresa',
-      dataIndex: 'sector',
-      key: 'sector',
+      dataIndex: 'department',
+      key: 'department',
     },
     {
       title: 'Cargo / Função',
-      dataIndex: 'job',
-      key: 'job',
+      dataIndex: 'office',
+      key: 'office',
     },
     {
       title: 'Data de admissão',

@@ -118,7 +118,7 @@ const Table: React.FC<TableProps> = ({
                                   item,
                                   rowIndex
                                 )
-                              : item[currentItem.key]}
+                              : item[currentItem.key] || '---'}
                           </StyledTableColumnBody>
                         )
                       );

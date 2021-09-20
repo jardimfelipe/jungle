@@ -41,6 +41,8 @@ export type User = {
   sons: string
   __v: string
   _id: string
+  department: string
+  office: string
 }
 
 export type UsersState = {
