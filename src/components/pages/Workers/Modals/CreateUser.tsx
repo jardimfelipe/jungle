@@ -1,11 +1,14 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Box, Modal, Typography, FileUploader } from '../../..';
 import { ModalButton } from '../../../pages/Dashboard/Dashboard.styled';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { Oval } from 'react-loading-icons';
 
-import { createUsersRequest } from '../../../../store/modules/users/actions';
+import {
+  createUsersRequest,
+  getUsersRequest,
+} from '../../../../store/modules/users/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
 
@@ -26,6 +29,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const { userFileProgress, isFileLoading, error, fileSuccess } = useSelector(
     (state: RootState) => state.users
   );
+  const { currentUser } = useSelector(({ login }: RootState) => login);
   const [currentFile, setCurrentFile] = useState<FormData | undefined>(
     undefined
   );
@@ -95,6 +99,11 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     const text = fileSuccess ? 'Fechar' : 'Enviar planilha';
     return isFileLoading ? <Oval height="28" /> : text;
   };
+
+  useEffect(() => {
+    fileSuccess &&
+      dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
+  }, [fileSuccess, dispatch, currentUser]);
 
   return (
     <Modal width={550} height={500} isOpen={isModalOpen} onClose={onClose}>
