@@ -13,7 +13,7 @@ import { SocialAspectsCard, CardHeader, CardBody } from './MyResults.styled';
 import { Col, Row } from 'react-flexbox-grid';
 import { Icons } from '../../';
 import Skeleton from 'react-loading-skeleton';
-import ResultsCards from './Cards/ResultsCards';
+// import ResultsCards from './Cards/ResultsCards';
 import {
   CardCharts,
   CardIcon,
@@ -49,7 +49,7 @@ const MyResults: React.FC = () => {
   const { t } = useTranslation();
 
   const isEmpty = () =>
-    results.statistics.every((statistic) => statistic.value === 0) &&
+    results.statistics.every((statistic) => statistic.value === null) &&
     !isLoading;
 
   const getProtectionLevelItems = () => {
@@ -57,8 +57,6 @@ const MyResults: React.FC = () => {
   };
 
   const getBarColor = (result: Statistics, level: any) => {
-    console.log(result);
-    console.log(level);
     if (!result.result) return rgba('#011F3B', 0.1);
     const string = result.result.split(' ')[1];
     if (!string) return rgba('#011F3B', 0.5);
@@ -106,7 +104,7 @@ const MyResults: React.FC = () => {
         <EmptyResults />
       ) : (
         <>
-          <ResultsCards isLoading={isLoading} analysis={results.analysis} />
+          {/* <ResultsCards isLoading={isLoading} analysis={results.analysis} />s */}
 
           <Title level={3}>{t('pages.title.protecionLevels')}</Title>
           <FlexContainer>

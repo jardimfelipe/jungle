@@ -36,7 +36,7 @@ import EmptyResults from '../MyResults/EmptyResults';
 import { useTranslation } from 'react-i18next';
 import { rgba } from 'polished';
 import { Statistics } from '../../../store/modules/results/types';
-import ResultsCards from '../MyResults/Cards/ResultsCards';
+// import ResultsCards from '../MyResults/Cards/ResultsCards';
 
 const { Title, Text } = Typography;
 const { Brain } = Icons;
@@ -104,7 +104,7 @@ const TeamResults: React.FC = () => {
                 <Text paragraph>{results.analysis.expert_analysis}</Text>
               </Card>
             </StyledCol> */}
-          <ResultsCards isLoading={isLoading} analysis={results.analysis} />
+          {/* <ResultsCards isLoading={isLoading} analysis={results.analysis} /> */}
 
           {/* <StyledCol xs={12} md={6}>
               <Card>
