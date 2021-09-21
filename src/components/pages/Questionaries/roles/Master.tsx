@@ -92,12 +92,6 @@ const Master: React.FC = () => {
       ),
     },
     {
-      title: 'Criado em',
-      dataIndex: 'replied',
-      key: 'replied',
-      render: () => <Text>01/06/2021</Text>,
-    },
-    {
       title: 'Status',
       dataIndex: 'active',
       key: 'active',
