@@ -2,6 +2,7 @@ import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
 import { RequestError, RequestFeedback, RequestParams } from "../exportTypes";
 import { Questionary } from "../questionaries/types";
+import { User } from "../users/types";
 
 export enum CompaniesTypeKeys {
   GET_COMPANIES_REQUEST = "@companies/GET_COMPANIES_REQUEST",
@@ -28,18 +29,9 @@ export type CompanyItem = {
   createdAt: Date
 }
 
-export type Worker = {
-  worker: string
-  sector: string
-  job: string
-  admission: string
-  answeredQuestionaries: string
-  id: number
-}
-
 export type CompanyModel = {
   questionaries: Questionary[];
-  workers: Worker[];
+  workers: User[];
 }
 
 export type CompaniesState = {

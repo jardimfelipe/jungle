@@ -90,7 +90,7 @@ const TeamResults: React.FC = () => {
           flexWrap: 'wrap',
         }}
       >
-        <Title level={3}>{t('pages.title.understandingTeam')}</Title>
+        {/* <Title level={3}>{t('pages.title.understandingTeam')}</Title> */}
       </Box>
       {isEmpty() && !isLoading ? (
         <EmptyResults />

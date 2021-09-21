@@ -99,7 +99,7 @@ const MyResults: React.FC = () => {
         text={t('greetings.myResults.text')}
       />
 
-      <Title level={3}>{t('pages.title.myResults')}</Title>
+      {/* <Title level={3}>{t('pages.title.myResults')}</Title> */}
       {isEmpty() ? (
         <EmptyResults />
       ) : (

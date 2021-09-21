@@ -1,5 +1,5 @@
 import { action } from "typesafe-actions";
-import { UsersTypeKeys, User, GetUserParams } from "./types";
+import { UsersTypeKeys, User, GetUserParams, DeleteUserParams } from "./types";
 
 export function getUsersRequest(params?: GetUserParams) {
   return action(UsersTypeKeys.GET_USERS_REQUEST, params);
@@ -35,4 +35,16 @@ export function createUsersProgress(params: number) {
 
 export function resetUsersErrors() {
   return action(UsersTypeKeys.RESET_USERS_ERRORS)
+}
+
+export function deleteUsersRequest(params: DeleteUserParams) {
+  return action(UsersTypeKeys.DELETE_USERS_REQUEST, params)
+}
+
+export function deleteUsersSuccess() {
+  return action(UsersTypeKeys.DELETE_USERS_SUCCESS)
+}
+
+export function deleteUsersFailure(params: string) {
+  return action(UsersTypeKeys.DELETE_USERS_FAILURE, params)
 }

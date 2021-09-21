@@ -16,6 +16,10 @@ export enum UsersTypeKeys {
   CREATE_USERS_FAILURE = "@user/CREATE_USERS_FAILURE",
   CREATE_USERS_PROGRESS = "@user/CREATE_USERS_PROGRESS",
 
+  DELETE_USERS_REQUEST = "@user/DELETE_USERS_REQUEST",
+  DELETE_USERS_SUCCESS = "@user/DELETE_USERS_SUCCESS",
+  DELETE_USERS_FAILURE = "@user/DELETE_USERS_FAILURE",
+
   RESET_USERS_ERRORS = "@user/RESET_USERS_ERRORS"
 }
 
@@ -43,6 +47,7 @@ export type User = {
   _id: string
   department: string
   office: string
+  active: boolean
 }
 
 export type UsersState = {
@@ -60,4 +65,9 @@ export type GetUserParams = {
   headers: {
     company: string
   }
+}
+
+export type DeleteUserParams = {
+  user: User;
+  company?: string
 }

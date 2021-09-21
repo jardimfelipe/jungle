@@ -5,6 +5,7 @@ import api from "../../../services/api";
 import * as actions from "./actions";
 import { createUploadFileChannel } from "./channels/createFileUploadChannel";
 import { User, UsersTypeKeys } from "./types";
+import { getCompanyRequest } from "../companies/actions";
 
 const hackyCall: any = Effects.call;
 
@@ -50,4 +51,21 @@ function* createUsers({ payload }: ActionType<typeof actions.createUsersRequest>
   }
 }
 
-export default all([takeLatest(UsersTypeKeys.GET_USERS_REQUEST, getUsers), takeLatest(UsersTypeKeys.GET_GESTORES_REQUEST, getGestores), takeLatest(UsersTypeKeys.CREATE_USERS_REQUEST, createUsers)]);
+function* deleteUsers({ payload }: ActionType<typeof actions.deleteUsersRequest>) {
+  try {
+    const { user, company } = payload
+    yield call(api, `/users/${user._id}`, { method: "PUT", data: { ...user, active: false } });
+    yield put(actions.deleteUsersSuccess());
+    if (company) {
+      yield put(getCompanyRequest({ headers: { company } }))
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(actions.deleteUsersFailure('Ocorreu um erro, tente novamente mais tarde'));
+      console.log(error)
+    }
+
+  }
+}
+
+export default all([takeLatest(UsersTypeKeys.GET_USERS_REQUEST, getUsers), takeLatest(UsersTypeKeys.GET_GESTORES_REQUEST, getGestores), takeLatest(UsersTypeKeys.CREATE_USERS_REQUEST, createUsers), takeLatest(UsersTypeKeys.DELETE_USERS_REQUEST, deleteUsers)]);

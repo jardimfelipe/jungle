@@ -88,12 +88,13 @@ const Questionaries: React.FC = () => {
     if (currentTab === 'em andamento')
       return questionaries.filter(
         (questionary) =>
-          !questionary.answered && isFilledQuestionary(questionary._id)
+          !questionary.answered &&
+          isFilledQuestionary(questionary._id) &&
+          !isPast(new Date(questionary.tracking_end)) &&
+          !isFuture(new Date(questionary.tracking_start))
       );
     if (currentTab === 'finalizados')
-      return questionaries.filter(
-        (q) => q.answered || isPast(new Date(q.tracking_end))
-      );
+      return questionaries.filter((q) => q.answered);
     return questionaries;
   }, [currentTab, isFilledQuestionary, questionaries]);
 

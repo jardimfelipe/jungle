@@ -2,13 +2,14 @@ import React from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
 import { ColumnButton, Table, Tag, Typography } from '../../..';
-import { BiDotsVertical } from 'react-icons/bi';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import { Field } from '../../../molecules/Table/table.types';
 // import { TagColors } from '../../../atoms/Tag/Tag.types';
 
 import { Question } from '../../../../store/modules/questionaries/types';
 import { TabItemsProps } from './CompanyTabItems.types';
 import { DimensionItem } from '../../../../store';
+import { useTheme } from 'styled-components';
 
 const { Text } = Typography;
 
@@ -19,6 +20,7 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
   //   if (value === 'em breve') return 'warning';
   //   return 'warning';
   // };
+  const theme = useTheme();
 
   const tableFields: Field[] = [
     {
@@ -72,7 +74,7 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
       key: 'id',
       render: (value: string) => (
         <ColumnButton onClick={() => console.log(value)}>
-          <BiDotsVertical size="24" />
+          <BsThreeDotsVertical color={theme.colors.black} size="24" />
         </ColumnButton>
       ),
     },

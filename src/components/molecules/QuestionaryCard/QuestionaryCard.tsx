@@ -79,7 +79,8 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
   };
 
   const handleClick = () => {
-    if (isQuestionaryAvailableOnFuture()) return;
+    if (isQuestionaryAvailableOnFuture() || isQuestionaryAvailableOnPast())
+      return;
     onClick(questionary);
   };
 
@@ -100,7 +101,8 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
   return (
     <Questionary
       isFuture={
-        isQuestionaryAvailableOnFuture() || isQuestionaryAvailableOnPast()
+        isQuestionaryAvailableOnFuture() ||
+        (isQuestionaryAvailableOnPast() && !questionary.answered)
       }
       className="questionary-card"
       image=""

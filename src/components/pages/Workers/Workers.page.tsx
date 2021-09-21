@@ -191,7 +191,11 @@ const Companies: React.FC = () => {
 
       <Row>
         <Col xs>
-          <Table items={users} fields={tableFields} isLoading={isLoading} />
+          <Table
+            items={users.filter((u) => u.active)}
+            fields={tableFields}
+            isLoading={isLoading}
+          />
         </Col>
       </Row>
 

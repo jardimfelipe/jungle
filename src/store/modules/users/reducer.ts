@@ -45,6 +45,15 @@ export default function Reducer(
 
     case UsersTypeKeys.RESET_USERS_ERRORS:
       return { ...state, error: { ...INITIAL_STATE.error }, userFileProgress: 0, fileSuccess: false };
+
+    case UsersTypeKeys.DELETE_USERS_REQUEST:
+      return { ...state, isLoading: true };
+
+    case UsersTypeKeys.DELETE_USERS_SUCCESS:
+      return { ...state, isLoading: false, userFileProgress: 0, fileSuccess: true };
+
+    case UsersTypeKeys.DELETE_USERS_FAILURE:
+      return { ...state, isLoading: false, error: { status: true, message: action.payload } };
     default:
       return state;
   }
