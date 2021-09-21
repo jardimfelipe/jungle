@@ -117,11 +117,11 @@ const MyResults: React.FC = () => {
                   <Skeleton height={250} />
                 </Box>
               </>
-            ) : getProtectionLevelItems().every((r) => r.value === 0) ? (
+            ) : getProtectionLevelItems().every((r) => r.value === null) ? (
               <EmptyResults />
             ) : (
               getProtectionLevelItems().map((result, index) =>
-                index <= 4 && !!result.value ? (
+                index <= 4 && result.value !== null ? (
                   <Card key={`${result._id}-card-${index}`}>
                     <Box
                       params={{
@@ -254,7 +254,7 @@ const MyResults: React.FC = () => {
                         },
                         index
                       ) =>
-                        !!value && index > 4 ? (
+                        value !== null && index < 5 ? (
                           <SocialAspectsCard key={`dimension-${dimension}`}>
                             <CardHeader>
                               <Text textDecoration="strong" variant="primary">
@@ -266,7 +266,7 @@ const MyResults: React.FC = () => {
                               <ResultLine
                                 results={{
                                   analise: description,
-                                  total: value * 100,
+                                  total: (value || 0) * 100,
                                 }}
                                 minText={minText}
                                 maxText={maxText}
