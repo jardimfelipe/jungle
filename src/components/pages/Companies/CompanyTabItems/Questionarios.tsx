@@ -36,7 +36,7 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
       title: 'No de questões',
       dataIndex: 'question',
       key: 'question',
-      render: (value: Question[]) => <Text>{value.length}</Text>,
+      render: (value: Question[]) => <Text>{!!value ? value.length : 0}</Text>,
     },
     {
       title: 'Criado em',

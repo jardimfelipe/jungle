@@ -88,7 +88,7 @@ const Master: React.FC = () => {
       dataIndex: 'question',
       key: 'question',
       render: (value: Questionary['question']) => (
-        <Text>{value.length} perguntas</Text>
+        <Text>{!!value ? value.length : 0} perguntas</Text>
       ),
     },
     {

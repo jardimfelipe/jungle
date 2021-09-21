@@ -50,7 +50,9 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
         questionaryId === questionary._id
     );
     if (filledQuestionary) {
-      const totalQuestions = questionary.question.length;
+      const totalQuestions = !!questionary.question
+        ? questionary.question.length
+        : 0;
       const totalAnswers = filledQuestionary.answers.length;
       return (100 * totalAnswers) / totalQuestions;
     } else {
@@ -114,7 +116,9 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
       <Box params={{ display: 'flex', flexDirection: 'column' }}>
         <Title level={3}>{questionary.title}</Title>
         <Text color="#FFFFFF">
-          <small>{`${questionary.question.length} ${t('questions')}`}</small>
+          <small>{`${
+            !!questionary.question ? questionary.question.length : 0
+          } ${t('questions')}`}</small>
         </Text>
       </Box>
       <Box params={{ display: 'flex', justifyContent: 'space-between' }}>

@@ -70,7 +70,7 @@ const Questionaries: React.FC = () => {
       key: 'question',
       render: (value: Questionary['question']) => (
         <Text>
-          {value.length} {t('questions')}
+          {!!value ? value.length : 0} {t('questions')}
         </Text>
       ),
     },
