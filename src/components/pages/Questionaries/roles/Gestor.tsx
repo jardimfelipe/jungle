@@ -86,9 +86,15 @@ const Questionaries: React.FC = () => {
     },
     {
       title: t('table.headers.track'),
-      dataIndex: '_id',
-      key: '_id',
-      render: () => <Text>16/06 a 20/07</Text>,
+      dataIndex: 'tracking_start',
+      key: 'tracking_start',
+      render: (value: string, object: any) => (
+        <Text>
+          {`${new Date(value).toLocaleDateString('pt-br')} - ${new Date(
+            object.tracking_end
+          ).toLocaleDateString('pt-br')}`}
+        </Text>
+      ),
     },
   ];
   return (

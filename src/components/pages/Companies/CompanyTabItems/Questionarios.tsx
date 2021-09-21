@@ -46,9 +46,15 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
     },
     {
       title: 'Rastreio',
-      dataIndex: 'track',
-      key: 'track',
-      render: () => <Text>08/2021</Text>,
+      dataIndex: 'tracking_start',
+      key: 'tracking_start',
+      render: (value: string, object: any) => (
+        <Text>
+          {`${new Date(value).toLocaleDateString('pt-br')} - ${new Date(
+            object.tracking_end
+          ).toLocaleDateString('pt-br')}`}
+        </Text>
+      ),
     },
     {
       title: 'Status',
