@@ -45,7 +45,7 @@ const Gestor: React.FC = () => {
 
   const getTotalRespondents = () => {
     return questionaries.reduce((acc, curr) => {
-      return acc + curr.replied;
+      return acc + (curr.replied || 0);
     }, 0);
   };
 
