@@ -38,7 +38,6 @@ function* getResults({ payload = 'user' }: ActionType<typeof actions.getResultsR
       const translatedStatistics: ReturnType<typeof getTranslatedStatistics> = yield call(getTranslatedStatistics, statistics)
       yield put(actions.getResultsSuccess({ statistics: translatedStatistics as unknown as Statistics[], analysis: { adequate_protection: translate_adequate_protection as unknown as string[], minor_protection: translate_minor_protection as unknown as string[], ...rest } }));
     } else {
-      console.log('pter')
       yield put(actions.getResultsSuccess({ statistics, analysis: { adequate_protection, minor_protection, ...rest } }));
     }
   } catch (error) {

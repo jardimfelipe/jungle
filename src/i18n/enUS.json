@@ -57,7 +57,8 @@
     "soon": "Soon",
     "downloadSpreadsheet": "Download spreadsheet",
     "registerUsers": "Register users",
-    "backToLogin": "Back to login"
+    "backToLogin": "Back to login",
+    "send": "Send"
   },
   "emptyStates": {
     "questionaries": {
@@ -105,8 +106,10 @@
   "availableUntil": "Available until {{-date}}",
   "availableIn": "Available in",
   "questions": "questions",
+  "recoveryPassword": "To recover your password, enter your email",
   "checkAnswers": "Check Answers",
   "resumeQuiz": "Resume quiz",
+  "recoverySent": "In a moment you will receive an email with instructions to recover your password.",
   "startQuestionarie": "Start quiz",
   "notRatedYet": "Not yet rated",
   "weAreHereToHelp": "We are here to help",

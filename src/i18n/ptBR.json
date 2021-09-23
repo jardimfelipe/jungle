@@ -61,7 +61,8 @@
     "soon": "Em breve",
     "downloadSpreadsheet": "Baixar planilha",
     "registerUsers": "Cadastrar usuários",
-    "backToLogin": "Voltar para o login"
+    "backToLogin": "Voltar para o login",
+    "send": "Enviar"
   },
   "emptyStates": {
     "questionaries": {
@@ -105,6 +106,8 @@
     "moderate": "Moderada",
     "thin": "Leve"
   },
+  "recoveryPassword": "Para recuperar sua senha, informe o seu email",
+  "recoverySent": "Em instantes você receberá um email com instruções para recuperar sua senha.",
   "availableUntil": "Disponível até {{- date}}",
   "availableIn": "Disponível em",
   "questions": "questões",

@@ -57,7 +57,8 @@
     "soon": "Pronto",
     "downloadSpreadsheet": "Descargar documento",
     "registerUsers": "Registrar usuarios",
-    "backToLogin": "Volver a la pantalla de inicio de sesión"
+    "backToLogin": "Volver a la pantalla de inicio de sesión",
+    "send": "Enviar"
   },
   "emptyStates": {
     "questionaries": {
@@ -106,6 +107,8 @@
   "questions": "preguntas",
   "checkAnswers": "Comprobar respuestas",
   "resumeQuiz": "Reanudar cuestionario",
+  "recoveryPassword": "Para recuperar su contraseña, ingrese su correo electrónico",
+  "recoverySent": "En un momento recibirá un correo electrónico con instrucciones para recuperar su contraseña.",
   "startQuestionarie": "Iniciar cuestionario",
   "notRatedYet": "Aún no calificado",
   "weAreHereToHelp": "Estamos aquí para ayudar",

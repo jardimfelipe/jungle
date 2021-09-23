@@ -34,6 +34,18 @@ export function firstAccessSuccess() {
   return action(LoginTypeKeys.FIRST_ACCESS_SUCCESS)
 }
 
+export function forgotPasswordRequest(email: string) {
+  return action(LoginTypeKeys.FORGOT_PASSWORD_REQUEST, email)
+}
+
+export function forgotPasswordFailure() {
+  return action(LoginTypeKeys.FORGOT_PASSWORD_FAILURE)
+}
+
+export function forgotPasswordSuccess() {
+  return action(LoginTypeKeys.FORGOT_PASSWORD_SUCCESS)
+}
+
 export function resetStore() {
   return action(LoginTypeKeys.RESET_STORE)
 }

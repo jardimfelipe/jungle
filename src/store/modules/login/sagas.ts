@@ -27,7 +27,7 @@ function* getUserInfo() {
   yield put(actions.loginSuccess(userInfo));
 }
 
-function* firstAccess({ payload }: ActionType<typeof actions.loginRequest>) {
+function* firstAccess({ payload }: ActionType<typeof actions.firstAccessRequest>) {
   try {
     yield call(api, "/first-access", { method: "POST", data: { ...payload } })
     yield put(actions.firstAccessSuccess())
@@ -38,4 +38,15 @@ function* firstAccess({ payload }: ActionType<typeof actions.loginRequest>) {
   }
 }
 
-export default all([takeLatest(LoginTypeKeys.LOGIN_REQUEST, login), takeLatest(LoginTypeKeys.GET_USER_INFO, getUserInfo), takeLatest(LoginTypeKeys.FIRST_ACCESS_REQUEST, firstAccess)]);
+function* forgotPassword({ payload }: ActionType<typeof actions.forgotPasswordRequest>) {
+  try {
+    yield call(api, "/forgot-password", { method: "POST", data: { email: payload } })
+    yield put(actions.forgotPasswordSuccess())
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(actions.loginFailure({ status: true, message: 'Algo deu errado, verifique as informações e tente novamente' }));
+    }
+  }
+}
+
+export default all([takeLatest(LoginTypeKeys.LOGIN_REQUEST, login), takeLatest(LoginTypeKeys.GET_USER_INFO, getUserInfo), takeLatest(LoginTypeKeys.FIRST_ACCESS_REQUEST, firstAccess), takeLatest(LoginTypeKeys.FORGOT_PASSWORD_REQUEST, forgotPassword)]);

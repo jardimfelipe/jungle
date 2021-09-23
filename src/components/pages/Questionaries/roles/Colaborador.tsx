@@ -48,7 +48,10 @@ const Questionaries: React.FC = () => {
   >({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useMobileWidth();
-
+  const { currentUser } = useSelector(({ login }: RootState) => login);
+  const [filteredQuestionaries, setFilteredQuestionaries] = useState<
+    QuestionaryType[]
+  >([]);
   const handleTabClick = (tab: TabComponents) => {
     setCurrentTab(tab);
   };
@@ -56,10 +59,11 @@ const Questionaries: React.FC = () => {
   const isFilledQuestionary = useCallback(
     (id: string) => {
       return !!startedQuestionaries.find(
-        ({ questionaryId }: StartedQuestionary) => questionaryId === id
+        ({ questionaryId, userId }: StartedQuestionary) =>
+          questionaryId === id && currentUser._id === userId
       );
     },
-    [startedQuestionaries]
+    [startedQuestionaries, currentUser]
   );
 
   const handleQuestionaryClick = (questionary: QuestionaryType) => {
@@ -75,29 +79,6 @@ const Questionaries: React.FC = () => {
     });
   };
 
-  const filteredQuestionnaires = useCallback(() => {
-    if (currentTab === 'disponiveis')
-      return questionaries.filter(
-        (questionary) =>
-          !questionary.answered &&
-          !isFilledQuestionary(questionary._id) &&
-          !isPast(new Date(questionary.tracking_end)) &&
-          !isFuture(new Date(questionary.tracking_start))
-      );
-
-    if (currentTab === 'em andamento')
-      return questionaries.filter(
-        (questionary) =>
-          !questionary.answered &&
-          isFilledQuestionary(questionary._id) &&
-          !isPast(new Date(questionary.tracking_end)) &&
-          !isFuture(new Date(questionary.tracking_start))
-      );
-    if (currentTab === 'finalizados')
-      return questionaries.filter((q) => q.answered);
-    return questionaries;
-  }, [currentTab, isFilledQuestionary, questionaries]);
-
   useEffect(() => {
     dispatch(getQuestionariesRequest({ userRole: 'user' }));
   }, [dispatch]);
@@ -105,6 +86,39 @@ const Questionaries: React.FC = () => {
   useEffect(() => {
     feedback.status === 'error' && dispatch(setSnackbarOpen(feedback.message));
   }, [feedback, dispatch]);
+
+  useEffect(() => {
+    let q;
+    switch (currentTab) {
+      case 'disponiveis':
+        q = questionaries.filter(
+          (questionary) =>
+            !questionary.answered &&
+            !isFilledQuestionary(questionary._id) &&
+            !isPast(new Date(questionary.tracking_end)) &&
+            !isFuture(new Date(questionary.tracking_start))
+        );
+        setFilteredQuestionaries(q);
+        break;
+
+      case 'em andamento':
+        q = questionaries.filter(
+          (questionary) =>
+            !questionary.answered &&
+            isFilledQuestionary(questionary._id) &&
+            !isPast(new Date(questionary.tracking_end)) &&
+            !isFuture(new Date(questionary.tracking_start))
+        );
+        break;
+      case 'finalizados':
+        q = questionaries.filter((q) => q.answered);
+        break;
+      default:
+        q = questionaries;
+        break;
+    }
+    setFilteredQuestionaries(q);
+  }, [currentTab, isFilledQuestionary, questionaries]);
 
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -164,7 +178,7 @@ const Questionaries: React.FC = () => {
             ))}
           </>
         ) : questionaries.length ? (
-          filteredQuestionnaires().map((questionary) => (
+          filteredQuestionaries.map((questionary) => (
             <QuestionaryCard
               onClick={handleQuestionaryClick}
               questionary={questionary}

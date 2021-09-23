@@ -94,7 +94,11 @@ const QuestionaryApplication: React.FC = () => {
   const handleExitClick = () => {
     if (!answers.length) return history.goBack();
     saveState('worker.startedQuestionaries', [
-      { questionaryId: questionary._id, answers: answers },
+      {
+        questionaryId: questionary._id,
+        answers: answers,
+        userId: currentUser._id,
+      },
     ]);
     history.goBack();
   };

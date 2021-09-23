@@ -35,8 +35,8 @@ import { chartDataPopulation } from './populationChartDatas';
 import EmptyResults from '../MyResults/EmptyResults';
 import { useTranslation } from 'react-i18next';
 import { rgba } from 'polished';
-import { Statistics } from '../../../store/modules/results/types';
-// import ResultsCards from '../MyResults/Cards/ResultsCards';
+import { Nivel, Statistics } from '../../../store/modules/results/types';
+import ResultsCards from '../MyResults/Cards/ResultsCards';
 
 const { Title, Text } = Typography;
 const { Brain } = Icons;
@@ -49,6 +49,25 @@ const TeamResults: React.FC = () => {
     (state: RootState) => state.results
   );
 
+  const protectionLevelData = [
+    {
+      level: t('indexes.hight'),
+      color: '#F548E4',
+    },
+    {
+      level: t('indexes.good'),
+      color: '#4ED9A7',
+    },
+    {
+      level: t('indexes.moderate'),
+      color: '#0CC3E7',
+    },
+    {
+      level: t('indexes.thin'),
+      color: '#FFAE33',
+    },
+  ];
+
   const getLevelLabel = (label: string) => {
     const labelArray = label.split(' ');
     if (labelArray.length > 1) return labelArray[1];
@@ -60,13 +79,21 @@ const TeamResults: React.FC = () => {
   };
 
   const getBarColor = (result: Statistics, level: any) => {
-    console.log(result);
     if (!result.result) return rgba('#011F3B', 0.1);
-    const string = result.result.split(' ')[1];
-    if (!string) return rgba('#011F3B', 0.5);
-    return result.result.split(' ')[1] === level.level
-      ? level.color
+    return result.result === level.label
+      ? protectionLevelData.find(
+          (data) => data.level === level.label.split(' ')[1]
+        )?.color || rgba('#011F3B', 0.5)
       : rgba('#011F3B', 0.5);
+  };
+
+  const getProgressBarCompleted = (nivel: Nivel, index: number) => {
+    const totalUsers = results.statistics[index].niveis.reduce(
+      (acc, curr) => acc + curr.qtd,
+      0
+    );
+    const completed = (nivel.qtd * 100) / totalUsers;
+    return completed;
   };
 
   const isEmpty = () =>
@@ -104,7 +131,7 @@ const TeamResults: React.FC = () => {
                 <Text paragraph>{results.analysis.expert_analysis}</Text>
               </Card>
             </StyledCol> */}
-          {/* <ResultsCards isLoading={isLoading} analysis={results.analysis} /> */}
+          <ResultsCards isLoading={isLoading} analysis={results.analysis} />
 
           {/* <StyledCol xs={12} md={6}>
               <Card>
@@ -268,27 +295,36 @@ const TeamResults: React.FC = () => {
 
                       <ChartsBarContainer>
                         <LevelsContainer>
-                          {statistics.niveis?.map((level) => (
+                          {statistics.niveis?.map((nivel) => (
                             <ProgressBarContainer
-                              key={`protection-leve-${level}-${Math.random()}`}
+                              key={`protection-leve-${nivel}-${Math.random()}`}
                             >
-                              <Text>{getLevelLabel(level.label)}</Text>
+                              <Text>{getLevelLabel(nivel.label)}</Text>
                               <Box
-                                params={{ display: 'block', width: '140px' }}
+                                params={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '10px',
+                                }}
                               >
-                                <ProgressBar
-                                  bgColor={getBarColor(statistics, level)}
-                                  height="10px"
-                                  completed={
-                                    100 -
-                                    (statistics.team_protection || 0) * 100
-                                  }
-                                  baseBgColor={rgba(
-                                    getBarColor(statistics, level),
-                                    0.1
-                                  )}
-                                  isLabelVisible={false}
-                                />
+                                <Box
+                                  params={{ display: 'block', width: '140px' }}
+                                >
+                                  <ProgressBar
+                                    bgColor={getBarColor(statistics, nivel)}
+                                    height="10px"
+                                    completed={getProgressBarCompleted(
+                                      nivel,
+                                      index
+                                    )}
+                                    baseBgColor={rgba(
+                                      getBarColor(statistics, nivel),
+                                      0.1
+                                    )}
+                                    isLabelVisible={false}
+                                  />
+                                </Box>
+                                <Text>{nivel.qtd}</Text>
                               </Box>
                             </ProgressBarContainer>
                           ))}
@@ -349,8 +385,7 @@ const TeamResults: React.FC = () => {
 
           {/* Níveis de proteção */}
 
-          <Title level={3}>Aspectos biopsicossociais da equipe</Title>
-
+          <Title level={3}>{t('pages.title.biopsychosocialAspects')}</Title>
           <FlexContainer>
             {isLoading ? (
               <>
@@ -363,7 +398,7 @@ const TeamResults: React.FC = () => {
               </>
             ) : (
               results.statistics.map((statistic, index) =>
-                !!statistic.team_protection && index > 4 ? (
+                !!statistic.team_protection && index < 5 ? (
                   <SocialAspectsCard key={`social-${index}`}>
                     <CardHeader>
                       <Text textDecoration="strong" variant="primary">

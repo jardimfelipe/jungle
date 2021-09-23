@@ -17,6 +17,11 @@ const inlineStyles = css`
 
 const prefixStyles = css`
   padding-left: 45px;
+  &:focus {
+    svg {
+      color: ${(props) => props.theme.colors.black};
+    }
+  }
 `;
 
 const suffixStyles = css`

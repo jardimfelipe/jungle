@@ -1,30 +1,5 @@
 import styled from 'styled-components';
 
-import { Row } from 'react-flexbox-grid';
-
-import login from '../../../assets/login.png';
-
-export const LoginImage = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url(${login});
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  @media (max-width: 768px) {
-    height: 250px;
-  }
-`;
-
-export const LoginRow = styled(Row)`
-  height: 100vh;
-  margin: 0;
-  background-color: #ffffff;
-  .login-col {
-    padding: 0;
-  }
-`;
-
 export const LoginContainer = styled.div`
   height: 100vh;
   padding: 0 64px;

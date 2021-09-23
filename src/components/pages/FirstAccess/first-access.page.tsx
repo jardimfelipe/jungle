@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { firstAccessRequest } from '../../../store/modules/login/actions';
 
+import { FirstAccessContainer, FirstAccessForm } from './first-access.styled';
 import {
-  FirstAccessContainer,
-  FirstAccessForm,
-  FirstAccessImage,
-  FirstAccessRow,
-} from './first-access.styled';
-import { Col } from 'react-flexbox-grid';
-import { Box, Button, Typography, Textfield, Modal } from '../..';
+  Box,
+  Button,
+  Typography,
+  Textfield,
+  Modal,
+  LoggedOutTemplate,
+} from '../..';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { FiLock, FiEye, FiEyeOff, FiMail, FiKey } from 'react-icons/fi';
 
@@ -66,88 +67,83 @@ const FirstAccess: React.FC = () => {
     }
   }, [firstAccessFeedback]);
   return (
-    <FirstAccessRow>
-      <Col className="login-col" xs={12} md={7}>
-        <FirstAccessImage></FirstAccessImage>
-      </Col>
-      <Col xs>
-        <FirstAccessContainer>
-          <Box
-            params={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              width: '100%',
-            }}
-          >
-            <Image style={{ width: '150px' }} src={JungleLogo} alt="Jungle" />
-          </Box>
-          <Box params={{ width: '100%', textAlign: 'left' }}>
-            <Title level={2}>{t('itsYourFirstAccess')}</Title>
-            <Text>{t('createYourPassword')}</Text>
-          </Box>
-          <FirstAccessForm
-            onSubmit={formik.handleSubmit}
-            style={{ width: '100%' }}
-          >
-            <Textfield
-              prefix={<FiMail />}
-              type="email"
-              placeholder={t('informYourEmail')}
-              name="email"
-              id="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              label="E-mail"
-              error={!!formik.errors.email ? formik.errors.email : undefined}
-            />
+    <LoggedOutTemplate>
+      <FirstAccessContainer>
+        <Box
+          params={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          <Image style={{ width: '150px' }} src={JungleLogo} alt="Jungle" />
+        </Box>
+        <Box params={{ width: '100%', textAlign: 'left' }}>
+          <Title level={2}>{t('itsYourFirstAccess')}</Title>
+          <Text>{t('createYourPassword')}</Text>
+        </Box>
+        <FirstAccessForm
+          onSubmit={formik.handleSubmit}
+          style={{ width: '100%' }}
+        >
+          <Textfield
+            prefix={<FiMail />}
+            type="email"
+            placeholder={t('informYourEmail')}
+            name="email"
+            id="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            label="E-mail"
+            error={!!formik.errors.email ? formik.errors.email : undefined}
+          />
 
-            <Textfield
-              prefix={<FiLock />}
-              suffix={
-                isPasswordType ? (
-                  <FiEye onClick={handleInputType} />
-                ) : (
-                  <FiEyeOff onClick={handleInputType} />
-                )
-              }
-              type={isPasswordType ? 'password' : 'text'}
-              placeholder={t('informYourPassword')}
-              name="password"
-              id="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              label={t('password')}
-              error={
-                !!formik.errors.password ? formik.errors.password : undefined
-              }
-            />
+          <Textfield
+            prefix={<FiLock />}
+            suffix={
+              isPasswordType ? (
+                <FiEye onClick={handleInputType} />
+              ) : (
+                <FiEyeOff onClick={handleInputType} />
+              )
+            }
+            type={isPasswordType ? 'password' : 'text'}
+            placeholder={t('informYourPassword')}
+            name="password"
+            id="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            label={t('password')}
+            error={
+              !!formik.errors.password ? formik.errors.password : undefined
+            }
+          />
 
-            <Textfield
-              prefix={<FiKey />}
-              type="text"
-              placeholder={t('informYourCode')}
-              name="code"
-              id="code"
-              value={formik.values.code}
-              onChange={formik.handleChange}
-              label={t('code')}
-              error={!!formik.errors.code ? formik.errors.code : undefined}
-            />
+          <Textfield
+            prefix={<FiKey />}
+            type="text"
+            placeholder={t('informYourCode')}
+            name="code"
+            id="code"
+            value={formik.values.code}
+            onChange={formik.handleChange}
+            label={t('code')}
+            error={!!formik.errors.code ? formik.errors.code : undefined}
+          />
 
-            <Button isLoading={isLoading} type="submit" block variant="primary">
-              {t('createPassword')}
-            </Button>
+          <Button isLoading={isLoading} type="submit" block variant="primary">
+            {t('createPassword')}
+          </Button>
 
-            {error.status && (
-              <Box params={{ display: 'flex', justifyContent: 'center' }}>
-                <Text color={theme.colors.p1} textDecoration="strong">
-                  {error.message}
-                </Text>
-              </Box>
-            )}
-          </FirstAccessForm>
-        </FirstAccessContainer>
-      </Col>
+          {error.status && (
+            <Box params={{ display: 'flex', justifyContent: 'center' }}>
+              <Text color={theme.colors.p1} textDecoration="strong">
+                {error.message}
+              </Text>
+            </Box>
+          )}
+        </FirstAccessForm>
+      </FirstAccessContainer>
 
       <Modal isOpen={isModalOpen} hasCloseButton={false}>
         <Box params={{ padding: '80px 35px', textAlign: 'center' }}>
@@ -158,7 +154,7 @@ const FirstAccess: React.FC = () => {
           {t('button.backToLogin')}
         </ModalButton>
       </Modal>
-    </FirstAccessRow>
+    </LoggedOutTemplate>
   );
 };
 

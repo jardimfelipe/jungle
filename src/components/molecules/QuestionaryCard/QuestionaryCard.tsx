@@ -19,11 +19,14 @@ import { useTheme } from 'styled-components';
 import { differenceInDays, isFuture, isPast } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 const { Title, Text } = Typography;
 
 export type StartedQuestionary = {
   questionaryId: string;
+  userId: string;
   answers: UserAnswer[];
 };
 
@@ -33,21 +36,22 @@ const QuestionaryCard: React.FC<QuestionaryCardProps> = ({
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const { currentUser } = useSelector(({ login }: RootState) => login);
   const startedQuestionaries =
     getSavedState('worker.startedQuestionaries') || [];
 
   const isFilledQuestionary = () => {
     return !!startedQuestionaries.find(
-      ({ questionaryId }: StartedQuestionary) =>
-        questionaryId === questionary._id
+      ({ questionaryId, userId }: StartedQuestionary) =>
+        questionaryId === questionary._id && userId === currentUser._id
     );
   };
 
   const getPercentage = () => {
     if (questionary.answered) return 100;
     const filledQuestionary = startedQuestionaries.find(
-      ({ questionaryId }: StartedQuestionary) =>
-        questionaryId === questionary._id
+      ({ questionaryId, userId }: StartedQuestionary) =>
+        questionaryId === questionary._id && userId === currentUser._id
     );
     if (filledQuestionary) {
       const totalQuestions = !!questionary.question

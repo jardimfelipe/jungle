@@ -58,7 +58,7 @@ export const LevelsContainer = styled.div`
   justify-content: center;
   gap: 10px;
   width: 100%;
-  flex: 0 0 45%;
+  flex: 0 0 50%;
   ${media.lessThan('large')`
     flex: 0 0 100%;
   `}
@@ -82,7 +82,7 @@ export const ProgressBarContainer = styled.div`
 export const CardCharts = styled.div<{ align?: 'center' | 'space-between' }>`
   display: flex;
   justify-content: ${({ align = 'space-between' }) => align};
-  flex: 0 0 55%;
+  flex: 0 0 45%;
   flex-wrap: wrap;
   .chart {
     padding: 0 20px;

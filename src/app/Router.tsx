@@ -6,6 +6,7 @@ import {
   QuestionaryApplication,
   BlankTemplate,
   FirstAccess,
+  ForgotPassword,
 } from '../components';
 import Login from '../components/pages/Login/login.page';
 import PrivateRoute from './PrivateRoute';
@@ -30,6 +31,7 @@ const Router: React.FC = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/first-access" component={FirstAccess} />
+        <Route exact path="/forgot-password" component={ForgotPassword} />
         {routes[(currentUser.role as keyof typeof routes) || 'gestor'].map(
           (route) => (
             <PrivateRoute

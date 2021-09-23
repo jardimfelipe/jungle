@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { loginRequest } from '../../../store/modules/login/actions';
 
-import {
-  LoginContainer,
-  LoginForm,
-  LoginImage,
-  LoginRow,
-} from './login.styled';
-import { Col } from 'react-flexbox-grid';
+import { LoginContainer, LoginForm } from './login.styled';
 import {
   Box,
   Button,
@@ -20,6 +14,7 @@ import {
   Label,
   Checkbox,
   LanguageSelect,
+  LoggedOutTemplate,
 } from '../..';
 import { HiOutlineMail } from 'react-icons/hi';
 import { FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
@@ -70,88 +65,81 @@ const Login: React.FC = () => {
   }, [isLoggedIn, history]);
 
   return (
-    <LoginRow>
-      <Col className="login-col" xs={12} md={7}>
-        <LoginImage></LoginImage>
-      </Col>
-      <Col xs>
-        <LoginContainer>
-          <Box
-            params={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              width: '100%',
-            }}
-          >
-            <Image style={{ width: '150px' }} src={JungleLogo} alt="Jungle" />
-          </Box>
-          <Box params={{ width: '100%', textAlign: 'left' }}>
-            <Title level={2}>{t('niceHaveYouHere')}</Title>
-          </Box>
-          <LoginForm onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
-            <Textfield
-              prefix={<HiOutlineMail />}
-              name="email"
-              id="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              placeholder={t('informYourEmail')}
-              label="E-mail"
-              error={!!formik.errors.email ? formik.errors.email : undefined}
-            />
-            <div>
-              <Box
-                params={{ display: 'flex', justifyContent: 'space-between' }}
-              >
-                <Label>{t('password')}</Label>
-                <a href="/">Esqueci minha senha &gt;</a>
-              </Box>
-              <Textfield
-                prefix={<FiLock />}
-                suffix={
-                  isPasswordType ? (
-                    <FiEye onClick={handleInputType} />
-                  ) : (
-                    <FiEyeOff onClick={handleInputType} />
-                  )
-                }
-                type={isPasswordType ? 'password' : 'text'}
-                placeholder={t('informYourPassword')}
-                name="password"
-                id="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                error={
-                  !!formik.errors.password ? formik.errors.password : undefined
-                }
-              />
-            </div>
-
+    <LoggedOutTemplate>
+      <LoginContainer>
+        <Box
+          params={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          <Image style={{ width: '150px' }} src={JungleLogo} alt="Jungle" />
+        </Box>
+        <Box params={{ width: '100%', textAlign: 'left' }}>
+          <Title level={2}>{t('niceHaveYouHere')}</Title>
+        </Box>
+        <LoginForm onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+          <Textfield
+            prefix={<HiOutlineMail />}
+            name="email"
+            id="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            placeholder={t('informYourEmail')}
+            label="E-mail"
+            error={!!formik.errors.email ? formik.errors.email : undefined}
+          />
+          <div>
             <Box params={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Checkbox
-                checked={rememberUser}
-                onChange={handleCheckboxChange}
-                label={t('rememberUser')}
-              />
-              <Box params={{ flex: '0 0 100px' }}>
-                <LanguageSelect />
-              </Box>
+              <Label>{t('password')}</Label>
+              <Link to="/forgot-password">Esqueci minha senha &gt;</Link>
             </Box>
+            <Textfield
+              prefix={<FiLock />}
+              suffix={
+                isPasswordType ? (
+                  <FiEye onClick={handleInputType} />
+                ) : (
+                  <FiEyeOff onClick={handleInputType} />
+                )
+              }
+              type={isPasswordType ? 'password' : 'text'}
+              placeholder={t('informYourPassword')}
+              name="password"
+              id="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={
+                !!formik.errors.password ? formik.errors.password : undefined
+              }
+            />
+          </div>
 
-            <Button isLoading={isLoading} type="submit" block variant="primary">
-              {t('login')}
-            </Button>
-            {error.status && (
-              <Box params={{ display: 'flex', justifyContent: 'center' }}>
-                <Text color={theme.colors.p1} textDecoration="strong">
-                  {error.message}
-                </Text>
-              </Box>
-            )}
-          </LoginForm>
-        </LoginContainer>
-      </Col>
-    </LoginRow>
+          <Box params={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Checkbox
+              checked={rememberUser}
+              onChange={handleCheckboxChange}
+              label={t('rememberUser')}
+            />
+            <Box params={{ flex: '0 0 100px' }}>
+              <LanguageSelect />
+            </Box>
+          </Box>
+
+          <Button isLoading={isLoading} type="submit" block variant="primary">
+            {t('login')}
+          </Button>
+          {error.status && (
+            <Box params={{ display: 'flex', justifyContent: 'center' }}>
+              <Text color={theme.colors.p1} textDecoration="strong">
+                {error.message}
+              </Text>
+            </Box>
+          )}
+        </LoginForm>
+      </LoginContainer>
+    </LoggedOutTemplate>
   );
 };
 

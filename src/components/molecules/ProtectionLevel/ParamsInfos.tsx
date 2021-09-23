@@ -12,6 +12,8 @@ import { RootState } from '../../../store';
 import { useTranslation } from 'react-i18next';
 import { translateText } from '../../../utils/translateApiConfig';
 
+const DIMENSION_ID = '60fef537dc2ee30834c7b2f4';
+
 const { Text } = Typography;
 enum ProtectionLevelColors {
   'Proteção Leve' = '#FFAE33',
@@ -92,7 +94,11 @@ const ParamsInfos: React.FC<{ params: Statistics }> = ({ params }) => {
             <ProgressBar
               bgColor={ProtectionLevelColors[params.result]}
               height="8px"
-              completed={100 - (params[getValues()] || 0) * 100}
+              completed={
+                params.dimension === DIMENSION_ID
+                  ? (params[getValues()] || 0) * 100
+                  : 100 - (params[getValues()] || 0) * 100
+              }
               baseBgColor={lighten(0.35, ProtectionLevelColors[params.result])}
               isLabelVisible={false}
             />

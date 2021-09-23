@@ -41,13 +41,22 @@ export default function Reducer(
       return { ...state, currentUser: { name: '', email: '', role: '', _id: '', company: '' }, isLoggedIn: false }
 
     case LoginTypeKeys.FIRST_ACCESS_REQUEST:
-      return { ...state, isLoggedIn: true }
+      return { ...state, isLoading: true }
 
     case LoginTypeKeys.FIRST_ACCESS_SUCCESS:
-      return { ...state, isLoggedIn: false, firstAccessFeedback: 'success' }
+      return { ...state, isLoading: false, firstAccessFeedback: 'success' }
 
     case LoginTypeKeys.FIRST_ACCESS_FAILURE:
-      return { ...state, isLoggedIn: false, firstAccessFeedback: 'error' }
+      return { ...state, isLoading: false, firstAccessFeedback: 'error' }
+
+    case LoginTypeKeys.FORGOT_PASSWORD_REQUEST:
+      return { ...state, isLoading: true }
+
+    case LoginTypeKeys.FORGOT_PASSWORD_SUCCESS:
+      return { ...state, isLoading: false, firstAccessFeedback: 'success' }
+
+    case LoginTypeKeys.FORGOT_PASSWORD_FAILURE:
+      return { ...state, isLoading: false, firstAccessFeedback: 'error' }
 
     default:
       return state;
