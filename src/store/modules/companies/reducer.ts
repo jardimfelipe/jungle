@@ -42,6 +42,15 @@ export default function Reducer(
         }
       };
 
+    case CompaniesTypeKeys.REMOVE_TRACKING_REQUEST:
+      return { ...state, isLoading: true };
+
+    case CompaniesTypeKeys.REMOVE_TRACKING_FAILURE:
+      return { ...state, isLoading: false };
+
+    case CompaniesTypeKeys.REMOVE_TRACKING_SUCCESS:
+      return { ...state, isLoading: false };
+
     case CompaniesTypeKeys.RESET_FEEDBACK:
       return {
         ...state, isLoading: false, questionaryFeedback: { ...INITIAL_STATE.questionaryFeedback }

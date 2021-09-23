@@ -78,7 +78,7 @@
     "headers": {
       "title": "Título",
       "dimension": "Dimensão",
-      "questionNumber": "Número de perguntas",
+      "questionNumber": "No. de perguntas",
       "track": "Rastreio",
       "respondents": "Respondentes",
       "replied": "Responderam",
@@ -106,6 +106,8 @@
     "moderate": "Moderada",
     "thin": "Leve"
   },
+  "changePassword": "Trocar senha",
+  "toChangeYourPassword": "Para trocar sua senha, preencha os dados abaixo",
   "recoveryPassword": "Para recuperar sua senha, informe o seu email",
   "recoverySent": "Em instantes você receberá um email com instruções para recuperar sua senha.",
   "availableUntil": "Disponível até {{- date}}",

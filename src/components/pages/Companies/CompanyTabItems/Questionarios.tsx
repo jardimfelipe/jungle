@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
-import { ColumnButton, Table, Tag, Typography } from '../../..';
+import {
+  ColumnButton,
+  ConfirmationModal,
+  Table,
+  TableMenu,
+  Tag,
+  Typography,
+} from '../../..';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { Field } from '../../../molecules/Table/table.types';
 // import { TagColors } from '../../../atoms/Tag/Tag.types';
 
 import { Question } from '../../../../store/modules/questionaries/types';
 import { TabItemsProps } from './CompanyTabItems.types';
-import { DimensionItem } from '../../../../store';
+import { CompanyItem, DimensionItem } from '../../../../store';
 import { useTheme } from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { removeTrackingRequest } from '../../../../store/modules/companies/actions';
+import { useLocation } from 'react-router-dom';
 
 const { Text } = Typography;
+
+type RouteState = {
+  company: CompanyItem;
+};
 
 const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
   // const getTagColor = (value: string): TagColors => {
@@ -20,8 +34,21 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
   //   if (value === 'em breve') return 'warning';
   //   return 'warning';
   // };
+  const {
+    state: { company: routeCompany },
+  } = useLocation<RouteState>();
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const [currentOpenMenu, setCurrentOpenMenu] = useState(-1);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
+  const tableMenuItems = [
+    {
+      title: 'Excluir',
+      onClick: () => handleDeleteClick(),
+      isDanger: true,
+    },
+  ];
   const tableFields: Field[] = [
     {
       title: 'Título',
@@ -72,13 +99,51 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
       title: '',
       dataIndex: 'id',
       key: 'id',
-      render: (value: string) => (
-        <ColumnButton onClick={() => console.log(value)}>
-          <BsThreeDotsVertical color={theme.colors.black} size="24" />
-        </ColumnButton>
+      render: (value: string, object: any, index: number) => (
+        <>
+          <TableMenu
+            onClose={() => handleCloseButton()}
+            isOpen={currentOpenMenu === index}
+            menuItems={tableMenuItems}
+            itemIndex={index}
+          />
+          <ColumnButton onClick={() => handleTableButtonClick(index)}>
+            <BsThreeDotsVertical color={theme.colors.black} size="24" />
+          </ColumnButton>
+        </>
       ),
     },
   ];
+
+  const handleDeleteClick = () => {
+    setIsConfirmationModalOpen(true);
+  };
+
+  const handleTableButtonClick = (index: number) => {
+    setCurrentOpenMenu(index);
+  };
+
+  const handleCloseButton = () => {
+    setCurrentOpenMenu(-1);
+  };
+
+  const handleFeedbackClick = (value: boolean) => {
+    if (value) {
+      dispatch(
+        removeTrackingRequest({
+          trackingId: company.questionaries[currentOpenMenu].trackingId,
+          companyId: routeCompany.id,
+        })
+      );
+    }
+    setIsConfirmationModalOpen(false);
+    setCurrentOpenMenu(-1);
+  };
+
+  const handleConfirmationModalClose = () => {
+    setIsConfirmationModalOpen(false);
+  };
+
   return (
     <React.Fragment>
       <Row>
@@ -90,6 +155,12 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
           />
         </Col>
       </Row>
+
+      <ConfirmationModal
+        onFeedbackClick={handleFeedbackClick}
+        isOpen={isConfirmationModalOpen}
+        onClose={handleConfirmationModalClose}
+      />
     </React.Fragment>
   );
 };

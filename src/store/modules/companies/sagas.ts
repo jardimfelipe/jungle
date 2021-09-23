@@ -4,6 +4,7 @@ import api from "../../../services/api";
 import * as actions from "./actions";
 import { CompaniesTypeKeys } from "./types";
 
+
 function* getCompanies({ payload }: ActionType<typeof actions.getCompanyRequest>) {
   try {
     const { data } = yield call(api, "/companies", { params: { ...payload } });
@@ -44,4 +45,17 @@ function* insertQuestionary({ payload }: ActionType<typeof actions.insertQuestio
   }
 }
 
-export default all([takeLatest(CompaniesTypeKeys.GET_COMPANIES_REQUEST, getCompanies), takeLatest(CompaniesTypeKeys.GET_COMPANY_REQUEST, getCompany), takeLatest(CompaniesTypeKeys.INSERT_QUESTIONARY_REQUEST, insertQuestionary)]);
+function* removeTracking({ payload }: ActionType<typeof actions.removeTrackingRequest>) {
+  try {
+    const { trackingId, companyId } = payload
+    yield call(api, `/questionnaires/tracking/${trackingId}`, { method: "DELETE" });
+    yield call(api, "/questionnaires/current", { headers: { company: companyId } });
+    yield put(actions.removeTrackingSuccess());
+  } catch (error) {
+    if (error instanceof Error) {
+      yield put(actions.removeTrackingFailure());
+    }
+  }
+}
+
+export default all([takeLatest(CompaniesTypeKeys.GET_COMPANIES_REQUEST, getCompanies), takeLatest(CompaniesTypeKeys.GET_COMPANY_REQUEST, getCompany), takeLatest(CompaniesTypeKeys.INSERT_QUESTIONARY_REQUEST, insertQuestionary), takeLatest(CompaniesTypeKeys.REMOVE_TRACKING_REQUEST, removeTracking)]);

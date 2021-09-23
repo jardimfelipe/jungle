@@ -107,6 +107,8 @@
   "questions": "preguntas",
   "checkAnswers": "Comprobar respuestas",
   "resumeQuiz": "Reanudar cuestionario",
+  "changePassword": "Cambiar la contraseña",
+  "toChangeYourPassword": "Para cambiar su contraseña, complete los detalles a continuación",
   "recoveryPassword": "Para recuperar su contraseña, ingrese su correo electrónico",
   "recoverySent": "En un momento recibirá un correo electrónico con instrucciones para recuperar su contraseña.",
   "startQuestionarie": "Iniciar cuestionario",

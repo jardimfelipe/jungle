@@ -107,6 +107,8 @@
   "availableIn": "Available in",
   "questions": "questions",
   "recoveryPassword": "To recover your password, enter your email",
+  "changePassword": "Change password",
+  "toChangeYourPassword": "To change your password, fill in the details below",
   "checkAnswers": "Check Answers",
   "resumeQuiz": "Resume quiz",
   "recoverySent": "In a moment you will receive an email with instructions to recover your password.",

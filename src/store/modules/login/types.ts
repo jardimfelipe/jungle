@@ -45,7 +45,8 @@ export type LoginParams = {
 export type FirstAccessParams = {
   email: string;
   password: string;
-  code: string
+  code: string;
+  isChangingPassword: boolean
 }
 
 

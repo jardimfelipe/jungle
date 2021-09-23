@@ -25,6 +25,7 @@ import schema from './schema';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { ModalButton } from '../Dashboard/Dashboard.styled';
+import useQuery from '../../../hooks/useQuery';
 
 const { Title, Text } = Typography;
 
@@ -33,13 +34,13 @@ const FirstAccess: React.FC = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const history = useHistory();
+  const query = useQuery();
   const { error, isLoading, firstAccessFeedback } = useSelector(
     ({ login }: RootState) => login
   );
-
   const [isPasswordType, setIsPasswordType] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isChangingPassword] = useState(!!query.get('email'));
   const handleInputType = () => {
     setIsPasswordType(!isPasswordType);
   };
@@ -50,12 +51,12 @@ const FirstAccess: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      email: query.get('email') || '',
       password: '',
       code: '',
     },
     onSubmit: (values) => {
-      dispatch(firstAccessRequest(values));
+      dispatch(firstAccessRequest({ ...values, isChangingPassword }));
     },
     validateOnChange: false,
     validationSchema: schema,
@@ -79,8 +80,14 @@ const FirstAccess: React.FC = () => {
           <Image style={{ width: '150px' }} src={JungleLogo} alt="Jungle" />
         </Box>
         <Box params={{ width: '100%', textAlign: 'left' }}>
-          <Title level={2}>{t('itsYourFirstAccess')}</Title>
-          <Text>{t('createYourPassword')}</Text>
+          <Title level={2}>
+            {t(isChangingPassword ? 'changePassword' : 'itsYourFirstAccess')}
+          </Title>
+          <Text>
+            {t(
+              isChangingPassword ? 'toChangeYourPassword' : 'createYourPassword'
+            )}
+          </Text>
         </Box>
         <FirstAccessForm
           onSubmit={formik.handleSubmit}
@@ -95,6 +102,7 @@ const FirstAccess: React.FC = () => {
             value={formik.values.email}
             onChange={formik.handleChange}
             label="E-mail"
+            disabled={isChangingPassword}
             error={!!formik.errors.email ? formik.errors.email : undefined}
           />
 

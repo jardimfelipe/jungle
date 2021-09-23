@@ -29,7 +29,8 @@ function* getUserInfo() {
 
 function* firstAccess({ payload }: ActionType<typeof actions.firstAccessRequest>) {
   try {
-    yield call(api, "/first-access", { method: "POST", data: { ...payload } })
+    const { isChangingPassword, ...rest } = payload
+    yield call(api, isChangingPassword ? "/change-password" : "/first-access", { method: "POST", data: { ...rest } })
     yield put(actions.firstAccessSuccess())
   } catch (error) {
     if (error instanceof Error) {

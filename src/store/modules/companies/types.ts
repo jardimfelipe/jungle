@@ -13,6 +13,10 @@ export enum CompaniesTypeKeys {
   INSERT_QUESTIONARY_REQUEST = "@companies/INSERT_QUESTIONARY_REQUEST",
   INSERT_QUESTIONARY_SUCCESS = "@companies/INSERT_QUESTIONARY_SUCCESS",
 
+  REMOVE_TRACKING_REQUEST = "@companies/REMOVE_TRACKING_REQUEST",
+  REMOVE_TRACKING_SUCCESS = "@companies/REMOVE_TRACKING_SUCCESS",
+  REMOVE_TRACKING_FAILURE = "@companies/REMOVE_TRACKING_FAILURE",
+
   RESET_FEEDBACK = "@companies/RESET_FEEDBACK",
 }
 
@@ -51,4 +55,9 @@ export type TrackModel = {
   questionnaire: string,
   start: string,
   end: string
+}
+
+export type RemoveTrackingParams = {
+  trackingId: string;
+  companyId: string;
 }
