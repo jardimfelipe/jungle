@@ -98,7 +98,6 @@ const Questionaries: React.FC = () => {
             !isPast(new Date(questionary.tracking_end)) &&
             !isFuture(new Date(questionary.tracking_start))
         );
-        setFilteredQuestionaries(q);
         break;
 
       case 'em andamento':
@@ -117,6 +116,7 @@ const Questionaries: React.FC = () => {
         q = questionaries;
         break;
     }
+    console.log(q);
     setFilteredQuestionaries(q);
   }, [currentTab, isFilledQuestionary, questionaries]);
 
@@ -178,11 +178,11 @@ const Questionaries: React.FC = () => {
             ))}
           </>
         ) : questionaries.length ? (
-          filteredQuestionaries.map((questionary) => (
+          filteredQuestionaries.map((questionary, index) => (
             <QuestionaryCard
               onClick={handleQuestionaryClick}
               questionary={questionary}
-              key={questionary._id}
+              key={`${questionary._id}-${index}`}
             />
           ))
         ) : (

@@ -65,6 +65,7 @@ type RouteState = {
 type StartedQuestionary = {
   questionaryId: string;
   answers: UserAnswer[];
+  userId: string;
 };
 
 const QuestionaryApplication: React.FC = () => {
@@ -182,12 +183,12 @@ const QuestionaryApplication: React.FC = () => {
     const savedAnswers = getSavedState('worker.startedQuestionaries');
     if (!savedAnswers) return;
     const questionaryAnswers = savedAnswers.find(
-      ({ questionaryId }: StartedQuestionary) =>
-        questionaryId === questionary._id
+      ({ questionaryId, userId }: StartedQuestionary) =>
+        questionaryId === questionary._id && userId === currentUser._id
     );
     if (!questionaryAnswers) return;
     setCurrentQuestion(questionaryAnswers.answers.length);
-  }, [questionary]);
+  }, [questionary, currentUser]);
 
   // useEffect(() => {
   //   dispatch(getQuestionaryRequest(id));

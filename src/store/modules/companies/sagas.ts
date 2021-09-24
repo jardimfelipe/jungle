@@ -49,7 +49,11 @@ function* removeTracking({ payload }: ActionType<typeof actions.removeTrackingRe
   try {
     const { trackingId, companyId } = payload
     yield call(api, `/questionnaires/tracking/${trackingId}`, { method: "DELETE" });
-    yield call(api, "/questionnaires/current", { headers: { company: companyId } });
+    const [{ data: questionaries }, { data: workers }] = yield all([
+      call(api.get, "/questionnaires/current", { headers: { company: companyId } }),
+      call(api.get, "users", { headers: { company: companyId } }),
+    ]);
+    yield put(actions.getCompanySuccess({ questionaries, workers }));
     yield put(actions.removeTrackingSuccess());
   } catch (error) {
     if (error instanceof Error) {
