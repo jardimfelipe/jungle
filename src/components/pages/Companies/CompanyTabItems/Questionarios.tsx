@@ -131,7 +131,7 @@ const Questionarios: React.FC<TabItemsProps> = ({ company, isLoading }) => {
     if (value) {
       dispatch(
         removeTrackingRequest({
-          trackingId: company.questionaries[currentOpenMenu].trackingId,
+          trackingId: company.questionaries[currentOpenMenu].tracking,
           companyId: routeCompany.id,
         })
       );
