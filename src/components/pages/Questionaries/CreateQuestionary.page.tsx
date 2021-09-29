@@ -252,8 +252,15 @@ const CreateQuestionary: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    questions.forEach((q) => {
+      if (!q.dimension) {
+        console.log(q);
+      }
+    });
     const filteredQuestions = questions.filter(
-      (question) => question.dimension._id === questionary.dimension._id
+      (question) =>
+        question.dimension &&
+        question.dimension._id === questionary.dimension._id
     );
     setQuestionaryQuestions(filteredQuestions);
   }, [questions, questionary]);

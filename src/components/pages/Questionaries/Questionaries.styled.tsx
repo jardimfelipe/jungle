@@ -131,5 +131,4 @@ export const OptionBox = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  flex: 0 0 auto;
 `;
