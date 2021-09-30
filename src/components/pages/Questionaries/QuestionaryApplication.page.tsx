@@ -134,7 +134,7 @@ const QuestionaryApplication: React.FC = () => {
         questionnaire: questionary._id,
         dimension: questionary.dimension?._id || '',
         user: currentUser._id,
-        answers: answers,
+        answers: [...answers, newAnswer],
       };
 
       dispatch(sendQuestionaryRequest(model));

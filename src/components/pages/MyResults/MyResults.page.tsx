@@ -252,7 +252,7 @@ const MyResults: React.FC = () => {
                         },
                         index
                       ) =>
-                        value !== null && index < 5 ? (
+                        value !== null && index > 4 ? (
                           <SocialAspectsCard key={`dimension-${dimension}`}>
                             <CardHeader>
                               <Text textDecoration="strong" variant="primary">
