@@ -36,7 +36,6 @@ import EmptyResults from '../MyResults/EmptyResults';
 import { useTranslation } from 'react-i18next';
 import { rgba } from 'polished';
 import { Nivel, Statistics } from '../../../store/modules/results/types';
-import ResultsCards from '../MyResults/Cards/ResultsCards';
 
 const { Title, Text } = Typography;
 const { Brain } = Icons;
@@ -131,7 +130,6 @@ const TeamResults: React.FC = () => {
                 <Text paragraph>{results.analysis.expert_analysis}</Text>
               </Card>
             </StyledCol> */}
-          <ResultsCards isLoading={isLoading} analysis={results.analysis} />
 
           {/* <StyledCol xs={12} md={6}>
               <Card>
@@ -398,7 +396,7 @@ const TeamResults: React.FC = () => {
               </>
             ) : (
               results.statistics.map((statistic, index) =>
-                !!statistic.team_protection && index < 5 ? (
+                !!statistic.team_protection && index >= 5 ? (
                   <SocialAspectsCard key={`social-${index}`}>
                     <CardHeader>
                       <Text textDecoration="strong" variant="primary">

@@ -13,7 +13,6 @@ import { SocialAspectsCard, CardHeader, CardBody } from './MyResults.styled';
 import { Col, Row } from 'react-flexbox-grid';
 import { Icons } from '../../';
 import Skeleton from 'react-loading-skeleton';
-import ResultsCards from './Cards/ResultsCards';
 import {
   CardCharts,
   CardIcon,
@@ -99,12 +98,11 @@ const MyResults: React.FC = () => {
         text={t('greetings.myResults.text')}
       />
 
-      <Title level={3}>{t('pages.title.myResults')}</Title>
+      {/* <Title level={3}>{t('pages.title.myResults')}</Title> */}
       {isEmpty() ? (
         <EmptyResults />
       ) : (
         <>
-          <ResultsCards isLoading={isLoading} analysis={results.analysis} />
           <Title level={3}>{t('pages.title.protecionLevels')}</Title>
           <FlexContainer>
             {isLoading ? (
