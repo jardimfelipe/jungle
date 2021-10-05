@@ -144,7 +144,7 @@
   "termsConditions": {
     "header": "Para utilizar a plataforma Jungle é necessário que você aceite os Termos de Conscentimento",
     "cb_terms0": "Estou ciente",
-    "cb_terms1": "Aceito participar",
+    "cb_terms1": "Estou ciente dos termos e aceito participar",
     "introduction": [
       "TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS PESSOAIS – Jungle Medical Science for Business. Você foi convidada(o) a participar do Ciclo de Rastreios Great Questions for Healthier Minds, desenvolvido pela JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118/0001-10) e oferecido por sua empresa contratante .Este documento visa registrar a manifestação livre, informada e inequívoca pela qual você concorda com o tratamento de seus dados pessoais em conformidade com a LGPD – Lei Geral de Proteção de Dados Pessoais, Lei nº 13.709/18, e demais legislações aplicáveis, bem como com a Política de Privacidade e Proteção de Dados de Jungle Medical Science for Business (www.junglexp.com/politica-de-privacidade/).",
       "Ao manifestar sua aceitação ao presente termo você consente e concorda que seja realizado o tratamento de seus dados pessoais[1] e dados pessoais sensíveis[2] para as finalidades específicas aqui dispostas.",
@@ -211,7 +211,7 @@
         "Leia todo o termo e informe se está de acordo."
       ],
       "link": "Não aceito e desejo sair da plataforma",
-      "button": "Finalizar"
+      "button": "Continuar"
     }
   }
 }

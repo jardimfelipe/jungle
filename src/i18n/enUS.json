@@ -141,7 +141,7 @@
   "termsConditions": {
     "header": "To use the Jungle platform you must accept the Terms of Consent",
     "cb_terms0": "I'm aware",
-    "cb_terms1": "I accept to participate",
+    "cb_terms1": "I am aware of the terms and agree to participate.",
     "introduction": [
       "INFORMATION OF CONSENT FOR PROCESSING PERSONAL DATA – Jungle Medical Science for Business. You were invited to participate in the Great Questions for Healthier Minds Screening Cycle, developed by JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118/0001-10) ) and offered by your contracting company. This document aims to register the free, informed and unambiguous expression by which you agree with the treatment of your personal data in accordance with the LGPD - General Law for the Protection of Personal Data, Law No. 13.709/18, and other applicable legislation, as well as the Jungle Medical Science for Business Privacy and Data Protection Policy (www.junglex.com/politica-de-privacidade/).",
       "By expressing your acceptance of this term, you consent and agree that the processing of your personal data[1] and sensitive personal data[2] will be carried out for the specific purposes set forth herein.",
@@ -208,7 +208,7 @@
         "Read the entire term and let us know if you agree."
       ],
       "link": "I don't accept and I want to leave the platform",
-      "button": "Finish"
+      "button": "Continue"
     }
   }
 }

@@ -140,7 +140,7 @@
   "termsConditions": {
     "header": "Para utilizar la plataforma Jungle debe aceptar las Condiciones de consentimiento",
     "cb_terms0": "Soy consciente",
-    "cb_terms1": "Acepto participar",
+    "cb_terms1": "Conozco los términos y acepto participar.",
     "introduction": [
       "INFORMACIÓN DE CONSENTIMIENTO PARA EL TRATAMIENTO DE DATOS PERSONALES - Jungle Medical Science for Business. Fue invitado a participar en el Ciclo de detección de Grandes Preguntas para Mentes más Saludables, desarrollado por JUNGLE CONSULTORIA LTDA (CNPJ n. 41.484.118 / 0001-10)) y ofrecido por su empresa contratante. Este documento tiene como objetivo registrar la expresión libre, informada e inequívoca por la cual usted acepta el tratamiento de sus datos personales de acuerdo con la LGPD - Ley General de Protección de Datos Personales, Ley N ° 13.709 / 18, y otra legislación aplicable, así como la Política de Privacidad y Protección de Datos de Jungle Medical Science for Business (www.junglex.com/politica-de-privacidade/). ",
       "Al expresar su aceptación de este término, usted consiente y acepta que el procesamiento de sus datos personales [1] y datos personales sensibles [2] se llevará a cabo para los fines específicos establecidos en este documento.",
@@ -207,7 +207,7 @@
         "Lea el término completo y avísenos si está de acuerdo."
       ],
       "link": "No acepto y quiero salir de la plataforma",
-      "button": "Finalizar"
+      "button": "Continuar"
     }
   }
 }

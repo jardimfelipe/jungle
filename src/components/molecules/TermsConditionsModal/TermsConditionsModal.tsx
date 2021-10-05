@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import {
-  removeState,
-  saveState,
-  getSavedState,
-} from '../../../utils/localStorage';
-import { logout } from '../../../store/modules/login/actions';
+import { saveState, getSavedState } from '../../../utils/localStorage';
 
 import { Box, Modal, Typography, Checkbox, Button } from '../..';
 
@@ -18,36 +13,24 @@ const { Text, Title } = Typography;
 const TermsConditionsModal: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const [opcao1, setOpcao1] = useState(false);
-  const [opcao2, setOpcao2] = useState(false);
-  const [opcao3, setOpcao3] = useState(false);
+  const [opcao, setOpcao] = useState(false);
   const { currentUser } = useSelector(({ login }: RootState) => login);
   const [isModalOpen, setIsModalOpen] = useState(
     getSavedState('modal' + currentUser['_id'])
   );
-
   const handleModalClose = () => {
     setIsModalOpen(false);
     saveState('modal' + currentUser['_id'], false);
   };
 
-  const handleLogout = () => {
-    removeState('auth.token');
-    dispatch(logout());
-    removeState('modal' + currentUser['_id']);
-  };
-
-  // useEffect(()=>{
-  //     if (getSavedState('modal'+currentUser['_id']) == null){
-  //        saveState('modal'+currentUser['_id'], true);
-  //         console.log('Abrir? '+getSavedState('modal'+currentUser['_id']))
-  //     }
-  //     else{
-  //       console.log('Abrir? '+getSavedState('modal'+currentUser['_id']))
-  //     }
-
-  // })
+  useEffect(() => {
+    if (getSavedState('modal' + currentUser['_id']) == null) {
+      saveState('modal' + currentUser['_id'], true);
+      console.log('Abrir? ' + getSavedState('modal' + currentUser['_id']));
+    } else {
+      console.log('Abrir? ' + getSavedState('modal' + currentUser['_id']));
+    }
+  });
 
   return (
     <Modal
@@ -114,14 +97,6 @@ const TermsConditionsModal: React.FC = () => {
             'termsConditions.purpose.text.7'
           )}`}</Text>
 
-          <Checkbox
-            label={`${t('termsConditions.cb_terms0')}`}
-            checked={opcao1}
-            onChange={() => {
-              setOpcao1(!opcao1);
-            }}
-          ></Checkbox>
-
           <Title level={3}>{t('termsConditions.purpose2.title')}</Title>
 
           <Text paragraph textAlign="justify">{`${t(
@@ -172,14 +147,6 @@ const TermsConditionsModal: React.FC = () => {
             'termsConditions.purpose6.text.5'
           )}`}</Text>
 
-          <Checkbox
-            label={`${t('termsConditions.cb_terms0')}`}
-            checked={opcao2}
-            onChange={() => {
-              setOpcao2(!opcao2);
-            }}
-          ></Checkbox>
-
           <Text paragraph textAlign="justify">
             {`${t('termsConditions.end.text.0')}`}
             <Text textDecoration="strong">{`${t(
@@ -187,46 +154,35 @@ const TermsConditionsModal: React.FC = () => {
             )}`}</Text>
             {`${t('termsConditions.end.text.2')}`}
           </Text>
-
-          <Box
-            params={{
-              display: 'flex',
-            }}
-          >
-            <Checkbox
-              label={`${t('termsConditions.cb_terms1')}`}
-              checked={opcao3}
-              onChange={() => {
-                setOpcao3(!opcao3);
-              }}
-            ></Checkbox>
-
-            <Button variant="link" onClick={handleLogout}>{`${t(
-              'termsConditions.end.link'
-            )}`}</Button>
-          </Box>
           <Text paragraph textAlign="justify">{`${t(
             'termsConditions.end.text.3'
           )}`}</Text>
         </Box>
         <Box
           params={{
-            paddingTop: '10px',
+            paddingTop: '30px',
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'space-around',
           }}
         >
-          <Text paragraph>{`${t('termsConditions.end.text.4')}`}</Text>
-
-          <Button
-            variant="primary"
-            size="small"
-            disabled={opcao1 && opcao2 && opcao3 ? false : true}
-            onClick={handleModalClose}
-          >
-            {`${t('termsConditions.end.button')}`}
-          </Button>
+          <Checkbox
+            label={`${t('termsConditions.cb_terms1')}`}
+            checked={opcao}
+            onChange={() => {
+              setOpcao(!opcao);
+            }}
+          ></Checkbox>
+          <Box params={{ flex: '0 0 40%' }}>
+            <Button
+              variant="primary"
+              block
+              disabled={!opcao}
+              onClick={handleModalClose}
+            >
+              {`${t('termsConditions.end.button')}`}
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Modal>
