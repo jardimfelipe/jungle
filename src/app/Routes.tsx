@@ -26,6 +26,7 @@ import {
   BlankTemplate,
   CreateQuestionary,
   EditQuestionary,
+  EditQuestions,
 } from '../components';
 
 export const routes = {
@@ -84,6 +85,14 @@ export const routes = {
         <BasicTemplate>
           <Questions />
         </BasicTemplate>
+      ),
+    },
+    {
+      path: '/questions/edit/:id',
+      render: () => (
+        <BlankTemplate>
+          <EditQuestions />
+        </BlankTemplate>
       ),
     },
     {

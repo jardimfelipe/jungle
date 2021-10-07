@@ -20,10 +20,13 @@ import { RootState } from '../../../store';
 import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
 import CreateQuestion from './Modals/CreateQuestion.page';
 
+import { useHistory } from 'react-router';
+
 const { Title, Text } = Typography;
 
 const Questions: React.FC = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { dimensions, isLoading } = useSelector(
     ({ dimensions }: RootState) => dimensions
   );
@@ -42,6 +45,10 @@ const Questions: React.FC = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleTableButtonClick = (id: string) => {
+    history.push(`/questions/edit/${id}`);
   };
 
   useEffect(() => {
@@ -106,10 +113,10 @@ const Questions: React.FC = () => {
     },
     {
       title: '',
-      dataIndex: 'id',
-      key: 'id',
-      render: () => (
-        <ColumnButton onClick={() => console.log('')}>
+      dataIndex: '_id',
+      key: '_id',
+      render: (value: string) => (
+        <ColumnButton onClick={() => handleTableButtonClick(value)}>
           <AiOutlineRight size="24" />
         </ColumnButton>
       ),

@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { loginRequest } from '../../../store/modules/login/actions';
+import { loginRequest, resetStore } from '../../../store/modules/login/actions';
 
 import { LoginContainer, LoginForm } from './login.styled';
 import {
@@ -62,7 +62,8 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     isLoggedIn && history.push('/');
-  }, [isLoggedIn, history]);
+    !isLoggedIn && dispatch(resetStore());
+  }, [isLoggedIn, history, dispatch]);
 
   return (
     <LoggedOutTemplate>
