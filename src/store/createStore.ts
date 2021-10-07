@@ -19,7 +19,7 @@ export interface RootState {
   questions: QuestionsState;
 }
 const resetEnhancer = (rootReducer: Reducer) => (state: any, action: any) => {
-  if (action.type !== LoginTypeKeys.RESET_STORE) return rootReducer(state, action);
+  if (action.type !== LoginTypeKeys.LOGOUT) return rootReducer(state, action);
 
   const newState = rootReducer(undefined, { type: '' });
   return newState;
