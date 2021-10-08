@@ -116,7 +116,6 @@ const Questionaries: React.FC = () => {
         q = questionaries;
         break;
     }
-    console.log(q);
     setFilteredQuestionaries(q);
   }, [currentTab, isFilledQuestionary, questionaries]);
 
