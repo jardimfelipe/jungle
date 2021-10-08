@@ -12,7 +12,9 @@ import SuccessFeedback from '../../../../assets/SuccessFeedback.svg';
 
 const { Title } = Typography;
 
-const FeedbackModal: React.FC = () => {
+const FeedbackModal: React.FC<{ isEditingQuestion: boolean }> = ({
+  isEditingQuestion,
+}) => {
   const dispatch = useDispatch();
   const [isModalOpen, setisModalOpen] = useState(false);
   const { feedback } = useSelector(({ questions }: RootState) => questions);
@@ -29,7 +31,11 @@ const FeedbackModal: React.FC = () => {
       <Box params={{ padding: '25px 35px' }}>
         <Row middle="xs" around="xs">
           <Col xs={12} md={4}>
-            <Title level={1}>Pergunta cadastrada com sucesso!</Title>
+            <Title level={1}>
+              {isEditingQuestion
+                ? 'Pergunta editada com sucesso'
+                : 'Pergunta cadastrada com sucesso!'}
+            </Title>
           </Col>
           <Col xs={12} md={4}>
             <Image src={SuccessFeedback} />
@@ -45,7 +51,7 @@ const FeedbackModal: React.FC = () => {
               style={{ right: 0, left: 'auto' }}
               onClick={handleModalClose}
             >
-              Cadastrar outra pergunta
+              {isEditingQuestion ? 'Editar' : 'Cadastrar'} outra pergunta
             </ModalButtonHalf>
           </Col>
         </Row>

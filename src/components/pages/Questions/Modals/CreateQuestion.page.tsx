@@ -36,8 +36,12 @@ import { useFormik } from 'formik';
 import {
   OptionModel,
   Priorities,
+  QuestionItem,
 } from '../../../../store/modules/questions/types';
-import { createQuestionRequest } from '../../../../store/modules/questions/actions';
+import {
+  createQuestionRequest,
+  editQuestionRequest,
+} from '../../../../store/modules/questions/actions';
 import FeedbackModal from './FeedbackModal';
 import schema from './schema';
 import { ErrorMessage } from '../../../atoms/Textfield/Textfield.styled';
@@ -47,6 +51,7 @@ const { Text } = Typography;
 type ModalProps = {
   onClose: () => void;
   isModalOpen: boolean;
+  question?: QuestionItem;
 };
 
 const weightOptions = [
@@ -62,7 +67,11 @@ const valueOptions = [...new Array(11)].map((v, i) => ({
   label: i,
 }));
 
-const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
+const CreateQuestion: React.FC<ModalProps> = ({
+  onClose,
+  isModalOpen,
+  question,
+}) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { dimensions } = useSelector(({ dimensions }: RootState) => dimensions);
@@ -167,8 +176,13 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     },
     onSubmit: (values) => {
       const { editedQuestion, ...rest } = values;
-      dispatch(createQuestionRequest(rest));
+      if (question) {
+        dispatch(editQuestionRequest({ model: rest, id: question._id }));
+      } else {
+        dispatch(createQuestionRequest(rest));
+      }
     },
+
     validateOnChange: false,
     validationSchema: schema,
   });
@@ -180,8 +194,39 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     }));
     setDimensionOptions(dimensionOptionsLocal);
   }, [dimensions]);
+
+  useEffect(() => {
+    if (question) {
+      Object.keys(question).forEach((prop) => {
+        const fieldValue = question[prop as keyof typeof question];
+        switch (prop) {
+          case 'dimension':
+            formik.setFieldValue(
+              prop,
+              fieldValue['_id' as keyof typeof fieldValue]
+            );
+            break;
+
+          case 'priority':
+            formik.setFieldValue(prop, (fieldValue as string).toUpperCase());
+            break;
+
+          default:
+            formik.setFieldValue(prop, fieldValue);
+            break;
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [question]);
+
   return (
-    <Modal width={980} height={840} isOpen={isModalOpen} onClose={onClose}>
+    <Modal
+      width={980}
+      height={840}
+      isOpen={isModalOpen}
+      onClose={handleCancelButton}
+    >
       <form onSubmit={formik.handleSubmit}>
         <Box params={{ padding: '0 25px' }}>
           <Row>
@@ -193,6 +238,9 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 }
                 placeholder="Selecione"
                 options={dimensionOptions}
+                value={dimensionOptions.find(
+                  ({ value }) => value === formik.values.dimension
+                )}
               />
               {!!formik.errors.dimension && (
                 <ErrorMessage position="relative">
@@ -249,6 +297,9 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 }
                 placeholder="Selecione"
                 options={weightOptions}
+                value={weightOptions.find(
+                  ({ value }) => value === formik.values.weight
+                )}
               />
             </Col>
 
@@ -303,6 +354,9 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 }
                 placeholder="Selecione"
                 options={typeOptions}
+                value={typeOptions.find(
+                  ({ value }) => value === formik.values.type
+                )}
               />
             </Box>
             {!!formik.errors.type && (
@@ -385,7 +439,7 @@ const CreateQuestion: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
           </Box>
         </Box>
       </form>
-      <FeedbackModal />
+      <FeedbackModal isEditingQuestion={!!question} />
     </Modal>
   );
 };

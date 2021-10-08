@@ -10,6 +10,7 @@ export const MenuCard = styled(CardContainer)`
   z-index: 100;
   transition: 200ms ease-in-out;
   overflow: hidden;
+  box-shadow: 1px 2px 12px -6px #000000;
   ul {
     list-style-type: none;
     li {

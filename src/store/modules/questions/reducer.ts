@@ -20,6 +20,15 @@ export default function Reducer(
     case QuestionsTypeKeys.GET_QUESTIONS_SUCCESS:
       return { ...state, questions: action.payload, isLoading: false };
 
+    case QuestionsTypeKeys.DELETE_QUESTION_REQUEST:
+      return { ...state, isLoading: true };
+
+    case QuestionsTypeKeys.DELETE_QUESTION_SUCCESS:
+      return { ...state, isLoading: false };
+
+    case QuestionsTypeKeys.DELETE_QUESTION_FAILURE:
+      return { ...state, isLoading: false };
+
     case QuestionsTypeKeys.CREATE_QUESTIONS_REQUEST:
       return { ...state, isLoading: true };
 
@@ -27,6 +36,16 @@ export default function Reducer(
       return { ...state, feedback: { status: 'success', message: 'Pergunta cadastrada com sucesso!' }, isLoading: false }
 
     case QuestionsTypeKeys.CREATE_QUESTIONS_FAILURE:
+      return { ...state, isLoading: false };
+
+
+    case QuestionsTypeKeys.EDIT_QUESTION_REQUEST:
+      return { ...state, isLoading: true };
+
+    case QuestionsTypeKeys.EDIT_QUESTION_SUCCESS:
+      return { ...state, feedback: { status: 'success', message: 'Pergunta cadastrada com sucesso!' }, isLoading: false }
+
+    case QuestionsTypeKeys.EDIT_QUESTION_FAILURE:
       return { ...state, isLoading: false };
 
     case QuestionsTypeKeys.RESET_FEEDBACK:

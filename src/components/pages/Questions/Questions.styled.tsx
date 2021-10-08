@@ -44,3 +44,11 @@ export const CancelButton = styled(StyledButton)`
   border: 1px solid ${(props) => props.theme.colors.p1};
   flex: 0 0 250px;
 `;
+
+export const IconBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+`;

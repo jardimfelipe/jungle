@@ -16,7 +16,7 @@ import { AiOutlineRight } from 'react-icons/ai';
 import { useTheme } from 'styled-components';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { DimensionItem, RootState } from '../../../store';
 import { getDimensionsRequest } from '../../../store/modules/dimensions/actions';
 import CreateQuestion from './Modals/CreateQuestion.page';
 
@@ -47,8 +47,11 @@ const Questions: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const handleTableButtonClick = (id: string) => {
-    history.push(`/questions/edit/${id}`);
+  const handleTableButtonClick = (object: DimensionItem) => {
+    history.push({
+      pathname: `/questions/edit/${object._id}`,
+      state: { dimensionName: object.name },
+    });
   };
 
   useEffect(() => {
@@ -115,8 +118,8 @@ const Questions: React.FC = () => {
       title: '',
       dataIndex: '_id',
       key: '_id',
-      render: (value: string) => (
-        <ColumnButton onClick={() => handleTableButtonClick(value)}>
+      render: (value: string, object: DimensionItem) => (
+        <ColumnButton onClick={() => handleTableButtonClick(object)}>
           <AiOutlineRight size="24" />
         </ColumnButton>
       ),

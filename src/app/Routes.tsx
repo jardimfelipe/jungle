@@ -90,9 +90,9 @@ export const routes = {
     {
       path: '/questions/edit/:id',
       render: () => (
-        <BlankTemplate>
+        <BasicTemplate>
           <EditQuestions />
-        </BlankTemplate>
+        </BasicTemplate>
       ),
     },
     {

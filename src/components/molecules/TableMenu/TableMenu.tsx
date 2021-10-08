@@ -8,7 +8,7 @@ import { TableMenuProps } from './TableMenu.types';
 import { MenuButton, MenuCard } from './TableMenu.styled';
 
 const menuStyle = {
-  transition: `200ms ease-in-out`,
+  transition: `50ms ease-in-out`,
   height: 0,
   width: 0,
 };
@@ -28,7 +28,7 @@ const TableMenu: React.FC<TableMenuProps> = ({
 }) => {
   const theme = useTheme();
   return (
-    <Transition in={isOpen} timeout={200} unmountOnExit>
+    <Transition in={isOpen} timeout={10} unmountOnExit>
       {(state) => (
         <MenuCard
           style={{
