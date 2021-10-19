@@ -155,6 +155,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     {label: '', value: ''}
   ]
 
+
   return (
     <div>
 
@@ -238,14 +239,22 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             <Label>Nome completo</Label>
             <Textfield placeholder="Digite o nome completo" />
                     
-            <Label>Unidade/localização</Label>
-            <Textfield placeholder="Digite e unidade ou localização" />
+            <div style={{marginTop: '32px'}}>
+              <Label>Unidade/localização</Label>
+              <Textfield placeholder="Digite e unidade ou localização" />
+            </div>
+
+            <div style={{marginTop: '32px'}}>
+              <Label>Cargo</Label>
+              <Select options={listaCargo} value={listaCargo[0]} />
+            </div>
+
+            <div style={{marginTop: '32px'}}>
+              <Label>Líder de pessoas</Label>
+              <Select options={listaLider} value={listaLider[0]} />
+            </div>
+
             
-            <Label>Cargo</Label>
-            <Select options={listaCargo} value={listaCargo[0]} />
-            
-            <Label>Líder de pessoas</Label>
-            <Select options={listaLider} value={listaLider[0]} />
           </Box>
           <Box params={{
             display: 'flex',
@@ -256,16 +265,20 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             <Label>E-mail</Label>
             <Textfield placeholder="Digite o e-mail" />
 
-            <Label>Tipo de cargo</Label>
-            <Select options={listaTipoCargo} value={listaTipoCargo[0]} />
+            <div style={{marginTop: '32px'}}>
+              <Label>Tipo de cargo</Label>
+              <Select options={listaTipoCargo} value={listaTipoCargo[0]} />
+            </div>
 
-            
-            <Label>Área/departamento/diretoria</Label>
-            <Select options={listaArea} value={listaArea[0]} />
-            
-            
-            <Label>E-mail Gestor Direto</Label>
-            <Textfield placeholder="Digite o e-mail do gestor direto" />
+            <div style={{marginTop: '32px'}}>
+              <Label>Área/departamento/diretoria</Label>
+              <Select    options={listaArea} value={listaArea[0]} />
+            </div>
+
+            <div style={{marginTop: '32px'}}>
+              <Label>E-mail Gestor Direto</Label>
+              <Textfield placeholder="Digite o e-mail do gestor direto" />
+            </div>
           </Box>
         </Box>
         
