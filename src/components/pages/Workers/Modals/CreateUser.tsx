@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Box, Modal, Typography, FileUploader } from '../../..';
+import { Box, Modal, Typography, FileUploader, Button } from '../../..';
 import { ModalButton } from '../../../pages/Dashboard/Dashboard.styled';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { Oval } from 'react-loading-icons';
@@ -17,6 +17,7 @@ import { rgba } from 'polished';
 import { FaCheckCircle } from 'react-icons/fa';
 
 const { Title, Text } = Typography;
+
 
 type ModalProps = {
   onClose: () => void;
@@ -106,8 +107,38 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   }, [fileSuccess, dispatch, currentUser]);
 
   return (
-    <Modal onClose={onClose} isOpen={isModalOpen}>
+    <Modal width={581} height={455} onClose={onClose} isOpen={isModalOpen}>
+      <Box params={{
+        width: '443px',
+        paddingLeft: '69px',
+        paddingRight: '69px',
+      }}>
+        <Text style={{
+          fontFamily: 'Raleway',
+          fontStyle: 'normal',
+          fontWeight: 'bold',
+          fontSize: '24px',
+          lineHeight: '28px',
+          color: '#0062FF'   
+        }}> 
+          Cadastrar colaborador
+        </Text>
 
+        <Button variant="primary" style={{
+          width: '443px',
+          height: '126px',
+          marginTop: '28px',
+          marginBottom: '20px'
+        }}>
+          Cadastrar manualmente um novo colaborador.
+        </Button>
+        <Button variant="primary" style={{
+          width: '443px',
+          height: '126px'
+        }}>
+          Cadastrar múltiplos colaboradores via planilha.
+        </Button>
+      </Box>
     </Modal>
   );
 };
