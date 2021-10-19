@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Box, Modal, Typography, FileUploader, Button } from '../../..';
+import { Box, Modal, Typography, FileUploader, Button, Textfield, Label, Select } from '../../..';
 import { ModalButton } from '../../../pages/Dashboard/Dashboard.styled';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { Oval } from 'react-loading-icons';
@@ -110,6 +110,51 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
       dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
   }, [fileSuccess, dispatch, currentUser]);
 
+  const listaTipoCargo = [
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''}
+  ]
+  const listaCargo = [
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''}
+  ]
+  const listaArea = [
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''}
+  ]
+  const listaLider = [
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''},
+    {label: '', value: ''}
+  ]
+
   return (
     <div>
 
@@ -130,7 +175,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             Cadastrar colaborador
           </Text>
 
-          <Button variant="primary" style={{
+          <Button variant="primary" onClick={onClose2} style={{
             width: '443px',
             height: '126px',
             marginTop: '28px',
@@ -179,9 +224,53 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
           {buttonContent()}
         </ModalButton>
       </Modal>
-      <Modal width={550} height={500} isOpen={isModalOpen2} onClose={onClose2}>
+      <Modal width={1073} height={752} isOpen={isModalOpen2} onClose={onClose2}>
+        <Box params={{
+          display: 'flex',
+          flexDirection: 'row',
+          marginLeft: '64px'
+        }}>
+          <Box params={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '443px'
+          }}>
+            <Label>Nome completo</Label>
+            <Textfield placeholder="Digite o nome completo" />
+                    
+            <Label>Unidade/localização</Label>
+            <Textfield placeholder="Digite e unidade ou localização" />
+            
+            <Label>Cargo</Label>
+            <Select options={listaCargo} value={listaCargo[0]} />
+            
+            <Label>Líder de pessoas</Label>
+            <Select options={listaLider} value={listaLider[0]} />
+          </Box>
+          <Box params={{
+            display: 'flex',
+            flexDirection: 'column',
+            marginLeft: '32px',
+            width: '443px'
+          }}>
+            <Label>E-mail</Label>
+            <Textfield placeholder="Digite o e-mail" />
 
+            <Label>Tipo de cargo</Label>
+            <Select options={listaTipoCargo} value={listaTipoCargo[0]} />
+
+            
+            <Label>Área/departamento/diretoria</Label>
+            <Select options={listaArea} value={listaArea[0]} />
+            
+            
+            <Label>E-mail Gestor Direto</Label>
+            <Textfield placeholder="Digite o e-mail do gestor direto" />
+          </Box>
+        </Box>
+        
       </Modal>
+
     </div>
   );
 };
