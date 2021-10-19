@@ -254,7 +254,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Select options={listaLider} value={listaLider[0]} />
             </div>
 
-            
+            <Button style={{width: '265px', marginTop: '51px'}} variant="cancel">Cancelar</Button>
+          
           </Box>
           <Box params={{
             display: 'flex',
@@ -279,6 +280,9 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Label>E-mail Gestor Direto</Label>
               <Textfield placeholder="Digite o e-mail do gestor direto" />
             </div>
+
+            <Button style={{width: '265px', marginTop: '51px'}} variant="primary">Adicionar Colaborador</Button>
+          
           </Box>
         </Box>
         
