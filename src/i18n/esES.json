@@ -82,7 +82,8 @@
       "sector": "Sector",
       "function": "Ocupación",
       "email": "Email",
-      "status": "Status"
+      "status": "Status",
+      "phone": "Teléfono"
     }
   },
   "menu": {

@@ -74,7 +74,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
         }}
       >
         <Title style={{ alignSelf: 'flex-start' }} variant="primary" level={4}>
-          Cadastrar usuários
+          Cadastrar usuários    
         </Title>
         <FileUploader onChange={handleFileChange} />
 
@@ -106,38 +106,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   }, [fileSuccess, dispatch, currentUser]);
 
   return (
-    <Modal width={550} height={500} isOpen={isModalOpen} onClose={onClose}>
-      {isFileLoading && (
-        <Box
-          params={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-          }}
-        >
-          <ProgressBar
-            bgColor={theme.colors.blue}
-            height="3px"
-            completed={userFileProgress}
-            baseBgColor={rgba(theme.colors.blue, 0.1)}
-            isLabelVisible={false}
-            transitionDuration="0.3s"
-          />
-        </Box>
-      )}
+    <Modal onClose={onClose} isOpen={isModalOpen}>
 
-      {fileSuccess ? successFeedback() : usersFileUploader()}
-
-      <ModalButton
-        disabled={!currentFile || isFileLoading}
-        onClick={handleSubmit}
-        variant="primary"
-        block
-      >
-        {buttonContent()}
-      </ModalButton>
     </Modal>
   );
 };

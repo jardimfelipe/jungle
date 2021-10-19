@@ -11,7 +11,7 @@ import {
 import { MindGiftsLink, UserInfo, UserTag } from '../UserBar.styled';
 import { FiChevronRight, FiSettings } from 'react-icons/fi';
 
-import Profile from '../../../../assets/profile.jpg';
+import Profile from '../../../../assets/user.svg';
 import Banner from '../../../../assets/banner-mindgifts.png';
 
 import { UserBarProfileProps } from '../UserBar.types';

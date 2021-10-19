@@ -123,6 +123,7 @@ const Colaboradores: React.FC<TabItemsProps> = ({ company, isLoading }) => {
         isOpen={isConfirmationModalOpen}
         onClose={handleConfirmationModalClose}
       />
+      
     </React.Fragment>
   );
 };

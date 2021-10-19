@@ -10,6 +10,7 @@ import {
   // Avatar,
   Tag,
   ColumnButton,
+  Select,
 } from '../..';
 import { BiSearch } from 'react-icons/bi';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -32,6 +33,10 @@ const { Title } = Typography;
 
 const Companies: React.FC = () => {
   const { t } = useTranslation();
+  const lista = [
+    {label: 'Todos', value: ''},
+    {label: '', value: ''}
+  ]
 
   const tableFields: Field[] = [
     {
@@ -61,6 +66,12 @@ const Companies: React.FC = () => {
       title: t('table.headers.email'),
       dataIndex: 'email',
       key: 'email',
+    },
+    {
+      title: t('table.headers.phone'),
+      dataIndex: 'phone',
+      key: 'phone',
+      render: (value) => value || '---',
     },
     {
       title: t('table.headers.status'),
@@ -186,8 +197,27 @@ const Companies: React.FC = () => {
               {t('button.registerUsers')}
             </Button>
           </Box>
+          
         </Box>
+        
       </Box>
+      <Box 
+            params={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              width: '100%'
+            }}
+          >
+          <div style={{marginRight: '30px'}}>Status</div>
+          <div style={{width: '265px'}}>
+            <Select 
+              value={{label: 'Todos', value: ''}}
+              options={lista}
+            />
+          </div>
+          </Box>
 
       <Row>
         <Col xs>

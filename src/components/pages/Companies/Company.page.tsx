@@ -101,10 +101,7 @@ const Company: React.FC = () => {
           <BsArrowLeft />
           <Text>Voltar</Text>
         </NavigationButton>
-        {/* <NavigationButton textColor="primary">
-          <Text>Editar Cadastro</Text>
-          <BsArrowRight />
-        </NavigationButton> */}
+        
       </Box>
 
       <Resume

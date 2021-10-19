@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '../../..';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { UserBarButton, UserInfo } from '../UserBar.styled';
 
-import Profile from '../../../../assets/profile.jpg';
+import Profile from '../../../../assets/user.svg';
 import { UserBarConfigProps } from '../UserBar.types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store';

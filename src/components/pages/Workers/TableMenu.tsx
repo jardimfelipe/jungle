@@ -58,6 +58,8 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
               <MenuButton danger>Excluir</MenuButton>
             </li>
           </ul>
+
+
         </MenuCard>
       )}
     </Transition>

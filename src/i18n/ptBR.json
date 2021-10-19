@@ -86,7 +86,8 @@
       "sector": "Setor",
       "function": "Função",
       "email": "Email",
-      "status": "Status"
+      "status": "Status",
+      "phone": "Telefone"
     }
   },
   "menu": {
