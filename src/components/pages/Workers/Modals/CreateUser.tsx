@@ -34,6 +34,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   const [currentFile, setCurrentFile] = useState<FormData | undefined>(
     undefined
   );
+  const [isModalOpen1, setModal1] = useState(false); 
+  const onClose1 = ()=>setModal1(!isModalOpen1);
 
   const handleFileChange = useCallback((files: File[]) => {
     if (!files.length) return setCurrentFile(undefined);
@@ -107,39 +109,74 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   }, [fileSuccess, dispatch, currentUser]);
 
   return (
-    <Modal width={581} height={455} onClose={onClose} isOpen={isModalOpen}>
-      <Box params={{
-        width: '443px',
-        paddingLeft: '69px',
-        paddingRight: '69px',
-      }}>
-        <Text style={{
-          fontFamily: 'Raleway',
-          fontStyle: 'normal',
-          fontWeight: 'bold',
-          fontSize: '24px',
-          lineHeight: '28px',
-          color: '#0062FF'   
-        }}> 
-          Cadastrar colaborador
-        </Text>
+    <div>
+      <Modal width={581} height={455} onClose={onClose} isOpen={isModalOpen}>
+        <Box params={{
+          width: '443px',
+          paddingLeft: '69px',
+          paddingRight: '69px',
+        }}>
+          <Text style={{
+            fontFamily: 'Raleway',
+            fontStyle: 'normal',
+            fontWeight: 'bold',
+            fontSize: '24px',
+            lineHeight: '28px',
+            color: '#0062FF'   
+          }}> 
+            Cadastrar colaborador
+          </Text>
 
-        <Button variant="primary" style={{
-          width: '443px',
-          height: '126px',
-          marginTop: '28px',
-          marginBottom: '20px'
-        }}>
-          Cadastrar manualmente um novo colaborador.
-        </Button>
-        <Button variant="primary" style={{
-          width: '443px',
-          height: '126px'
-        }}>
-          Cadastrar múltiplos colaboradores via planilha.
-        </Button>
-      </Box>
-    </Modal>
+          <Button variant="primary" style={{
+            width: '443px',
+            height: '126px',
+            marginTop: '28px',
+            marginBottom: '20px'
+          }}>
+            Cadastrar manualmente um novo colaborador.
+          </Button>
+          <Button variant="primary" onClick={onClose1} style={{
+            width: '443px',
+            height: '126px'
+          }}>
+            Cadastrar múltiplos colaboradores via planilha.
+          </Button>
+        </Box>
+      </Modal>
+      <Modal width={550} height={500} isOpen={isModalOpen1} onClose={onClose1}>
+        {isFileLoading && (
+          <Box
+            params={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+            }}
+          >
+            <ProgressBar
+              bgColor={theme.colors.blue}
+              height="3px"
+              completed={userFileProgress}
+              baseBgColor={rgba(theme.colors.blue, 0.1)}
+              isLabelVisible={false}
+              transitionDuration="0.3s"
+            />
+          </Box>
+        )}
+
+        {fileSuccess ? successFeedback() : usersFileUploader()}
+
+        <ModalButton
+          disabled={!currentFile || isFileLoading}
+          onClick={handleSubmit}
+          variant="primary"
+          block
+        >
+          {buttonContent()}
+        </ModalButton>
+      </Modal>
+    </div>
   );
 };
 
