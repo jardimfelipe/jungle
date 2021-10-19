@@ -35,7 +35,9 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     undefined
   );
   const [isModalOpen1, setModal1] = useState(false); 
+  const [isModalOpen2, setModal2] = useState(false);
   const onClose1 = ()=>setModal1(!isModalOpen1);
+  const onClose2 = ()=>setModal2(!isModalOpen2);
 
   const handleFileChange = useCallback((files: File[]) => {
     if (!files.length) return setCurrentFile(undefined);
@@ -110,6 +112,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
 
   return (
     <div>
+
       <Modal width={581} height={455} onClose={onClose} isOpen={isModalOpen}>
         <Box params={{
           width: '443px',
@@ -175,6 +178,9 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
         >
           {buttonContent()}
         </ModalButton>
+      </Modal>
+      <Modal width={550} height={500} isOpen={isModalOpen2} onClose={onClose2}>
+
       </Modal>
     </div>
   );
