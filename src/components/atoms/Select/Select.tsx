@@ -19,7 +19,7 @@ const ReactSelect: React.FC<SelectProps> = (props) => {
     control: (styles: any) => ({
       ...styles,
       backgroundColor: theme.colors.gray,
-      height: '45px',
+      height: '56px',
       border: '1px solid #B8CAE8',
       borderRadius: '10px',
     }),
