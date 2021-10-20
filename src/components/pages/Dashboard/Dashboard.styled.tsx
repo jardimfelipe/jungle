@@ -58,6 +58,30 @@ export const ModalButton = styled(StyledButton)`
   border-radius: 0;
 `;
 
+export const ModalGrid = styled.div`
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   border-radius: 0;
+
+   display: flex;
+   flex-direction: row;
+   
+`
+
+export const GridBtnLeft = styled(StyledButton)`
+  width: 100%;
+  border-radius: 0 0 0 20px;
+
+`
+
+export const GridBtnRight = styled(StyledButton)`
+  width: 100%;
+  border-radius: 0 0 20px 0;
+`
+
+
 export const GestorCard = styled(CardContainer)`
   flex: 0 0 calc(50% - 15px);
   ${media.lessThan('large')`

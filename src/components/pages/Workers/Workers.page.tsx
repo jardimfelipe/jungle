@@ -35,7 +35,9 @@ const Companies: React.FC = () => {
   const { t } = useTranslation();
   const lista = [
     {label: 'Todos', value: ''},
-    {label: '', value: ''}
+    {label: 'Ativo', value: 'Ativo'},
+    {label: 'Inativo', value: 'Inativo'},
+    {label: 'Pendente', value: 'Pendente'}
   ]
 
   const tableFields: Field[] = [
