@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { TableChartProps } from './TableChart.types';
@@ -19,9 +20,7 @@ const TableChart: React.FC<TableChartProps> = (props) => {
   const [stateOptions, setOptions] = useState(defaultOptions);
 
   useEffect(() => {
-    setOptions(
-      (stateOptions) => (stateOptions = { ...stateOptions, ...options })
-    );
+    setOptions((stateOptions)=>(stateOptions={...stateOptions, ...options}));
   }, [options]);
 
   return <Doughnut {...rest} options={stateOptions} data={data} />;
