@@ -123,7 +123,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   }, [fileSuccess, dispatch, currentUser]);
 
   const listaTipoCargo = [
-    {label: 'Selecione', value: ''},
+    
     {label: 'Gestor-supervisão ou gerência operacional', value: 'Gestor-supervisão ou gerência operacional'},
     {label: 'Gestor-média gerência', value: 'Gestor-média gerência'},
     {label: 'Gestor-Presidência/Diretoria', value: 'Gestor-Presidência/Diretoria'},
@@ -131,7 +131,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     {label: 'Terceirizado/Outsourcing', value: 'Terceirizado/Outsourcing'}
   ]
   const listaCargo = [
-    {label: 'Selecione', value: ''},
+    
     {label: 'Executivo e gestor sênior', value: 'Executivo e gestor sênior'},
     {label: 'Gerente e supervisor', value: 'Gerente e supervisor'},
     {label: 'Coordenador', value: 'Coordenador'},
@@ -145,7 +145,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     {label: 'Enfermeiro', value: 'Enfermeiro'}
   ]
   const listaArea = [
-    {label: 'Selecione', value: ''},
+    
     {label: 'Administrativo/Financeiro', value: 'Administrativo/Financeiro'},
     {label: 'Jurídico/Auditoria/Compliance', value: 'Jurídico/Auditoria/Compliance'},
     {label: 'Logística/Supply Chain', value: 'Logística/Supply Chain'},
@@ -159,7 +159,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     {label: 'Vendas/Comercial', value: 'Vendas/Comercial'}
   ]
   const listaLider = [
-    {label: 'Selecione', value: ''},
+    
     {label: 'Não', value: 'Não'},
     {label: 'Sim', value: 'Sim'}
   ]
@@ -169,10 +169,10 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
       name: '',
       email: '',
       unity_location: '', 
-      type_of_position: {value: '', label: ''},
-      office:  {value: '', label: ''},
-      area_department_board:  {value: '', label: ''},
-      people_leader:  {value: '', label: ''},
+      type_of_position: {value: '', label: 'Selecione'},
+      office:  {value: '', label: 'Selecione'},
+      area_department_board:  {value: '', label: 'Selecione'},
+      people_leader:  {value: '', label: 'Selecione'},
       direct_manager_email: ''
     },
     onSubmit: (values) => {
