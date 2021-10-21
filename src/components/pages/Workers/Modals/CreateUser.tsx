@@ -375,7 +375,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
 
             <Button style={{width: '265px', marginTop: '51px'}} onClick={onClose3} variant="primary">Adicionar Colaborador</Button>
 
-          </Box>
+          </Box> 
         </Box>
         
         

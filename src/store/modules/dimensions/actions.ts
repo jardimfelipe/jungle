@@ -36,4 +36,4 @@ export function deleteDimensionFailure(params: RequestError) {
 
 export function resetDimensionFeedback() {
   return action(DimensionsTypeKeys.RESET_FEEDBACK)
-}
+} 

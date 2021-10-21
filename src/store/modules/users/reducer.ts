@@ -13,7 +13,7 @@ const INITIAL_STATE: UsersState = {
   },
   fileSuccess: false
 };
-
+ 
 export default function Reducer(
   state: UsersState = INITIAL_STATE,
   action: UsersAction

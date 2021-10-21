@@ -13,7 +13,7 @@ function* getDimensions() {
       console.log(error)
     }
 
-  }
+  } 
 }
 
 function* createDimension({ payload }: ActionType<typeof actions.createDimensionsRequest>) {

@@ -15,7 +15,7 @@ export enum DimensionsTypeKeys {
   DELETE_DIMENSIONS_FAILURE = "@dimensions/DELETE_DIMENSIONS_FAILURE",
 
   RESET_FEEDBACK = "@dimensions/RESET_FEEDBACK",
-}
+} 
 
 export type DimensionsAction = ActionType<typeof actions>;
 
