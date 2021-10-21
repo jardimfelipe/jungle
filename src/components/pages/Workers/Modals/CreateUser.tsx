@@ -276,7 +276,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Select options={listaCargo} value={listaCargo[0]} />
             </div>
 
-            <div style={{marginTop: '32px'}}>
+            <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>Líder de pessoas</Label>
               <Select options={listaLider} value={listaLider[0]} />
             </div>
@@ -298,12 +298,12 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               <Select options={listaTipoCargo} value={listaTipoCargo[0]} />
             </div>
 
-            <div style={{marginTop: '32px'}}>
+            <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>Área/departamento/diretoria</Label>
               <Select    options={listaArea} value={listaArea[0]} />
             </div>
 
-            <div style={{marginTop: '32px'}}>
+            <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>E-mail Gestor Direto</Label>
               <Textfield placeholder="Digite o e-mail do gestor direto" />
             </div>

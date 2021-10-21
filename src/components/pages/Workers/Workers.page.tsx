@@ -147,6 +147,8 @@ const Companies: React.FC = () => {
 
   useEffect(() => {
     dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
+
+    
   }, [dispatch, currentUser]);
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
