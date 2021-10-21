@@ -10,8 +10,6 @@ import { TableMenuProps } from './Workers.type';
 import { GridBtnLeft, GridBtnRight, ModalButton, ModalGrid } from '../Dashboard/Dashboard.styled';
 
 import ModalSuccess from '../../../assets/ModalSuccess.svg';
-import { useFormik } from 'formik';
-import schema from './schema';
 
 
 const {Title, Text} = Typography;
@@ -78,24 +76,6 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
     {label: 'Sim', value: 'Sim'}
   ]
 
-  const formik = useFormik({
-      initialValues: { 
-        name: '',
-        email: '', 
-        unit_location: '', 
-        type_of_position: {value: '', label: ''}, 
-        office: {value: '', label: ''}, 
-        area_department_board:  {value: '', label: ''},
-        people_leader:  {value: '', label: ''},
-        direct_manager_email: ''
-      },
-      onSubmit: (values) => {
-        console.warn('valores:', values)
-      },
-      validateOnChange: false,
-      validationSchema: schema
-  })
-
   return (
     <div>
       <Transition in={isOpen} timeout={200} unmountOnExit>
@@ -151,45 +131,22 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
             width: '443px'
           }}>
             <Label>Nome completo</Label>
-            <Textfield 
-              name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              placeholder="Digite o nome completo" 
-            />
+            <Textfield placeholder="Digite o nome completo" />
                     
             <div style={{marginTop: '32px'}}>
               <Label>Unidade/localização</Label>
-              <Textfield
-                name="unit_location"
-                value={formik.values.unit_location}
-                onChange={formik.handleChange}
-                placeholder="Digite e unidade ou localização"
-              />
+              <Textfield placeholder="Digite e unidade ou localização" />
             </div>
 
             <div style={{marginTop: '32px'}}>
               <Label>Cargo</Label>
-              <Select 
-                options={listaCargo} 
-                value={formik.values.office}
-                onChange={(value)=>{
-                  formik.setFieldValue('office', value)
-                }}
-              />
+              <Select options={listaCargo} value={listaCargo[0]} />
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>Líder de pessoas</Label>
-              <Select 
-                options={listaLider} 
-                value={formik.values.people_leader}
-                onChange={(value)=>{
-                  formik.setFieldValue('people_leader', value)
-                }}
-              />
+              <Select options={listaLider} value={listaLider[0]} />
             </div>
-
 
             <Button style={{width: '265px', marginTop: '51px'}} variant="cancel">Cancelar</Button>
           
@@ -201,43 +158,21 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
             width: '443px'
           }}>
             <Label>E-mail</Label>
-            <Textfield 
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              placeholder="Digite o e-mail" 
-            />
+            <Textfield placeholder="Digite o e-mail" />
 
             <div style={{marginTop: '32px'}}>
               <Label>Tipo de cargo</Label>
-              <Select 
-                options={listaTipoCargo} 
-                value={formik.values.type_of_position}
-                onChange={(value)=>{
-                  formik.setFieldValue('type_of_position', value)
-                }}
-              />
+              <Select options={listaTipoCargo} value={listaTipoCargo[0]} />
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>Área/departamento/diretoria</Label>
-              <Select    
-                options={listaArea} 
-                value={formik.values.area_department_board}
-                onChange={(value)=>{
-                  formik.setFieldValue('area_department_board', value)
-                }}  
-              />
+              <Select    options={listaArea} value={listaArea[0]} />
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>E-mail Gestor Direto</Label>
-              <Textfield 
-                name="direct_manager_email"
-                value={formik.values.direct_manager_email}
-                onChange={formik.handleChange}
-                placeholder="Digite o e-mail do gestor direto" 
-              />
+              <Textfield placeholder="Digite o e-mail do gestor direto" />
             </div>
 
             <Button style={{width: '265px', marginTop: '51px'}} onClick={onClose2} variant="primary">Adicionar Colaborador</Button>
