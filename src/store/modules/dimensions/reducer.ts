@@ -6,9 +6,9 @@ const INITIAL_STATE: DimensionsState = {
   feedback: {
     status: '',
     message: ''
-  } 
+  }
 };
-
+ 
 export default function Reducer(
   state: DimensionsState = INITIAL_STATE,
   action: DimensionsAction

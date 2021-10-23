@@ -159,7 +159,6 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     {label: 'Vendas/Comercial', value: 'Vendas/Comercial'}
   ]
   const listaLider = [
-    
     {label: 'Não', value: 'Não'},
     {label: 'Sim', value: 'Sim'}
   ]
@@ -174,8 +173,11 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
       area_department_board:  {value: '', label: 'Selecione'},
       people_leader:  {value: '', label: 'Selecione'},
       direct_manager_email: ''
+
+      
     },
     onSubmit: (values) => {
+
       console.log('teste: ', values)
     },
     validateOnChange: false,
@@ -273,7 +275,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
         onClose();
         onClose2();
         }}>
-
+      
+      <form onSubmit={formik.handleSubmit}>
         <Box params={{
           display: 'flex',
           flexDirection: 'row',
@@ -290,6 +293,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               value={formik.values.name}
               onChange={formik.handleChange}
               placeholder="Digite o nome completo" 
+              error={!!formik.errors.name ? formik.errors.name : undefined }
             />
                     
             <div style={{marginTop: '32px'}}>
@@ -299,6 +303,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 value={formik.values.unity_location}
                 onChange={formik.handleChange}
                 placeholder="Digite e unidade ou localização" 
+                error={!!formik.errors.unity_location ? formik.errors.unity_location : undefined }
               />
             </div>
 
@@ -311,6 +316,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                   formik.setFieldValue('office', value);
                 }}
               />
+              <Text>{formik.errors.office}</Text>
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
@@ -322,6 +328,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                   formik.setFieldValue('people_leader', value)
                 }}
               />
+              <Text>{formik.errors.people_leader}</Text>
             </div>
 
             <Button style={{width: '265px', marginTop: '51px'}} onClick={onClose2} variant="cancel">Cancelar</Button>
@@ -373,12 +380,12 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               />
             </div>
 
-            <Button style={{width: '265px', marginTop: '51px'}} onClick={onClose3} variant="primary">Adicionar Colaborador</Button>
+            <Button style={{width: '265px', marginTop: '51px'}}  type="submit" variant="primary">Adicionar Colaborador</Button>
 
           </Box> 
         </Box>
-        
-        
+      </form> 
+         
       </Modal>
       <Modal width={766} height={473}  isOpen={isModalOpen3}>
           <Box params={{

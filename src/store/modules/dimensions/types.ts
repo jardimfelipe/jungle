@@ -1,7 +1,7 @@
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
 import { RequestFeedback } from "../exportTypes";
-
+ 
 export enum DimensionsTypeKeys {
   GET_DIMENSIONS_REQUEST = "@dimensions/GET_DIMENSIONS_REQUEST",
   GET_DIMENSIONS_SUCCESS = "@dimensions/GET_DIMENSIONS_SUCCESS",
@@ -15,7 +15,7 @@ export enum DimensionsTypeKeys {
   DELETE_DIMENSIONS_FAILURE = "@dimensions/DELETE_DIMENSIONS_FAILURE",
 
   RESET_FEEDBACK = "@dimensions/RESET_FEEDBACK",
-} 
+}  
 
 export type DimensionsAction = ActionType<typeof actions>;
 
@@ -44,4 +44,3 @@ export type DimensionsState = {
   isLoading: boolean;
   feedback: RequestFeedback
 }
-

@@ -1,19 +1,21 @@
-import { CollaboratorAction, CollaboratorState } from './types'
+import { CollaboratorState, CollaboratorAction, CollaboratorTypeKeys }  from './types'
 
 const INITIAL_STATE: CollaboratorState = {
-    users: [],
-    error: { 
-        status: false,
-        message: ''
-    }
+    collaborator: []    
 }
 
 export default function Reducer(
     state: CollaboratorState = INITIAL_STATE,
-    action: CollaboratorAction    
+    action: CollaboratorAction
 ): CollaboratorState {
     switch (action.type){
-        case CollaboratorTypeKeys.GET:
-            return 
+        case CollaboratorTypeKeys.CREATE_COLLABORATOR_REQUEST:
+            return {
+                ...state,
+                collaborator: [...state.collaborator, action.payload]
+            }
+        default:
+            return state
     }
 }
+

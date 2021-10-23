@@ -3,7 +3,7 @@ import { ActionType } from "typesafe-actions";
 import api from "../../../services/api";
 import * as actions from "./actions";
 import { DimensionsTypeKeys } from "./types";
-
+ 
 function* getDimensions() {
   try {
     const { data } = yield call(api, "/dimensions");
@@ -13,7 +13,7 @@ function* getDimensions() {
       console.log(error)
     }
 
-  } 
+  }  
 }
 
 function* createDimension({ payload }: ActionType<typeof actions.createDimensionsRequest>) {

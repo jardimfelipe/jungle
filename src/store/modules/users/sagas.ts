@@ -21,7 +21,7 @@ function* getUsers({ payload }: ActionType<typeof actions.getUsersRequest>) {
 
   }
 }
-
+ 
 function* getGestores() {
   try {
     const { data } = yield call(api, "/users");
