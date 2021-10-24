@@ -8,6 +8,7 @@ import results from "./results/reducer";
 import questionaries from "./questionaries/reducer";
 import users from "./users/reducer";
 import questions from "./questions/reducer";
+import collaborator from './collaborator/reducer'
 
 export default combineReducers<RootState>({
   login,
@@ -17,5 +18,6 @@ export default combineReducers<RootState>({
   results,
   questionaries,
   users,
-  questions
+  questions,
+  collaborator
 });

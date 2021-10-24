@@ -8,7 +8,7 @@ import 'rc-slider/assets/index.css';
 
 import { useTheme } from 'styled-components';
 import { SliderContainer } from '../DImensions.styled';
-
+ 
 import { useFormik } from 'formik';
 import schema from './schema';
 import { ErrorMessage } from '../../../atoms/Textfield/Textfield.styled';
@@ -135,7 +135,7 @@ const DimensionForm: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                     onChange={(value) =>
                       formik.setFieldValue('mandatory', value)
                     }
-                    trackStyle={{
+                   trackStyle={{
                       backgroundColor: theme.colors.p1,
                       height: 8,
                     }}

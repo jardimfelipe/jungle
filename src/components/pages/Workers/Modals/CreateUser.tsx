@@ -24,6 +24,8 @@ import { useTheme } from 'styled-components';
 import { rgba } from 'polished';
 import { FaCheckCircle } from 'react-icons/fa';
 
+import { createCollaboratorRequest } from '../../../../store/modules/collaborator/actions'
+
 const { Title, Text } = Typography;
 
 
@@ -169,20 +171,56 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
       email: '',
       unity_location: '', 
       type_of_position: {value: '', label: 'Selecione'},
+      type_of_position_s: '',
+
       office:  {value: '', label: 'Selecione'},
+      office_s: '',
+
       area_department_board:  {value: '', label: 'Selecione'},
+      area_department_board_s: '',
+
       people_leader:  {value: '', label: 'Selecione'},
+      people_leader_s: '',
+
       direct_manager_email: ''
 
       
     },
     onSubmit: (values) => {
-
-      console.log('teste: ', values)
+      console.log(currentUser)
+      let objeto = {
+        name: values.name,
+        unity: values.unity_location,
+        office: values.office_s,
+        people_leader: values.people_leader_s,
+        email: values.email,
+        type_position: values.type_of_position_s,
+        department: values.area_department_board_s,
+        direct_manager_email: values.direct_manager_email,
+        cpf: '',
+        rne: '',  
+        company: currentUser.company,
+        password: '1234',
+        genere: '',
+        age: '',
+        house_time: '', 
+        education: '',  
+        ethnicity: '',
+        sexual_orientation: '',
+        marital_status: '',
+        sons: '',
+        phone: '', 
+        photo: '', 
+        role: '' 
+      } 
+      dispatch(createCollaboratorRequest(objeto));
     },
     validateOnChange: false,
     validationSchema: schema
   })
+
+
+  
 
   return (
     <div>
@@ -314,6 +352,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 value={formik.values.office}
                 onChange={(value)=>{
                   formik.setFieldValue('office', value);
+                  formik.setFieldValue('office_s', value == null ? null : value.value)
                 }}
               />
               <Text>{formik.errors.office}</Text>
@@ -326,6 +365,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 value={formik.values.people_leader}
                 onChange={(value)=>{
                   formik.setFieldValue('people_leader', value)
+                  formik.setFieldValue('people_leader_s',  value == null ? null : value.value)
+                  
                 }}
               />
               <Text>{formik.errors.people_leader}</Text>
@@ -346,6 +387,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
               value={formik.values.email}
               onChange={formik.handleChange}
               placeholder="Digite o e-mail"
+              error={!!formik.errors.email ? formik.errors.email : undefined }
             />
 
             <div style={{marginTop: '32px'}}>
@@ -355,6 +397,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 value={formik.values.type_of_position}
                 onChange={(value)=>{
                   formik.setFieldValue('type_of_position', value)
+                  formik.setFieldValue('type_of_position_s', value == null ? null : value.value)
+
                 }}
               />
             </div>
@@ -366,8 +410,11 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 value={formik.values.area_department_board}
                 onChange={(value)=>{
                   formik.setFieldValue('area_department_board', value)
+                  formik.setFieldValue('area_department_board_s', value == null ? null : value.value)
+
                 }}
               />
+              <Text>{formik.errors.area_department_board}</Text>
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
@@ -377,6 +424,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
                 value={formik.values.direct_manager_email}
                 onChange={formik.handleChange}
                 placeholder="Digite o e-mail do gestor direto" 
+                error={!!formik.errors.direct_manager_email ? formik.errors.direct_manager_email : undefined }
               />
             </div>
 
