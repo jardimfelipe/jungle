@@ -17,7 +17,7 @@ function* createCollaborator({payload}: ActionType<typeof actions.createCollabor
     catch(error){
         if(error instanceof Error){
           console.error('Colaborador:', error.message, '\n', error)
-          yield put(actions.getCollaboratorFail())
+          yield put(actions.getCollaboratorSuccess())
         }
     }
 }
@@ -43,7 +43,7 @@ function* inactivateCollaborator({payload}: ActionType<typeof actions.inactivate
   try{
     const { data } = yield call(api, `/users/${payload._id}`, {
       method: 'PUT',
-      data: {...payload, active: false }
+      data: {...payload, activate: false }
     })
     console.warn('Colaborador: ', data)
     yield put(actions.getCollaboratorSuccess())

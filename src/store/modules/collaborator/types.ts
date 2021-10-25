@@ -43,7 +43,7 @@ export type CollaboratorId = {
 
 export type CollaboratorInactive = {
   _id: string, 
-  active: boolean,
+  activate: boolean,
   company: string,
   name: string,
   unity: string,

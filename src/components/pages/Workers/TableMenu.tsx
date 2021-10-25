@@ -13,7 +13,7 @@ import ModalSuccess from '../../../assets/ModalSuccess.svg';
 import { useFormik } from 'formik';
 import schema from './schema';
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteCollaboratorRequest, editCollaboratorRequest } from '../../../store/modules/collaborator/actions';
+import { deleteCollaboratorRequest, editCollaboratorRequest, inactivateCollaboratorRequest } from '../../../store/modules/collaborator/actions';
 import { RootState } from '../../../store';
 
 
@@ -35,8 +35,6 @@ const menuTransition = {
 const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
   const dispatch = useDispatch()
   const theme = useTheme();
-  const [ tabelaOpen, setTabelaOpen ] = useState(isOpen)
-
   const [isModalOpen1, setModalOpen1 ] = useState(false);
   const [isModalOpen2, setModalOpen2] = useState(false);
   const onClose1 = () => setModalOpen1(!isModalOpen1);
@@ -155,7 +153,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
 
   return (
     <div>
-      <Transition in={tabelaOpen} timeout={200} unmountOnExit >
+      <Transition in={isOpen} timeout={200} unmountOnExit>
         {(state) => (
           <MenuCard
             style={{
@@ -183,14 +181,44 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
               <li role="menuitem">
                 <MenuButton>Reenviar e-mail</MenuButton>
               </li>
-              <li role="menuitem">
+              <li role="menuitem" onClick={()=>{
+                let objeto = {
+                  _id: usuario?._id == undefined ? '' : usuario?._id, 
+                  activate: false,
+                  company: usuario?.company == undefined ? '' : usuario?.company,
+                  name: usuario?.name == undefined ? '' : usuario?.name,
+                  unity: usuario?.unity == undefined ? '' : usuario?.unity,
+                  office: usuario?.office == undefined ? '' : usuario?.office,
+                  people_leader: usuario?.people_leader == undefined ? '' : usuario?.people_leader,
+                  email: usuario?.email == undefined ? '' : usuario?.email,
+                  type_position: usuario?.type_position == undefined ? '' : usuario?.type_position,
+                  department: usuario?.department == undefined ? '' : usuario?.department,
+                  direct_manager_email: usuario?.direct_manager_email == undefined ? '' : usuario?.direct_manager_email,
+                  cpf: usuario?.cpf == undefined ? '' : usuario?.cpf, 
+                  rne: usuario?.rne == undefined ? '' : usuario?.rne, 
+                  password: usuario?.password == undefined ? '' : usuario?.password,
+                  genere: usuario?.genere == undefined ? '' : usuario?.genere,
+                  age: usuario?.age == undefined ? '' : usuario?.age,
+                  house_time: usuario?.house_time == undefined ? '' : usuario?.house_time, 
+                  education: usuario?.education == undefined ? '' : usuario?.education,  
+                  ethnicity: usuario?.ethnicity == undefined ? '' : usuario?.ethnicity,
+                  sexual_orientation: usuario?.sexual_orientation == undefined ? '' : usuario?.sexual_orientation,
+                  marital_status: usuario?.marital_status == undefined ? '' : usuario?.marital_status,
+                  sons: usuario?.sons == undefined ? '' : usuario?.sons,
+                  phone: usuario?.phone == undefined ? '' : usuario?.phone, 
+                  photo: usuario?.photo == undefined ? '' : usuario?.photo, 
+                  role: usuario?.role == undefined ? '' : usuario?.role 
+                }
+
+                dispatch(inactivateCollaboratorRequest(objeto))
+                
+              }}>
                 <MenuButton>Inativar</MenuButton>
               </li>
               <li role="menuitem">
                 <MenuButton danger onClick={()=>{
                   let usr = usuario?._id == undefined ? {_id: ''} : {_id: usuario?._id}
                   dispatch(deleteCollaboratorRequest(usr));
-                  
                 }}>Excluir</MenuButton>
               </li>
             </ul>
@@ -256,7 +284,10 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
             </div>
 
 
-            <Button style={{width: '265px', marginTop: '51px'}} variant="cancel">Cancelar</Button>
+            <Button style={{width: '265px', marginTop: '51px'}} onClick={()=>{
+              onClose()
+              onClose1()
+            }} variant="cancel">Cancelar</Button>
           
           </Box>
           <Box params={{
@@ -313,7 +344,8 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
             </div>
 
             <Button style={{width: '265px', marginTop: '51px'}} type="submit" variant="primary" onClick={()=>{
-              console.log(formik.values)
+             onClose1()
+             onClose2()
             }}>Editar Colaborador</Button>
           
           </Box>

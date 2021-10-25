@@ -220,20 +220,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
     validationSchema: schema
   })
 
-  function recarregar(){
-    formik.setFieldValue('name', '');
-    formik.setFieldValue('email', '');
-    formik.setFieldValue('unity_location', '');
-    formik.setFieldValue('type_of_position', {value: '', label: 'Selecione'});
-    formik.setFieldValue('type_of_position_s', '');
-    formik.setFieldValue('office', {value: '', label: 'Selecione'});
-    formik.setFieldValue('office_s', '');
-    formik.setFieldValue('area_department_board', {value: '', label: 'Selecione'});
-    formik.setFieldValue('area_department_board_s', '');
-    formik.setFieldValue('people_leader', {value: '', label: 'Selecione'});
-    formik.setFieldValue('people_leader_s', '');
-    formik.setFieldValue('direct_manager_email', '');
-  }
+
+  
 
   return (
     <div>
@@ -325,7 +313,6 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
       <Modal width={1073} height={752} isOpen={isModalOpen2} onClose={()=>{
         onClose();
         onClose2();
-        recarregar()
         }}>
       
       <form onSubmit={formik.handleSubmit}>
@@ -386,11 +373,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
               <Text>{formik.errors.people_leader}</Text>
             </div>
 
-            <Button style={{width: '265px', marginTop: '51px'}} onClick={()=>{
-              onClose();
-              onClose2();
-              recarregar();
-            }} variant="cancel">Cancelar</Button>
+            <Button style={{width: '265px', marginTop: '51px'}} onClick={onClose2} variant="cancel">Cancelar</Button>
           
           </Box>
           <Box params={{
@@ -447,9 +430,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
             </div>
 
             <Button style={{width: '265px', marginTop: '51px'}}  type="submit" onClick={()=>{
-              onClose2();
-              onClose3();
-              recarregar();
+              onClose3()
             }} variant="primary">Adicionar Colaborador</Button>
 
           </Box> 
@@ -457,12 +438,11 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
       </form> 
          
       </Modal>
-      <Modal width={766} height={473}  isOpen={isModalOpen3} hasCloseButton={false} >
+      <Modal width={766} height={473}  isOpen={isModalOpen3}>
           <Box params={{
             display: 'flex',
             flexDirection: 'row',
-            alignItems: 'center',
-            marginTop: '66px'
+            alignItems: 'center'
           }}>
             <Box params={{
               width: '235px',
@@ -493,23 +473,12 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
           <ModalGrid>
             <GridBtnLeft variant="secondary"
               onClick={()=>{
-                onClose3();
                 onClose();
-                recarregar();
-              }}
-            >
-              Fechar
-            </GridBtnLeft>
-            <GridBtnRight variant="primary" 
-              onClick={()=>{
-                onClose1();
                 onClose2();
                 onClose3();
-                recarregar();
               }}
-            >
-              Cadastrar novo colaborador
-            </GridBtnRight>
+            >Fechar</GridBtnLeft>
+            <GridBtnRight variant="primary">Cadastrar novo colaborador</GridBtnRight>
           </ModalGrid>
         
       </Modal>
