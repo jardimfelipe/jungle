@@ -60,7 +60,7 @@ export type UsersState = {
   error: RequestError;
   fileSuccess: boolean;
 }
-
+ 
 export type GetUserParams = {
   headers: {
     company: string

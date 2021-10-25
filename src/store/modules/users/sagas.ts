@@ -33,7 +33,7 @@ function* getGestores() {
     }
 
   }
-}
+} 
 
 function* createUsers({ payload }: ActionType<typeof actions.createUsersRequest>): any {
   const channel = yield hackyCall(createUploadFileChannel, "/importings/upload", payload);

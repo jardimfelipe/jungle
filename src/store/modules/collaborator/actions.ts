@@ -15,4 +15,12 @@ export function editCollaboratorRequest(params: CollaboratorEdit){
 
 export function inactivateCollaboratorRequest(params: CollaboratorInactive){
   return action(CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUES, params)
+} 
+
+export function getCollaboratorSuccess(){
+  return action(CollaboratorTypeKeys.GET_COLLABORATOR_SUCCESS)
+}
+
+export function getCollaboratorFail(){
+  return action(CollaboratorTypeKeys.GET_COLLABORATOR_FAIL);
 }

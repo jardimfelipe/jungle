@@ -12,7 +12,7 @@ const INITIAL_STATE: UsersState = {
     message: ''
   },
   fileSuccess: false
-}; 
+};  
  
 export default function Reducer(
   state: UsersState = INITIAL_STATE,

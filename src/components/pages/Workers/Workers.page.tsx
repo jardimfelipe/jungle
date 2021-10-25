@@ -28,6 +28,7 @@ import { useTheme } from 'styled-components';
 import TableMenu from './TableMenu';
 import CreateUser from './Modals/CreateUser';
 import { useTranslation } from 'react-i18next';
+import { Text } from '../../atoms/Typography/text';
 
 const { Title } = Typography;
 
@@ -109,6 +110,8 @@ const Companies: React.FC = () => {
   const dispatch = useDispatch();
   const { users, isLoading } = useSelector((state: RootState) => state.users);
   const { currentUser } = useSelector(({ login }: RootState) => login);
+  const carregar = useSelector(({ collaborator }: RootState) => collaborator.isLoading)
+  
 
   const handleTableButtonClick = (index: number) => {
     setCurrentOpenMenu(index);
@@ -148,9 +151,13 @@ const Companies: React.FC = () => {
 
   useEffect(() => {
     dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
-
+    console.warn('carregar:', carregar)
     
   }, [dispatch, currentUser]);
+
+
+
+
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
@@ -224,6 +231,7 @@ const Companies: React.FC = () => {
           </div>
           </Box>
 
+
       <Row>
         <Col xs>
           <Table
@@ -234,7 +242,8 @@ const Companies: React.FC = () => {
         </Col>
       </Row>
 
-      <CreateUser onClose={handleModalClose} isModalOpen={isModalOpen} />
+
+      <CreateUser onClose={handleModalClose} isModalOpen={isModalOpen}  />
     </Box>
   );
 };

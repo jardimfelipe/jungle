@@ -33,9 +33,10 @@ const { Title, Text } = Typography;
 type ModalProps = {
   onClose: () => void;
   isModalOpen: boolean;
+  reload?: () => void;
 };
 
-const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
+const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const { userFileProgress, isFileLoading, error, fileSuccess } = useSelector(

@@ -1,7 +1,8 @@
 import { CollaboratorState, CollaboratorAction, CollaboratorTypeKeys }  from './types'
 
 const INITIAL_STATE: CollaboratorState = {
-    collaborator: []    
+    collaborator: [],
+    isLoading: false  
 }
 
 export default function Reducer(
@@ -26,8 +27,18 @@ export default function Reducer(
             return {
                 ...state
             }
+        case CollaboratorTypeKeys.GET_COLLABORATOR_SUCCESS:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case CollaboratorTypeKeys.GET_COLLABORATOR_FAIL:
+            return {
+                ...state,
+                isLoading: false
+            }
         default:
             return state
     }
 }
-
+ 
