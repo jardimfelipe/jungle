@@ -94,6 +94,7 @@ const Companies: React.FC = () => {
           <TableMenu
             onClose={() => handleCloseButton()}
             isOpen={currentOpenMenu === index}
+            usr={item}
           />
           <ColumnButton onClick={() => handleTableButtonClick(index)}>
             <BsThreeDotsVertical color={theme.colors.black} size="24" />

@@ -14,6 +14,18 @@ export default function Reducer(
                 ...state,
                 collaborator: [...state.collaborator, action.payload]
             }
+        case CollaboratorTypeKeys.DELETE_COLLABORATOR_REQUEST:
+            return {
+                ...state
+            }
+        case CollaboratorTypeKeys.EDIT_COLLABORATOR_REQUEST:
+            return {
+                ...state
+            }
+        case CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUES:
+            return {
+                ...state
+            }
         default:
             return state
     }

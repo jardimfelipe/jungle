@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { useTheme } from 'styled-components';
 import { Image, Box, Button, Label, Modal, Typography, Select, Textfield } from '../..';
@@ -12,6 +12,9 @@ import { GridBtnLeft, GridBtnRight, ModalButton, ModalGrid } from '../Dashboard/
 import ModalSuccess from '../../../assets/ModalSuccess.svg';
 import { useFormik } from 'formik';
 import schema from './schema';
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteCollaboratorRequest, editCollaboratorRequest } from '../../../store/modules/collaborator/actions';
+import { RootState } from '../../../store';
 
 
 const {Title, Text} = Typography;
@@ -29,13 +32,16 @@ const menuTransition = {
   exited: { width: 0, height: 0 },
 };
 
-const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
+const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
+  const dispatch = useDispatch()
   const theme = useTheme();
   const [isModalOpen1, setModalOpen1 ] = useState(false);
   const [isModalOpen2, setModalOpen2] = useState(false);
   const onClose1 = () => setModalOpen1(!isModalOpen1);
   const onClose2 = ()=> setModalOpen2(!isModalOpen2);
-
+  const [ usuario, setUsuario ] = useState(usr);
+  const { currentUser } = useSelector(({ login }: RootState) => login);
+  
   const listaTipoCargo = [
     {label: 'Selecione', value: ''},
     {label: 'Gestor-supervisão ou gerência operacional', value: 'Gestor-supervisão ou gerência operacional'},
@@ -80,21 +86,70 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
 
   const formik = useFormik({
       initialValues: { 
-        name: '',
-        email: '', 
-        unit_location: '', 
-        type_of_position: {value: '', label: ''}, 
-        office: {value: '', label: ''}, 
-        area_department_board:  {value: '', label: ''},
-        people_leader:  {value: '', label: ''},
-        direct_manager_email: ''
+        name: usuario?.name == undefined ? '' : usuario?.name,
+        email: usuario?.email == undefined ? '' : usuario?.email, 
+        unity_location: usuario?.unity == undefined ? '' : usuario?.unity, 
+        type_of_position: {
+          value: usuario?.type_position == undefined ? '' : usuario?.type_position, 
+          label: usuario?.type_position == undefined ? '' : usuario?.type_position
+        }, 
+        type_of_position_s: usuario?.type_position == undefined ? '' : usuario?.type_position,
+        office: {
+          value: usuario?.office == undefined ? '' : usuario?.office, 
+          label: usuario?.office == undefined ? '' : usuario?.office
+        }, 
+        office_s: usuario?.office == undefined ? '' : usuario?.office,
+        area_department_board:  {
+          value: usuario?.department == undefined ? '' : usuario?.department, 
+          label: usuario?.department == undefined ? '' : usuario?.department
+        },
+        area_department_board_s: usuario?.department == undefined ? '' : usuario?.department,
+        people_leader:  {
+          value: usuario?.people_leader == undefined ? '' : usuario?.people_leader, 
+          label: usuario?.people_leader == undefined ? '' : usuario?.people_leader
+        },
+        people_leader_s: usuario?.people_leader == undefined ? '' : usuario?.people_leader,
+        direct_manager_email:  usuario?.direct_manager_email == undefined ? '' : usuario?.direct_manager_email
       },
       onSubmit: (values) => {
-        console.warn('valores:', values)
+        console.log(currentUser)
+        let objeto = {
+          name: values.name,
+          unity: values.unity_location,
+          office: values.office_s,
+          people_leader: values.people_leader_s,
+          email: values.email,
+          type_position: values.type_of_position_s,
+          department: values.area_department_board_s,
+          direct_manager_email: values.direct_manager_email,
+          cpf: '',
+          rne: '',  
+          company: currentUser.company,
+          password: '1234',
+          genere: '',
+          age: '',
+          house_time: '', 
+          education: '',  
+          ethnicity: '',
+          sexual_orientation: '',
+          marital_status: '',
+          sons: '',
+          phone: '', 
+          photo: '', 
+          role: '',
+          _id: usuario?._id == undefined ? '' : usuario?._id,
+           
+        } 
+        dispatch(editCollaboratorRequest(objeto));
+        
       },
       validateOnChange: false,
       validationSchema: schema
   })
+
+  useEffect(()=>{
+      
+  }, [])
 
   return (
     <div>
@@ -130,7 +185,10 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
                 <MenuButton>Inativar</MenuButton>
               </li>
               <li role="menuitem">
-                <MenuButton danger>Excluir</MenuButton>
+                <MenuButton danger onClick={()=>{
+                  let usr = usuario?._id == undefined ? {_id: ''} : {_id: usuario?._id}
+                  dispatch(deleteCollaboratorRequest(usr));
+                }}>Excluir</MenuButton>
               </li>
             </ul>
 
@@ -139,7 +197,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
         )}
       </Transition>
       <Modal width={1073} height={752} isOpen={isModalOpen1} onClose={onClose1}>
-
+      <form onSubmit={formik.handleSubmit}>
         <Box params={{
           display: 'flex',
           flexDirection: 'row',
@@ -156,15 +214,17 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
               value={formik.values.name}
               onChange={formik.handleChange}
               placeholder="Digite o nome completo" 
-            />
+              error={!!formik.errors.name ? formik.errors.name : undefined }
+              />
                     
             <div style={{marginTop: '32px'}}>
               <Label>Unidade/localização</Label>
               <Textfield
                 name="unit_location"
-                value={formik.values.unit_location}
+                value={formik.values.unity_location}
                 onChange={formik.handleChange}
                 placeholder="Digite e unidade ou localização"
+                error={!!formik.errors.unity_location ? formik.errors.unity_location : undefined }
               />
             </div>
 
@@ -175,6 +235,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
                 value={formik.values.office}
                 onChange={(value)=>{
                   formik.setFieldValue('office', value)
+                  formik.setFieldValue('office_s', value == null ? null : value.value)
                 }}
               />
             </div>
@@ -185,7 +246,8 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
                 options={listaLider} 
                 value={formik.values.people_leader}
                 onChange={(value)=>{
-                  formik.setFieldValue('people_leader', value)
+                  formik.setFieldValue('people_leader', value)                  
+                  formik.setFieldValue('people_leader_s', value == null ? null : value.value)
                 }}
               />
             </div>
@@ -206,6 +268,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
               value={formik.values.email}
               onChange={formik.handleChange}
               placeholder="Digite o e-mail" 
+              error={!!formik.errors.email ? formik.errors.email : undefined }
             />
 
             <div style={{marginTop: '32px'}}>
@@ -215,8 +278,10 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
                 value={formik.values.type_of_position}
                 onChange={(value)=>{
                   formik.setFieldValue('type_of_position', value)
+                  formik.setFieldValue('type_of_position_s', value == null ? null : value.value)
                 }}
               />
+              <Text>{formik.errors.type_of_position}</Text>
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
@@ -226,8 +291,10 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
                 value={formik.values.area_department_board}
                 onChange={(value)=>{
                   formik.setFieldValue('area_department_board', value)
+                  formik.setFieldValue('area_department_board_s', value == null ? null : value.value)
                 }}  
               />
+              <Text>{formik.errors.area_department_board}</Text>
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
@@ -237,14 +304,18 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose }) => {
                 value={formik.values.direct_manager_email}
                 onChange={formik.handleChange}
                 placeholder="Digite o e-mail do gestor direto" 
+                error={!!formik.errors.direct_manager_email ? formik.errors.direct_manager_email : undefined } 
               />
+              <Text>{formik.errors.direct_manager_email}</Text>
             </div>
 
-            <Button style={{width: '265px', marginTop: '51px'}} onClick={onClose2} variant="primary">Adicionar Colaborador</Button>
+            <Button style={{width: '265px', marginTop: '51px'}} type="submit" variant="primary" onClick={()=>{
+              console.log(formik.values)
+            }}>Editar Colaborador</Button>
           
           </Box>
-
         </Box>
+      </form>
         
       </Modal>
       <Modal width={766} height={473} isOpen={isModalOpen2}>
