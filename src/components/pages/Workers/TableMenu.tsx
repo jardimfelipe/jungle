@@ -35,6 +35,8 @@ const menuTransition = {
 const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
   const dispatch = useDispatch()
   const theme = useTheme();
+  const [ tabelaOpen, setTabelaOpen ] = useState(isOpen)
+
   const [isModalOpen1, setModalOpen1 ] = useState(false);
   const [isModalOpen2, setModalOpen2] = useState(false);
   const onClose1 = () => setModalOpen1(!isModalOpen1);
@@ -153,7 +155,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
 
   return (
     <div>
-      <Transition in={isOpen} timeout={200} unmountOnExit>
+      <Transition in={tabelaOpen} timeout={200} unmountOnExit >
         {(state) => (
           <MenuCard
             style={{
@@ -188,6 +190,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                 <MenuButton danger onClick={()=>{
                   let usr = usuario?._id == undefined ? {_id: ''} : {_id: usuario?._id}
                   dispatch(deleteCollaboratorRequest(usr));
+                  
                 }}>Excluir</MenuButton>
               </li>
             </ul>

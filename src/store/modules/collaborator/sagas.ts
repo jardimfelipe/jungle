@@ -45,10 +45,12 @@ function* deleteCollaborator({payload}: ActionType<typeof actions.deleteCollabor
       method: 'DELETE'
     })
     console.warn('Colaborador', data)
+    return data
   }
   catch(error){
     if(error instanceof Error){
-      console.error('Caolaborador', error.message, '\n', error)
+      console.error('Colaborador', error.message, '\n', error)
+      return error
     }
   }
 }
