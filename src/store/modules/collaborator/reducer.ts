@@ -2,9 +2,9 @@ import { CollaboratorState, CollaboratorAction, CollaboratorTypeKeys }  from './
 
 const INITIAL_STATE: CollaboratorState = {
     collaborator: [],
-    isLoading: false  
+    isConcluded: false  
 }
-
+ 
 export default function Reducer(
     state: CollaboratorState = INITIAL_STATE,
     action: CollaboratorAction
@@ -13,29 +13,33 @@ export default function Reducer(
         case CollaboratorTypeKeys.CREATE_COLLABORATOR_REQUEST:
             return {
                 ...state,
-                collaborator: [...state.collaborator, action.payload]
+                collaborator: [...state.collaborator, action.payload],
+                isConcluded: true
             }
         case CollaboratorTypeKeys.DELETE_COLLABORATOR_REQUEST:
             return {
-                ...state
+                ...state,
+                isConcluded: true
             }
         case CollaboratorTypeKeys.EDIT_COLLABORATOR_REQUEST:
             return {
-                ...state
+                ...state,
+                isConcluded: true
             }
         case CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUES:
             return {
-                ...state
+                ...state,
+                isConcluded: true
             }
         case CollaboratorTypeKeys.GET_COLLABORATOR_SUCCESS:
             return {
                 ...state,
-                isLoading: true
+                isConcluded: false
             }
         case CollaboratorTypeKeys.GET_COLLABORATOR_FAIL:
             return {
                 ...state,
-                isLoading: false
+                isConcluded: true
             }
         default:
             return state

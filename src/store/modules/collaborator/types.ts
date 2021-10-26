@@ -105,5 +105,5 @@ export type CollaboratorAction = ActionType<typeof actions>
 
 export type CollaboratorState = {
   collaborator: Collaborator[];
-  isLoading: boolean;
+  isConcluded: boolean;
 } 

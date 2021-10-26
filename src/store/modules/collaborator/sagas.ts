@@ -11,13 +11,13 @@ function* createCollaborator({payload}: ActionType<typeof actions.createCollabor
         method: 'POST', 
         data: {...payload}
       })
-      console.warn('Colaborador: ', data)
+      //console.warn('Colaborador: ', data)
       yield put(actions.getCollaboratorSuccess())
     }
     catch(error){
         if(error instanceof Error){
-          console.error('Colaborador:', error.message, '\n', error)
-          yield put(actions.getCollaboratorSuccess())
+          //console.error('Colaborador:', error.message, '\n', error)
+          yield put(actions.getCollaboratorFail())
         }
     }
 }
@@ -28,13 +28,13 @@ function* editCollaborator({payload}: ActionType<typeof actions.editCollaborator
       method: 'PUT',
       data: {...payload}
     })
-    console.warn('Colaborador: ', data )
-    yield put(actions.getCollaboratorSuccess())
+    //console.warn('Colaborador: ', data )
+      yield put(actions.getCollaboratorSuccess())    
   }
   catch(error){
     if(error instanceof Error){
-      console.error('Colaborador:', error.message, '\n', error)
-      yield put(actions.getCollaboratorFail())
+      //console.error('Colaborador:', error.message, '\n', error)
+      yield put(actions.getCollaboratorFail())      
     }
   }
 }
@@ -45,12 +45,12 @@ function* inactivateCollaborator({payload}: ActionType<typeof actions.inactivate
       method: 'PUT',
       data: {...payload }
     })
-    console.warn('Colaborador: ', data)
-    yield put(actions.getCollaboratorSuccess())
+    //console.warn('Colaborador: ', data)
+    yield put(actions.getCollaboratorSuccess())   
   }
   catch(error){
     if(error instanceof Error){
-      console.error('Colaborador:', error.message, '\n', error)
+      //console.error('Colaborador:', error.message, '\n', error)
       yield put(actions.getCollaboratorFail())
     }
   }
@@ -61,16 +61,17 @@ function* deleteCollaborator({payload}: ActionType<typeof actions.deleteCollabor
     const { data } = yield call(api, `/users/${payload._id}`, {
       method: 'DELETE'
     })
-    console.warn('Colaborador', data)
+    //console.warn('Colaborador', data)
     yield put(actions.getCollaboratorSuccess())
   }
   catch(error){
     if(error instanceof Error){
-      console.error('Colaborador', error.message, '\n', error)
+      //console.error('Colaborador', error.message, '\n', error)
       yield put(actions.getCollaboratorFail())
     } 
   }
 }
+
 
 export default all([ 
   takeLatest(CollaboratorTypeKeys.CREATE_COLLABORATOR_REQUEST, createCollaborator),

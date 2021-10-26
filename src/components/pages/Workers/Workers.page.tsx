@@ -29,6 +29,8 @@ import TableMenu from './TableMenu';
 import CreateUser from './Modals/CreateUser';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../../atoms/Typography/text';
+import { getCollaboratorFail } from '../../../store/modules/collaborator/actions';
+
 
 const { Title } = Typography;
 
@@ -112,7 +114,7 @@ const Companies: React.FC = () => {
   const dispatch = useDispatch();
   const { users, isLoading } = useSelector((state: RootState) => state.users);
   const { currentUser } = useSelector(({ login }: RootState) => login);
-  const carregar = useSelector(({ collaborator }: RootState) => collaborator.isLoading)
+  const carregar = useSelector(({ collaborator }: RootState) => collaborator.isConcluded)
   
 
   const handleTableButtonClick = (index: number) => {
@@ -153,7 +155,7 @@ const Companies: React.FC = () => {
 
   useEffect(() => {
     dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
-    console.warn('carregar:', carregar)
+    console.warn('carregar:', carregar == true || isLoading == true ? 'Carregar' : 'Não carregar')
     
   }, [dispatch, currentUser]);
 
@@ -233,17 +235,21 @@ const Companies: React.FC = () => {
           </div>
           </Box>
 
+      
+        <Row>
+          <Col xs>
+            <Table
+              items={users.filter((u) => u.active)}
+              fields={tableFields}
+              isLoading={
+                carregar == true || isLoading == true ? true : false
+              }
+            />
+          </Col>
+        </Row>
+      
 
-      <Row>
-        <Col xs>
-          <Table
-            items={users.filter((u) => u.active)}
-            fields={tableFields}
-            isLoading={isLoading}
-          />
-        </Col>
-      </Row>
-
+      <Text>{carregar== true ? 'Carregar' : 'Não carregar'}</Text>
 
       <CreateUser onClose={handleModalClose} isModalOpen={isModalOpen}  />
     </Box>
