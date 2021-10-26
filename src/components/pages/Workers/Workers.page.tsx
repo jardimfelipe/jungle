@@ -41,6 +41,8 @@ const Companies: React.FC = () => {
     {label: 'Pendente', value: 'Pendente'}
   ]
 
+  
+
   const tableFields: Field[] = [
     {
       title: t('table.headers.worker'),
@@ -81,8 +83,8 @@ const Companies: React.FC = () => {
       dataIndex: 'id',
       key: 'id',
       render: (value) => (
-        <Tag size="large" color="success">
-          {value ? 'ativo' : 'inativo'}
+        <Tag size="large" color={value == undefined ? 'default' : value == true ? 'success': 'warning'}>
+          {value == undefined ? 'Inativo' : value == true ? 'Ativo': 'Pendente'}
         </Tag>
       ),
     },

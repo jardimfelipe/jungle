@@ -34,7 +34,8 @@ export type Collaborator = {
   sons: string,
   phone: string, 
   photo: string, 
-  role: string 
+  role: string,
+  status: boolean | undefined
 }
 
 export type CollaboratorId = {
@@ -63,6 +64,7 @@ export type CollaboratorInactive = {
   ethnicity: string,
   sexual_orientation: string,
   marital_status: string,
+  status: boolean | undefined,
   sons: string,
   phone: string, 
   photo: string, 
@@ -93,7 +95,8 @@ export type CollaboratorEdit = {
   sons: string,
   phone: string, 
   photo: string, 
-  role: string 
+  role: string,
+  status: boolean | undefined
 }
  
 

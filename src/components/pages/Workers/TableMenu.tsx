@@ -137,9 +137,10 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           phone: '', 
           photo: '', 
           role: '',
-          _id: usuario?._id == undefined ? '' : usuario?._id,
-           
+          _id: usuario?._id == undefined ? '' : usuario?._id, 
+          status: false       
         } 
+
         dispatch(editCollaboratorRequest(objeto));
         
       },
@@ -207,7 +208,8 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                   sons: usuario?.sons == undefined ? '' : usuario?.sons,
                   phone: usuario?.phone == undefined ? '' : usuario?.phone, 
                   photo: usuario?.photo == undefined ? '' : usuario?.photo, 
-                  role: usuario?.role == undefined ? '' : usuario?.role 
+                  role: usuario?.role == undefined ? '' : usuario?.role,
+                  status: false
                 }
 
                 dispatch(inactivateCollaboratorRequest(objeto))

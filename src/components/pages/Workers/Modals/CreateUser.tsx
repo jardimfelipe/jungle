@@ -212,7 +212,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
         sons: '',
         phone: '', 
         photo: '', 
-        role: '' 
+        role: '',
+        status: undefined
       } 
       dispatch(createCollaboratorRequest(objeto));
     },
@@ -478,7 +479,12 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
                 onClose3();
               }}
             >Fechar</GridBtnLeft>
-            <GridBtnRight variant="primary">Cadastrar novo colaborador</GridBtnRight>
+            <GridBtnRight variant="primary" onClick={()=>{
+              onClose();
+              onClose2();
+              onClose3();
+              onClose2();
+            }}>Cadastrar novo colaborador</GridBtnRight>
           </ModalGrid>
         
       </Modal>

@@ -43,7 +43,7 @@ function* inactivateCollaborator({payload}: ActionType<typeof actions.inactivate
   try{
     const { data } = yield call(api, `/users/${payload._id}`, {
       method: 'PUT',
-      data: {...payload, activate: false }
+      data: {...payload }
     })
     console.warn('Colaborador: ', data)
     yield put(actions.getCollaboratorSuccess())
