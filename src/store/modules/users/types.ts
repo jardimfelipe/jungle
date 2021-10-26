@@ -20,7 +20,8 @@ export enum UsersTypeKeys {
   DELETE_USERS_SUCCESS = "@user/DELETE_USERS_SUCCESS",
   DELETE_USERS_FAILURE = "@user/DELETE_USERS_FAILURE",
 
-  RESET_USERS_ERRORS = "@user/RESET_USERS_ERRORS"
+  RESET_USERS_ERRORS = "@user/RESET_USERS_ERRORS",
+  
 }
  
 export type UsersAction = ActionType<typeof actions>;
@@ -61,6 +62,7 @@ export type UsersState = {
   fileSuccess: boolean;
 }
  
+
 export type GetUserParams = {
   headers: {
     company: string

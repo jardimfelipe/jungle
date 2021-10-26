@@ -68,4 +68,5 @@ function* deleteUsers({ payload }: ActionType<typeof actions.deleteUsersRequest>
   }
 }
 
+
 export default all([takeLatest(UsersTypeKeys.GET_USERS_REQUEST, getUsers), takeLatest(UsersTypeKeys.GET_GESTORES_REQUEST, getGestores), takeLatest(UsersTypeKeys.CREATE_USERS_REQUEST, createUsers), takeLatest(UsersTypeKeys.DELETE_USERS_REQUEST, deleteUsers)]);

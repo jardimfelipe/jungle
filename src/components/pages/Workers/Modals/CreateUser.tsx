@@ -213,7 +213,8 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
         phone: '', 
         photo: '', 
         role: '',
-        status: undefined
+        status: true,
+        active: undefined
       } 
       dispatch(createCollaboratorRequest(objeto));
     },

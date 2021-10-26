@@ -4,11 +4,13 @@ import * as actions from './actions'
 export enum CollaboratorTypeKeys {
   GET_COLLABORATOR_SUCCESS = "@users/GET_COLLABORATOR_SUCCESS",
   GET_COLLABORATOR_FAIL = "@users/GET_COLLABORATOR_FAIL",
+  GET_ALL_USERS = "@users/GET_ALL_USERS",
 
   CREATE_COLLABORATOR_REQUEST = "@users/CREATE_COLLABORATOR_REQUEST",
   DELETE_COLLABORATOR_REQUEST = "@users/DELETE_COLLABORATOR_REQUEST",
   EDIT_COLLABORATOR_REQUEST = "@users/EDIT_COLLABORATOR_REQUEST",
   INACTIVE_COLLABORATOR_REQUES = "@users/INACTIVE_COLLABORATOR_REQUES",
+
 }
 
 export type Collaborator = {
@@ -35,6 +37,7 @@ export type Collaborator = {
   phone: string, 
   photo: string, 
   role: string,
+  active: boolean | undefined,
   status: boolean | undefined
 }
 
@@ -44,7 +47,7 @@ export type CollaboratorId = {
 
 export type CollaboratorInactive = {
   _id: string, 
-  activate: boolean,
+  active: boolean | undefined,
   company: string,
   name: string,
   unity: string,
@@ -96,6 +99,7 @@ export type CollaboratorEdit = {
   phone: string, 
   photo: string, 
   role: string,
+  active: boolean | undefined,
   status: boolean | undefined
 }
  

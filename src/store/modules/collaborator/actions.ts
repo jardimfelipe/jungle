@@ -24,3 +24,7 @@ export function getCollaboratorSuccess(){
 export function getCollaboratorFail(){
   return action(CollaboratorTypeKeys.GET_COLLABORATOR_FAIL);
 }
+
+export function getAllUsers(){
+  return action(CollaboratorTypeKeys.GET_ALL_USERS)
+}

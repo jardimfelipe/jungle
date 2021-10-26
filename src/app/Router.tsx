@@ -32,7 +32,7 @@ const Router: React.FC = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/first-access" component={FirstAccess} />
         <Route exact path="/change-password" component={FirstAccess} />
-        <Route exact path="/forgot-password" component={ForgotPassword} />
+        <Route exact path="/forgot-password" component={ForgotPassword}  />
         {routes[(currentUser.role as keyof typeof routes) || 'gestor'].map(
           (route) => (
             <PrivateRoute

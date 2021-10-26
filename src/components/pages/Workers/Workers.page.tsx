@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
 import {
@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import {
   getUsersRequest,
+  getUsersSuccess,
   resetUsersErrors,
 } from '../../../store/modules/users/actions';
 import { Field } from '../../molecules/Table/table.types';
@@ -29,7 +30,7 @@ import TableMenu from './TableMenu';
 import CreateUser from './Modals/CreateUser';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../../atoms/Typography/text';
-import { getCollaboratorFail } from '../../../store/modules/collaborator/actions';
+import { getCollaboratorFail, getAllUsers } from '../../../store/modules/collaborator/actions';
 
 
 const { Title } = Typography;
@@ -82,13 +83,14 @@ const Companies: React.FC = () => {
     },
     {
       title: t('table.headers.status'),
-      dataIndex: 'id',
-      key: 'id',
+      dataIndex: 'status',
+      key: 'active',
       render: (value) => (
-        <Tag size="large" color={value == undefined ? 'default' : value == true ? 'success': 'warning'}>
-          {value == undefined ? 'Inativo' : value == true ? 'Ativo': 'Pendente'}
-        </Tag>
-      ),
+          <Tag size="large" color={value == undefined ? 'default' : value == true ? 'success': 'warning'}>
+            {value == undefined ? 'Inativo' : value == true ? 'Ativo': 'Pendente'}
+            {value}
+          </Tag>
+        ),
     },
     {
       title: '',
@@ -112,9 +114,10 @@ const Companies: React.FC = () => {
   const [currentOpenMenu, setCurrentOpenMenu] = useState(-1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const { users, isLoading } = useSelector((state: RootState) => state.users);
+  const { users , isLoading } = useSelector((state: RootState) => state.users);
+
   const { currentUser } = useSelector(({ login }: RootState) => login);
-  const carregar = useSelector(({ collaborator }: RootState) => collaborator.isConcluded)
+  const { isConcluded } = useSelector(({ collaborator }: RootState) => collaborator)
   
 
   const handleTableButtonClick = (index: number) => {
@@ -155,12 +158,17 @@ const Companies: React.FC = () => {
 
   useEffect(() => {
     dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
-    console.warn('carregar:', carregar == true || isLoading == true ? 'Carregar' : 'Não carregar')
-    
+    console.error('carregar: ', isConcluded  ? 'Carregar' : 'Não carregar')
+    teste()
   }, [dispatch, currentUser]);
 
 
-
+  function teste(){
+    console.warn('carregar', isConcluded  ? 'Carregar' : 'Não carregar')
+    dispatch(getAllUsers())
+    dispatch(getCollaboratorFail())
+    return 'Carregado!'
+  }
 
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -239,18 +247,18 @@ const Companies: React.FC = () => {
         <Row>
           <Col xs>
             <Table
-              items={users.filter((u) => u.active)}
+              items={users.filter((u) => u.name)}
               fields={tableFields}
               isLoading={
-                carregar == true || isLoading == true ? true : false
+                isConcluded == true || isLoading == true ? true : false
               }
             />
           </Col>
         </Row>
       
 
-      <Text>{carregar== true ? 'Carregar' : 'Não carregar'}</Text>
-
+      <Text>{isConcluded  ? 'Carregar' : 'Não carregar'}</Text>
+      
       <CreateUser onClose={handleModalClose} isModalOpen={isModalOpen}  />
     </Box>
   );

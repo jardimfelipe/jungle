@@ -138,7 +138,8 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           photo: '', 
           role: '',
           _id: usuario?._id == undefined ? '' : usuario?._id, 
-          status: false       
+          status: false,
+          active: true
         } 
 
         dispatch(editCollaboratorRequest(objeto));
@@ -185,7 +186,6 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
               <li role="menuitem" onClick={()=>{
                 let objeto = {
                   _id: usuario?._id == undefined ? '' : usuario?._id, 
-                  activate: false,
                   company: usuario?.company == undefined ? '' : usuario?.company,
                   name: usuario?.name == undefined ? '' : usuario?.name,
                   unity: usuario?.unity == undefined ? '' : usuario?.unity,
@@ -209,7 +209,8 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                   phone: usuario?.phone == undefined ? '' : usuario?.phone, 
                   photo: usuario?.photo == undefined ? '' : usuario?.photo, 
                   role: usuario?.role == undefined ? '' : usuario?.role,
-                  status: false
+                  status: false,
+                  active: false
                 }
 
                 dispatch(inactivateCollaboratorRequest(objeto))
