@@ -38,14 +38,14 @@ const { Title } = Typography;
 const Companies: React.FC = () => {
   const { t } = useTranslation();
   const lista = [
-    {label: 'Todos', value: ''},
+    {label: 'Todos', value: 'Todos'},
     {label: 'Ativo', value: 'Ativo'},
     {label: 'Inativo', value: 'Inativo'},
     {label: 'Pendente', value: 'Pendente'}
   ]
-
+  const [ selecionaTipo, setSelecionaTipo ] = useState({label: 'Todos', value: 'Todos'})
+  //let iteracaoDados = users.filter((u) => u.name)
   
-
   const tableFields: Field[] = [
     {
       title: t('table.headers.worker'),
@@ -118,6 +118,11 @@ const Companies: React.FC = () => {
 
   const { currentUser } = useSelector(({ login }: RootState) => login);
   const { isConcluded } = useSelector(({ collaborator }: RootState) => collaborator)
+
+  //users.filter((u) => u.name)
+  let [ iteracaoDados, setIteracaoDados ] = useState(
+    users.filter((u) => u.name)
+  )  
   
 
   const handleTableButtonClick = (index: number) => {
@@ -156,19 +161,37 @@ const Companies: React.FC = () => {
     setCurrentOpenMenu(-1);
   };
 
+  
   useEffect(() => {
     dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
-    console.error('carregar: ', isConcluded  ? 'Carregar' : 'Não carregar')
-    teste()
-  }, [dispatch, currentUser]);
+
+    if(selecionaTipo?.label == 'Todos'){
+      console.log('Todos selecione!')
+      setIteracaoDados(users.filter((u)=>u.name))
+    }
+    if(selecionaTipo?.label == 'Ativo'){
+      console.log('Ativo selecione!')
+      setIteracaoDados(users.filter((u)=>u.active == true))
+    }
+    if(selecionaTipo?.label == 'Pendente'){
+      console.log('Pendente selecione!')
+      setIteracaoDados(users.filter((u)=>u.active == undefined))
+    }
+    if(selecionaTipo?.label == 'Inativo'){
+      console.log('Inativo selecione!')
+      setIteracaoDados(users.filter((u)=>u.active = false))
+    }
+
+    if(isConcluded == true){
+      console.warn('carregar', isConcluded  ? 'Carregar' : 'Não carregar')
+      dispatch(getAllUsers())
+      dispatch(getCollaboratorFail())
+    }
+
+  }, [dispatch, currentUser, selecionaTipo, isConcluded]);
 
 
-  function teste(){
-    console.warn('carregar', isConcluded  ? 'Carregar' : 'Não carregar')
-    dispatch(getAllUsers())
-    dispatch(getCollaboratorFail())
-    return 'Carregado!'
-  }
+
 
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -237,8 +260,13 @@ const Companies: React.FC = () => {
           <div style={{marginRight: '30px'}}>Status</div>
           <div style={{width: '265px'}}>
             <Select 
-              value={{label: 'Todos', value: ''}}
+              value={selecionaTipo}
               options={lista}
+              onChange={(e)=>{
+                  setSelecionaTipo({label: e?.label, value: e?.value}) 
+                  console.log(iteracaoDados, selecionaTipo)
+                  
+              }}
             />
           </div>
           </Box>
@@ -247,7 +275,7 @@ const Companies: React.FC = () => {
         <Row>
           <Col xs>
             <Table
-              items={users.filter((u) => u.name)}
+              items={iteracaoDados}
               fields={tableFields}
               isLoading={
                 isConcluded == true || isLoading == true ? true : false

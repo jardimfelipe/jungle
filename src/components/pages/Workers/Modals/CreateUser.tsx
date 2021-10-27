@@ -24,7 +24,7 @@ import { useTheme } from 'styled-components';
 import { rgba } from 'polished';
 import { FaCheckCircle } from 'react-icons/fa';
 
-import { createCollaboratorRequest } from '../../../../store/modules/collaborator/actions'
+import { createCollaboratorRequest, getAllUsers, getCollaboratorFail } from '../../../../store/modules/collaborator/actions'
 
 const { Title, Text } = Typography;
 
@@ -213,10 +213,11 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
         phone: '', 
         photo: '', 
         role: '',
-        status: true,
-        active: undefined
+        active: true
       } 
       dispatch(createCollaboratorRequest(objeto));
+      dispatch(getAllUsers())
+      dispatch(getCollaboratorFail())
     },
     validateOnChange: false,
     validationSchema: schema

@@ -13,7 +13,7 @@ import ModalSuccess from '../../../assets/ModalSuccess.svg';
 import { useFormik } from 'formik';
 import schema from './schema';
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteCollaboratorRequest, editCollaboratorRequest, inactivateCollaboratorRequest } from '../../../store/modules/collaborator/actions';
+import { deleteCollaboratorRequest, editCollaboratorRequest, getAllUsers, getCollaboratorFail, inactivateCollaboratorRequest } from '../../../store/modules/collaborator/actions';
 import { RootState } from '../../../store';
 
 
@@ -138,11 +138,13 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           photo: '', 
           role: '',
           _id: usuario?._id == undefined ? '' : usuario?._id, 
-          status: false,
-          active: true
+          active: true,
+          first_access: true
         } 
 
         dispatch(editCollaboratorRequest(objeto));
+        dispatch(getAllUsers())
+        dispatch(getCollaboratorFail())
         
       },
       validateOnChange: false,
@@ -209,12 +211,13 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                   phone: usuario?.phone == undefined ? '' : usuario?.phone, 
                   photo: usuario?.photo == undefined ? '' : usuario?.photo, 
                   role: usuario?.role == undefined ? '' : usuario?.role,
-                  status: false,
-                  active: false
+                  active: false,
+                  first_access: true
                 }
 
                 dispatch(inactivateCollaboratorRequest(objeto))
-                
+                dispatch(getAllUsers())
+                dispatch(getCollaboratorFail())
               }}>
                 <MenuButton>Inativar</MenuButton>
               </li>

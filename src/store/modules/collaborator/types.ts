@@ -37,8 +37,7 @@ export type Collaborator = {
   phone: string, 
   photo: string, 
   role: string,
-  active: boolean | undefined,
-  status: boolean | undefined
+  active: boolean | undefined
 }
 
 export type CollaboratorId = {
@@ -46,8 +45,7 @@ export type CollaboratorId = {
 }
 
 export type CollaboratorInactive = {
-  _id: string, 
-  active: boolean | undefined,
+  _id: string,
   company: string,
   name: string,
   unity: string,
@@ -67,11 +65,12 @@ export type CollaboratorInactive = {
   ethnicity: string,
   sexual_orientation: string,
   marital_status: string,
-  status: boolean | undefined,
   sons: string,
   phone: string, 
   photo: string, 
-  role: string 
+  role: string,
+  active: boolean | undefined,
+  first_access: boolean
 }
 
 export type CollaboratorEdit = {
@@ -100,7 +99,7 @@ export type CollaboratorEdit = {
   photo: string, 
   role: string,
   active: boolean | undefined,
-  status: boolean | undefined
+  first_access: boolean
 }
  
 
