@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { useTheme } from 'styled-components';
 import { Image, Box, Button, Label, Modal, Typography, Select, Textfield } from '../..';
@@ -35,13 +35,31 @@ const menuTransition = {
 const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
   const dispatch = useDispatch()
   const theme = useTheme();
-  const [isModalOpen1, setModalOpen1 ] = useState(false);
-  const [isModalOpen2, setModalOpen2] = useState(false);
-  const onClose1 = () => setModalOpen1(!isModalOpen1);
-  const onClose2 = ()=> setModalOpen2(!isModalOpen2);
+
   const [ usuario, setUsuario ] = useState(usr);
   const { currentUser } = useSelector(({ login }: RootState) => login);
-  const { error, feedback } = useSelector((state: RootState) => state.collaborator)
+  const { feedback } = useSelector((state: RootState) => state.collaborator)
+  
+  const [ isModalOpen1, setModalOpen1 ] = useState(false);
+  const [ isModalOpen2, setModalOpen2 ] = useState(false);
+  const [ isModalOpen3, setModalOpen3 ] = useState(false);
+  const [ isModalOpen4, setModalOpen4 ] = useState(false);
+  const [ isModalOpen5, setModalOpen5 ] = useState(false);
+  
+  const onClose1 = () => setModalOpen1(!isModalOpen1);
+  const onClose2 = () => setModalOpen2(!isModalOpen2);
+  const onClose3 = () => setModalOpen3(!isModalOpen3)
+  const onClose4 = () => setModalOpen4(!isModalOpen4)
+  const onClose5 = () => setModalOpen5(!isModalOpen5)
+
+  
+
+  const handleEmailSuccess = ()=>{
+    let objeto = { email: usuario?.email == undefined ? '' : usuario?.email }
+    dispatch(sendCollaboratorEmailRequest(objeto))
+    
+  } 
+
   
   const listaTipoCargo = [
     {label: 'Selecione', value: ''},
@@ -152,17 +170,11 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
       validationSchema: schema
   })
 
-  function verifica(){
-    if(error.status == true || feedback.status != 'success'){
-       
-    }
-    else {
-      
-    }
-  }
+  
 
   return (
     <div>
+      
       <Transition in={isOpen} timeout={200} unmountOnExit>
         {(state) => (
           <MenuCard
@@ -189,46 +201,49 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                 <MenuButton onClick={onClose1}>Editar</MenuButton>
               </li>
               <li role="menuitem">
-                <MenuButton onClick={()=>{
-                  let objeto = { email: usuario?.email == undefined ? '' : usuario?.email }
-                  dispatch(sendCollaboratorEmailRequest(objeto))
-                }}>Reenviar e-mail</MenuButton>
+                <MenuButton onClick={handleEmailSuccess}>
+                  Reenviar e-mail
+                </MenuButton>
               </li>
-              <li role="menuitem" onClick={()=>{
-                let objeto = {
-                  _id: usuario?._id == undefined ? '' : usuario?._id, 
-                  company: usuario?.company == undefined ? '' : usuario?.company,
-                  name: usuario?.name == undefined ? '' : usuario?.name,
-                  unity: usuario?.unity == undefined ? '' : usuario?.unity,
-                  office: usuario?.office == undefined ? '' : usuario?.office,
-                  people_leader: usuario?.people_leader == undefined ? '' : usuario?.people_leader,
-                  email: usuario?.email == undefined ? '' : usuario?.email,
-                  type_position: usuario?.type_position == undefined ? '' : usuario?.type_position,
-                  department: usuario?.department == undefined ? '' : usuario?.department,
-                  direct_manager_email: usuario?.direct_manager_email == undefined ? '' : usuario?.direct_manager_email,
-                  cpf: usuario?.cpf == undefined ? '' : usuario?.cpf, 
-                  rne: usuario?.rne == undefined ? '' : usuario?.rne, 
-                  password: usuario?.password == undefined ? '' : usuario?.password,
-                  genere: usuario?.genere == undefined ? '' : usuario?.genere,
-                  age: usuario?.age == undefined ? '' : usuario?.age,
-                  house_time: usuario?.house_time == undefined ? '' : usuario?.house_time, 
-                  education: usuario?.education == undefined ? '' : usuario?.education,  
-                  ethnicity: usuario?.ethnicity == undefined ? '' : usuario?.ethnicity,
-                  sexual_orientation: usuario?.sexual_orientation == undefined ? '' : usuario?.sexual_orientation,
-                  marital_status: usuario?.marital_status == undefined ? '' : usuario?.marital_status,
-                  sons: usuario?.sons == undefined ? '' : usuario?.sons,
-                  phone: usuario?.phone == undefined ? '' : usuario?.phone, 
-                  photo: usuario?.photo == undefined ? '' : usuario?.photo, 
-                  role: usuario?.role == undefined ? '' : usuario?.role,
-                  active: false,
-                  first_access: true
-                }
+              <li role="menuitem">
+                <MenuButton  
+                onClick={()=>{
+                  let objeto = {
+                    _id: usuario?._id == undefined ? '' : usuario?._id, 
+                    company: usuario?.company == undefined ? '' : usuario?.company,
+                    name: usuario?.name == undefined ? '' : usuario?.name,
+                    unity: usuario?.unity == undefined ? '' : usuario?.unity,
+                    office: usuario?.office == undefined ? '' : usuario?.office,
+                    people_leader: usuario?.people_leader == undefined ? '' : usuario?.people_leader,
+                    email: usuario?.email == undefined ? '' : usuario?.email,
+                    type_position: usuario?.type_position == undefined ? '' : usuario?.type_position,
+                    department: usuario?.department == undefined ? '' : usuario?.department,
+                    direct_manager_email: usuario?.direct_manager_email == undefined ? '' : usuario?.direct_manager_email,
+                    cpf: usuario?.cpf == undefined ? '' : usuario?.cpf, 
+                    rne: usuario?.rne == undefined ? '' : usuario?.rne, 
+                    password: usuario?.password == undefined ? '' : usuario?.password,
+                    genere: usuario?.genere == undefined ? '' : usuario?.genere,
+                    age: usuario?.age == undefined ? '' : usuario?.age,
+                    house_time: usuario?.house_time == undefined ? '' : usuario?.house_time, 
+                    education: usuario?.education == undefined ? '' : usuario?.education,  
+                    ethnicity: usuario?.ethnicity == undefined ? '' : usuario?.ethnicity,
+                    sexual_orientation: usuario?.sexual_orientation == undefined ? '' : usuario?.sexual_orientation,
+                    marital_status: usuario?.marital_status == undefined ? '' : usuario?.marital_status,
+                    sons: usuario?.sons == undefined ? '' : usuario?.sons,
+                    phone: usuario?.phone == undefined ? '' : usuario?.phone, 
+                    photo: usuario?.photo == undefined ? '' : usuario?.photo, 
+                    role: usuario?.role == undefined ? '' : usuario?.role,
+                    active: false,
+                    first_access: true
+                  }
 
-                dispatch(inactivateCollaboratorRequest(objeto))
-                dispatch(getAllUsers())
-                dispatch(getCollaboratorFail())
-              }}>
-                <MenuButton>Inativar</MenuButton>
+                  dispatch(inactivateCollaboratorRequest(objeto))
+                  dispatch(getAllUsers())
+                  dispatch(getCollaboratorFail())
+                }}
+              >
+                  Inativar
+                </MenuButton>
               </li>
               <li role="menuitem">
                 <MenuButton danger onClick={()=>{
@@ -242,6 +257,14 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           </MenuCard>
         )}
       </Transition>
+      <Modal 
+        width={766} 
+        height={473}
+        isOpen={isModalOpen3} 
+        hasCloseButton={false} >
+
+      <ModalButton onClick={()=>onClose3()}> Fechar </ModalButton>
+      </Modal>
       <Modal width={1073} height={752} isOpen={isModalOpen1} onClose={onClose1}>
       <form onSubmit={formik.handleSubmit}>
         <Box params={{
