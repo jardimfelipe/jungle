@@ -282,12 +282,12 @@ const Companies: React.FC = () => {
             />
           </div>
           </Box>
-
+              
       
         <Row>
           <Col xs>
             <Table
-              items={iteracaoDados}
+              items={iteracaoDados || users.filter((u) => u.name)}
               fields={tableFields}
               isLoading={
                 isConcluded == true || isLoading == true ? true : false

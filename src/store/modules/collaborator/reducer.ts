@@ -1,8 +1,17 @@
 import { CollaboratorState, CollaboratorAction, CollaboratorTypeKeys }  from './types'
 
+
 const INITIAL_STATE: CollaboratorState = {
     collaborator: [],
-    isConcluded: false  
+    isConcluded: false,
+    error: {
+        status: false,
+        message: ''
+    },
+    feedback: { 
+        status: 'success',
+        message: ''
+    } 
 }
  
 export default function Reducer(
@@ -45,6 +54,22 @@ export default function Reducer(
             return {
                 ...state,
                 isConcluded: true
+            }
+        case CollaboratorTypeKeys.GET_ERROR:
+            return {
+                ...state,
+                error: {
+                    status: action.payload.status,
+                    message: action.payload.message
+                }
+            }
+        case CollaboratorTypeKeys.GET_FEEDBACK:
+            return {
+                ...state,
+                feedback: { 
+                    status: action.payload.status,
+                    message: action.payload.message
+                }
             }
         default:
             return state

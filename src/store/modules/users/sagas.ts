@@ -20,7 +20,7 @@ function* getUsers({ payload }: ActionType<typeof actions.getUsersRequest>) {
     }
 
   }
-}
+} 
  
 function* getGestores() {
   try {

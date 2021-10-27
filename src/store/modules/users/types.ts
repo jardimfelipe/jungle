@@ -23,7 +23,7 @@ export enum UsersTypeKeys {
   RESET_USERS_ERRORS = "@user/RESET_USERS_ERRORS",
   
 }
- 
+  
 export type UsersAction = ActionType<typeof actions>;
 
 export type User = {

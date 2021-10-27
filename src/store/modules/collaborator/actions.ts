@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions'
-import { Collaborator, CollaboratorEdit, CollaboratorEmail, CollaboratorId, CollaboratorInactive, CollaboratorTypeKeys } from './types'
+import { Collaborator, CollaboratorError, CollaboratorEdit, CollaboratorEmail, CollaboratorId, CollaboratorInactive, CollaboratorTypeKeys, CollaboratorFeedback } from './types'
 
 export function createCollaboratorRequest(params: Collaborator){
   return action(CollaboratorTypeKeys.CREATE_COLLABORATOR_REQUEST, params)
@@ -23,6 +23,14 @@ export function getCollaboratorSuccess(){
 
 export function getCollaboratorFail(){
   return action(CollaboratorTypeKeys.GET_COLLABORATOR_FAIL);
+}
+ 
+export function getError(params: CollaboratorError){
+  return action(CollaboratorTypeKeys.GET_ERROR, params);
+}
+
+export function getFeedback(params: CollaboratorFeedback){
+  return action(CollaboratorTypeKeys.GET_FEEDBACK, params);
 }
 
 export function getAllUsers(){

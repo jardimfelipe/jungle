@@ -47,4 +47,4 @@ export function deleteUsersSuccess() {
 
 export function deleteUsersFailure(params: string) {
   return action(UsersTypeKeys.DELETE_USERS_FAILURE, params)
-}
+} 
