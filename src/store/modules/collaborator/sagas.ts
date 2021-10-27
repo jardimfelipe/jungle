@@ -23,6 +23,23 @@ function* createCollaborator({payload}: ActionType<typeof actions.createCollabor
     }
 }
 
+function* sendCollaboratorEmail({payload}: ActionType<typeof actions.sendCollaboratorEmailRequest>) :any {
+  try{
+    const { data } = yield call(api, `/users/resend-code`, {
+      method: 'POST', 
+      data: {...payload}
+    })
+    console.warn('Collaborador', data)
+    yield put(actions.getCollaboratorSuccess())
+  }
+  catch(error){
+    if(error instanceof Error){
+      console.error('Collaborador:', error.message, '\n', error)
+      yield put(actions.getCollaboratorFail())
+    }
+  }
+}
+
 function* editCollaborator({payload}: ActionType<typeof actions.editCollaboratorRequest>): any{
   try{
     const { data } = yield call(api, `/users/${payload._id}`, {
@@ -96,6 +113,7 @@ export default all([
   takeLatest(CollaboratorTypeKeys.CREATE_COLLABORATOR_REQUEST, createCollaborator),
   takeLatest(CollaboratorTypeKeys.DELETE_COLLABORATOR_REQUEST, deleteCollaborator),
   takeLatest(CollaboratorTypeKeys.EDIT_COLLABORATOR_REQUEST, editCollaborator),
-  takeLatest(CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUES, inactivateCollaborator),
-  takeLatest(CollaboratorTypeKeys.GET_ALL_USERS, getAllUsers)
+  takeLatest(CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUEST, inactivateCollaborator),
+  takeLatest(CollaboratorTypeKeys.GET_ALL_USERS, getAllUsers),
+  takeLatest(CollaboratorTypeKeys.SEND_COLLABORATOR_EMAIL_REQUEST, sendCollaboratorEmail)
 ])

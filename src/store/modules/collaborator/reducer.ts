@@ -26,7 +26,7 @@ export default function Reducer(
                 ...state,
                 isConcluded: true
             }
-        case CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUES:
+        case CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUEST:
             return {
                 ...state,
                 isConcluded: true
@@ -35,6 +35,11 @@ export default function Reducer(
             return {
                 ...state,
                 isConcluded: false
+            }
+        case CollaboratorTypeKeys.SEND_COLLABORATOR_EMAIL_REQUEST:
+            return {
+                ...state, 
+                isConcluded: true
             }
         case CollaboratorTypeKeys.GET_COLLABORATOR_FAIL:
             return {

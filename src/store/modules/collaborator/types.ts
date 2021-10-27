@@ -9,7 +9,8 @@ export enum CollaboratorTypeKeys {
   CREATE_COLLABORATOR_REQUEST = "@users/CREATE_COLLABORATOR_REQUEST",
   DELETE_COLLABORATOR_REQUEST = "@users/DELETE_COLLABORATOR_REQUEST",
   EDIT_COLLABORATOR_REQUEST = "@users/EDIT_COLLABORATOR_REQUEST",
-  INACTIVE_COLLABORATOR_REQUES = "@users/INACTIVE_COLLABORATOR_REQUES",
+  INACTIVE_COLLABORATOR_REQUEST = "@users/INACTIVE_COLLABORATOR_REQUES",
+  SEND_COLLABORATOR_EMAIL_REQUEST = "@users/SEND_COLLABORATOR_EMAIL_REQUEST" 
 
 }
 
@@ -42,6 +43,10 @@ export type Collaborator = {
 
 export type CollaboratorId = {
   _id: string
+}
+
+export type CollaboratorEmail = {
+  email: string
 }
 
 export type CollaboratorInactive = {

@@ -13,7 +13,7 @@ import ModalSuccess from '../../../assets/ModalSuccess.svg';
 import { useFormik } from 'formik';
 import schema from './schema';
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteCollaboratorRequest, editCollaboratorRequest, getAllUsers, getCollaboratorFail, inactivateCollaboratorRequest } from '../../../store/modules/collaborator/actions';
+import { deleteCollaboratorRequest, editCollaboratorRequest, getAllUsers, getCollaboratorFail, inactivateCollaboratorRequest, sendCollaboratorEmailRequest } from '../../../store/modules/collaborator/actions';
 import { RootState } from '../../../store';
 
 
@@ -151,9 +151,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
       validationSchema: schema
   })
 
-  useEffect(()=>{
-      
-  }, [])
+ 
 
   return (
     <div>
@@ -183,7 +181,10 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                 <MenuButton onClick={onClose1}>Editar</MenuButton>
               </li>
               <li role="menuitem">
-                <MenuButton>Reenviar e-mail</MenuButton>
+                <MenuButton onClick={()=>{
+                  let objeto = { email: usuario?.email == undefined ? '' : usuario?.email }
+                  dispatch(sendCollaboratorEmailRequest(objeto))
+                }}>Reenviar e-mail</MenuButton>
               </li>
               <li role="menuitem" onClick={()=>{
                 let objeto = {

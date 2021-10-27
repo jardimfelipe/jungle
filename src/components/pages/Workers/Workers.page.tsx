@@ -86,8 +86,8 @@ const Companies: React.FC = () => {
       dataIndex: 'status',
       key: 'active',
       render: (value) => (
-          <Tag size="large" color={value == undefined ? 'default' : value == true ? 'success': 'warning'}>
-            {value == undefined ? 'Inativo' : value == true ? 'Ativo': 'Pendente'}
+          <Tag size="large" color={value == undefined ? 'warning' : value == true ? 'success': 'default'}>
+            {value == undefined ? 'Pendente' : value == true ? 'Ativo': 'Inativo'}
             {value}
           </Tag>
         ),
@@ -161,32 +161,42 @@ const Companies: React.FC = () => {
     setCurrentOpenMenu(-1);
   };
 
-  
+
   useEffect(() => {
     dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
 
-    if(selecionaTipo?.label == 'Todos'){
-      console.log('Todos selecione!')
-      setIteracaoDados(users.filter((u)=>u.name))
+
+
+    
+    switch(selecionaTipo?.label){
+      case 'Todos':
+        setIteracaoDados(users.filter((u) => u.name))
+        console.log('Selecionado: Todos')
+      break;
+      case 'Ativo':
+        setIteracaoDados(users.filter((u) => u.active == true))
+        console.log('Selecionado: Ativo')
+      break;
+      case 'Pendente':
+        setIteracaoDados(users.filter((u) => u.active == undefined))
+        console.log('Selecionado: Pendente')
+      break;
+      case 'Inativo':
+        setIteracaoDados(users.filter((u) => u.active == false))
+        console.log('Selecionado: Inativo')
+      default:
+        setIteracaoDados(users.filter((u) => u.name))
+        console.log('Selecionado: Todos')
+      break;
     }
-    if(selecionaTipo?.label == 'Ativo'){
-      console.log('Ativo selecione!')
-      setIteracaoDados(users.filter((u)=>u.active == true))
-    }
-    if(selecionaTipo?.label == 'Pendente'){
-      console.log('Pendente selecione!')
-      setIteracaoDados(users.filter((u)=>u.active == undefined))
-    }
-    if(selecionaTipo?.label == 'Inativo'){
-      console.log('Inativo selecione!')
-      setIteracaoDados(users.filter((u)=>u.active = false))
-    }
+ 
 
     if(isConcluded == true){
       console.warn('carregar', isConcluded  ? 'Carregar' : 'Não carregar')
       dispatch(getAllUsers())
       dispatch(getCollaboratorFail())
     }
+
 
   }, [dispatch, currentUser, selecionaTipo, isConcluded]);
 
@@ -265,7 +275,6 @@ const Companies: React.FC = () => {
               onChange={(e)=>{
                   setSelecionaTipo({label: e?.label, value: e?.value}) 
                   console.log(iteracaoDados, selecionaTipo)
-                  
               }}
             />
           </div>
