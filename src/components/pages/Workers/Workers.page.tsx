@@ -166,7 +166,8 @@ const Companies: React.FC = () => {
     dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
 
 
-
+    console.warn('Selecionado: ' ,selecionaTipo)
+    
     
     switch(selecionaTipo?.label){
       case 'Todos':
@@ -184,6 +185,7 @@ const Companies: React.FC = () => {
       case 'Inativo':
         setIteracaoDados(users.filter((u) => u.active == false))
         console.log('Selecionado: Inativo')
+      break;
       default:
         setIteracaoDados(users.filter((u) => u.name))
         console.log('Selecionado: Todos')
@@ -271,6 +273,7 @@ const Companies: React.FC = () => {
           <div style={{width: '265px'}}>
             <Select 
               value={selecionaTipo}
+              
               options={lista}
               onChange={(e)=>{
                   setSelecionaTipo({label: e?.label, value: e?.value}) 
@@ -294,7 +297,7 @@ const Companies: React.FC = () => {
         </Row>
       
 
-      <Text>{isConcluded  ? 'Carregar' : 'Não carregar'}</Text>
+      {/* <Text>{isConcluded  ? 'Carregar' : 'Não carregar'}</Text> */}
       
       <CreateUser onClose={handleModalClose} isModalOpen={isModalOpen}  />
     </Box>
