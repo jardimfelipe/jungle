@@ -5,7 +5,7 @@ import * as actions from './actions'
 import * as actionsUsers from '../users/actions'
 import { CollaboratorEdit, CollaboratorTypeKeys } from './types';
 import { createCollaboratorRequest } from './actions';
-  
+   
 function* createCollaborator({payload}: ActionType<typeof actions.createCollaboratorRequest>): any {
   try{      
       const { data } = yield call(api, `/users/`, {
@@ -19,7 +19,7 @@ function* createCollaborator({payload}: ActionType<typeof actions.createCollabor
     catch(error){
         if(error instanceof Error){
           console.error('Colaborador:', error.message, '\n', error)
-          yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: false }))
+          yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
           yield put(actions.getCollaboratorFail())
         }
     }
@@ -38,7 +38,7 @@ function* sendCollaboratorEmail({payload}: ActionType<typeof actions.sendCollabo
   catch(error){
     if(error instanceof Error){
       console.error('Collaborador:', error.message, '\n', error)
-      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: false }))
+      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
       yield put(actions.getCollaboratorFail())
     }
   }
@@ -58,7 +58,7 @@ function* editCollaborator({payload}: ActionType<typeof actions.editCollaborator
   catch(error){
     if(error instanceof Error){
       console.error('Colaborador:', error.message, '\n', error)
-      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: false }))
+      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
       yield put(actions.getCollaboratorFail())      
     }
   }
@@ -78,7 +78,7 @@ function* inactivateCollaborator({payload}: ActionType<typeof actions.inactivate
   catch(error){
     if(error instanceof Error){
       console.error('Colaborador:', error.message, '\n', error)
-      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: false }))
+      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
       yield put(actions.getCollaboratorFail())
     }
   }
@@ -96,7 +96,7 @@ function* getAllUsers(){
   catch(error){
     if(error instanceof Error){
       console.error('Colaborator', error.message, '\n', error)
-      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: false }))
+      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
       yield put(actions.getCollaboratorFail())
     }
   }
@@ -115,7 +115,7 @@ function* deleteCollaborator({payload}: ActionType<typeof actions.deleteCollabor
   catch(error){
     if(error instanceof Error){
       console.error('Colaborador', error.message, '\n', error)
-      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: false }))
+      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
       yield put(actions.getCollaboratorFail())
     } 
   }

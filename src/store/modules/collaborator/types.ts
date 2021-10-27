@@ -15,7 +15,7 @@ export enum CollaboratorTypeKeys {
   INACTIVE_COLLABORATOR_REQUEST = "@users/INACTIVE_COLLABORATOR_REQUES",
   SEND_COLLABORATOR_EMAIL_REQUEST = "@users/SEND_COLLABORATOR_EMAIL_REQUEST",
   
-
+ 
 }
 
 export type Collaborator = {

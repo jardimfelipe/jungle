@@ -13,7 +13,7 @@ const INITIAL_STATE: CollaboratorState = {
         message: ''
     } 
 }
- 
+  
 export default function Reducer(
     state: CollaboratorState = INITIAL_STATE,
     action: CollaboratorAction

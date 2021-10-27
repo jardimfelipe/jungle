@@ -39,4 +39,4 @@ export function getAllUsers(){
 
 export function sendCollaboratorEmailRequest(params: CollaboratorEmail){
   return action(CollaboratorTypeKeys.SEND_COLLABORATOR_EMAIL_REQUEST, params)
-}
+} 

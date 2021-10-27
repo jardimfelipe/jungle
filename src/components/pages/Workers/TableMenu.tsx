@@ -41,6 +41,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
   const onClose2 = ()=> setModalOpen2(!isModalOpen2);
   const [ usuario, setUsuario ] = useState(usr);
   const { currentUser } = useSelector(({ login }: RootState) => login);
+  const { error, feedback } = useSelector((state: RootState) => state.collaborator)
   
   const listaTipoCargo = [
     {label: 'Selecione', value: ''},
@@ -151,7 +152,14 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
       validationSchema: schema
   })
 
- 
+  function verifica(){
+    if(error.status == true || feedback.status != 'success'){
+       
+    }
+    else {
+      
+    }
+  }
 
   return (
     <div>
