@@ -1,4 +1,3 @@
-
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Image, Box, Modal, Typography, FileUploader, Button, Textfield, Label, Select } from '../../..';
@@ -13,6 +12,10 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
 
+
+import { useFormik } from 'formik'
+import schema from '../schema';
+
 import ModalSuccess from '../../../../assets/ModalSuccess.svg';
 import AddUser from      '../../../../assets/AddUser.svg';
 import AddDocument from  '../../../../assets/AddDocument.svg';
@@ -21,6 +24,8 @@ import { useTheme } from 'styled-components';
 import { rgba } from 'polished';
 import { FaCheckCircle } from 'react-icons/fa';
 
+import { createCollaboratorRequest, getAllUsers, getCollaboratorFail } from '../../../../store/modules/collaborator/actions'
+
 const { Title, Text } = Typography;
 
 
@@ -28,9 +33,10 @@ const { Title, Text } = Typography;
 type ModalProps = {
   onClose: () => void;
   isModalOpen: boolean;
+  reload?: () => void;
 };
 
-const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
+const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
   const { userFileProgress, isFileLoading, error, fileSuccess } = useSelector(
@@ -120,7 +126,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
   }, [fileSuccess, dispatch, currentUser]);
 
   const listaTipoCargo = [
-    {label: 'Selecione', value: ''},
+    
     {label: 'Gestor-supervisão ou gerência operacional', value: 'Gestor-supervisão ou gerência operacional'},
     {label: 'Gestor-média gerência', value: 'Gestor-média gerência'},
     {label: 'Gestor-Presidência/Diretoria', value: 'Gestor-Presidência/Diretoria'},
@@ -128,7 +134,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     {label: 'Terceirizado/Outsourcing', value: 'Terceirizado/Outsourcing'}
   ]
   const listaCargo = [
-    {label: 'Selecione', value: ''},
+    
     {label: 'Executivo e gestor sênior', value: 'Executivo e gestor sênior'},
     {label: 'Gerente e supervisor', value: 'Gerente e supervisor'},
     {label: 'Coordenador', value: 'Coordenador'},
@@ -142,7 +148,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     {label: 'Enfermeiro', value: 'Enfermeiro'}
   ]
   const listaArea = [
-    {label: 'Selecione', value: ''},
+    
     {label: 'Administrativo/Financeiro', value: 'Administrativo/Financeiro'},
     {label: 'Jurídico/Auditoria/Compliance', value: 'Jurídico/Auditoria/Compliance'},
     {label: 'Logística/Supply Chain', value: 'Logística/Supply Chain'},
@@ -156,11 +162,82 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
     {label: 'Vendas/Comercial', value: 'Vendas/Comercial'}
   ]
   const listaLider = [
-    {label: 'Selecione', value: ''},
     {label: 'Não', value: 'Não'},
     {label: 'Sim', value: 'Sim'}
   ]
 
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      email: '',
+      unity_location: '', 
+      type_of_position: {value: '', label: 'Selecione'},
+      type_of_position_s: '',
+
+      office:  {value: '', label: 'Selecione'},
+      office_s: '',
+
+      area_department_board:  {value: '', label: 'Selecione'},
+      area_department_board_s: '',
+
+      people_leader:  {value: '', label: 'Selecione'},
+      people_leader_s: '',
+
+      direct_manager_email: ''
+
+      
+    },
+    onSubmit: (values) => {
+      console.log(currentUser)
+      let objeto = {
+        name: values.name,
+        unity: values.unity_location,
+        office: values.office_s,
+        people_leader: values.people_leader_s,
+        email: values.email,
+        type_position: values.type_of_position_s,
+        department: values.area_department_board_s,
+        direct_manager_email: values.direct_manager_email,
+        cpf: '',
+        rne: '',  
+        company: currentUser.company,
+        password: '1234',
+        genere: '',
+        age: '',
+        house_time: '', 
+        education: '',  
+        ethnicity: '',
+        sexual_orientation: '',
+        marital_status: '',
+        sons: '',
+        phone: '', 
+        photo: '', 
+        role: '',
+        active: true
+      } 
+      dispatch(createCollaboratorRequest(objeto));
+      dispatch(getAllUsers())
+      dispatch(getCollaboratorFail())
+    },
+    validateOnChange: false,
+    validationSchema: schema
+  })
+
+  function limpar(){
+    formik.setFieldValue('name', '')
+    formik.setFieldValue('email', '')
+    formik.setFieldValue('unity_location', '') 
+    formik.setFieldValue('type_of_position', {value: '', label: 'Selecione'})
+    formik.setFieldValue('type_of_position_s', '')
+    formik.setFieldValue('office',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('office_s', '')
+    formik.setFieldValue('area_department_board',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('area_department_board_s', '')
+    formik.setFieldValue('people_leader',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('people_leader_s', '')
+    formik.setFieldValue('direct_manager_email', '')
+  }
+  
 
   return (
     <div>
@@ -252,8 +329,10 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
       <Modal width={1073} height={752} isOpen={isModalOpen2} onClose={()=>{
         onClose();
         onClose2();
+        limpar()
         }}>
-
+      
+      <form onSubmit={formik.handleSubmit}>
         <Box params={{
           display: 'flex',
           flexDirection: 'row',
@@ -265,24 +344,56 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             width: '443px'
           }}>
             <Label>Nome completo</Label>
-            <Textfield placeholder="Digite o nome completo" />
+            <Textfield 
+              name="name"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              placeholder="Digite o nome completo" 
+              error={!!formik.errors.name ? formik.errors.name : undefined }
+            />
                     
             <div style={{marginTop: '32px'}}>
               <Label>Unidade/localização</Label>
-              <Textfield placeholder="Digite e unidade ou localização" />
+              <Textfield 
+                name="unity_location"
+                value={formik.values.unity_location}
+                onChange={formik.handleChange}
+                placeholder="Digite e unidade ou localização" 
+                error={!!formik.errors.unity_location ? formik.errors.unity_location : undefined }
+              />
             </div>
 
             <div style={{marginTop: '32px'}}>
               <Label>Cargo</Label>
-              <Select options={listaCargo} value={listaCargo[0]} />
+              <Select 
+                options={listaCargo} 
+                value={formik.values.office}
+                onChange={(value)=>{
+                  formik.setFieldValue('office', value);
+                  formik.setFieldValue('office_s', value == null ? null : value.value)
+                }}
+              />
+              <Text>{formik.errors.office}</Text>
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>Líder de pessoas</Label>
-              <Select options={listaLider} value={listaLider[0]} />
+              <Select 
+                options={listaLider} 
+                value={formik.values.people_leader}
+                onChange={(value)=>{
+                  formik.setFieldValue('people_leader', value)
+                  formik.setFieldValue('people_leader_s',  value == null ? null : value.value)
+                  
+                }}
+              />
+              <Text>{formik.errors.people_leader}</Text>
             </div>
 
-            <Button style={{width: '265px', marginTop: '51px'}} onClick={onClose2} variant="cancel">Cancelar</Button>
+            <Button style={{width: '265px', marginTop: '51px'}} onClick={()=>{
+              onClose2();
+              limpar();  
+            }} variant="cancel">Cancelar</Button>
           
           </Box>
           <Box params={{
@@ -292,35 +403,67 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
             width: '443px'
           }}>
             <Label>E-mail</Label>
-            <Textfield placeholder="Digite o e-mail" />
+            <Textfield 
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              placeholder="Digite o e-mail"
+              error={!!formik.errors.email ? formik.errors.email : undefined }
+            />
 
             <div style={{marginTop: '32px'}}>
               <Label>Tipo de cargo</Label>
-              <Select options={listaTipoCargo} value={listaTipoCargo[0]} />
+              <Select 
+                options={listaTipoCargo} 
+                value={formik.values.type_of_position}
+                onChange={(value)=>{
+                  formik.setFieldValue('type_of_position', value)
+                  formik.setFieldValue('type_of_position_s', value == null ? null : value.value)
+
+                }}
+              />
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>Área/departamento/diretoria</Label>
-              <Select    options={listaArea} value={listaArea[0]} />
+              <Select    
+                options={listaArea} 
+                value={formik.values.area_department_board}
+                onChange={(value)=>{
+                  formik.setFieldValue('area_department_board', value)
+                  formik.setFieldValue('area_department_board_s', value == null ? null : value.value)
+
+                }}
+              />
+              <Text>{formik.errors.area_department_board}</Text>
             </div>
 
             <div style={{marginTop: 'calc(32px + 16px)'}}>
               <Label>E-mail Gestor Direto</Label>
-              <Textfield placeholder="Digite o e-mail do gestor direto" />
+              <Textfield 
+                name="direct_manager_email"
+                value={formik.values.direct_manager_email}
+                onChange={formik.handleChange}
+                placeholder="Digite o e-mail do gestor direto" 
+                error={!!formik.errors.direct_manager_email ? formik.errors.direct_manager_email : undefined }
+              />
             </div>
 
-            <Button style={{width: '265px', marginTop: '51px'}} onClick={onClose3} variant="primary">Adicionar Colaborador</Button>
+            <Button style={{width: '265px', marginTop: '51px'}}  type="submit" onClick={()=>{
+              onClose3()
+            }} variant="primary">Adicionar Colaborador</Button>
 
-          </Box>
+          </Box> 
         </Box>
-        
-        
+      </form> 
+         
       </Modal>
-      <Modal width={766} height={473}  isOpen={isModalOpen3}>
+      <Modal width={766} height={473}  isOpen={isModalOpen3} hasCloseButton={false}>
           <Box params={{
             display: 'flex',
             flexDirection: 'row',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginTop: '66px'
           }}>
             <Box params={{
               width: '235px',
@@ -351,12 +494,16 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen }) => {
           <ModalGrid>
             <GridBtnLeft variant="secondary"
               onClick={()=>{
-                onClose();
-                onClose2();
-                onClose3();
+                onClose()
+                onClose2()
+                onClose3()
+                limpar()
               }}
             >Fechar</GridBtnLeft>
-            <GridBtnRight variant="primary">Cadastrar novo colaborador</GridBtnRight>
+            <GridBtnRight variant="primary" onClick={()=>{
+                limpar()
+                onClose3()
+            }}>Cadastrar novo colaborador</GridBtnRight>
           </ModalGrid>
         
       </Modal>

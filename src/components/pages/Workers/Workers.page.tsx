@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
 import {
@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import {
   getUsersRequest,
+  getUsersSuccess,
   resetUsersErrors,
 } from '../../../store/modules/users/actions';
 import { Field } from '../../molecules/Table/table.types';
@@ -28,18 +29,23 @@ import { useTheme } from 'styled-components';
 import TableMenu from './TableMenu';
 import CreateUser from './Modals/CreateUser';
 import { useTranslation } from 'react-i18next';
+import { Text } from '../../atoms/Typography/text';
+import { getCollaboratorFail, getAllUsers } from '../../../store/modules/collaborator/actions';
+
 
 const { Title } = Typography;
 
 const Companies: React.FC = () => {
   const { t } = useTranslation();
   const lista = [
-    {label: 'Todos', value: ''},
+    {label: 'Todos', value: 'Todos'},
     {label: 'Ativo', value: 'Ativo'},
     {label: 'Inativo', value: 'Inativo'},
     {label: 'Pendente', value: 'Pendente'}
   ]
-
+  const [ selecionaTipo, setSelecionaTipo ] = useState({label: 'Todos', value: 'Todos'})
+  //let iteracaoDados = users.filter((u) => u.name)
+  
   const tableFields: Field[] = [
     {
       title: t('table.headers.worker'),
@@ -77,13 +83,14 @@ const Companies: React.FC = () => {
     },
     {
       title: t('table.headers.status'),
-      dataIndex: 'id',
-      key: 'id',
+      dataIndex: 'status',
+      key: 'active',
       render: (value) => (
-        <Tag size="large" color="success">
-          {value ? 'ativo' : 'inativo'}
-        </Tag>
-      ),
+          <Tag size="large" color={value == undefined ? 'warning' : value == true ? 'success': 'default'}>
+            {value == undefined ? 'Pendente' : value == true ? 'Ativo': 'Inativo'}
+            {value}
+          </Tag>
+        ),
     },
     {
       title: '',
@@ -94,6 +101,7 @@ const Companies: React.FC = () => {
           <TableMenu
             onClose={() => handleCloseButton()}
             isOpen={currentOpenMenu === index}
+            usr={item}
           />
           <ColumnButton onClick={() => handleTableButtonClick(index)}>
             <BsThreeDotsVertical color={theme.colors.black} size="24" />
@@ -106,8 +114,16 @@ const Companies: React.FC = () => {
   const [currentOpenMenu, setCurrentOpenMenu] = useState(-1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const { users, isLoading } = useSelector((state: RootState) => state.users);
+  const { users , isLoading } = useSelector((state: RootState) => state.users);
+
   const { currentUser } = useSelector(({ login }: RootState) => login);
+  const { isConcluded } = useSelector(({ collaborator }: RootState) => collaborator)
+
+  //users.filter((u) => u.name)
+  let [ iteracaoDados, setIteracaoDados ] = useState(
+    users.filter((u) => u.name)
+  )  
+  
 
   const handleTableButtonClick = (index: number) => {
     setCurrentOpenMenu(index);
@@ -145,11 +161,50 @@ const Companies: React.FC = () => {
     setCurrentOpenMenu(-1);
   };
 
+
   useEffect(() => {
     dispatch(getUsersRequest({ headers: { company: currentUser.company } }));
 
+
+    console.warn('Selecionado: ' ,selecionaTipo)
     
-  }, [dispatch, currentUser]);
+    
+    switch(selecionaTipo?.label){
+      case 'Todos':
+        setIteracaoDados(users.filter((u) => u.name))
+        console.log('Selecionado: Todos')
+      break;
+      case 'Ativo':
+        setIteracaoDados(users.filter((u) => u.active == true))
+        console.log('Selecionado: Ativo')
+      break;
+      case 'Pendente':
+        setIteracaoDados(users.filter((u) => u.active == undefined))
+        console.log('Selecionado: Pendente')
+      break;
+      case 'Inativo':
+        setIteracaoDados(users.filter((u) => u.active == false))
+        console.log('Selecionado: Inativo')
+      break;
+      default:
+        setIteracaoDados(users.filter((u) => u.name))
+        console.log('Selecionado: Todos')
+      break;
+    }
+ 
+
+    if(isConcluded == true){
+      console.warn('carregar', isConcluded  ? 'Carregar' : 'Não carregar')
+      dispatch(getAllUsers())
+      dispatch(getCollaboratorFail())
+    }
+
+
+  }, [dispatch, currentUser, selecionaTipo, isConcluded]);
+
+
+
+
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <PromotionalCard
@@ -217,23 +272,34 @@ const Companies: React.FC = () => {
           <div style={{marginRight: '30px'}}>Status</div>
           <div style={{width: '265px'}}>
             <Select 
-              value={{label: 'Todos', value: ''}}
+              value={selecionaTipo}
+              
               options={lista}
+              onChange={(e)=>{
+                  setSelecionaTipo({label: e?.label, value: e?.value}) 
+                  console.log(iteracaoDados, selecionaTipo)
+              }}
             />
           </div>
           </Box>
+              
+      
+        <Row>
+          <Col xs>
+            <Table
+              items={iteracaoDados || users.filter((u) => u.name)}
+              fields={tableFields}
+              isLoading={
+                isConcluded == true || isLoading == true ? true : false
+              }
+            />
+          </Col>
+        </Row>
+      
 
-      <Row>
-        <Col xs>
-          <Table
-            items={users.filter((u) => u.active)}
-            fields={tableFields}
-            isLoading={isLoading}
-          />
-        </Col>
-      </Row>
-
-      <CreateUser onClose={handleModalClose} isModalOpen={isModalOpen} />
+      {/* <Text>{isConcluded  ? 'Carregar' : 'Não carregar'}</Text> */}
+      
+      <CreateUser onClose={handleModalClose} isModalOpen={isModalOpen}  />
     </Box>
   );
 };

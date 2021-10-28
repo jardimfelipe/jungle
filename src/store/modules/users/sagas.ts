@@ -20,8 +20,8 @@ function* getUsers({ payload }: ActionType<typeof actions.getUsersRequest>) {
     }
 
   }
-}
-
+} 
+ 
 function* getGestores() {
   try {
     const { data } = yield call(api, "/users");
@@ -33,7 +33,7 @@ function* getGestores() {
     }
 
   }
-}
+} 
 
 function* createUsers({ payload }: ActionType<typeof actions.createUsersRequest>): any {
   const channel = yield hackyCall(createUploadFileChannel, "/importings/upload", payload);
@@ -67,5 +67,6 @@ function* deleteUsers({ payload }: ActionType<typeof actions.deleteUsersRequest>
 
   }
 }
+
 
 export default all([takeLatest(UsersTypeKeys.GET_USERS_REQUEST, getUsers), takeLatest(UsersTypeKeys.GET_GESTORES_REQUEST, getGestores), takeLatest(UsersTypeKeys.CREATE_USERS_REQUEST, createUsers), takeLatest(UsersTypeKeys.DELETE_USERS_REQUEST, deleteUsers)]);

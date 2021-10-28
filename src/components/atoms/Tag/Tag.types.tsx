@@ -4,3 +4,4 @@ export type TagProps = {
   color?: TagColors;
   size?: 'regular' | 'large';
 };
+ 

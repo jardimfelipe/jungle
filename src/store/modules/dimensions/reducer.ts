@@ -8,7 +8,7 @@ const INITIAL_STATE: DimensionsState = {
     message: ''
   }
 };
-
+ 
 export default function Reducer(
   state: DimensionsState = INITIAL_STATE,
   action: DimensionsAction

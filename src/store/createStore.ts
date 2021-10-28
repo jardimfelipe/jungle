@@ -7,6 +7,7 @@ import { QuestionariesState } from "./modules/questionaries/types";
 import { QuestionsState } from "./modules/questions/types";
 import { ResultsState } from "./modules/results/types";
 import { UsersState } from "./modules/users/types";
+import { CollaboratorState } from './modules/collaborator/types'
 
 export interface RootState {
   base: BaseState;
@@ -17,6 +18,7 @@ export interface RootState {
   questionaries: QuestionariesState;
   users: UsersState;
   questions: QuestionsState;
+  collaborator: CollaboratorState;
 }
 const resetEnhancer = (rootReducer: Reducer) => (state: any, action: any) => {
   if (action.type !== LoginTypeKeys.RESET_STORE) return rootReducer(state, action);

@@ -12,7 +12,7 @@ export function getUsersSuccess(params: User[]) {
 export function getGestoresRequest() {
   return action(UsersTypeKeys.GET_GESTORES_REQUEST);
 }
-
+ 
 export function getGestoresSuccess(params: User[]) {
   return action(UsersTypeKeys.GET_GESTORES_SUCCESS, params);
 }
@@ -47,4 +47,4 @@ export function deleteUsersSuccess() {
 
 export function deleteUsersFailure(params: string) {
   return action(UsersTypeKeys.DELETE_USERS_FAILURE, params)
-}
+} 

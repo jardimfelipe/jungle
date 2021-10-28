@@ -8,6 +8,7 @@ export type Field = {
   title: string;
   dataIndex: string;
   key: string;
+  cor?: (value: any)=>void;
   render?: (value: any, object: any, index: number) => void
   sorter?: (a: object, b: object) => any
 }
@@ -19,6 +20,7 @@ export interface TableProps {
   loaderIcon?: ReactNode | ImageData;
   rowType?: RowTypes
   hideHeader?: boolean
+  carregar?: boolean
 }
 
 export interface IStyledTableRowProps {
