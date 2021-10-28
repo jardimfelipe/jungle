@@ -8,11 +8,13 @@ export type Feedbacks = 'error' | 'success' | ''
 export type RequestError = {
   status: boolean;
   message: string;
+  type?: string;
 }
 
 export type RequestFeedback = {
   status: Feedbacks;
-  message: string
+  message: string;
+  type?: string;
 }
 
 

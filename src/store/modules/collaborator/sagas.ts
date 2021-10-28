@@ -23,7 +23,7 @@ function* createCollaborator({payload}: ActionType<typeof actions.createCollabor
           yield put(actions.getCollaboratorFail())
         }
     }
-}
+} 
 
 function* sendCollaboratorEmail({payload}: ActionType<typeof actions.sendCollaboratorEmailRequest>) :any {
   try{
