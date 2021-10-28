@@ -213,7 +213,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
         phone: '', 
         photo: '', 
         role: '',
-        active: true
+        active: false
       } 
       dispatch(createCollaboratorRequest(objeto));
       dispatch(getAllUsers())
@@ -449,7 +449,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
               />
             </div>
 
-            <Button style={{width: '265px', marginTop: '51px'}}  type="submit"  variant="primary">Adicionar Colaborador</Button>
+            <Button style={{width: '265px', marginTop: '51px'}}  type="submit" onClick={()=>{onClose2();onClose();}}  variant="primary">Adicionar Colaborador</Button>
 
           </Box> 
         </Box>

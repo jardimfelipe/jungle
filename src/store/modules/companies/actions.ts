@@ -2,6 +2,7 @@ import { action } from "typesafe-actions";
 import { RequestParams } from "../exportTypes";
 import { CompaniesTypeKeys, CompanyItem, CompanyModel, RemoveTrackingParams, RequestParamsCompany, TrackModel } from "./types";
 
+
 export function getCompaniesRequest(params?: RequestParams) {
   return action(CompaniesTypeKeys.GET_COMPANIES_REQUEST, params);
 }

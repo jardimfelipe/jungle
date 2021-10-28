@@ -151,7 +151,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           photo: '', 
           role: '',
           _id: usuario?._id == undefined ? '' : usuario?._id, 
-          active: true,
+          active: usuario?.active == undefined ? false : usuario?.active,
           first_access: true
         } 
 
@@ -227,7 +227,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                     phone: usuario?.phone == undefined ? '' : usuario?.phone, 
                     photo: usuario?.photo == undefined ? '' : usuario?.photo, 
                     role: usuario?.role == undefined ? '' : usuario?.role,
-                    active: false,
+                    active: usuario?.active == undefined ? false : usuario?.active,
                     first_access: true
                   }
 

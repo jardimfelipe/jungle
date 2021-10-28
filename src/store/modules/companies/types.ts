@@ -18,6 +18,7 @@ export enum CompaniesTypeKeys {
   REMOVE_TRACKING_FAILURE = "@companies/REMOVE_TRACKING_FAILURE",
 
   RESET_FEEDBACK = "@companies/RESET_FEEDBACK",
+
 }
 
 export type CompaniesAction = ActionType<typeof actions>;
