@@ -1,0 +1,55 @@
+name: cloudrun-deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  setup-build-publish-deploy:
+    name: (Produção) Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      # Setup gcloud CLI
+      - name: Setup
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          project_id: ${{secrets.GCP_PROJECT}}
+          service_account_key: ${{secrets.GCP_CREDENTIALS}}
+          export_default_credentials: true
+
+      # Configure Docker with Credentials
+      - name: Configure Docker
+        run: |
+          gcloud auth configure-docker
+
+      # # Build the Docker image
+      # - name: Build & Publish
+      #   run: |
+      #     gcloud config set project ${{secrets.GCP_PROJECT}}
+      #     gcloud builds submit --tag gcr.io/${{secrets.GCP_PROJECT}}/${{secrets.GCP_APPLICATION}}:hml ./Dockerfile.hml
+      #     gcloud config set run/region us-central1
+      - name: Build and Push Container
+        run: |
+          docker build -f Dockerfile.hml -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:hml .
+          docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:hml
+
+      # # Deploy the Docker image to the GKE cluster
+      # - name: Deploy
+      #   run: |
+      #     gcloud run deploy ${{secrets.GCP_APPLICATION}} --image gcr.io/${{secrets.GCP_PROJECT}}/${{secrets.GCP_APPLICATION}}:hml \
+      #     --platform managed \
+      #     --allow-unauthenticated \
+      #     --memory 512M
+
+      # - name: Deploy to Cloud Run
+      #   id: deploy
+      #   uses: google-github-actions/deploy-cloudrun@v0.4.0
+      #   with:
+      #     service: ${{ secrets.GCP_APPLICATION }}
+      #     image: gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION }}:hml
+      #     region: us-central1
+
+      # - name: Show Output
+      #   run: echo ${{ steps.deploy.outputs.url }}
