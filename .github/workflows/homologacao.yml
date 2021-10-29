@@ -1,11 +1,11 @@
-name: cloudrun-deploy
+name: Homologação CI/CD
 on:
   push:
     branches:
       - homologacao
 jobs:
   setup-build-publish-deploy:
-    name: (Homologação) Setup, Build, Publish, and Deploy
+    name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
