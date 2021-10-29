@@ -1,0 +1,41 @@
+name: Homologação CI/CD
+on:
+  push:
+    branches:
+      - homologacao
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      # Setup gcloud CLI
+      - name: Setup
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          project_id: ${{secrets.GCP_PROJECT}}
+          service_account_key: ${{secrets.GCP_CREDENTIALS}}
+          export_default_credentials: true
+
+      # Configure Docker with Credentials
+      - name: Configure Docker
+        run: |
+          gcloud auth configure-docker
+
+      - name: Build and Push Container
+        run: |
+          docker build -f Dockerfile.hml -t gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION_HML }}:hml .
+          docker push gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION_HML }}:hml
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0.4.0
+        with:
+          service: ${{ secrets.GCP_APPLICATION_HML }}
+          image: gcr.io/${{ secrets.GCP_PROJECT }}/${{ secrets.GCP_APPLICATION_HML }}:hml
+          region: us-central1
+
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}

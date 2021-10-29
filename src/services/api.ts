@@ -3,7 +3,11 @@ import store from "../store";
 import { logout } from "../store/modules/login/actions";
 import { getSavedState, removeState } from "../utils/localStorage";
 
-const baseURL = window.location.href === 'http://homologacao.app.junglexp.com.br/' ? 'https://jungle-api-hml-ozjujigmba-uc.a.run.app/' : process.env.REACT_APP_API_BASE_URL
+const baseURL =
+  window.location.href.indexOf("hml.app") >= 0 ||
+  window.location.href.indexOf("localhost") >= 0
+    ? "https://jungle-api-hml-ozjujigmba-uc.a.run.app/"
+    : process.env.REACT_APP_API_BASE_URL;
 
 const api = axios.create({
   baseURL,
@@ -26,5 +30,6 @@ api.interceptors.response.use(function (response) {
   }
   return Promise.reject(error);
 });
+
 
 export default api;
