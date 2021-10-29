@@ -9,12 +9,9 @@ export enum CollaboratorTypeKeys {
   GET_ERROR = "@users/GET_ERROR",
   GET_FEEDBACK = "@users/GET_FEEDBACK",
 
-<<<<<<< HEAD
-=======
   CLEAR_FEEDBACK = "@users/CLEAR_FEEDBACK",
   CLEAR_ERROR = "@users/CLEAR_ERROR",
 
->>>>>>> origin/jungle-collaborator
   CREATE_COLLABORATOR_REQUEST = "@users/CREATE_COLLABORATOR_REQUEST",
   DELETE_COLLABORATOR_REQUEST = "@users/DELETE_COLLABORATOR_REQUEST",
   EDIT_COLLABORATOR_REQUEST = "@users/EDIT_COLLABORATOR_REQUEST",
@@ -119,28 +116,17 @@ export type CollaboratorEdit = {
  
 export type CollaboratorError = {
   status: boolean,
-<<<<<<< HEAD
-  message: string
-=======
   message: string,
   type?: string
->>>>>>> origin/jungle-collaborator
 }
 
 export type CollaboratorFeedback = {
   status: Feedbacks,
-<<<<<<< HEAD
-  message: string
-}
-
-
-=======
   message: string,
   type?: string
 }
 
  
->>>>>>> origin/jungle-collaborator
 export type CollaboratorAction = ActionType<typeof actions>
 
 export type CollaboratorState = {

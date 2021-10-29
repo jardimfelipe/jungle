@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import React, { useEffect } from 'react';
-
-import { Col, Row } from 'react-flexbox-grid';
-import { Box, IconButton, Typography, CompanyTable } from '../..';
-=======
 import React, { useEffect ,useState} from 'react';
 
 import { Col, Row } from 'react-flexbox-grid';
 import { Select, Box, IconButton, Typography, CompanyTable, Button, ColumnButton, Modal, Textfield, Label, FileUploader, ImageUploader } from '../..';
->>>>>>> origin/jungle-collaborator
 import { BiSearch } from 'react-icons/bi';
 import { BiBuildings, BiDockLeft } from 'react-icons/bi';
 import PromotionalCard from '../../molecules/PromotionalCard/PromotionalCard';
@@ -21,12 +14,9 @@ import { useTheme } from 'styled-components';
 import { CompanyItem, RootState } from '../../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestionariesRequest } from '../../../store/modules/questionaries/actions';
-<<<<<<< HEAD
-=======
 import axios from 'axios';
 
 import paises from './paises.json';
->>>>>>> origin/jungle-collaborator
 
 const { Title } = Typography;
 
@@ -69,11 +59,6 @@ const Companies: React.FC = () => {
     });
   };
 
-<<<<<<< HEAD
-  useEffect(() => {
-    dispatch(getQuestionariesRequest());
-  }, [dispatch]);
-=======
 
 
   
@@ -115,7 +100,6 @@ const Companies: React.FC = () => {
 
   }, [dispatch, paises]);
 
->>>>>>> origin/jungle-collaborator
 
   return (
     <Box params={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -133,19 +117,12 @@ const Companies: React.FC = () => {
       >
         <Title level={3}>Empresas</Title>
         <Box
-<<<<<<< HEAD
-          params={{ display: 'flex', justifyContent: 'flex-end', gap: '15px' }}
-=======
           params={{ display: 'flex', justifyContent: 'flex-end', gap: '15px', alignItems: 'center'}}
->>>>>>> origin/jungle-collaborator
         >
           <IconButton icon={<BiSearch />} />
           <FilterLink isActive={true}>Ativas</FilterLink>
           <FilterLink isActive={false}>Inativas</FilterLink>
-<<<<<<< HEAD
-=======
           <div style={{width: "256px", height: "40px"}}> <Button block size="small"  variant="primary" onClick={onClose1}> Cadastrar Dimensões </Button> </div>
->>>>>>> origin/jungle-collaborator
         </Box>
       </Box>
 
@@ -156,8 +133,6 @@ const Companies: React.FC = () => {
       </Row>
 
       <CompanyTable onClick={handleTableClick} />
-<<<<<<< HEAD
-=======
 
       <Modal width={1073} height={752}  isOpen={isOpenModal1} onClose={onClose1}>
         <form>
@@ -204,7 +179,6 @@ const Companies: React.FC = () => {
           </Box>
         </form>
       </Modal>
->>>>>>> origin/jungle-collaborator
     </Box>
   );
 };

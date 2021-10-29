@@ -6,16 +6,6 @@ const INITIAL_STATE: CollaboratorState = {
     isConcluded: false,
     error: {
         status: false,
-<<<<<<< HEAD
-        message: ''
-    },
-    feedback: { 
-        status: 'success',
-        message: ''
-    } 
-}
-  
-=======
         message: '',
         type: ''
     },
@@ -26,7 +16,6 @@ const INITIAL_STATE: CollaboratorState = {
     } 
 }
    
->>>>>>> origin/jungle-collaborator
 export default function Reducer(
     state: CollaboratorState = INITIAL_STATE,
     action: CollaboratorAction
@@ -73,12 +62,8 @@ export default function Reducer(
                 ...state,
                 error: {
                     status: action.payload.status,
-<<<<<<< HEAD
-                    message: action.payload.message
-=======
                     message: action.payload.message,
                     type: action.payload.type,
->>>>>>> origin/jungle-collaborator
                 }
             }
         case CollaboratorTypeKeys.GET_FEEDBACK:
@@ -86,9 +71,6 @@ export default function Reducer(
                 ...state,
                 feedback: { 
                     status: action.payload.status,
-<<<<<<< HEAD
-                    message: action.payload.message
-=======
                     message: action.payload.message,
                     type: action.payload.type
                 }
@@ -109,7 +91,6 @@ export default function Reducer(
                     status: false,
                     message: '',
                     type: ''
->>>>>>> origin/jungle-collaborator
                 }
             }
         default:

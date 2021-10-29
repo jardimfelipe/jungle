@@ -12,11 +12,7 @@ export function deleteCollaboratorRequest(params: CollaboratorId){
 export function editCollaboratorRequest(params: CollaboratorEdit){
   return action(CollaboratorTypeKeys.EDIT_COLLABORATOR_REQUEST, params);
 }
-<<<<<<< HEAD
-
-=======
  
->>>>>>> origin/jungle-collaborator
 export function inactivateCollaboratorRequest(params: CollaboratorInactive){
   return action(CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUEST, params)
 } 
@@ -37,8 +33,6 @@ export function getFeedback(params: CollaboratorFeedback){
   return action(CollaboratorTypeKeys.GET_FEEDBACK, params);
 }
 
-<<<<<<< HEAD
-=======
 export function clearFeedback(){
   return action(CollaboratorTypeKeys.CLEAR_FEEDBACK);
 }
@@ -46,7 +40,6 @@ export function clearError(){
   return action(CollaboratorTypeKeys.CLEAR_ERROR);
 }
 
->>>>>>> origin/jungle-collaborator
 export function getAllUsers(){
   return action(CollaboratorTypeKeys.GET_ALL_USERS)
 }
