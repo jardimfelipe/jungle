@@ -13,7 +13,11 @@ function* createCollaborator({payload}: ActionType<typeof actions.createCollabor
         data: {...payload}
       })
       console.warn('Colaborador: ', data)
+<<<<<<< HEAD
       yield put(actions.getFeedback({ message: 'Sucesso ao criar o colaborador', status: 'success' }))
+=======
+      yield put(actions.getFeedback({ message: 'Colaborador cadastrado com sucesso', type: 'cadastrar' , status: 'success'}))
+>>>>>>> origin/jungle-collaborator
       yield put(actions.getCollaboratorSuccess())
     }
     catch(error){
@@ -23,7 +27,12 @@ function* createCollaborator({payload}: ActionType<typeof actions.createCollabor
           yield put(actions.getCollaboratorFail())
         }
     }
+<<<<<<< HEAD
 }
+=======
+
+} 
+>>>>>>> origin/jungle-collaborator
 
 function* sendCollaboratorEmail({payload}: ActionType<typeof actions.sendCollaboratorEmailRequest>) :any {
   try{
@@ -32,7 +41,11 @@ function* sendCollaboratorEmail({payload}: ActionType<typeof actions.sendCollabo
       data: {...payload}
     })
     console.warn('Collaborador', data)
+<<<<<<< HEAD
     yield put(actions.getFeedback({ message: 'Sucesso ao criar o colaborador', status: 'success' }))
+=======
+    yield put(actions.getFeedback({ message: 'E-mail enviado com sucesso', type: 'email', status: 'success' }))
+>>>>>>> origin/jungle-collaborator
     yield put(actions.getCollaboratorSuccess())
   }
   catch(error){
@@ -51,7 +64,11 @@ function* editCollaborator({payload}: ActionType<typeof actions.editCollaborator
       data: {...payload}
     })
     console.warn('Colaborador: ', data )
+<<<<<<< HEAD
     yield put(actions.getFeedback({ message: 'Sucesso ao criar o colaborador', status: 'success' }))
+=======
+    yield put(actions.getFeedback({ message: 'Colaborador editado com sucesso', type: 'editar' , status: 'success' }))
+>>>>>>> origin/jungle-collaborator
     yield put(actions.getCollaboratorSuccess())
     
   }
@@ -71,14 +88,22 @@ function* inactivateCollaborator({payload}: ActionType<typeof actions.inactivate
       data: {...payload }
     })
     console.warn('Colaborador: ', data)
+<<<<<<< HEAD
     yield put(actions.getFeedback({ message: 'Sucesso ao criar o colaborador', status: 'success' }))
+=======
+    yield put(actions.getFeedback({ message: 'Colaborador inativado!', type: 'inativar' , status: 'success' }))
+>>>>>>> origin/jungle-collaborator
     yield put(actions.getCollaboratorSuccess())
     
   }
   catch(error){
     if(error instanceof Error){
       console.error('Colaborador:', error.message, '\n', error)
+<<<<<<< HEAD
       yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
+=======
+      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true, type: 'inativar' }))
+>>>>>>> origin/jungle-collaborator
       yield put(actions.getCollaboratorFail())
     }
   }
@@ -90,13 +115,20 @@ function* getAllUsers(){
       method: 'GET'
     })
     yield put(actionsUsers.getUsersSuccess(data))
+<<<<<<< HEAD
     yield put(actions.getFeedback({ message: 'Sucesso ao criar o colaborador', status: 'success' }))
+=======
+>>>>>>> origin/jungle-collaborator
     yield put(actions.getCollaboratorSuccess())
   }
   catch(error){
     if(error instanceof Error){
       console.error('Colaborator', error.message, '\n', error)
+<<<<<<< HEAD
       yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
+=======
+      // yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
+>>>>>>> origin/jungle-collaborator
       yield put(actions.getCollaboratorFail())
     }
   }
@@ -108,14 +140,22 @@ function* deleteCollaborator({payload}: ActionType<typeof actions.deleteCollabor
       method: 'DELETE'
     })
     console.warn('Colaborador', data)
+<<<<<<< HEAD
     yield put(actions.getFeedback({ message: 'Sucesso ao criar o colaborador', status: 'success' }))
+=======
+    yield put(actions.getFeedback({ message: 'Colaborador apagado com sucesso', status: 'success', type: 'deletar' }))
+>>>>>>> origin/jungle-collaborator
     yield put(actions.getCollaboratorSuccess())
     
   }
   catch(error){
     if(error instanceof Error){
       console.error('Colaborador', error.message, '\n', error)
+<<<<<<< HEAD
       yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
+=======
+      //yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
+>>>>>>> origin/jungle-collaborator
       yield put(actions.getCollaboratorFail())
     } 
   }

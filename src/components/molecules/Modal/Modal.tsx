@@ -32,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({
   children,
   width,
   height,
-  hasCloseButton = true,
+  hasCloseButton = true
 }) => {
   const modalTransition = {
     entering: { width: 0, height: 0 },

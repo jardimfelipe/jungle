@@ -7,13 +7,21 @@ import { MenuCard, MenuButton } from './Workers.styled';
 import { Transition } from 'react-transition-group';
 import { TableMenuProps } from './Workers.type';
 
+<<<<<<< HEAD
 import { GridBtnLeft, GridBtnRight, ModalButton, ModalGrid } from '../Dashboard/Dashboard.styled';
+=======
+import { GridBtnFull, GridBtnLeft, GridBtnRight, ModalButton, ModalGrid } from '../Dashboard/Dashboard.styled';
+>>>>>>> origin/jungle-collaborator
 
 import ModalSuccess from '../../../assets/ModalSuccess.svg';
 import { useFormik } from 'formik';
 import schema from './schema';
 import { useDispatch, useSelector } from 'react-redux'
+<<<<<<< HEAD
 import { deleteCollaboratorRequest, editCollaboratorRequest, getAllUsers, getCollaboratorFail, inactivateCollaboratorRequest, sendCollaboratorEmailRequest } from '../../../store/modules/collaborator/actions';
+=======
+import { clearFeedback, deleteCollaboratorRequest, editCollaboratorRequest, getAllUsers, getCollaboratorFail, inactivateCollaboratorRequest, sendCollaboratorEmailRequest } from '../../../store/modules/collaborator/actions';
+>>>>>>> origin/jungle-collaborator
 import { RootState } from '../../../store';
 
 
@@ -38,6 +46,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
 
   const [ usuario, setUsuario ] = useState(usr);
   const { currentUser } = useSelector(({ login }: RootState) => login);
+<<<<<<< HEAD
   const { feedback } = useSelector((state: RootState) => state.collaborator)
   
   const [ isModalOpen1, setModalOpen1 ] = useState(false);
@@ -52,6 +61,16 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
   const onClose4 = () => setModalOpen4(!isModalOpen4)
   const onClose5 = () => setModalOpen5(!isModalOpen5)
 
+=======
+  
+  
+  const { feedback, error } = useSelector((state: RootState) => state.collaborator)
+  const [ isModalOpen1, setModalOpen1 ] = useState(false);
+  const [ isModalOpen2, setModalOpen2 ] = useState(feedback.status == 'success' && error.status == false && feedback.message != '' ? true : false);
+  
+  const onClose1 = () => setModalOpen1(!isModalOpen1);
+  const onClose2 = () => dispatch(clearFeedback())
+>>>>>>> origin/jungle-collaborator
   
 
   const handleEmailSuccess = ()=>{
@@ -144,7 +163,11 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           cpf: '',
           rne: '',  
           company: currentUser.company,
+<<<<<<< HEAD
           password: '1234',
+=======
+          password: '',
+>>>>>>> origin/jungle-collaborator
           genere: '',
           age: '',
           house_time: '', 
@@ -157,7 +180,11 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           photo: '', 
           role: '',
           _id: usuario?._id == undefined ? '' : usuario?._id, 
+<<<<<<< HEAD
           active: true,
+=======
+          active: usuario?.active == undefined ? false : usuario?.active,
+>>>>>>> origin/jungle-collaborator
           first_access: true
         } 
 
@@ -170,8 +197,29 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
       validationSchema: schema
   })
 
+<<<<<<< HEAD
   
 
+=======
+  useEffect(()=>{
+    console.log('atualizado:',feedback)
+  }, [feedback])
+
+  function limpar(){
+    formik.setFieldValue('name', '')
+    formik.setFieldValue('email', '')
+    formik.setFieldValue('unity_location', '') 
+    formik.setFieldValue('type_of_position', {value: '', label: 'Selecione'})
+    formik.setFieldValue('type_of_position_s', '')
+    formik.setFieldValue('office',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('office_s', '')
+    formik.setFieldValue('area_department_board',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('area_department_board_s', '')
+    formik.setFieldValue('people_leader',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('people_leader_s', '')
+    formik.setFieldValue('direct_manager_email', '')
+  }
+>>>>>>> origin/jungle-collaborator
   return (
     <div>
       
@@ -233,7 +281,11 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                     phone: usuario?.phone == undefined ? '' : usuario?.phone, 
                     photo: usuario?.photo == undefined ? '' : usuario?.photo, 
                     role: usuario?.role == undefined ? '' : usuario?.role,
+<<<<<<< HEAD
                     active: false,
+=======
+                    active: usuario?.active == undefined ? false : usuario?.active,
+>>>>>>> origin/jungle-collaborator
                     first_access: true
                   }
 
@@ -257,6 +309,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           </MenuCard>
         )}
       </Transition>
+<<<<<<< HEAD
       <Modal 
         width={766} 
         height={473}
@@ -265,6 +318,11 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
 
       <ModalButton onClick={()=>onClose3()}> Fechar </ModalButton>
       </Modal>
+=======
+     
+     
+
+>>>>>>> origin/jungle-collaborator
       <Modal width={1073} height={752} isOpen={isModalOpen1} onClose={onClose1}>
       <form onSubmit={formik.handleSubmit}>
         <Box params={{
@@ -383,7 +441,10 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
 
             <Button style={{width: '265px', marginTop: '51px'}} type="submit" variant="primary" onClick={()=>{
              onClose1()
+<<<<<<< HEAD
              onClose2()
+=======
+>>>>>>> origin/jungle-collaborator
             }}>Editar Colaborador</Button>
           
           </Box>
@@ -391,7 +452,12 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
       </form>
         
       </Modal>
+<<<<<<< HEAD
       <Modal width={766} height={473} isOpen={isModalOpen2}>
+=======
+     
+      <Modal  width={766} height={473} isOpen={isModalOpen2} onClose={onClose2}>
+>>>>>>> origin/jungle-collaborator
           <Box params={{
             display: 'flex',
             flexDirection: 'row',
@@ -410,7 +476,11 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                 lineHeight: '33px',
                 color: '#011F3B'
               }}>
+<<<<<<< HEAD
                 Colaborador editado com sucesso
+=======
+                {feedback.message}
+>>>>>>> origin/jungle-collaborator
               </Text>
             </Box>
             <Box params={{
@@ -421,6 +491,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
             </Box>              
           </Box>
 
+<<<<<<< HEAD
           <ModalGrid>
             <GridBtnLeft variant="secondary">
               Fechar
@@ -429,6 +500,31 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
               Voltar para colaboradores
             </GridBtnRight>
           </ModalGrid>
+=======
+            {feedback.type == 'email' && 
+              <ModalGrid>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}> Fechar </GridBtnFull>
+              </ModalGrid>}
+            {feedback.type == 'cadastrar' && 
+              <ModalGrid>
+                <GridBtnLeft variant="secondary" onClick={()=>{limpar(); onClose2();}}> Fechar </GridBtnLeft>
+                <GridBtnRight variant="primary" onClick={()=>{limpar(); onClose1(); onClose2();}}>Cadastrar novo colaborador</GridBtnRight>
+              </ModalGrid>}
+            {feedback.type == 'editar' && 
+              <ModalGrid>
+                <GridBtnLeft variant="secondary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnLeft>
+                <GridBtnRight variant="primary">Voltar para colaboradores</GridBtnRight>
+              </ModalGrid>}         
+            {feedback.type ==  'inativar' &&
+              <ModalGrid>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnFull>
+              </ModalGrid>}
+            {feedback.type == 'deletar' && 
+              <ModalGrid>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnFull>
+              </ModalGrid>}
+          
+>>>>>>> origin/jungle-collaborator
       </Modal>
     </div>
   );

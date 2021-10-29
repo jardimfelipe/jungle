@@ -81,6 +81,13 @@ export const GridBtnRight = styled(StyledButton)`
   border-radius: 0 0 20px 0;
 `
 
+<<<<<<< HEAD
+=======
+export const GridBtnFull = styled(StyledButton)`
+  width: 100%;
+  border-radius: 0 0 20px 20px;
+`
+>>>>>>> origin/jungle-collaborator
 
 export const GestorCard = styled(CardContainer)`
   flex: 0 0 calc(50% - 15px);
