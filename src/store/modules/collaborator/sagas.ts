@@ -72,6 +72,7 @@ function* inactivateCollaborator({payload}: ActionType<typeof actions.inactivate
       data: {...payload }
     })
     console.warn('Colaborador: ', data)
+    yield put(actions.getFeedback({ message: 'Colaborador inativado!', type: 'inativar' , status: 'success' }))
     yield put(actions.getCollaboratorSuccess())
     
   }
@@ -95,7 +96,7 @@ function* getAllUsers(){
   catch(error){
     if(error instanceof Error){
       console.error('Colaborator', error.message, '\n', error)
-      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
+      // yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
       yield put(actions.getCollaboratorFail())
     }
   }
@@ -114,7 +115,7 @@ function* deleteCollaborator({payload}: ActionType<typeof actions.deleteCollabor
   catch(error){
     if(error instanceof Error){
       console.error('Colaborador', error.message, '\n', error)
-      yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
+      //yield put(actions.getError({ message: 'Erro ao criar o colaborador', status: true }))
       yield put(actions.getCollaboratorFail())
     } 
   }

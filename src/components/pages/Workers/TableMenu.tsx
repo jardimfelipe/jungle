@@ -42,7 +42,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
   
   const { feedback, error } = useSelector((state: RootState) => state.collaborator)
   const [ isModalOpen1, setModalOpen1 ] = useState(false);
-  const [ isModalOpen2, setModalOpen2 ] = useState(feedback.status == 'success' && error.status == false ? true : false);
+  const [ isModalOpen2, setModalOpen2 ] = useState(feedback.status == 'success' && error.status == false && feedback.message != '' ? true : false);
   
   const onClose1 = () => setModalOpen1(!isModalOpen1);
   const onClose2 = () => dispatch(clearFeedback())
@@ -138,7 +138,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           cpf: '',
           rne: '',  
           company: currentUser.company,
-          password: '1234',
+          password: '',
           genere: '',
           age: '',
           house_time: '', 
@@ -164,8 +164,24 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
       validationSchema: schema
   })
 
-  
+  useEffect(()=>{
+    console.log('atualizado:',feedback)
+  }, [feedback])
 
+  function limpar(){
+    formik.setFieldValue('name', '')
+    formik.setFieldValue('email', '')
+    formik.setFieldValue('unity_location', '') 
+    formik.setFieldValue('type_of_position', {value: '', label: 'Selecione'})
+    formik.setFieldValue('type_of_position_s', '')
+    formik.setFieldValue('office',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('office_s', '')
+    formik.setFieldValue('area_department_board',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('area_department_board_s', '')
+    formik.setFieldValue('people_leader',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('people_leader_s', '')
+    formik.setFieldValue('direct_manager_email', '')
+  }
   return (
     <div>
       
@@ -412,25 +428,25 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
 
             {feedback.type == 'email' && 
               <ModalGrid>
-                <GridBtnFull variant="primary" onClick={onClose2}> Fechar </GridBtnFull>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}> Fechar </GridBtnFull>
               </ModalGrid>}
             {feedback.type == 'cadastrar' && 
               <ModalGrid>
-                <GridBtnLeft variant="secondary" onClick={onClose2}> Fechar </GridBtnLeft>
-                <GridBtnRight variant="primary" >Cadastrar novo colaborador</GridBtnRight>
+                <GridBtnLeft variant="secondary" onClick={()=>{limpar(); onClose2();}}> Fechar </GridBtnLeft>
+                <GridBtnRight variant="primary" onClick={()=>{limpar(); onClose1(); onClose2();}}>Cadastrar novo colaborador</GridBtnRight>
               </ModalGrid>}
             {feedback.type == 'editar' && 
               <ModalGrid>
-                <GridBtnLeft variant="secondary" onClick={onClose2}>Fechar</GridBtnLeft>
+                <GridBtnLeft variant="secondary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnLeft>
                 <GridBtnRight variant="primary">Voltar para colaboradores</GridBtnRight>
               </ModalGrid>}         
             {feedback.type ==  'inativar' &&
               <ModalGrid>
-                <GridBtnFull variant="primary" onClick={onClose2}>Fechar</GridBtnFull>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnFull>
               </ModalGrid>}
             {feedback.type == 'deletar' && 
               <ModalGrid>
-                <GridBtnFull variant="primary" onClick={onClose2}>Fechar</GridBtnFull>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnFull>
               </ModalGrid>}
           
       </Modal>

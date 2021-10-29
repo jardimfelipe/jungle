@@ -201,7 +201,7 @@ const CreateUser: React.FC<ModalProps> = ({ onClose, isModalOpen, reload }) => {
         cpf: '',
         rne: '',  
         company: currentUser.company,
-        password: '1234',
+        password: 'teste',
         genere: '',
         age: '',
         house_time: '', 
