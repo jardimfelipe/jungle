@@ -3,11 +3,16 @@ import store from "../store";
 import { logout } from "../store/modules/login/actions";
 import { getSavedState, removeState } from "../utils/localStorage";
 
-const baseURL =
-  window.location.href.indexOf("hml.app") >= 0 ||
+let baseURL = "";
+
+if (
+  window.location.href.indexOf("hml.app.junglexp.com.br") >= 0 ||
   window.location.href.indexOf("localhost") >= 0
-    ? "https://jungle-api-hml-ozjujigmba-uc.a.run.app/"
-    : process.env.REACT_APP_API_BASE_URL;
+)
+  baseURL = "https://jungle-api-hml-ozjujigmba-uc.a.run.app/";
+
+if (window.location.hostname === "app.junglexp.com.br")
+  baseURL = "https://jungle-api-ozjujigmba-uc.a.run.app/";
 
 const api = axios.create({
   baseURL,
