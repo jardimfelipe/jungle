@@ -9,6 +9,9 @@ export enum CollaboratorTypeKeys {
   GET_ERROR = "@users/GET_ERROR",
   GET_FEEDBACK = "@users/GET_FEEDBACK",
 
+  CLEAR_FEEDBACK = "@users/CLEAR_FEEDBACK",
+  CLEAR_ERROR = "@users/CLEAR_ERROR",
+
   CREATE_COLLABORATOR_REQUEST = "@users/CREATE_COLLABORATOR_REQUEST",
   DELETE_COLLABORATOR_REQUEST = "@users/DELETE_COLLABORATOR_REQUEST",
   EDIT_COLLABORATOR_REQUEST = "@users/EDIT_COLLABORATOR_REQUEST",
@@ -113,15 +116,17 @@ export type CollaboratorEdit = {
  
 export type CollaboratorError = {
   status: boolean,
-  message: string
+  message: string,
+  type?: string
 }
 
 export type CollaboratorFeedback = {
   status: Feedbacks,
-  message: string
+  message: string,
+  type?: string
 }
 
-
+ 
 export type CollaboratorAction = ActionType<typeof actions>
 
 export type CollaboratorState = {

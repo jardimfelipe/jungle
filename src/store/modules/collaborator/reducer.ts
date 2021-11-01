@@ -6,14 +6,16 @@ const INITIAL_STATE: CollaboratorState = {
     isConcluded: false,
     error: {
         status: false,
-        message: ''
+        message: '',
+        type: ''
     },
     feedback: { 
         status: 'success',
-        message: ''
+        message: '',
+        type: ''
     } 
 }
-  
+   
 export default function Reducer(
     state: CollaboratorState = INITIAL_STATE,
     action: CollaboratorAction
@@ -60,7 +62,8 @@ export default function Reducer(
                 ...state,
                 error: {
                     status: action.payload.status,
-                    message: action.payload.message
+                    message: action.payload.message,
+                    type: action.payload.type,
                 }
             }
         case CollaboratorTypeKeys.GET_FEEDBACK:
@@ -68,7 +71,26 @@ export default function Reducer(
                 ...state,
                 feedback: { 
                     status: action.payload.status,
-                    message: action.payload.message
+                    message: action.payload.message,
+                    type: action.payload.type
+                }
+            }
+        case CollaboratorTypeKeys.CLEAR_FEEDBACK:
+            return {
+                ...state,
+                feedback: { 
+                    status: '', 
+                    message: '',
+                    type: ''
+                }
+            }
+        case CollaboratorTypeKeys.CLEAR_ERROR:
+            return {
+                ...state,
+                error: {
+                    status: false,
+                    message: '',
+                    type: ''
                 }
             }
         default:

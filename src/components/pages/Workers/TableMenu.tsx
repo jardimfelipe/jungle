@@ -7,13 +7,13 @@ import { MenuCard, MenuButton } from './Workers.styled';
 import { Transition } from 'react-transition-group';
 import { TableMenuProps } from './Workers.type';
 
-import { GridBtnLeft, GridBtnRight, ModalButton, ModalGrid } from '../Dashboard/Dashboard.styled';
+import { GridBtnFull, GridBtnLeft, GridBtnRight, ModalButton, ModalGrid } from '../Dashboard/Dashboard.styled';
 
 import ModalSuccess from '../../../assets/ModalSuccess.svg';
 import { useFormik } from 'formik';
 import schema from './schema';
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteCollaboratorRequest, editCollaboratorRequest, getAllUsers, getCollaboratorFail, inactivateCollaboratorRequest, sendCollaboratorEmailRequest } from '../../../store/modules/collaborator/actions';
+import { clearFeedback, deleteCollaboratorRequest, editCollaboratorRequest, getAllUsers, getCollaboratorFail, inactivateCollaboratorRequest, sendCollaboratorEmailRequest } from '../../../store/modules/collaborator/actions';
 import { RootState } from '../../../store';
 
 
@@ -38,20 +38,14 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
 
   const [ usuario, setUsuario ] = useState(usr);
   const { currentUser } = useSelector(({ login }: RootState) => login);
-  const { feedback } = useSelector((state: RootState) => state.collaborator)
   
+  
+  const { feedback, error } = useSelector((state: RootState) => state.collaborator)
   const [ isModalOpen1, setModalOpen1 ] = useState(false);
-  const [ isModalOpen2, setModalOpen2 ] = useState(false);
-  const [ isModalOpen3, setModalOpen3 ] = useState(false);
-  const [ isModalOpen4, setModalOpen4 ] = useState(false);
-  const [ isModalOpen5, setModalOpen5 ] = useState(false);
+  const [ isModalOpen2, setModalOpen2 ] = useState(feedback.status == 'success' && error.status == false && feedback.message != '' ? true : false);
   
   const onClose1 = () => setModalOpen1(!isModalOpen1);
-  const onClose2 = () => setModalOpen2(!isModalOpen2);
-  const onClose3 = () => setModalOpen3(!isModalOpen3)
-  const onClose4 = () => setModalOpen4(!isModalOpen4)
-  const onClose5 = () => setModalOpen5(!isModalOpen5)
-
+  const onClose2 = () => dispatch(clearFeedback())
   
 
   const handleEmailSuccess = ()=>{
@@ -144,7 +138,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           cpf: '',
           rne: '',  
           company: currentUser.company,
-          password: '1234',
+          password: '',
           genere: '',
           age: '',
           house_time: '', 
@@ -157,7 +151,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           photo: '', 
           role: '',
           _id: usuario?._id == undefined ? '' : usuario?._id, 
-          active: true,
+          active: usuario?.active == undefined ? false : usuario?.active,
           first_access: true
         } 
 
@@ -170,8 +164,24 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
       validationSchema: schema
   })
 
-  
+  useEffect(()=>{
+    console.log('atualizado:',feedback)
+  }, [feedback])
 
+  function limpar(){
+    formik.setFieldValue('name', '')
+    formik.setFieldValue('email', '')
+    formik.setFieldValue('unity_location', '') 
+    formik.setFieldValue('type_of_position', {value: '', label: 'Selecione'})
+    formik.setFieldValue('type_of_position_s', '')
+    formik.setFieldValue('office',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('office_s', '')
+    formik.setFieldValue('area_department_board',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('area_department_board_s', '')
+    formik.setFieldValue('people_leader',  {value: '', label: 'Selecione'})
+    formik.setFieldValue('people_leader_s', '')
+    formik.setFieldValue('direct_manager_email', '')
+  }
   return (
     <div>
       
@@ -233,7 +243,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                     phone: usuario?.phone == undefined ? '' : usuario?.phone, 
                     photo: usuario?.photo == undefined ? '' : usuario?.photo, 
                     role: usuario?.role == undefined ? '' : usuario?.role,
-                    active: false,
+                    active: usuario?.active == undefined ? false : usuario?.active,
                     first_access: true
                   }
 
@@ -257,14 +267,9 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
           </MenuCard>
         )}
       </Transition>
-      <Modal 
-        width={766} 
-        height={473}
-        isOpen={isModalOpen3} 
-        hasCloseButton={false} >
+     
+     
 
-      <ModalButton onClick={()=>onClose3()}> Fechar </ModalButton>
-      </Modal>
       <Modal width={1073} height={752} isOpen={isModalOpen1} onClose={onClose1}>
       <form onSubmit={formik.handleSubmit}>
         <Box params={{
@@ -383,7 +388,6 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
 
             <Button style={{width: '265px', marginTop: '51px'}} type="submit" variant="primary" onClick={()=>{
              onClose1()
-             onClose2()
             }}>Editar Colaborador</Button>
           
           </Box>
@@ -391,7 +395,8 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
       </form>
         
       </Modal>
-      <Modal width={766} height={473} isOpen={isModalOpen2}>
+     
+      <Modal  width={766} height={473} isOpen={isModalOpen2} onClose={onClose2}>
           <Box params={{
             display: 'flex',
             flexDirection: 'row',
@@ -410,7 +415,7 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
                 lineHeight: '33px',
                 color: '#011F3B'
               }}>
-                Colaborador editado com sucesso
+                {feedback.message}
               </Text>
             </Box>
             <Box params={{
@@ -421,14 +426,29 @@ const TableMenu: React.FC<TableMenuProps> = ({ isOpen, onClose, usr }) => {
             </Box>              
           </Box>
 
-          <ModalGrid>
-            <GridBtnLeft variant="secondary">
-              Fechar
-            </GridBtnLeft>
-            <GridBtnRight variant="primary">
-              Voltar para colaboradores
-            </GridBtnRight>
-          </ModalGrid>
+            {feedback.type == 'email' && 
+              <ModalGrid>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}> Fechar </GridBtnFull>
+              </ModalGrid>}
+            {feedback.type == 'cadastrar' && 
+              <ModalGrid>
+                <GridBtnLeft variant="secondary" onClick={()=>{limpar(); onClose2();}}> Fechar </GridBtnLeft>
+                <GridBtnRight variant="primary" onClick={()=>{limpar(); onClose1(); onClose2();}}>Cadastrar novo colaborador</GridBtnRight>
+              </ModalGrid>}
+            {feedback.type == 'editar' && 
+              <ModalGrid>
+                <GridBtnLeft variant="secondary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnLeft>
+                <GridBtnRight variant="primary">Voltar para colaboradores</GridBtnRight>
+              </ModalGrid>}         
+            {feedback.type ==  'inativar' &&
+              <ModalGrid>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnFull>
+              </ModalGrid>}
+            {feedback.type == 'deletar' && 
+              <ModalGrid>
+                <GridBtnFull variant="primary" onClick={()=>{limpar(); onClose2();}}>Fechar</GridBtnFull>
+              </ModalGrid>}
+          
       </Modal>
     </div>
   );

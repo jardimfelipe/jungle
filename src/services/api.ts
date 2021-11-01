@@ -19,24 +19,22 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(function (config) {
-  const token = getSavedState("auth.token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
+  const token = getSavedState('auth.token')
+  if (token) config.headers.Authorization = `Bearer ${token}`
+  return config
+})
+
+api.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  if (error.response.status === 401) {
+    alert('Token expirado')
+    removeState('auth.token')
+    store.dispatch(logout())
+    document.location.reload()
+  }
+  return Promise.reject(error);
 });
 
-api.interceptors.response.use(
-  function (response) {
-    return response;
-  },
-  function (error) {
-    if (error.response.status === 401) {
-      alert("Token expirado");
-      removeState("auth.token");
-      store.dispatch(logout());
-      document.location.reload();
-    }
-    return Promise.reject(error);
-  }
-);
 
 export default api;

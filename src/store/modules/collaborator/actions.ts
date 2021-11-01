@@ -12,7 +12,7 @@ export function deleteCollaboratorRequest(params: CollaboratorId){
 export function editCollaboratorRequest(params: CollaboratorEdit){
   return action(CollaboratorTypeKeys.EDIT_COLLABORATOR_REQUEST, params);
 }
-
+ 
 export function inactivateCollaboratorRequest(params: CollaboratorInactive){
   return action(CollaboratorTypeKeys.INACTIVE_COLLABORATOR_REQUEST, params)
 } 
@@ -31,6 +31,13 @@ export function getError(params: CollaboratorError){
 
 export function getFeedback(params: CollaboratorFeedback){
   return action(CollaboratorTypeKeys.GET_FEEDBACK, params);
+}
+
+export function clearFeedback(){
+  return action(CollaboratorTypeKeys.CLEAR_FEEDBACK);
+}
+export function clearError(){
+  return action(CollaboratorTypeKeys.CLEAR_ERROR);
 }
 
 export function getAllUsers(){
